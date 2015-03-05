@@ -12,12 +12,18 @@
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers '(
                                        appearance
-                                       git
+                                       (git :variables
+                                            git-magit-status-fullscreen t
+                                            git-enable-github-support t
+                                            git-gutter-use-fringe nil)
                                        prodigy
                                        (colors :variables colors-enable-nyan-cat-progress-bar ,(display-graphic-p))
                                        perspectives
                                        edit-with-emacs
-                                       rcirc
+                                       (rcirc :variables
+                                              rcirc-default-nick "cestdiego"
+                                              rcirc-default-user-name "cestdiego"
+                                              rcirc-default-full-name "Diego Berrocal")
                                        html
                                        tramp
                                        restclient
@@ -53,6 +59,7 @@
                                        python
                                        haskell
                                        javascript
+                                       ruby
                                        ;; Utils
                                        utils
                                        )
@@ -83,8 +90,8 @@ before layers configuration."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+   dotspacemacs-default-font '("Source Code Pro for Powerline"
+                               :size 16
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -247,7 +254,7 @@ version 2014-10-28"
 
       (when (buffer-modified-p)
         (when (y-or-n-p "Buffer modified. Do you want to save first?")
-        (save-buffer)))
+          (save-buffer)))
 
 
       (if (string-equal ξfSuffix "el") ; special case for emacs lisp

@@ -14,7 +14,7 @@
                   )
                 )
       (custom-set-faces
-       '(auto-dim-other-buffers-face ((t (:background "#181818"))))
+       '(auto-dim-other-buffers-face ((t (:background "#2f2f2f"))))
        )
       )))
 

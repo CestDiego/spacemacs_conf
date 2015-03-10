@@ -16,7 +16,7 @@ which require an initialization must be listed explicitly in the list.")
     :commands rcirc-notify-add-hooks
     :init
     (progn
-      (eval-after-load 'rcirc 
+      (eval-after-load 'rcirc
         '(progn
            (rcirc-notify-add-hooks)
            (setq rcirc-omit-responses '("JOIN" "PART" "QUIT" "NICK" "AWAY" "MODE"))

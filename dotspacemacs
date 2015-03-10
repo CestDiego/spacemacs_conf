@@ -37,14 +37,13 @@
                                        ;; Code Navigation
                                        ecb
                                        presentations
-                                       ace-window
                                        ;; Miscellaneous
-                                       ace-window
                                        ;; webkit
                                        wakatime
                                        ;; Media
                                        bongo
                                        ;; Completings Stuff
+                                       ;; slime
                                        ycmd
                                        ;; LaTeX
                                        auctex
@@ -62,6 +61,7 @@
                                        ruby
                                        ;; Utils
                                        utils
+                                       xkcd
                                        )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -85,7 +85,7 @@ before layers configuration."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(zenburn gotham leuven)
+   dotspacemacs-themes '(zenburn gotham solarized-light leuven)
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -149,8 +149,6 @@ before layers configuration."
 
   ;; Lines should be 80 characters wide, not 72
   (setq fill-column 80)
-  (setq git-enable-github-support t)
-  (setq git-gutter-use-fringe nil)
 
   (when (file-exists-p "~/.cabal/bin")
     (add-to-list 'exec-path "~/.cabal/bin/"))
@@ -198,13 +196,7 @@ layers configuration."
   ;; Sentences do not need double spaces to end. Period.
   (set-default 'sentence-end-double-space nil)
 
-  (eval-after-load 'rcirc 
-    '(progn
-       (setq rcirc-default-nick "cestdiego")
-       (setq rcirc-default-user-name "cestdiego")
-       (setq rcirc-default-full-name "Diego Berrocal")
-       ))
-
+  (setq org-startup-folded nil)
   (eval-after-load 'org2blog
     (progn
       (setq org2blog/wp-blog-alist
@@ -289,12 +281,17 @@ version 2014-10-28"
       (modify-syntax-entry ?_ "w" table)
       (with-syntax-table table
         ad-do-it)))
-  (setq python-shell-virtualenv-path "~/Enthought/Canopy_64bit/User/")
-  (setq python-shell-interpreter "~/Enthought/Canopy_64bit/User/bin/python")
+
+  ;; (setq python-shell-virtualenv-path "~/Enthought/Canopy_64bit/User/")
+  ;; (setq python-shell-interpreter "~/Enthought/Canopy_64bit/User/bin/python")
+
+  (setq python-shell-virtualenv-path "~/anaconda/")
+  (setq python-shell-interpreter "~/anaconda/bin/python")
+
   (setq eshell-rc-script "~/spacemacs_conf/.eshellrc")
   (setq eshell-path-env (concat "/home/io/Enthought/Canopy_64bit/User/bin" ":" eshell-path-env))
   (setq exec-path (append '("/home/io/Enthought/Canopy_64bit/User/bin") exec-path))
-  (setq powerline-default-separator 'box)
+  (setq powerline-default-separator 'slant)
   (setq vc-follow-symlinks t)
   )
 
@@ -308,21 +305,60 @@ version 2014-10-28"
  '(ac-ispell-requires 4)
  '(ahs-case-fold-search nil)
  '(ahs-default-range (quote ahs-range-whole-buffer))
- '(markdown-command "/usr/bin/pandoc")
  '(ahs-idle-interval 0.25)
  '(ahs-idle-timer 0 t)
  '(ahs-inhibit-face-list nil)
- '(paradox-github-token t)
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(anzu-search-threshold 1000)
+ '(compilation-message-face (quote default))
+ '(cua-global-mark-cursor-color "#2aa198")
+ '(cua-normal-cursor-color "#657b83")
+ '(cua-overwrite-cursor-color "#b58900")
+ '(cua-read-only-cursor-color "#859900")
+ '(global-evil-search-highlight-persist t)
+ '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
+ '(highlight-symbol-colors
+   (--map
+    (solarized-color-blend it "#fdf6e3" 0.25)
+    (quote
+     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
+ '(highlight-symbol-foreground-color "#586e75")
+ '(highlight-tail-colors
+   (quote
+    (("#eee8d5" . 0)
+     ("#B4C342" . 20)
+     ("#69CABF" . 30)
+     ("#69B7F0" . 50)
+     ("#DEB542" . 60)
+     ("#F2804F" . 70)
+     ("#F771AC" . 85)
+     ("#eee8d5" . 100))))
+ '(hl-bg-colors
+   (quote
+    ("#DEB542" "#F2804F" "#FF6E64" "#F771AC" "#9EA0E5" "#69B7F0" "#69CABF" "#B4C342")))
+ '(hl-fg-colors
+   (quote
+    ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
+ '(if (version< emacs-version "24.4"))
+ '(magit-diff-use-overlays nil)
+ '(markdown-command "/usr/bin/pandoc")
  '(org-agenda-files
    (quote
     ("~/Dropbox/Org-Notes/AyersGroup/AyersGroup.org" "~/Dropbox/Org-Notes/main.org")))
  '(paradox-automatically-star t)
  '(paradox-github-token t)
- '(ring-bell-function (quote ignore) t))
+ '(pos-tip-background-color "#eee8d5")
+ '(pos-tip-foreground-color "#586e75")
+ '(ring-bell-function (quote ignore) t)
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
+ '(weechat-color-list
+   (quote
+    (unspecified "#fdf6e3" "#eee8d5" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#657b83" "#839496"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-
- '(auto-dim-other-buffers-face ((t (:background "#181818")))))
+ '(default ((t (:family "Source Code Pro for Powerline" :foundry "adobe" :slant normal :weight normal :height 120 :width normal))))
+ '(evil-search-highlight-persist-highlight-face ((t (:background "peru")))))

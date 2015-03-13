@@ -20,10 +20,11 @@
                                        (colors :variables colors-enable-nyan-cat-progress-bar ,(display-graphic-p))
                                        perspectives
                                        edit-with-emacs
-                                       (rcirc :variables
-                                              rcirc-default-nick "cestdiego"
-                                              rcirc-default-user-name "cestdiego"
-                                              rcirc-default-full-name "Diego Berrocal")
+                                       ;; (rcirc :variables
+                                       ;;        rcirc-default-nick "cestdiego"
+                                       ;;        rcirc-default-user-name "cestdiego"
+                                       ;;        rcirc-default-full-name "Diego Berrocal"
+                                       ;;        )
                                        html
                                        tramp
                                        restclient
@@ -43,7 +44,7 @@
                                        ;; Media
                                        bongo
                                        ;; Completings Stuff
-                                       ;; slime
+                                       slime
                                        ycmd
                                        ;; LaTeX
                                        auctex
@@ -169,6 +170,7 @@ before layers configuration."
   (set-face-attribute 'vertical-border nil :foreground "#1f1f1f")
   (setq-default evil-escape-key-sequence "nj")
   (setq delete-by-moving-to-trash t)
+  (setq rcirc-uses-znc t)
   )
 
 (defun dotspacemacs/config ()
@@ -285,14 +287,37 @@ version 2014-10-28"
   ;; (setq python-shell-virtualenv-path "~/Enthought/Canopy_64bit/User/")
   ;; (setq python-shell-interpreter "~/Enthought/Canopy_64bit/User/bin/python")
 
-  (setq python-shell-virtualenv-path "~/anaconda/")
-  (setq python-shell-interpreter "~/anaconda/bin/python")
+  (setenv "PYTHONPATH" "/home/io/horton")
+  (setenv "HORTONDATA" "/home/io/horton/data")
+
+  (setq python-shell-virtualenv-path "/usr/")
+  ;; (setq python-shell-interpreter "/usr/bin/python")
+
 
   (setq eshell-rc-script "~/spacemacs_conf/.eshellrc")
-  (setq eshell-path-env (concat "/home/io/Enthought/Canopy_64bit/User/bin" ":" eshell-path-env))
-  (setq exec-path (append '("/home/io/Enthought/Canopy_64bit/User/bin") exec-path))
+  (setq eshell-path-env exec-path)
+  ;; (setq exec-path (append '("/home/io/.local/bin") exec-path))
+  ;; (print eshell-path-env)
+  ;; (print exec-path)
   (setq powerline-default-separator 'slant)
   (setq vc-follow-symlinks t)
+
+  ;; (setq rcirc-server-alist
+  ;;       ;; we use ZNC
+  ;;       (dim:rcirc-server-alist-get-authinfo
+  ;;        '(("freenode"
+  ;;           :host "freenode.berrocal.me"
+  ;;           :port "1984"
+  ;;           :auth "cestdiego/freenode"
+  ;;           :channels ("#emacs"))
+
+  ;;          ("geekshed"
+  ;;           :host "geekshed.berrocal.me"
+  ;;           :port "1984"
+  ;;           :auth "cestdiego/geekshed"
+  ;;           :channels ("#jupiterbroadcasting"))
+  ;;          ;; ("localhost" :channels ("&bitlbee"))
+  ;;          )))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

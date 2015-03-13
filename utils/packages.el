@@ -15,7 +15,7 @@
     string-inflection
     evil-annoying-arrows
     pdf-tools
-    aggressive-fill-paragraph
+    ;; aggressive-fill-paragraph
     python-environment
     )
   "List of all packages to install and/or initialize. Built-in packages
@@ -55,17 +55,17 @@ which require an initialization must be listed explicitly in the list.")
         "l" 'image-forward-hscroll
         ))))
 
-(defun utils/init-aggressive-fill-paragraph()
-  (use-package aggressive-fill-paragraph
-    :init
-    (afp-setup-recommended-hooks)))
+;; (defun utils/init-aggressive-fill-paragraph()
+;;   (use-package aggressive-fill-paragraph
+;;     :init
+;;     (afp-setup-recommended-hooks)))
 
 (defun utils/init-python-environment()
   (use-package python-environment
     :init
     (progn
       (require 'python-environment)
-      (defun YOUR-PLUGIN-install-python-dependencies ()
+      (defun install-python-dependencies ()
         (interactive)
         (python-environment-run "pip" "install" "grip"))
       )))

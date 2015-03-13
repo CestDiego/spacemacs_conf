@@ -172,6 +172,19 @@ before layers configuration."
   (setq delete-by-moving-to-trash t)
   (setq rcirc-authinfo-support t)
   (setq rcirc-uses-znc t)
+  (setq rcirc-server-alist
+         '(("freenode"
+            :host "freenode.berrocal.me"
+            :port "1984"
+            :auth "cestdiego/freenode"
+            :channels ("#emacs"))
+
+           ("geekshed"
+            :host "geekshed.berrocal.me"
+            :port "1984"
+            :auth "cestdiego/geekshed"
+            :channels ("#jupiterbroadcasting"))
+           ))
   )
 
 (defun dotspacemacs/config ()
@@ -303,21 +316,6 @@ version 2014-10-28"
   (setq powerline-default-separator 'slant)
   (setq vc-follow-symlinks t)
 
-  (setq rcirc-server-alist
-        ;; we use ZNC
-        (dim:rcirc-server-alist-get-authinfo
-         '(("freenode"
-            :host "freenode.berrocal.me"
-            :port "1984"
-            :auth "cestdiego/freenode"
-            :channels ("#emacs"))
-
-           ("geekshed"
-            :host "geekshed.berrocal.me"
-            :port "1984"
-            :auth "cestdiego/geekshed"
-            :channels ("#jupiterbroadcasting"))
-           )))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

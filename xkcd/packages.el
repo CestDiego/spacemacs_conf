@@ -27,11 +27,12 @@ which require an initialization must be listed explicitly in the list.")
   (use-package xkcd-mode
     :init
     (progn
-    (evil-leader/set-key
-      "ax" 'xkcd)
-    (spacemacs|evilify xkcd-mode-map)
-    (add-to-list 'evil-emacs-state-modes 'xkcd-mode)
-    )))
+      (setq xkcd-cache-dir "~/.emacs.d/.cache/xkcd/")
+      (evil-leader/set-key
+        "ax" 'xkcd)
+      (spacemacs|evilify xkcd-mode-map)
+      (add-to-list 'evil-emacs-state-modes 'xkcd-mode)
+      )))
 ;;
 ;; Often the body of an initialize function uses `use-package'
 ;; For more info on `use-package', see readme:

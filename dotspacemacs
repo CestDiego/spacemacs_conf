@@ -20,11 +20,11 @@
                                        (colors :variables colors-enable-nyan-cat-progress-bar ,(display-graphic-p))
                                        perspectives
                                        edit-with-emacs
-                                       ;; (rcirc :variables
-                                       ;;        rcirc-default-nick "cestdiego"
-                                       ;;        rcirc-default-user-name "cestdiego"
-                                       ;;        rcirc-default-full-name "Diego Berrocal"
-                                       ;;        )
+                                       (rcirc :variables
+                                              rcirc-default-nick "cestdiego"
+                                              rcirc-default-user-name "cestdiego"
+                                              rcirc-default-full-name "Diego Berrocal"
+                                              )
                                        html
                                        tramp
                                        restclient
@@ -170,6 +170,7 @@ before layers configuration."
   (set-face-attribute 'vertical-border nil :foreground "#1f1f1f")
   (setq-default evil-escape-key-sequence "nj")
   (setq delete-by-moving-to-trash t)
+  (setq rcirc-authinfo-support t)
   (setq rcirc-uses-znc t)
   )
 
@@ -302,22 +303,21 @@ version 2014-10-28"
   (setq powerline-default-separator 'slant)
   (setq vc-follow-symlinks t)
 
-  ;; (setq rcirc-server-alist
-  ;;       ;; we use ZNC
-  ;;       (dim:rcirc-server-alist-get-authinfo
-  ;;        '(("freenode"
-  ;;           :host "freenode.berrocal.me"
-  ;;           :port "1984"
-  ;;           :auth "cestdiego/freenode"
-  ;;           :channels ("#emacs"))
+  (setq rcirc-server-alist
+        ;; we use ZNC
+        (dim:rcirc-server-alist-get-authinfo
+         '(("freenode"
+            :host "freenode.berrocal.me"
+            :port "1984"
+            :auth "cestdiego/freenode"
+            :channels ("#emacs"))
 
-  ;;          ("geekshed"
-  ;;           :host "geekshed.berrocal.me"
-  ;;           :port "1984"
-  ;;           :auth "cestdiego/geekshed"
-  ;;           :channels ("#jupiterbroadcasting"))
-  ;;          ;; ("localhost" :channels ("&bitlbee"))
-  ;;          )))
+           ("geekshed"
+            :host "geekshed.berrocal.me"
+            :port "1984"
+            :auth "cestdiego/geekshed"
+            :channels ("#jupiterbroadcasting"))
+           )))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

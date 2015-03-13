@@ -57,7 +57,8 @@ which require an initialization must be listed explicitly in the list.")
                :password "le_passwd"
                :channels ("#emacs"))))
 
-      (if (file-exists-p "~/.authinfo.gpg")
+      (if (and rcirc-authinfo-support
+               (file-exists-p "~/.authinfo.gpg"))
           (progn
             (defun barebones-rcirc-config ()
               (defadvice rcirc (before rcirc-read-from-authinfo activate)
@@ -79,7 +80,6 @@ This doesn't support the chanserv auth method"
               (rcirc nil)
               )
             (defun znc-rcirc-config ()
-              (require 'cl)
               (defun dim:auth-source-fetch-password (server)
                 "Given a server with at least :host :port :login, return the :password"
                 (destructuring-bind (&key host auth &allow-other-keys)
@@ -140,12 +140,12 @@ This doesn't support the chanserv auth method"
                     (dim:rcirc-server-alist-get-authinfo
                      '(("freenode"
                         :host "freenode.spacemacsserver.me"
-                        :port "1984"
+                        :port "1337"
                         :auth "spacemacs_user/freenode"
                         :channels ("#emacs"))
                        ("geekshed"
                         :host "geekshed.spacemacsserver.me"
-                        :port "1984"
+                        :port "1337"
                         :auth "spacemacs_user/geekshed"
                         :channels ("#jupiterbroadcasting"))
                        )))
@@ -155,7 +155,6 @@ This doesn't support the chanserv auth method"
               ;; machine geekshed.spacemacsserver.me port irc user spacemacs_user/geekshed password my_znc_passwd
               (dim:rcirc)
               )
-
             (defun rcirc-config()
               (interactive)
               (if rcirc-uses-znc

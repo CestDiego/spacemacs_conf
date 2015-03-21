@@ -16,6 +16,7 @@
 
 (defun appearance/init-hexrgb ()
   (use-package hexrgb
+    :init
     (defadvice load-theme (around activate)
       (setq dim-other-buffers-face-color (hexrgb-increment-equal-rgb (face-background 'default) 2 -10))
       (set-face-attribute 'auto-dim-other-buffers-face nil

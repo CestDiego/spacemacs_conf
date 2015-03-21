@@ -10,7 +10,6 @@
    dotspacemacs-configuration-layer-path '("~/spacemacs_conf/")
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
-   dotspacemacs-editing-style 'vim
    dotspacemacs-configuration-layers '(
                                        appearance
                                        (git :variables
@@ -20,18 +19,19 @@
                                        prodigy
                                        (colors :variables colors-enable-nyan-cat-progress-bar ,(display-graphic-p))
                                        (perspectives :variables
-                                                     perspective-enable-persp-projectile t)
+                                                     perspective-use-persp-projectile t)
                                        edit-with-emacs
-                                      (rcirc :variables
-                                             rcirc-default-nick "cestdiego"
-                                             rcirc-default-user-name "cestdiego"
-                                             rcirc-default-full-name "Diego Berrocal"
-                                             rcirc-enable-znc-support t)
+                                       (rcirc :variables
+                                              rcirc-default-nick "cestdiego"
+                                              rcirc-default-user-name "cestdiego"
+                                              rcirc-default-full-name "Diego Berrocal"
+                                              )
                                        html
                                        tramp
                                        restclient
                                        ;; Org
-                                       org-projectile org2blog
+                                       org-projectile
+                                       org2blog
                                        org-notify
                                        org-babel
                                        ;; Helm
@@ -58,11 +58,10 @@
                                        html
                                        c-c++
                                        python
-                                       ;; haskell
+                                       haskell
                                        javascript
                                        ruby
                                        ;; Utils
-                                       floobits
                                        utils
                                        xkcd
                                        )
@@ -84,6 +83,7 @@ before layers configuration."
    ;; banner with the corresponding index is used, if the value is `random'
    ;; then the banner is chosen randomly among the available banners, if
    ;; the value is nil then no banner is displayed.
+   dotspacemacs-startup-banner '0
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
@@ -171,15 +171,17 @@ before layers configuration."
   (set-face-attribute 'vertical-border nil :foreground "#1f1f1f")
   (setq-default evil-escape-key-sequence "nj")
   (setq delete-by-moving-to-trash t)
+  (setq rcirc-authinfo-support t)
+  (setq rcirc-uses-znc t)
   (setq rcirc-server-alist
          '(("freenode"
-            :host "irc.berrocal.me"
+            :host "freenode.berrocal.me"
             :port "1984"
             :auth "cestdiego/freenode"
             :channels ("#emacs"))
 
            ("geekshed"
-            :host "irc.berrocal.me"
+            :host "geekshed.berrocal.me"
             :port "1984"
             :auth "cestdiego/geekshed"
             :channels ("#jupiterbroadcasting"))
@@ -287,7 +289,7 @@ version 2014-10-28"
                     )
                   ))
   (evil-leader/set-key
-    "Lob" 'custom-persp/bbspwm)
+    "Pob" 'custom-persp/bbspwm)
   (setq browse-url-browser-function 'browse-url-generic
         browse-url-generic-program "google-chrome")
   (setq spacemacs/mode-line-battery-time t)
@@ -304,8 +306,7 @@ version 2014-10-28"
   (setenv "HORTONDATA" "/home/io/horton/data")
 
   (setq python-shell-virtualenv-path "/usr/")
-  (setq python-shell-interpreter "ipython")
-  (setq python-shell-interpreter-args "-i --gui=wx")
+  ;; (setq python-shell-interpreter "/usr/bin/python")
 
 
   (setq eshell-rc-script "~/spacemacs_conf/.eshellrc")
@@ -316,12 +317,6 @@ version 2014-10-28"
   (setq powerline-default-separator 'slant)
   (setq vc-follow-symlinks t)
 
-  (setq sublimity-scroll-weight 10
-        sublimity-scroll-drift-length 5
-        sublimity-map-fraction 0.3
-        sublimity-map-size 20
-        sublimity-map-text-scale -7
-        )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

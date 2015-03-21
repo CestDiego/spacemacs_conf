@@ -8,7 +8,7 @@
 
 (defun eshell/init-virtualenvwrapper()
   (use-package virtualenvwrapper
-    :init
+    :config
     (venv-initialize-eshell)
     ))
 

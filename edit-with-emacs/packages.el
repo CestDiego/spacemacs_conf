@@ -15,7 +15,7 @@ which require an initialization must be listed explicitly in the list.")
   (use-package edit-server
     :config
     (progn
-      (setq edit-server-new-frame t)
+      (setq edit-server-new-frame nil)
       (edit-server-start)
       (setq edit-server-url-major-mode-alist
             '(("github\\.com" . markdown-mode)))

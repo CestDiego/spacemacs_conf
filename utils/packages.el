@@ -14,9 +14,9 @@
   '(
     string-inflection
     evil-annoying-arrows
-    pdf-tools
+    ;; pdf-tools
     ;; aggressive-fill-paragraph
-    python-environment
+   python-environment
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
@@ -44,16 +44,16 @@ which require an initialization must be listed explicitly in the list.")
     )
   )
 
-(defun utils/init-pdf-tools ()
-  "Initialize my package"
-  (use-package pdf-tools
-    :init
-    (progn
-      (pdf-tools-install)
-      (evil-leader/set-key-for-mode 'pdf-view-mode
-        "h" 'image-backward-hscroll
-        "l" 'image-forward-hscroll
-        ))))
+;;(defun utils/init-pdf-tools ()
+;;  "Initialize my package"
+;;  (use-package pdf-tools
+;;    :init
+;;    (progn
+;;      (pdf-tools-install)
+;;      (evil-leader/set-key-for-mode 'pdf-view-mode
+;;        "h" 'image-backward-hscroll
+;;        "l" 'image-forward-hscroll
+;;        ))))
 
 ;; (defun utils/init-aggressive-fill-paragraph()
 ;;   (use-package aggressive-fill-paragraph
@@ -62,9 +62,8 @@ which require an initialization must be listed explicitly in the list.")
 
 (defun utils/init-python-environment()
   (use-package python-environment
-    :init
+    :config
     (progn
-      (require 'python-environment)
       (defun install-python-dependencies ()
         (interactive)
         (python-environment-run "pip" "install" "grip"))

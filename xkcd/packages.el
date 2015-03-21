@@ -25,13 +25,15 @@ which require an initialization must be listed explicitly in the list.")
 (defun xkcd/init-xkcd ()
   "Initialize my package"
   (use-package xkcd-mode
+    :defer t
     :init
+    (setq xkcd-cache-dir "~/.emacs.d/.cache/xkcd/")
+    (evil-leader/set-key
+      "ax" 'xkcd)
+    (add-to-list 'evil-emacs-state-modes 'xkcd-mode)
+    :config
     (progn
-      (setq xkcd-cache-dir "~/.emacs.d/.cache/xkcd/")
-      (evil-leader/set-key
-        "ax" 'xkcd)
       (spacemacs|evilify xkcd-mode-map)
-      (add-to-list 'evil-emacs-state-modes 'xkcd-mode)
       )))
 ;;
 ;; Often the body of an initialize function uses `use-package'

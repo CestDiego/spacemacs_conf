@@ -6,7 +6,7 @@
 
 (defun org-notify/init-org-notify()
   (use-package org-notify
-    :init
+    :config
     (progn
       (org-notify-start)
 

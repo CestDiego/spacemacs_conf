@@ -18,7 +18,8 @@
                                             git-enable-github-support t
                                             git-gutter-use-fringe nil)
                                        prodigy
-                                       (colors :variables colors-enable-nyan-cat-progress-bar ,(display-graphic-p))
+                                       ;; (colors :variables colors-enable-nyan-cat-progress-bar ,(display-graphic-p))
+                                       colors
                                        (perspectives :variables
                                                      perspective-enable-persp-projectile t)
                                        edit-with-emacs
@@ -31,9 +32,9 @@
                                        tramp
                                        restclient
                                        ;; Org
-                                       org-projectile org2blog
+                                       org2blog
                                        org-notify
-                                       org-babel
+                                       org
                                        ;; Helm
                                        helm
                                        ;; Code Navigation
@@ -92,7 +93,7 @@ before layers configuration."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro for Powerline"
+   dotspacemacs-default-font '("Sauce Code Powerline"
                                :size 16
                                :weight normal
                                :width normal
@@ -322,6 +323,7 @@ version 2014-10-28"
         sublimity-map-size 20
         sublimity-map-text-scale -7
         )
+  (setq zone-timer (run-with-idle-timer 120 t 'zone))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -374,7 +376,7 @@ version 2014-10-28"
  '(markdown-command "/usr/bin/pandoc")
  '(org-agenda-files
    (quote
-    ("~/Dropbox/Org-Notes/AyersGroup/AyersGroup.org" "~/Dropbox/Org-Notes/main.org")))
+    ("~/Dropbox/Org-Notes/personal.org" "~/Dropbox/Org-Notes/ayers.org" "~/Dropbox/Org-Notes/AyersGroup/AyersGroup.org" "~/Dropbox/Org-Notes/main.org")))
  '(paradox-automatically-star t)
  '(paradox-github-token t)
  '(pos-tip-background-color "#eee8d5")
@@ -389,5 +391,5 @@ version 2014-10-28"
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Source Code Pro for Powerline" :foundry "adobe" :slant normal :weight normal :height 120 :width normal))))
+ '(default ((t (:foreground "#DCDCCC" :background "#3F3F3F"))))
  '(evil-search-highlight-persist-highlight-face ((t (:background "peru")))))

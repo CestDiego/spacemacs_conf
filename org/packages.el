@@ -70,10 +70,10 @@ which require an initialization must be listed explicitly in the list.")
       (setq org-projectile:per-repo-filename "TODO.org"
             org-agenda-files (append org-agenda-files (org-projectile:todo-files)))
       (add-to-list 'org-capture-templates (org-projectile:project-todo-entry "p"))
-      (add-to-list 'org-capture-templates (org-projectile:project-todo-entry "l" "* TODO %? %a\n" "Linked Project TODO"))
+      (add-to-list 'org-capture-templates (org-projectile:project-todo-entry "l" "* TODO [[%l][%? ]] \t %^g\n \t\t\t\tCaptured at: %T\n" "Linked Project TODO"))
       (evil-leader/set-key
         "oc" 'org-capture
-        "opc" 'org-projectile:project-todo-completing-read)
+        "pC" 'org-projectile:project-todo-completing-read)
       )))
 
 (defun org/init-org-gcal ()
@@ -84,9 +84,9 @@ which require an initialization must be listed explicitly in the list.")
           org-gcal-file-alist '(("cestdiego@gmail.com" .  "~/Dropbox/Org-Notes/personal.org")
                                 ("ao267thudhi3o29famivcckt9c@group.calendar.google.com" .  "~/Dropbox/Org-Notes/ayers.org")))
     (evil-leader/set-key
-      "mgf" 'org-gcal-fetch
-      "mgp" 'org-gcal-post-at-point
-      "mgr" 'org-gcal-refresh-token)
+      "ogf" 'org-gcal-fetch
+      "ogp" 'org-gcal-post-at-point
+      "ogr" 'org-gcal-refresh-token)
     ))
 
 (defun org/init-ox-ioslide ()

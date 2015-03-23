@@ -1,5 +1,1 @@
 * Tasks
-** TODO  do whole stuff      <2014-11-26 Wed 19:49>
-  
- 
-  Link: file:~/spacemacs_conf/org-repo-todo/extensions.el:::init

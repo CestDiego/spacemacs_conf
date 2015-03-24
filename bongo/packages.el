@@ -30,12 +30,6 @@ which require an initialization must be listed explicitly in the list.")
     (progn
       ;; (add-to-list 'evil-emacs-state-modes 'bongo-library-mode)
       ;; (add-to-list 'evil-emacs-state-modes 'bongo-playlist-mode)
-      (spacemacs|evilify bongo-mode-map
-        )
-      (spacemacs|evilify bongo-dired-library-mode-map
-        )
-      (spacemacs|evilify bongo-seek-mode-map
-        )
       (evil-leader/set-key
         "aB" 'bongo)
       ))

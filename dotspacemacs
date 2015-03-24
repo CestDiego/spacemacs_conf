@@ -185,6 +185,8 @@ before layers configuration."
             :auth "cestdiego/geekshed"
             :channels ("#jupiterbroadcasting"))
            ))
+
+  (setq ycmd-server-command "~/.installed/ycmd/")
   )
 
 (defun dotspacemacs/config ()

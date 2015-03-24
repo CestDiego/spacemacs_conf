@@ -326,6 +326,7 @@ version 2014-10-28"
         sublimity-map-text-scale -7
         )
   (setq zone-timer (run-with-idle-timer 120 t 'zone))
+  (setq zone-programs [zone-pgm-rotate-LR-lockstep])
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

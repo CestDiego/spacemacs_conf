@@ -10,32 +10,18 @@
 ;;
 ;;; License: GPLv3
 
-(defvar xkcd-packages
-  '(
-    xkcd
-    )
-  "List of all packages to install and/or initialize. Built-in packages
-which require an initialization must be listed explicitly in the list.")
+(defvar xkcd-packages '(xkcd))
 
-(defvar xkcd-excluded-packages '()
-  "List of packages to exclude.")
-
-;; For each package, define a function xkcd/init-<package-xkcd>
-;;
 (defun xkcd/init-xkcd ()
-  "Initialize my package"
   (use-package xkcd-mode
     :defer t
     :init
-    (setq xkcd-cache-dir "~/.emacs.d/.cache/xkcd/")
-    (evil-leader/set-key
-      "ax" 'xkcd)
-    (add-to-list 'evil-emacs-state-modes 'xkcd-mode)
+    (progn
+      (setq xkcd-cache-dir "~/.emacs.d/.cache/xkcd/")
+      (evil-leader/set-key
+        "ax" 'xkcd)
+      (add-to-list 'evil-emacs-state-modes 'xkcd-mode))
     :config
     (progn
-      (spacemacs|evilify xkcd-mode-map)
-      )))
-;;
-;; Often the body of an initialize function uses `use-package'
-;; For more info on `use-package', see readme:
-;; https://github.com/jwiegley/use-package
+      (define-key xkcd-mode-map (kbd "j") 'xkcd-next)
+      (define-key xkcd-mode-map (kbd "k") 'xkcd-prev))))

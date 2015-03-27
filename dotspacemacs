@@ -2,6 +2,7 @@
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
+
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration."
   (setq-default
@@ -11,8 +12,7 @@
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-editing-style 'vim
-   dotspacemacs-configuration-layers '(
-                                       appearance
+   dotspacemacs-configuration-layers '(appearance
                                        (git :variables
                                             git-magit-status-fullscreen t
                                             git-enable-github-support t
@@ -46,6 +46,7 @@
                                        ;; Media
                                        bongo
                                        ;; Completings Stuff
+                                       company-mode
                                        slime
                                        ycmd
                                        ;; LaTeX
@@ -140,9 +141,9 @@ before layers configuration."
    ;; point when it reaches the top or bottom of the screen.
    dotspacemacs-smooth-scrolling t
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
-   dotspacemacs-smartparens-strict-mode nil
+   dotspacemacs-smartparens-strict-mode t
    ;; If non nil advises quit functions to keep server open when quitting.
-   dotspacemacs-persistent-server nil
+   dotspacemacs-persistent-server t
    ;; The default package repository used if no explicit repository has been
    ;; specified with an installed package.
    ;; Not used for now.
@@ -193,26 +194,25 @@ before layers configuration."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
-
+  (setq spacemacs-mode-line-minor-modesp nil)
+  (setq spacemacs/mode-line-battery-time t)
   ;;; SANE DEFAULTS!!
   ;; decent navigation like a good citizen
   (global-set-key (kbd "<C-s-tab>") 'persp-next)
   (global-set-key (kbd "<M-s-tab>") 'persp-prev)
-  ;; Don't break lines for me, please
-  (setq sp-cancel-autoskip-on-backward-movement nil)
 
   ;; Use helm-projectile anywhere
   ;; (setq projectile-require-project-root nil)
 
   ;; UTF-8 please
-  (setq locale-coding-system 'utf-8) ; pretty
-  (set-terminal-coding-system 'utf-8) ; pretty
-  (set-keyboard-coding-system 'utf-8) ; pretty
-  (set-selection-coding-system 'utf-8) ; please
-  (prefer-coding-system 'utf-8) ; with sugar on top
-  (set-language-environment 'utf-8)
+  ;; (setq locale-coding-system 'utf-8) ; pretty
+  ;; (set-terminal-coding-system 'utf-8) ; pretty
+  ;; (set-keyboard-coding-system 'utf-8) ; pretty
+  ;; (set-selection-coding-system 'utf-8) ; please
+  ;; (prefer-coding-system 'utf-8) ; with sugar on top
+  ;; (set-language-environment 'utf-8)
   ;; Sentences do not need double spaces to end. Period.
-  (set-default 'sentence-end-double-space nil)
+  ;; (set-default 'sentence-end-double-space nil)
 
   (setq org-startup-folded nil)
   (eval-after-load 'org2blog
@@ -226,58 +226,7 @@ layers configuration."
                :tags-as-categories nil)))
       (setq org2blog/wp-confirm-post t)
       ))
-  (setq web-mode-enable-current-column-highlight t)
-
-  (add-hook 'doc-view-mode-hook 'auto-revert-mode)
-
-  (defun xah-run-current-file ()
-    "Execute the current file.
-For example, if the current buffer is the file xx.py, then it'll call 「python xx.py」 in a shell.
-The file can be php, perl, python, ruby, javascript, bash, ocaml, vb, elisp.
-File suffix is used to determine what program to run.
-
-If the file is modified, ask if you want to save first.
-
-URL `http://ergoemacs.org/emacs/elisp_run_current_file.html'
-version 2014-10-28"
-    (interactive)
-    (let* (
-           (ξsuffixMap
-            ;; (‹extension› . ‹shell program name›)
-            `(
-              ("php" . "php")
-              ("pl" . "perl")
-              ("py" . "python")
-              ("py3" . ,(if (string-equal system-type "windows-nt") "c:/Python32/python.exe" "python3"))
-              ("rb" . "ruby")
-              ("js" . "node") ; node.js
-              ("sh" . "bash")
-              ("clj" . "java -cp /home/xah/apps/clojure-1.6.0/clojure-1.6.0.jar clojure.main")
-              ("ml" . "ocaml")
-              ("vbs" . "cscript")
-              ;; ("pov" . "/usr/local/bin/povray +R2 +A0.1 +J1.2 +Am2 +Q9 +H480 +W640")
-              ))
-           (ξfName (buffer-file-name))
-           (ξfSuffix (file-name-extension ξfName))
-           (ξprogName (cdr (assoc ξfSuffix ξsuffixMap)))
-           (ξcmdStr (concat ξprogName " \""   ξfName "\"")))
-
-      (when (buffer-modified-p)
-        (when (y-or-n-p "Buffer modified. Do you want to save first?")
-          (save-buffer)))
-
-
-      (if (string-equal ξfSuffix "el") ; special case for emacs lisp
-          (load ξfName)
-        (if ξprogName
-            (progn
-              (message "Running…")
-              (shell-command ξcmdStr "*xah-run-current-file output*" ))
-          (message "No recognized program file suffix for this file.")))))
-
-  (evil-leader/set-key-for-mode 'python-mode
-    "mcap" 'xah-run-current-file)
-
+  ;; (setq web-mode-enable-current-column-highlight t)
   (defun custom-persp/bbspwm ()
     (interactive)
     (custom-persp "bbspwm"
@@ -293,7 +242,6 @@ version 2014-10-28"
     "Lob" 'custom-persp/bbspwm)
   (setq browse-url-browser-function 'browse-url-generic
         browse-url-generic-program "google-chrome")
-  (setq spacemacs/mode-line-battery-time t)
   (defadvice evil-inner-word (around underscore-as-word activate)
     (let ((table (copy-syntax-table (syntax-table))))
       (modify-syntax-entry ?_ "w" table)
@@ -309,7 +257,6 @@ version 2014-10-28"
   (setq python-shell-virtualenv-path "/usr/")
   (setq python-shell-interpreter "ipython")
   (setq python-shell-interpreter-args "-i --gui=wx")
-
 
   (setq eshell-rc-script "~/spacemacs_conf/.eshellrc")
   (setq eshell-path-env exec-path)
@@ -327,7 +274,7 @@ version 2014-10-28"
         )
   (setq zone-timer (run-with-idle-timer 120 t 'zone))
   (setq zone-programs [zone-pgm-rotate-LR-lockstep])
-
+  (sp-with-modes '(emacs-lisp-mode dotspacemacs-mode) (sp-local-pair "'" "'" :actions '(:rem insert)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

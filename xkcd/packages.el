@@ -17,7 +17,9 @@
     :defer t
     :init
     (progn
-      (setq xkcd-cache-dir "~/.emacs.d/.cache/xkcd/")
+      (setq xkcd-cache-dir (concat spacemacs-cache-directory "xkcd/"))
+      (when (not (file-directory-p xkcd-cache-dir))
+        (make-directory xkcd-cache-dir))
       (evil-leader/set-key
         "ax" 'xkcd)
       (add-to-list 'evil-emacs-state-modes 'xkcd-mode))

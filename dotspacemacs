@@ -17,7 +17,7 @@
                                             git-magit-status-fullscreen t
                                             git-enable-github-support t
                                             git-gutter-use-fringe nil)
-                                       prodigy
+                                       ;;prodigy
                                        ;; (colors :variables colors-enable-nyan-cat-progress-bar ,(display-graphic-p))
                                        colors
                                        (perspectives :variables
@@ -32,7 +32,6 @@
                                        tramp
                                        restclient
                                        ;; Org
-                                       org2blog
                                        org-notify
                                        org
                                        ;; Helm
@@ -66,7 +65,7 @@
                                        ;; Utils
                                        floobits
                                        utils
-                                       xkcd
+;;                                       xkcd
                                        )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -266,6 +265,9 @@ layers configuration."
   (setq powerline-default-separator 'slant)
   (setq vc-follow-symlinks t)
 
+  (evil-leader/set-key
+    "m/" 'evil-search-highlight-persist-remove-all)
+
   (setq sublimity-scroll-weight 10
         sublimity-scroll-drift-length 5
         sublimity-map-fraction 0.3
@@ -275,6 +277,38 @@ layers configuration."
   (setq zone-timer (run-with-idle-timer 120 t 'zone))
   (setq zone-programs [zone-pgm-rotate-LR-lockstep])
   (sp-with-modes '(emacs-lisp-mode dotspacemacs-mode) (sp-local-pair "'" "'" :actions '(:rem insert)))
+
+  ;; Prodigy stuff
+  ;; (prodigy-define-service
+  ;;   :name "GMAT Dudes Django server"
+  ;;   :cwd "~/Projects/ansible-test/"
+  ;;   :command "python"
+  ;;   :args '("manage.py" "runserver" )
+  ;;   :init (lambda ()
+  ;;           (pyvenv-workon "gmat"))
+  ;;   :kill-signal 'sigkill
+  ;;   :kill-process-buffer-on-stop t
+  ;;   )
+  ;; (prodigy-define-service
+  ;;   :name "Rocola Hackspace Client"
+  ;;   :cwd "~/Projects/Rocola-Hackspace/Client/"
+  ;;   :command "node"
+  ;;   :args '("app.js" )
+  ;;   :init (lambda()
+  ;;           ())
+  ;;   :kill-signal 'sigkill
+  ;;   :kill-process-buffer-on-stop t
+  ;;   )
+  ;; (prodigy-define-service
+  ;;   :name "Rocola Hackspace Server"
+  ;;   :cwd "~/Projects/Rocola-Hackspace/Server/"
+  ;;   :command "node"
+  ;;   :args '("app.js" )
+  ;;   :init (lambda()
+  ;;           ())
+  ;;   :kill-signal 'sigkill
+  ;;   :kill-process-buffer-on-stop t
+  ;;   )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

@@ -10,5 +10,4 @@
     (progn
       (global-set-key (kbd "<f6>") 'demo-it-step)
       (global-set-key (kbd "S-<f6>") 'demo-it-end)
-      ()
       )))

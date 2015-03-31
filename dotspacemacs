@@ -174,13 +174,13 @@ before layers configuration."
   (setq delete-by-moving-to-trash t)
   (setq rcirc-server-alist
          '(("freenode"
-            :host "irc.berrocal.me"
+            :host "freenode.berrocal.me"
             :port "1984"
             :auth "cestdiego/freenode"
             :channels ("#emacs"))
 
            ("geekshed"
-            :host "irc.berrocal.me"
+            :host "geekshed.berrocal.me"
             :port "1984"
             :auth "cestdiego/geekshed"
             :channels ("#jupiterbroadcasting"))
@@ -376,5 +376,4 @@ layers configuration."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:foreground "#DCDCCC" :background "#3F3F3F"))))
  '(evil-search-highlight-persist-highlight-face ((t (:background "peru")))))

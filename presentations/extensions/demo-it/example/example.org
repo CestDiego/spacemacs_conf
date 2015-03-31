@@ -19,17 +19,6 @@ many...well, the few features of the =demo-it= project.
 
 #+end_src
 
-** HOli
-
-** asdasd
-sfafasfdasd
-
-** needed now
-asdadasd
-
-*** nested stuff nees me
-adads
-
 * Source Code Highlighting
 
   We can show source code using Emacs'

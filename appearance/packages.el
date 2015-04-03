@@ -1,7 +1,6 @@
 (defvar appearance-packages
   '(
     auto-dim-other-buffers
-    gotham-theme
     hexrgb
     ))
 
@@ -30,9 +29,3 @@
                         :background  dim-other-buffers-face-color)
     )
   )
-
-(defun appearance/init-gotham-theme ()
-  (use-package gotham-theme
-    :defer t
-    ))
-

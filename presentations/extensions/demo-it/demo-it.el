@@ -87,8 +87,6 @@
 (defvar demo-it--steps '() "List of functions to be executed in order.")
 
 ;; The following functions come from other projects I like to use
-(declare-function fancy-narrow-to-region "ext:fancy-narrow")
-(declare-function fancy-narrow-to-defun "ext:fancy-narrow")
 (declare-function eshell-send-input "ext:eshell")
 (declare-function show-all "ext:eshell.c")
 (defvar org-tree-slide-heading-emphasis)
@@ -163,12 +161,11 @@ STEPS is a list of functions to execute."
 ;;    narrow to the function:
 
 (defun demo-it-highlight-section ()
-  "If the region is active, call 'fancy-narrow-to-region on it, otherwise, call 'fancy-narrow-to-defun, and see what happens."
+  "If the region is active, call 'narrow-to-region on it, otherwise, call 'fancy-narrow-to-defun, and see what happens."
   (interactive)
-  (when (fboundp 'fancy-narrow-to-region)
-    (if (region-active-p)
-        (fancy-narrow-to-region (region-beginning) (region-end))
-      (fancy-narrow-to-defun))))
+  (if (region-active-p)
+      (narrow-to-region (region-beginning) (region-end))
+    (narrow-to-defun)))
 
 ;; Hiding the Modeline
 ;;
@@ -226,17 +223,14 @@ STEPS is a list of functions to execute."
   "Load FILE and use fancy narrow to highlight part of the buffer.  If TYPE is 'char, LINE1 and LINE2 are position in buffer, otherwise LINE1 and LINE2 are start and ending lines to highlight.  If SIDE is non-nil, the buffer is placed in a new side window, either 'below or to the 'side, and SIZE is the text scale, which defaults to 1."
   (demo-it-load-file file side size)
 
-  ; If fancy-narrow hasn't been installed, this behaves
-  ; just like demo-it-load-file
-  (when (fboundp 'fancy-narrow-to-region)
-    (let ((start line1)
-          (end line2))
-      (unless (eq type 'char)
-        (goto-char (point-min)) (forward-line (1- line1))  ;; Heh: (goto-line line1)
-        (setq start (point))
-        (goto-char (point-min)) (forward-line line2)
-        (setq end (point)))
-      (fancy-narrow-to-region start end))))
+  (let ((start line1)
+        (end line2))
+    (unless (eq type 'char)
+      (goto-char (point-min)) (forward-line (1- line1))  ;; Heh: (goto-line line1)
+      (setq start (point))
+      (goto-char (point-min)) (forward-line line2)
+      (setq end (point)))
+    (narrow-to-region start end)))
 
 
 ;; Display an Image (or other non-textual scaled file) on the Side

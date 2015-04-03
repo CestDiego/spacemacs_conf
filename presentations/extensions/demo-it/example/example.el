@@ -59,5 +59,4 @@
 ;; Start the presentation whenever this script is evaluated. Good idea?
 
 (dit-start-presentation)
-
 ;;; example.el ends here

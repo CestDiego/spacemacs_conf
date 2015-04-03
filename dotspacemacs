@@ -361,7 +361,7 @@ layers configuration."
  '(markdown-command "/usr/bin/pandoc")
  '(org-agenda-files
    (quote
-    ("~/Dropbox/Org-Notes/personal.org" "~/Dropbox/Org-Notes/ayers.org" "~/Dropbox/Org-Notes/AyersGroup/AyersGroup.org" "~/Dropbox/Org-Notes/main.org")))
+    ("~/Dropbox/Org-Notes/AyersGroup/AyersGroup.org" "~/Dropbox/Org-Notes/main.org" "~/Dropbox/Org-Notes/personal.org" "~/Dropbox/Org-Notes/ayers.org")))
  '(paradox-automatically-star t)
  '(paradox-github-token t)
  '(pos-tip-background-color "#eee8d5")

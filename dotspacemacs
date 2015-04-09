@@ -45,7 +45,7 @@
                                        ;; Media
                                        bongo
                                        ;; Completings Stuff
-                                       company-mode
+                                       auto-completion
                                        slime
                                        ycmd
                                        ;; LaTeX
@@ -278,37 +278,41 @@ layers configuration."
   (setq zone-programs [zone-pgm-rotate-LR-lockstep])
   (sp-with-modes '(emacs-lisp-mode dotspacemacs-mode) (sp-local-pair "'" "'" :actions '(:rem insert)))
 
-  ;; Prodigy stuff
-  ;; (prodigy-define-service
-  ;;   :name "GMAT Dudes Django server"
-  ;;   :cwd "~/Projects/ansible-test/"
-  ;;   :command "python"
-  ;;   :args '("manage.py" "runserver" )
-  ;;   :init (lambda ()
-  ;;           (pyvenv-workon "gmat"))
-  ;;   :kill-signal 'sigkill
-  ;;   :kill-process-buffer-on-stop t
-  ;;   )
-  ;; (prodigy-define-service
-  ;;   :name "Rocola Hackspace Client"
-  ;;   :cwd "~/Projects/Rocola-Hackspace/Client/"
-  ;;   :command "node"
-  ;;   :args '("app.js" )
-  ;;   :init (lambda()
-  ;;           ())
-  ;;   :kill-signal 'sigkill
-  ;;   :kill-process-buffer-on-stop t
-  ;;   )
-  ;; (prodigy-define-service
-  ;;   :name "Rocola Hackspace Server"
-  ;;   :cwd "~/Projects/Rocola-Hackspace/Server/"
-  ;;   :command "node"
-  ;;   :args '("app.js" )
-  ;;   :init (lambda()
-  ;;           ())
-  ;;   :kill-signal 'sigkill
-  ;;   :kill-process-buffer-on-stop t
-  ;;   )
+  ;; (eval-after-load 'prodigy
+  ;;   (progn
+  ;;     (prodigy-define-service
+  ;;      :name "GMAT Dudes Django server"
+  ;;      :cwd "~/Projects/ansible-test/"
+  ;;      :command "python"
+  ;;      :args '("manage.py" "runserver" )
+  ;;      :init (lambda ()
+  ;;              (pyvenv-workon "gmat"))
+  ;;      :kill-signal 'sigkill
+  ;;      :kill-process-buffer-on-stop t
+  ;;      )
+  ;;     (prodigy-define-service
+  ;;      :name "Rocola Hackspace Client"
+  ;;      :cwd "~/Projects/Rocola-Hackspace/Client/"
+  ;;      :command "node"
+  ;;      :args '("app.js" )
+  ;;      :init (lambda()
+  ;;              ())
+  ;;      :kill-signal 'sigkill
+  ;;      :kill-process-buffer-on-stop t
+  ;;      )
+  ;;     (prodigy-define-service
+  ;;      :name "Rocola Hackspace Server"
+  ;;      :cwd "~/Projects/Rocola-Hackspace/Server/"
+  ;;      :command "node"
+  ;;      :args '("app.js" )
+  ;;      :init (lambda()
+  ;;              ())
+  ;;      :kill-signal 'sigkill
+  ;;      :kill-process-buffer-on-stop t
+  ;;      )
+  ;;     )
+
+  ;;    )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

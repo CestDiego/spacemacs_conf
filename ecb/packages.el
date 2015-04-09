@@ -11,7 +11,7 @@
       ;; (require 'epcs)
 
       ;; (let ((connect-function
-      ;;        (lambda (mngr) 
+      ;;        (lambda (mngr)
       ;;          (epc:define-method mngr 'echo (lambda (&rest x) x) "args" "just echo back arguments.")
       ;;          (epc:define-method mngr 'add '+ "args" "add argument numbers.")
       ;;          )) server-process)
@@ -20,4 +20,4 @@
       ;;   (sleep-for 10)
       ;;   (epcs:server-stop server-process))
       ;; (message "EPC has been loaded")
-      ))) 
+      )))

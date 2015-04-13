@@ -32,8 +32,9 @@
                                        tramp
                                        restclient
                                        ;; Org
-                                       org-notify
                                        org
+                                       org-notify
+                                       org-cestdiego
                                        ;; Helm
                                        helm
                                        ;; Code Navigation
@@ -48,6 +49,8 @@
                                        auto-completion
                                        slime
                                        ycmd
+                                       ;; Syntax Checking Stuff
+                                       syntax-checking
                                        ;; LaTeX
                                        auctex
                                        ;; Shells
@@ -65,7 +68,7 @@
                                        ;; Utils
                                        floobits
                                        utils
-;;                                       xkcd
+                                       xkcd
                                        )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()

@@ -14,6 +14,8 @@
   '(
     ;; package org-babels go here
     org
+    ob-http
+    ob-mongo
     ob-browser
     org-projectile
     org-gcal
@@ -25,31 +27,42 @@ which require an initialization must be listed explicitly in the list.")
 (defvar org-excluded-packages '()
   "List of packages to exclude.")
 
-;; For each package, define a function org/init-<package-org-babel>
-;;
-(defun org/init-org ()
+(defun org/init-ob-http()
+  (use-package ob-http
+    :init
+    ))
+
+(defun org/init-ob-mongo()
+  (use-package ob-mongo
+    :init
+    ))
+
+(defun org/init-org()
   "Initialize my package"
   (use-package org
-    :init
+    :config
     (progn
-      (setq org-confirm-babel-evaluate nil)
       (setq org-src-fontify-natively t)
       (setq org-src-tab-acts-natively t)
-
-      (org-babel-do-load-languages
-       'org-babel-load-languages
-       '((R . t)
-         (emacs-lisp . t)
-         (python . t)
-         (sh . t)
-         (haskell . t)
-         (js . t)
-         (latex . t)
-         (gnuplot . t)
-         (C . t)
-         (sql . t)
-         (ditaa . t)
-         ))
+      (setq org-confirm-babel-evaluate nil)
+      (eval-after-load 'org-babel
+        '(progn
+           (org-babel-do-load-languages
+            'org-babel-load-languages
+            '((R . t)
+              (emacs-lisp . t)
+              (python . t)
+              (sh . t)
+              (haskell . t)
+              (js . t)
+              (latex . t)
+              (gnuplot . t)
+              (C . t)
+              (sql . t)
+              (ditaa . t)
+              ))
+           )
+        )
       (setq org-ditaa-jar-path "/usr/bin/ditaa")
       )))
 

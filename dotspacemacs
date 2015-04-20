@@ -17,9 +17,10 @@
                                             git-magit-status-fullscreen t
                                             git-enable-github-support t
                                             git-gutter-use-fringe nil)
-                                       ;;prodigy
-                                       ;; (colors :variables colors-enable-nyan-cat-progress-bar ,(display-graphic-p))
-                                       colors
+                                       ;; prodigy
+                                       (colors :variables
+                                               colors-enable-nyan-cat-progress-bar ,(display-graphic-p)
+                                               colors-enable-rainbow-identifiers nil)
                                        (perspectives :variables
                                                      perspective-enable-persp-projectile t)
                                        edit-with-emacs
@@ -66,6 +67,7 @@
                                        javascript
                                        ruby
                                        ;; Utils
+                                       themes-megapack
                                        floobits
                                        utils
                                        xkcd
@@ -91,7 +93,7 @@ before layers configuration."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(zenburn solarized-light leuven)
+   dotspacemacs-themes '(monokai gotham zenburn solarized-dark leuven)
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -277,10 +279,11 @@ layers configuration."
         sublimity-map-size 20
         sublimity-map-text-scale -7
         )
-  (setq zone-timer (run-with-idle-timer 120 t 'zone))
+  (setq zone-timer (run-with-idle-timer 6000 t 'zone))
   (setq zone-programs [zone-pgm-rotate-LR-lockstep])
   (sp-with-modes '(emacs-lisp-mode dotspacemacs-mode) (sp-local-pair "'" "'" :actions '(:rem insert)))
-
+  (nyan-mode -1)
+  (setq js2-strict-missing-semi-warning nil)
   ;; (eval-after-load 'prodigy
   ;;   (progn
   ;;     (prodigy-define-service
@@ -325,7 +328,7 @@ layers configuration."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ac-ispell-requires 4)
+ '(ac-ispell-requires 4 t)
  '(ahs-case-fold-search nil)
  '(ahs-default-range (quote ahs-range-whole-buffer))
  '(ahs-idle-interval 0.25)
@@ -368,7 +371,7 @@ layers configuration."
  '(markdown-command "/usr/bin/pandoc")
  '(org-agenda-files
    (quote
-    ("~/Dropbox/Org-Notes/AyersGroup/AyersGroup.org" "~/Dropbox/Org-Notes/main.org" "~/Dropbox/Org-Notes/personal.org" "~/Dropbox/Org-Notes/ayers.org")))
+    ("~/Dropbox/Org-Notes/AyersGroup/AyersGroup.org" "~/Dropbox/Org-Notes/main.org" "~/Dropbox/Org-Notes/ayers.org" "~/Dropbox/Org-Notes/personal.org")))
  '(paradox-automatically-star t)
  '(paradox-github-token t)
  '(pos-tip-background-color "#eee8d5")
@@ -383,4 +386,7 @@ layers configuration."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:foreground "#DCDCCC" ))))
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
  '(evil-search-highlight-persist-highlight-face ((t (:background "peru")))))

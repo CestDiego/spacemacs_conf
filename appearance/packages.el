@@ -13,6 +13,7 @@
                                           (face-background 'default) 2 -2))
       (custom-set-faces
        '(auto-dim-other-buffers-face ((t :background dim-other-buffers-face-color))))
+
     :config
     (add-hook 'after-init-hook (lambda ()
                                  (when (fboundp 'auto-dim-other-buffers-mode)

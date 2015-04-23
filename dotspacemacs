@@ -17,7 +17,7 @@
                                             git-magit-status-fullscreen t
                                             git-enable-github-support t
                                             git-gutter-use-fringe nil)
-                                       ;; prodigy
+                                       prodigy
                                        (colors :variables
                                                colors-enable-nyan-cat-progress-bar ,(display-graphic-p)
                                                colors-enable-rainbow-identifiers nil)
@@ -34,7 +34,7 @@
                                        restclient
                                        ;; Org
                                        org
-                                       org-notify
+                                       ;; org-notify
                                        org-cestdiego
                                        ;; Helm
                                        helm
@@ -67,7 +67,7 @@
                                        javascript
                                        ruby
                                        ;; Utils
-                                       themes-megapack
+                                       ;; themes-megapack
                                        floobits
                                        utils
                                        xkcd
@@ -93,7 +93,12 @@ before layers configuration."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(monokai gotham zenburn solarized-dark leuven)
+   dotspacemacs-themes '(
+                         monokai
+                         gotham
+                         zenburn
+                         solarized-dark
+                         leuven)
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -255,10 +260,10 @@ layers configuration."
   ;; (setq python-shell-virtualenv-path "~/Enthought/Canopy_64bit/User/")
   ;; (setq python-shell-interpreter "~/Enthought/Canopy_64bit/User/bin/python")
 
-  (setenv "PYTHONPATH" "/home/io/horton")
-  (setenv "HORTONDATA" "/home/io/horton/data")
+  ;; (setenv "PYTHONPATH" "/home/io/horton")
+  ;; (setenv "HORTONDATA" "/home/io/horton/data")
 
-  (setq python-shell-virtualenv-path "/usr/")
+  ;; (setq python-shell-virtualenv-path "/usr/")
   (setq python-shell-interpreter "ipython")
   (setq python-shell-interpreter-args "-i --gui=wx")
 
@@ -281,112 +286,80 @@ layers configuration."
         )
   (setq zone-timer (run-with-idle-timer 6000 t 'zone))
   (setq zone-programs [zone-pgm-rotate-LR-lockstep])
-  (sp-with-modes '(emacs-lisp-mode dotspacemacs-mode) (sp-local-pair "'" "'" :actions '(:rem insert)))
+
   (nyan-mode -1)
   (setq js2-strict-missing-semi-warning nil)
-  ;; (eval-after-load 'prodigy
-  ;;   (progn
-  ;;     (prodigy-define-service
-  ;;      :name "GMAT Dudes Django server"
-  ;;      :cwd "~/Projects/ansible-test/"
-  ;;      :command "python"
-  ;;      :args '("manage.py" "runserver" )
-  ;;      :init (lambda ()
-  ;;              (pyvenv-workon "gmat"))
-  ;;      :kill-signal 'sigkill
-  ;;      :kill-process-buffer-on-stop t
-  ;;      )
-  ;;     (prodigy-define-service
-  ;;      :name "Rocola Hackspace Client"
-  ;;      :cwd "~/Projects/Rocola-Hackspace/Client/"
-  ;;      :command "node"
-  ;;      :args '("app.js" )
-  ;;      :init (lambda()
-  ;;              ())
-  ;;      :kill-signal 'sigkill
-  ;;      :kill-process-buffer-on-stop t
-  ;;      )
-  ;;     (prodigy-define-service
-  ;;      :name "Rocola Hackspace Server"
-  ;;      :cwd "~/Projects/Rocola-Hackspace/Server/"
-  ;;      :command "node"
-  ;;      :args '("app.js" )
-  ;;      :init (lambda()
-  ;;              ())
-  ;;      :kill-signal 'sigkill
-  ;;      :kill-process-buffer-on-stop t
-  ;;      )
-  ;;     )
 
-  ;;    )
+  ;; Org config
+  (setq org-src-fontify-natively t)
+  (setq org-src-tab-acts-natively t)
+  (setq org-confirm-babel-evaluate nil)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '(
+     (R . t)
+     (emacs-lisp . t)
+     (python . t)
+     (sh . t)
+     (haskell . t)
+     (js . t)
+     (latex . t)
+     (gnuplot . t)
+     (C . t)
+     (sql . t)
+     ))
+
+  (setq org-latex-packages-alist '(("" "color" t) ("" "minted" t) ("" "parskip" t))
+        org-latex-pdf-process
+        '("pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"
+          "bibtex $(basename %b)"
+          "pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"
+          "pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"))
+  (setq org-latex-custom-lang-environments
+        '((python "pythoncode")))
+
+  (prodigy-define-service
+    :name "HackSpace"
+    :command "nodemon"
+    :args '("dev" )
+    :cwd "~/Projects/flat"
+    :kill-signal 'sigkill
+    :kill-process-buffer-on-stop t)
+
+  (evil-define-key 'normal term-raw-map
+    "p" 'term-paste)
+
+  (add-to-list 'helm-completing-read-handlers-alist '(pony-manage . ido))
+
+  (eval-after-load "shell"
+  '(progn
+    (evil-define-key 'insert term-raw-map (kbd "C-k") 'term-send-up)
+    (evil-define-key 'insert term-raw-map (kbd "C-j") 'term-send-down)))
+
+  (setq web-mode-engines-alist
+        '(("django" . "\\.djhtml\\'")))
   )
-
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ac-ispell-requires 4 t)
  '(ahs-case-fold-search nil)
  '(ahs-default-range (quote ahs-range-whole-buffer))
  '(ahs-idle-interval 0.25)
  '(ahs-idle-timer 0 t)
  '(ahs-inhibit-face-list nil)
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(anzu-search-threshold 1000)
- '(compilation-message-face (quote default))
- '(cua-global-mark-cursor-color "#2aa198")
- '(cua-normal-cursor-color "#657b83")
- '(cua-overwrite-cursor-color "#b58900")
- '(cua-read-only-cursor-color "#859900")
- '(global-evil-search-highlight-persist t)
- '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
- '(highlight-symbol-colors
-   (--map
-    (solarized-color-blend it "#fdf6e3" 0.25)
-    (quote
-     ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
- '(highlight-symbol-foreground-color "#586e75")
- '(highlight-tail-colors
-   (quote
-    (("#eee8d5" . 0)
-     ("#B4C342" . 20)
-     ("#69CABF" . 30)
-     ("#69B7F0" . 50)
-     ("#DEB542" . 60)
-     ("#F2804F" . 70)
-     ("#F771AC" . 85)
-     ("#eee8d5" . 100))))
- '(hl-bg-colors
-   (quote
-    ("#DEB542" "#F2804F" "#FF6E64" "#F771AC" "#9EA0E5" "#69B7F0" "#69CABF" "#B4C342")))
- '(hl-fg-colors
-   (quote
-    ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
- '(if (version< emacs-version "24.4"))
- '(magit-diff-use-overlays nil)
- '(markdown-command "/usr/bin/pandoc")
- '(org-agenda-files
-   (quote
-    ("~/Dropbox/Org-Notes/AyersGroup/AyersGroup.org" "~/Dropbox/Org-Notes/main.org" "~/Dropbox/Org-Notes/ayers.org" "~/Dropbox/Org-Notes/personal.org")))
- '(paradox-automatically-star t)
- '(paradox-github-token t)
- '(pos-tip-background-color "#eee8d5")
- '(pos-tip-foreground-color "#586e75")
  '(ring-bell-function (quote ignore) t)
- '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
- '(weechat-color-list
+ '(safe-local-variable-values
    (quote
-    (unspecified "#fdf6e3" "#eee8d5" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#657b83" "#839496"))))
+    ((pony-settings
+      (make-pony-project :python "/usr/bin/python" :settings "cestdiego_django/settings.py"))
+     (pony-settings
+      (make-pony-project :python "/usr/bin/python" :settings "le_blog/settings.py"))))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:foreground "#DCDCCC" ))))
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
- '(evil-search-highlight-persist-highlight-face ((t (:background "peru")))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))

@@ -10,7 +10,7 @@
 ;;
 ;;; License: GPLv3
 
-(defvar org-packages
+(defvar org-cestdiego-packages
   '(
     ;; package org-babels go here
     org
@@ -27,46 +27,39 @@ which require an initialization must be listed explicitly in the list.")
 (defvar org-excluded-packages '()
   "List of packages to exclude.")
 
-(defun org/init-ob-http()
-  (use-package ob-http
-    :init
-    ))
+(defun org-cestdiego/init-ob-http()
+  (use-package ob-http))
 
-(defun org/init-ob-mongo()
-  (use-package ob-mongo
-    :init
-    ))
+(defun org-cestdiego/init-ob-mongo()
+  (use-package ob-mongo))
 
-(defun org/init-org()
+(defun org-cestdiego/post-init-org()
   "Initialize my package"
-  (use-package org
-    :config
-    (progn
-      (setq org-src-fontify-natively t)
-      (setq org-src-tab-acts-natively t)
-      (setq org-confirm-babel-evaluate nil)
-      (eval-after-load 'org-babel
-        '(progn
-           (org-babel-do-load-languages
-            'org-babel-load-languages
-            '((R . t)
-              (emacs-lisp . t)
-              (python . t)
-              (sh . t)
-              (haskell . t)
-              (js . t)
-              (latex . t)
-              (gnuplot . t)
-              (C . t)
-              (sql . t)
-              (ditaa . t)
-              ))
-           )
-        )
-      (setq org-ditaa-jar-path "/usr/bin/ditaa")
-      )))
+  (setq org-src-fontify-natively t)
+  (setq org-src-tab-acts-natively t)
+  (setq org-confirm-babel-evaluate nil)
+  (eval-after-load 'org-babel
+    '(progn
+       (org-babel-do-load-languages
+        'org-babel-load-languages
+        '((R . t)
+          (emacs-lisp . t)
+          (python . t)
+          (sh . t)
+          (haskell . t)
+          (js . t)
+          (latex . t)
+          (gnuplot . t)
+          (C . t)
+          (sql . t)
+          (ditaa . t)
+          ))
+       )
+    )
+  (setq org-ditaa-jar-path "/usr/bin/ditaa")
+  )
 
-(defun org/init-ob-browser()
+(defun org-cestdiego/init-ob-browser()
   (use-package ob-browser
     :init
     (progn
@@ -74,7 +67,7 @@ which require an initialization must be listed explicitly in the list.")
       (setenv "PATH" (mapconcat 'identity exec-path ":"))
       )))
 
-(defun org/init-org-projectile ()
+(defun org-cestdiego/init-org-projectile ()
   (use-package org-projectile
     :config
     (org-projectile:per-repo)
@@ -87,7 +80,7 @@ which require an initialization must be listed explicitly in the list.")
       "pC" 'org-projectile:project-todo-completing-read)
     ))
 
-(defun org/init-org-gcal ()
+(defun org-cestdiego/init-org-gcal ()
   (use-package org-gcal
     :init
     (setq org-gcal-client-id "245586477436-efhjaq0vfr8i07t4inqkmi417hvd3gak.apps.googleusercontent.com"
@@ -100,7 +93,7 @@ which require an initialization must be listed explicitly in the list.")
       "ogr" 'org-gcal-refresh-token)
     ))
 
-(defun org/init-ox-ioslide ()
+(defun org-cestdiego/init-ox-ioslide ()
   (use-package ox-ioslide
     :config
     (require 'ox-ioslide-helper)))

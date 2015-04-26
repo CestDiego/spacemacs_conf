@@ -23,7 +23,7 @@
                                                colors-enable-rainbow-identifiers nil)
                                        ;; (perspectives :variables
                                        ;;               perspective-enable-persp-projectile t)
-                                       ;; eyebrowse
+                                       eyebrowse
                                        edit-with-emacs
                                       (rcirc :variables
                                              rcirc-default-nick "cestdiego"
@@ -33,6 +33,7 @@
                                        html
                                        tramp
                                        restclient
+
                                        ;; Org
                                        org
                                        ;; org-notify

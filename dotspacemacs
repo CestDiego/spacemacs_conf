@@ -34,7 +34,6 @@
                                        html
                                        tramp
                                        restclient
-
                                        ;; Org
                                        org
                                        ;; org-notify
@@ -365,10 +364,12 @@ layers configuration."
   (global-set-key (kbd "<C-tab>") 'eyebrowse-next-window-config)
   (global-set-key (kbd "<C-iso-lefttab>") 'eyebrowse-prev-window-config)
 
-  (setq erc-nick "cestdiego"
-        erc-user-full-name "Diego Berrocal"
-        )
-
+  (setq
+   erc-nick "cestdiego"
+   erc-user-full-name "Diego Berrocal"
+   )
+  ;; Insert thing at point for Helm-aG!!
+  (setq helm-ag-insert-at-point 'symbol)
   )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

@@ -368,8 +368,24 @@ layers configuration."
    erc-nick "cestdiego"
    erc-user-full-name "Diego Berrocal"
    )
+
   ;; Insert thing at point for Helm-aG!!
   (setq helm-ag-insert-at-point 'symbol)
+
+  (setq org-publish-project-alist
+        '(("le_blog"
+           :base-directory "~/Projects/angular_material_blog/src/assets/posts"
+           :html-extension "html"
+           :base-extension "org"
+           :publishing-directory "~/Projects/angular_material_blog/src/assets/posts"
+           :publishing-function (org-html-publish-to-html)
+           :html-preamble nil
+           :html-postamble nil
+           )))
+
+  ;; (setq web-mode-enable-auto-pairing t)
+  (setq web-mode-enable-auto-expanding nil)
+
   )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

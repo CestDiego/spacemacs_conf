@@ -13,6 +13,8 @@
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers '(appearance
+                                       ;;Test;;
+                                       ;; vim-powerline
                                        (git :variables
                                             git-magit-status-fullscreen t
                                             git-enable-github-support t

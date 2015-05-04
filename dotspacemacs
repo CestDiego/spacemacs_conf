@@ -50,7 +50,9 @@
                                        ;; Media
                                        bongo
                                        ;; Completings Stuff
-                                       auto-completion
+                                       (auto-completion :variables
+                                                        auto-completion-enable-help-tooltip t
+                                        )
                                        slime
                                        ycmd
                                        ;; Syntax Checking Stuff

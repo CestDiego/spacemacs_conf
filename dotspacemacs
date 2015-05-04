@@ -294,8 +294,8 @@ layers configuration."
   ;; (setq python-shell-virtualenv-path "~/Enthought/Canopy_64bit/User/")
   ;; (setq python-shell-interpreter "~/Enthought/Canopy_64bit/User/bin/python")
 
-  ;; (setenv "PYTHONPATH" "/home/io/horton")
-  ;; (setenv "HORTONDATA" "/home/io/horton/data")
+  (setenv "PYTHONPATH" "/home/io/horton")
+  (setenv "HORTONDATA" "/home/io/horton/data")
 
   ;; (setq python-shell-virtualenv-path "/usr/")
   (setq python-shell-interpreter "ipython")

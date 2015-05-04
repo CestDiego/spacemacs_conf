@@ -34,7 +34,6 @@
                                              rcirc-default-full-name "Diego Berrocal"
                                              rcirc-enable-znc-support t)
                                        html
-                                       tramp
                                        restclient
                                        ;; Org
                                        org

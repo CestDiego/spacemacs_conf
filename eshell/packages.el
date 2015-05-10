@@ -6,19 +6,9 @@
     eshell
     ))
 
-(defun eshell/init-virtualenvwrapper()
-  (use-package virtualenvwrapper
-    :config
-    (venv-initialize-eshell)
-    ))
+(defun eshell/init-virtualenvwrapper ())
 
-(defun eshell/init-eshell-prompt-extras()
-  (use-package eshell-prompt-extras
-    :init
-    (eval-after-load 'virtualenvwrapper
-      '(setq eshell-highlight-prompt nil
-          eshell-prompt-function 'epe-theme-lambda))
-    ))
+(defun eshell/init-eshell-prompt-extras())
 
 (defun eshell/init-eshell ()
   (use-package eshell
@@ -48,6 +38,18 @@
           (add-hook 'eshell-mode-hook
                     #'(lambda ()
                         (bind-key "C-l" 'eshell/clear eshell-mode-map)))))
+
+      (use-package virtualenvwrapper
+        :defer t
+        :config
+        (venv-initialize-eshell)
+        (use-package esh-opt
+          :config
+          (use-package eshell-prompt-extras
+            :config
+            (setq eshell-highlight-prompt nil
+                  eshell-prompt-function 'epe-theme-lambda))))
+
 
       (use-package em-term
         :defer t

@@ -49,9 +49,11 @@
                                        ;; Media
                                        bongo
                                        ;; Completings Stuff
-                                       (auto-completion :variables
-                                                        auto-completion-enable-help-tooltip t
-                                        )
+                                       (auto-completion
+                                        :variables
+                                        auto-completion-enable-help-tooltip t
+                                        auto-completion-return-key-behavior nil
+                                        auto-completion-complete-with-key-sequence "jk")
                                        slime
                                        ycmd
                                        ;; Syntax Checking Stuff
@@ -64,6 +66,7 @@
                                        ansible
                                        markdown
                                        cp2k
+                                       emacs-lisp
                                        html
                                        c-c++
                                        python
@@ -71,6 +74,7 @@
                                        javascript
                                        ruby
                                        ;; Utils
+                                       calfw
                                        ;; themes-megapack
                                        floobits
                                        utils
@@ -117,6 +121,7 @@ before layers configuration."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
+                         jazz
                          monokai
                          gotham
                          zenburn
@@ -130,7 +135,7 @@ before layers configuration."
                                :size 16
                                :weight normal
                                :width normal
-                               :powerline-scale 1.1)
+                               :powerline-scale 1.0)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -185,7 +190,7 @@ before layers configuration."
    ;; `current' or `nil'. Default is `all'
    dotspacemacs-highlight-delimiters 'all
    ;; If non nil advises quit functions to keep server open when quitting.
-   dotspacemacs-persistent-server t
+   dotspacemacs-persistent-server nil
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
    dotspacemacs-search-tools '("ag" "pt" "ack" "grep")

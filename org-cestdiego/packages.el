@@ -37,6 +37,7 @@ which require an initialization must be listed explicitly in the list.")
 
 (defun org-cestdiego/post-init-org()
   "Initialize my package"
+  (setq org-startup-folded nil)
   (setq org-src-fontify-natively t)
   (setq org-src-tab-acts-natively t)
   (setq org-confirm-babel-evaluate nil)
@@ -58,6 +59,15 @@ which require an initialization must be listed explicitly in the list.")
           ))
        )
     )
+
+  (setq org-latex-packages-alist '(("" "color" t) ("" "minted" t) ("" "parskip" t))
+        org-latex-pdf-process
+        '("pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"
+          "bibtex $(basename %b)"
+          "pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"
+          "pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"))
+  (setq org-latex-custom-lang-environments
+        '((python "pythoncode")))
   (setq org-ditaa-jar-path "/usr/bin/ditaa")
   )
 

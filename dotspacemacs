@@ -260,7 +260,6 @@ layers configuration."
   ;; Sentences do not need double spaces to end. Period.
   ;; (set-default 'sentence-end-double-space nil)
 
-  (setq org-startup-folded nil)
   (eval-after-load 'org2blog
     (progn
       (setq org2blog/wp-blog-alist
@@ -321,34 +320,6 @@ layers configuration."
   (nyan-mode -1)
   (setq js2-strict-missing-semi-warning nil)
 
-  ;; Org config
-  ;; (setq org-src-fontify-natively t)
-  ;; (setq org-src-tab-acts-natively t)
-  ;; (setq org-confirm-babel-evaluate nil)
-  ;; (org-babel-do-load-languages
-  ;;  'org-babel-load-languages
-  ;;  '(
-  ;;    (R . t)
-  ;;    (emacs-lisp . t)
-  ;;    (python . t)
-  ;;    (sh . t)
-  ;;    (haskell . t)
-  ;;    (js . t)
-  ;;    (latex . t)
-  ;;    (gnuplot . t)
-  ;;    (C . t)
-  ;;    (sql . t)
-  ;;    ))
-
-  (setq org-latex-packages-alist '(("" "color" t) ("" "minted" t) ("" "parskip" t))
-        org-latex-pdf-process
-        '("pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"
-          "bibtex $(basename %b)"
-          "pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"
-          "pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"))
-  (setq org-latex-custom-lang-environments
-        '((python "pythoncode")))
-
   (prodigy-define-service
     :name "HackSpace"
     :command "nodemon"
@@ -363,9 +334,9 @@ layers configuration."
   (add-to-list 'helm-completing-read-handlers-alist '(pony-manage . ido))
 
   (eval-after-load "shell"
-  '(progn
-    (evil-define-key 'insert term-raw-map (kbd "C-k") 'term-send-up)
-    (evil-define-key 'insert term-raw-map (kbd "C-j") 'term-send-down)))
+    '(progn
+       (evil-define-key 'insert term-raw-map (kbd "C-k") 'term-send-up)
+       (evil-define-key 'insert term-raw-map (kbd "C-j") 'term-send-down)))
 
   (setq web-mode-engines-alist
         '(("django" . "\\.djhtml\\'")))
@@ -394,7 +365,6 @@ layers configuration."
 
   ;; (setq web-mode-enable-auto-pairing t)
   (setq web-mode-enable-auto-expanding nil)
-
   )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -406,10 +376,15 @@ layers configuration."
  '(ahs-idle-interval 0.25)
  '(ahs-idle-timer 0 t)
  '(ahs-inhibit-face-list nil)
+ '(expand-region-contract-fast-key "V")
+ '(expand-region-reset-fast-key "r")
+ '(magit-use-overlays nil)
  '(ring-bell-function (quote ignore) t)
  '(safe-local-variable-values
    (quote
-    ((pony-settings
+    ((org-export-allow-bind-keywords . t)
+     (set-input-method "latin-1-prefix" t)
+     (pony-settings
       (make-pony-project :python "~/.virtualenvs/quarca/bin/python" :settings "quarca/settings.py"))))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

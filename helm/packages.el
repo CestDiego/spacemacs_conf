@@ -12,6 +12,7 @@
 
 (defvar helm-packages
   '(
+    helm-dash
     helm-mt
     helm-open-github
     )
@@ -21,8 +22,18 @@ which require an initialization must be listed explicitly in the list.")
 (defvar helm-excluded-packages '()
   "List of packages to exclude.")
 
-;; For each package, define a function helm/init-<package-helm>
-;;
+(defun helm/init-helm-dash ()
+  (use-package helm-dash
+    :init
+    (setq helm-dash-docsets-path (concat spacemacs-cache-directory "helm-dash-docset/"))
+    :config
+    (setq helm-dash-common-docsets '("JavaScript")) 
+    (evil-leader/set-key
+      "mah" 'helm-dash
+      "maa" 'helm-dash-at-point)
+    )
+  )
+
 (defun helm/init-helm-mt ()
   "Initialize my package"
   (use-package helm-mt

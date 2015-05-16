@@ -41,25 +41,20 @@ which require an initialization must be listed explicitly in the list.")
   (setq org-src-fontify-natively t)
   (setq org-src-tab-acts-natively t)
   (setq org-confirm-babel-evaluate nil)
-  (eval-after-load 'org-babel
-    '(progn
-       (org-babel-do-load-languages
-        'org-babel-load-languages
-        '((R . t)
-          (emacs-lisp . t)
-          (python . t)
-          (sh . t)
-          (haskell . t)
-          (js . t)
-          (latex . t)
-          (gnuplot . t)
-          (C . t)
-          (sql . t)
-          (ditaa . t)
-          ))
-       )
-    )
-
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((R . t)
+     (emacs-lisp . t)
+     (python . t)
+     (sh . t)
+     (haskell . t)
+     (js . t)
+     (latex . t)
+     (gnuplot . t)
+     (C . t)
+     (sql . t)
+     (ditaa . t)
+     ))
   (setq org-latex-packages-alist '(("" "color" t) ("" "minted" t) ("" "parskip" t))
         org-latex-pdf-process
         '("pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"

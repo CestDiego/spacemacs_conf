@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: sh-sudo
+# key: sudo
+# binding: direct-keybinding
+# --
+#+begin_src sh :results verbatim :dir /sudo::$1
+$0
+#+end_src

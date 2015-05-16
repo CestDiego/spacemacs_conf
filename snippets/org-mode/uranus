@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: uranus
+# key: uranus
+# binding: direct-keybinding
+# --
+[[$1][⛢]]

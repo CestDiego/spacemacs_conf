@@ -385,9 +385,11 @@ layers configuration."
   ;;   (cl-case format
   ;;     (html (format "<kbd>%s</kbd>" (or desc "")))
   ;;     (latex (format "(HOW DO I EXPORT AUDIO TO LATEX? \"%s\")" path))))
+  ;; check out https://github.com/capitaomorte/yasnippet/issues/349
   (define-key yas-minor-mode-map (kbd "C-M-/") 'yas-next-field-or-maybe-expand)
   (setq yas-triggers-in-field t)
   )
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

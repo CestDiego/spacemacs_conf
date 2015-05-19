@@ -1,0 +1,9 @@
+((nil . (
+         (firestarter . (start-process "le_process"
+                                       "le_buffer"
+                                       "rsync"
+                                       "-avzP"
+                                       "--filter=:- .gitignore"
+                                       "miraflowers:/home/diego/miraflowers"))
+         )
+      ))

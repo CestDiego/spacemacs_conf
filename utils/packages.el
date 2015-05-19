@@ -16,7 +16,8 @@
     evil-annoying-arrows
     ;; pdf-tools
     ;; aggressive-fill-paragraph
-   python-environment
+    python-environment
+    firestarter
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
@@ -68,7 +69,9 @@ which require an initialization must be listed explicitly in the list.")
         (interactive)
         (python-environment-run "pip" "install" "grip"))
       )))
-;;
-;; Often the body of an initialize function uses `use-package'
-;; For more info on `use-package', see readme:
-;; https://github.com/jwiegley/use-package
+
+(defun utils/init-firestarter ()
+  (use-package firestarter
+    :init
+    (firestarter-mode)
+    ))

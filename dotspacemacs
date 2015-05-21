@@ -65,7 +65,9 @@
                                        auctex
                                        ;; Shells
                                        eshell
-                                       shell
+                                       (shell :variables
+                                              shell-default-shell ansi-term
+                                              shell-default-term-shell "/bin/zsh")
                                        ;; Lang
                                        ansible
                                        markdown
@@ -364,9 +366,6 @@ layers configuration."
            :html-preamble nil
            :html-postamble nil
            )))
-
-  ;; (setq web-mode-enable-auto-pairing t)
-  (setq web-mode-enable-auto-expanding nil)
 
   (add-to-list 'auto-mode-alist '("\\.tern-config\\'" . json-mode))
   (add-to-list 'auto-mode-alist '("\\.tern-project\\'" . json-mode))

@@ -15,6 +15,7 @@
                                        ;;Test;;
                                        ;; ocodo-svg-modeline
                                        ;; vim-powerline
+                                       spaceppets
                                        (git :variables
                                             git-magit-status-fullscreen t
                                             git-enable-github-support t
@@ -64,6 +65,7 @@
                                        auctex
                                        ;; Shells
                                        eshell
+                                       shell
                                        ;; Lang
                                        ansible
                                        markdown
@@ -366,7 +368,6 @@ layers configuration."
   ;; (setq web-mode-enable-auto-pairing t)
   (setq web-mode-enable-auto-expanding nil)
 
-
   (add-to-list 'auto-mode-alist '("\\.tern-config\\'" . json-mode))
   (add-to-list 'auto-mode-alist '("\\.tern-project\\'" . json-mode))
   ;; (setq my-yas-dir (concat (car dotspacemacs-configuration-layer-path)
@@ -421,5 +422,4 @@ layers configuration."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+)

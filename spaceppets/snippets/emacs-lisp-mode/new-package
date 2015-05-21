@@ -4,11 +4,12 @@
 # key: newp
 # binding: direct-keybinding
 # --
-(defun ${1:layer}/init-${2:package-name} ()
+(defun `(spacemacs/get-parent-dir)`/init-${2:package-name} ()
   ${3:(use-package $2 
   ${4::defer t
   }${5::init
-  ${}
+  ${;; This block executes before the package has been loaded}
   }${:config
-  ${}})})
+  ${;; This block executes after the package has been loaded}}
+  )})
   $0

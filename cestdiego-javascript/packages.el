@@ -13,6 +13,12 @@ which require an initialization must be listed explicitly in the list.")
 (defvar javascript-excluded-packages '()
   "List of packages to exclude.")
 
+(defun cestdiego-javascript/init-adssfadsf ()
+  (use-package adssfadsf
+    :init
+    adfjsf
+    ))
+
 ;; For each package, define a function cestdiego/init-<package-cestdiego>
 ;;
 (defun javascript/init-js2-mode ()

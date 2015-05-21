@@ -96,7 +96,7 @@ which require an initialization must be listed explicitly in the list.")
     :config
     (org-projectile:per-repo)
     (setq org-projectile:per-repo-filename "TODO.org"
-          org-agenda-files (append org-agenda-files (org-projectile:todo-files)))
+          org-agenda-files (append org-agenda-files '(org-projectile:todo-files)))
     (add-to-list 'org-capture-templates (org-projectile:project-todo-entry "p"))
     (add-to-list 'org-capture-templates (org-projectile:project-todo-entry "l" "* TODO [[%l][%? ]] \t %^g\n \t\t\t\tCaptured at: %T\n" "Linked Project TODO"))
     (evil-leader/set-key

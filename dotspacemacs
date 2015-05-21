@@ -294,6 +294,7 @@ layers configuration."
     "Lob" 'custom-persp/bbspwm)
   (setq browse-url-browser-function 'browse-url-generic
         browse-url-generic-program "google-chrome")
+
   (defadvice evil-inner-word (around underscore-as-word activate)
     (let ((table (copy-syntax-table (syntax-table))))
       (modify-syntax-entry ?_ "w" table)

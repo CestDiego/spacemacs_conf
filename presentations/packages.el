@@ -8,7 +8,7 @@ which require an initialization must be listed explicitly in the list.")
 ;; For each package, define a function cestdiego/init-<package-cestdiego>
 (defun presentations/init-org-tree-slide()
   (use-package org-tree-slide
-    :init
+    :config
     (progn
       (define-key org-mode-map (kbd "<f8>") 'org-tree-slide-mode)
       (define-key org-mode-map (kbd "S-<f8>") 'org-tree-slide-skip-done-toggle)

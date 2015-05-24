@@ -391,19 +391,49 @@ layers configuration."
 
   ;; Org Page!!!
   (setq op/personal-github-link "https://github.com/CestDiego/")
-  (setq op/repository-directory "/home/io/Projects/le_blog")
+  (setq op/repository-directory "/home/io/Projects/le_blog/")
   (setq op/site-domain "http://cestdiego.github.com/le_blog/")
   (setq op/theme (quote just_right))
-  (setq op/theme-root-directory "/home/io/spacemacs_conf/org-page-themes/")
+  (setq op/theme-root-directory "/home/io/spacemacs_conf/org-cestdiego/org-page-themes/")
+  (setq op/repository-org-branch "master")
   (setq op/repository-html-branch "gh-pages")
   (setq op/site-main-title "No te entiendo")
   (setq op/site-sub-title "punto com")
 
+
+  (setq op/category-config-alist
+        `(("blog" ;; this is the default configuration
+           :show-meta t
+           :show-comment t
+           :uri-generator op/generate-uri
+           :uri-template ,(concat op/site-domain "blog/%y/%m/%d/%t/")
+           :sort-by :date     ;; how to sort the posts
+           :category-index t) ;; generate category index or not
+          ("index"
+           :show-meta nil
+           :show-comment nil
+           :uri-generator op/generate-uri
+           :uri-template ,op/site-domain
+           :sort-by :date
+           :category-index nil)
+          ("about"
+           :show-meta nil
+           :show-comment nil
+           :uri-generator op/generate-uri
+           :uri-template ,(concat op/site-domain "about/")
+           :sort-by :date
+           :category-index nil))
+        )
   (evil-leader/set-key
     "opp" '(lambda()
              (interactive)
              (op/do-publication t nil nil)
-             ))
+             (find-file op/repository-directory)
+             )
+    "opP" '(lambda()
+             (interactive)
+             (op/do-publication t t (concat op/repository-directory "build")))
+    )
   )
 
 (custom-set-variables

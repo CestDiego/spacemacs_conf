@@ -22,7 +22,8 @@
     org-trello
     ox-ioslide
     ox-cv
-    org-page
+    mustache
+    ht
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
@@ -30,9 +31,12 @@ which require an initialization must be listed explicitly in the list.")
 (defvar org-excluded-packages '()
   "List of packages to exclude.")
 
-(defun org-cestdiego/init-org-page ()
-  (use-package org-page
-    :commands (op/do-publication op/new-post op/new-repository)))
+(defun org-cestdiego/init-mustache ()
+  (use-package mustache))
+
+(defun org-cestdiego/init-ht ()
+  (use-package ht))
+
 
 (defun org-cestdiego/init-org-trello ()
   (use-package org-trello

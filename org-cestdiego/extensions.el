@@ -13,11 +13,17 @@
 (defvar org-cestdiego-post-extensions
   '(
     ox-koma-letter
+    org-page
     )
   "List of all extensions to load after the packages.")
 
 ;; For each extension, define a function org-cestdiego/init-<extension-org-cestdiego>
 ;;
+
+(defun org-cestdiego/init-org-page ()
+  (use-package org-page
+    :commands (op/do-publication op/new-post op/new-repository)))
+
 (defun org-cestdiego/init-ox-koma-letter ()
   "Initialize ox-koma-letter"
   (use-package ox-koma-letter

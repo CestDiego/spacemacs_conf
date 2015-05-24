@@ -388,8 +388,22 @@ layers configuration."
   ;;     (html (format "<kbd>%s</kbd>" (or desc "")))
   ;;     (latex (format "(HOW DO I EXPORT AUDIO TO LATEX? \"%s\")" path))))
   ;; check out https://github.com/capitaomorte/yasnippet/issues/349
-  (define-key yas-minor-mode-map (kbd "C-M-/") 'yas-next-field-or-maybe-expand)
-  (setq yas-triggers-in-field t)
+
+  ;; Org Page!!!
+  (setq op/personal-github-link "https://github.com/CestDiego/")
+  (setq op/repository-directory "/home/io/Projects/le_blog")
+  (setq op/site-domain "http://cestdiego.github.com/le_blog/")
+  (setq op/theme (quote just_right))
+  (setq op/theme-root-directory "/home/io/spacemacs_conf/org-page-themes/")
+  (setq op/repository-html-branch "gh-pages")
+  (setq op/site-main-title "No te entiendo")
+  (setq op/site-sub-title "punto com")
+
+  (evil-leader/set-key
+    "opp" '(lambda()
+             (interactive)
+             (op/do-publication t nil nil)
+             ))
   )
 
 (custom-set-variables

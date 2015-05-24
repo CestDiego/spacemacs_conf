@@ -12,6 +12,7 @@
 
 (defvar utils-packages
   '(
+    define-word
     string-inflection
     evil-annoying-arrows
     ;; pdf-tools
@@ -25,8 +26,15 @@ which require an initialization must be listed explicitly in the list.")
 (defvar utils-excluded-packages '()
   "List of packages to exclude.")
 
-;; For each package, define a function utils/init-<package-utils>
-;;
+(defun utils/init-define-word ()
+  (use-package define-word
+    :init
+    (evil-leader/set-key
+      "gd" 'define-word
+      "gD" 'define-word-at-point)
+    ))
+
+
 (defun utils/init-string-inflection ()
   "Initialize my package"
   (use-package string-inflection

@@ -1,0 +1,3 @@
+[submodule "org-cestdiego/extensions/org-page"]
+	path = org-cestdiego/extensions/org-page
+	url = git@github.com:CestDiego/org-page.git

@@ -237,7 +237,7 @@ before layers configuration."
             :channels ("#jupiterbroadcasting"))
            ))
 
-  (setq ycmd-server-command "~/.installed/ycmd/")
+  (setq ycmd-server-command "~/build/ycmd/")
   )
 
 (defun dotspacemacs/config ()

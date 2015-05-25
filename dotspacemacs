@@ -68,6 +68,7 @@
                                        eshell
                                        (shell :variables
                                               shell-default-shell ansi-term
+                                              shell-pop-autocd-to-working-dir nil
                                               shell-default-term-shell "/bin/zsh")
                                        ;; Lang
                                        ansible
@@ -78,7 +79,7 @@
                                        c-c++
                                        python
                                        sql
-                                       ;; haskell
+                                       haskell
                                        javascript
                                        ruby
                                        ;; Utils
@@ -346,38 +347,16 @@ layers configuration."
        (evil-define-key 'insert term-raw-map (kbd "C-k") 'term-send-up)
        (evil-define-key 'insert term-raw-map (kbd "C-j") 'term-send-down)))
 
-  (setq web-mode-engines-alist
-        '(("django" . "\\.djhtml\\'")))
-
   (global-set-key (kbd "<C-tab>") 'eyebrowse-next-window-config)
   (global-set-key (kbd "<C-iso-lefttab>") 'eyebrowse-prev-window-config)
 
-  (setq
-   erc-nick "cestdiego"
-   erc-user-full-name "Diego Berrocal"
-   )
+  (setq erc-nick "cestdiego"
+        erc-user-full-name "Diego Berrocal")
   ;; Insert thing at point for Helm-aG!!
   (setq helm-ag-insert-at-point 'symbol)
 
-  (setq org-publish-project-alist
-        '(("le_blog"
-           :base-directory "~/Projects/angular_material_blog/src/assets/posts"
-           :html-extension "html"
-           :base-extension "org"
-           :publishing-directory "~/Projects/angular_material_blog/src/assets/posts"
-           :publishing-function (org-html-publish-to-html)
-           :html-preamble nil
-           :html-postamble nil
-           )))
-
   (add-to-list 'auto-mode-alist '("\\.tern-config\\'" . json-mode))
   (add-to-list 'auto-mode-alist '("\\.tern-project\\'" . json-mode))
-  ;; (setq my-yas-dir (concat (car dotspacemacs-configuration-layer-path)
-  ;;                          "snippets/"))
-  ;; (setq yas-snippet-dirs
-  ;;       (append (list my-yas-dir)
-  ;;               (when (boundp 'yas-snippet-dirs)
-  ;;                 yas-snippet-dirs)))
   ;; (setq org-hide-emphasis-markers t)
   ;; (regexp-opt (list " @@html:</kbd>@@[a-zA-Z0-9k ]"))
   ;; Got the org-link from
@@ -394,41 +373,22 @@ layers configuration."
   (setq op/personal-github-link "https://github.com/CestDiego/")
   (setq op/repository-directory "/home/io/Projects/le_blog/")
   (setq op/site-domain "http://cestdiego.github.com/le_blog/")
-  (setq op/theme (quote just_right))
+  (setq op/theme 'just_right)
   (setq op/theme-root-directory "/home/io/spacemacs_conf/org-cestdiego/org-page-themes/")
   (setq op/repository-org-branch "master")
   (setq op/repository-html-branch "gh-pages")
   (setq op/site-main-title "No te entiendo")
   (setq op/site-sub-title "punto com")
+  ;; (setq op/personal-avatar "https://avatars0.githubusercontent.com/u/3291619?v=3&s=460")
 
-
-  (setq op/category-config-alist
-        `(("blog" ;; this is the default configuration
-           :show-meta t
-           :show-comment t
-           :uri-generator op/generate-uri
-           :uri-template ,(concat op/site-domain "blog/%y/%m/%d/%t/")
-           :sort-by :date     ;; how to sort the posts
-           :category-index t) ;; generate category index or not
-          ("index"
-           :show-meta nil
-           :show-comment nil
-           :uri-generator op/generate-uri
-           :uri-template ,op/site-domain
-           :sort-by :date
-           :category-index nil)
-          ("about"
-           :show-meta nil
-           :show-comment nil
-           :uri-generator op/generate-uri
-           :uri-template ,(concat op/site-domain "about/")
-           :sort-by :date
-           :category-index nil))
-        )
   (evil-leader/set-key
+    "opo" '(lambda ()
+             (interactive)
+             (magit-status op/repository-directory)
+             )
     "opp" '(lambda()
              (interactive)
-             (op/do-publication t nil nil)
+             (op/do-publication t nil t nil)
              (find-file op/repository-directory)
              )
     "opP" '(lambda()

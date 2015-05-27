@@ -90,6 +90,23 @@ which require an initialization must be listed explicitly in the list.")
   (setq org-latex-custom-lang-environments
         '((python "pythoncode")))
   (setq org-ditaa-jar-path "/usr/bin/ditaa")
+
+  (defun org-check-misformatted-subtree ()
+    "Check misformatted entries in the current buffer."
+    (interactive)
+    (show-all)
+    (org-map-entries
+     (lambda ()
+       (when (and (move-beginning-of-line 2)
+                  (not (looking-at org-heading-regexp)))
+         (if (or (and (org-get-scheduled-time (point))
+                      (not (looking-at (concat "^.*" org-scheduled-regexp))))
+                 (and (org-get-deadline-time (point))
+                      (not (looking-at (concat "^.*" org-deadline-regexp)))))
+             (when (y-or-n-p "Fix this subtree? ")
+               (message "Call the function again when you're done fixing this subtree.")
+               (recursive-edit))
+           (message "All subtrees checked."))))))
   )
 
 (defun org-cestdiego/init-ob-browser()

@@ -73,6 +73,7 @@
                                        ;; Lang
                                        ansible
                                        markdown
+                                       clojure
                                        cp2k
                                        emacs-lisp
                                        html
@@ -122,7 +123,7 @@ before layers configuration."
    ;; dotspacemacs-startup-banner 'official
    dotspacemacs-startup-banner 'official
    ;; t if you always want to see the changelog at startup
-   dotspacemacs-always-show-changelog nil
+   dotspacemacs-always-show-changelog t
    ;; List of items to show in the startup buffer. If nil it is disabled.
    ;; Possible values are: `recents' `bookmarks' `projects'."
    dotspacemacs-startup-lists '(recents projects)
@@ -140,11 +141,11 @@ before layers configuration."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Sauce Code Pro"
-                               :size 13
+   dotspacemacs-default-font '("Anonymous Pro"
+                               :size 18
                                :weight normal
                                :width normal
-                               :powerline-scale 1.1)
+                               :powerline-scale 1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -221,7 +222,9 @@ before layers configuration."
   ;; (set-face-attribute 'mode-line nil
   ;;                     :inverse-video nil :box nil)
   ;; (set-face-attribute 'mode-line-inactive nil :box nil)
-  ;; (set-face-attribute 'vertical-border nil :foreground "#1f1f1f")
+
+  (set-face-attribute 'vertical-border nil :foreground "#1f1f1f")
+
   (setq-default evil-escape-key-sequence "nj")
   (setq delete-by-moving-to-trash t)
   (setq rcirc-server-alist
@@ -349,6 +352,8 @@ layers configuration."
 
   (global-set-key (kbd "<C-tab>") 'eyebrowse-next-window-config)
   (global-set-key (kbd "<C-iso-lefttab>") 'eyebrowse-prev-window-config)
+
+  (global-set-key (kbd "C-'") 'spacemacs/default-pop-shell)
 
   (setq erc-nick "cestdiego"
         erc-user-full-name "Diego Berrocal")

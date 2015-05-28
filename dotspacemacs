@@ -141,11 +141,11 @@ before layers configuration."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Anonymous Pro"
-                               :size 18
-                               :weight normal
-                               :width normal
-                               :powerline-scale 1)
+   dotspacemacs-default-font '("Anonymous Pro Bold"
+                               :size 19
+                               :weight medium
+                               :width medium
+                               :powerline-scale 1.1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -299,6 +299,7 @@ layers configuration."
   (evil-leader/set-key
     "Lob" 'custom-persp/bbspwm)
   (setq browse-url-browser-function 'browse-url-generic
+        engine/browser-function 'browse-url-generic
         browse-url-generic-program "google-chrome")
 
   (defadvice evil-inner-word (around underscore-as-word activate)
@@ -362,6 +363,8 @@ layers configuration."
 
   (add-to-list 'auto-mode-alist '("\\.tern-config\\'" . json-mode))
   (add-to-list 'auto-mode-alist '("\\.tern-project\\'" . json-mode))
+  (add-to-list 'auto-mode-alist '("dmenuExtended_preferences.txt\\'" . json-mode))
+  (add-to-list 'auto-mode-alist '("\\.touchegg.conf\\'" . web-mode))
   ;; (setq org-hide-emphasis-markers t)
   ;; (regexp-opt (list " @@html:</kbd>@@[a-zA-Z0-9k ]"))
   ;; Got the org-link from

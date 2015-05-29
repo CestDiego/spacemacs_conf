@@ -22,7 +22,10 @@
 
 (defun org-cestdiego/init-org-page ()
   (use-package org-page
-    :commands (op/do-publication op/new-post op/new-repository)))
+    :commands (op/do-publication op/new-post op/new-repository)
+    :config
+    (setq org-html-html5-fancy t)
+    ))
 
 (defun org-cestdiego/init-ox-koma-letter ()
   "Initialize ox-koma-letter"

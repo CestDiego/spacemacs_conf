@@ -1,4 +1,5 @@
 ((nil . ((firestarter . (op/do-publication
                          t
                          t
-                         (concat op/repository-directory "temp/build"))))))
+                         "~/Projects/le_blog_built"))))
+ ("just_right/.git" . ((firestarter . nil))))

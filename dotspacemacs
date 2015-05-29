@@ -389,7 +389,7 @@ layers configuration."
        (setq op/theme-root-directory "~/spacemacs_conf/org-cestdiego/org-page-themes/")
        (setq op/theme 'just_right)
 
-       (add-to-list 'op/category-ignore-list "temp")
+       ;; (add-to-list 'op/category-ignore-list "temp")
        ;; (setq op/repository-org-branch "master")
        ;; (setq op/repository-html-branch "gh-pages")
        (setq op/site-main-title "Diego Berrocal")
@@ -405,9 +405,8 @@ layers configuration."
              (op/do-publication t nil t nil)
              (find-file op/repository-directory))
     "opP" '(lambda() (interactive)
-             (op/do-publication t t (concat op/repository-directory "temp/build")))
-    )
-  )
+             (op/do-publication t t "~/Projects/le_blog_built/"))
+    ))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -429,11 +428,13 @@ layers configuration."
  '(org-agenda-files
    (quote
     ("~/Dropbox/Org-Notes/main.org" "~/dotfiles/README.org")))
+ '(org-trello-files (quote ("~/Dropbox/Org-Notes/Horton-Trello.org")) nil (org-trello))
  '(paradox-github-token t)
  '(ring-bell-function (quote ignore) t)
  '(safe-local-variable-values
    (quote
-    ((firestarter op/do-publication t t
+    ((firestarter op/do-publication t t "~/Projects/le_blog_built")
+     (firestarter op/do-publication t t
                   (concat op/repository-directory "temp/build"))
      (nil . firestarter-mode)
      (firestarter start-process "le_process" "le_buffer" "rsync" "-avzP" "--filter=:- .gitignore" "miraflowers:/home/diego/miraflowers")

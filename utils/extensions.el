@@ -10,23 +10,18 @@
 ;;
 ;;; License: GPLv3
 
-(defvar utils-pre-extensions
-  '(
-    ;; pre extension utilss go here
-    )
-  "List of all extensions to load before the packages.")
 
 (defvar utils-post-extensions
   '(
-    ;; post extension utilss go here
+    ;; narow-reindent
     )
   "List of all extensions to load after the packages.")
 
 ;; For each extension, define a function utils/init-<extension-utils>
 ;;
-;; (defun utils/init-my-extension ()
-;;   "Initialize my extension"
-;;   )
+;; (defun utils/init-narrow-reindent ()
+;;   (use-package narrow-reindent))
+
 ;;
 ;; Often the body of an initialize function uses `use-package'
 ;; For more info on `use-package', see readme:

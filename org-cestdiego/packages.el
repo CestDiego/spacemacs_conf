@@ -19,7 +19,7 @@
     ob-browser
     org-projectile
     org-gcal
-    org-trello
+    ;; org-trello
     ox-ioslide
     ox-cv
     mustache
@@ -38,21 +38,21 @@ which require an initialization must be listed explicitly in the list.")
   (use-package ht))
 
 
-(defun org-cestdiego/init-org-trello ()
-  (use-package org-trello
-    :init
-    (custom-set-variables '(org-trello-files '("~/Dropbox/Org-Notes/Horton-Trello.org")))
-    :config
-    (setq org-todo-keyword-faces
-          '(("TODO"        . (:foreground "firebrick2" :weight bold))
-            ("The-idea-bin" . (:foreground "olivedrab" :weight bold))
-            ("The-Backburner"     . (:foreground "sienna" :weight bold))
-            ("Done"        . (:foreground "forestgreen" :weight bold))
-            ("Before-next-release"   . (:foreground "dimgrey" :weight bold))
-            ("Ready-for-Review"   . (:foreground "dimgrey" :weight bold))
-            ("Doing"      . (:foreground "steelblue" :weight bold))
-            ("Blocked/Need-Input"   . shadow)))
-    ))
+;; (defun org-cestdiego/init-org-trello ()
+;;   (use-package org-trello
+;;     :init
+;;     (custom-set-variables '(org-trello-files '("~/Dropbox/Org-Notes/Horton-Trello.org")))
+;;     :config
+;;     (setq org-todo-keyword-faces
+;;           '(("TODO"        . (:foreground "firebrick2" :weight bold))
+;;             ("The-idea-bin" . (:foreground "olivedrab" :weight bold))
+;;             ("The-Backburner"     . (:foreground "sienna" :weight bold))
+;;             ("Done"        . (:foreground "forestgreen" :weight bold))
+;;             ("Before-next-release"   . (:foreground "dimgrey" :weight bold))
+;;             ("Ready-for-Review"   . (:foreground "dimgrey" :weight bold))
+;;             ("Doing"      . (:foreground "steelblue" :weight bold))
+;;             ("Blocked/Need-Input"   . shadow)))
+;;     ))
 
 
 (defun org-cestdiego/init-ob-http()

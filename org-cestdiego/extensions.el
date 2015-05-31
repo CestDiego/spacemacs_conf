@@ -58,7 +58,31 @@
             tuareg-font-lock-module-face
             tuareg-font-lock-constructor-face
             rainbow-delimiters-unmatched-face
-            font-lock-builtin-face))
+            font-lock-builtin-face
+            ;; Org
+            org-level-1
+            org-level-2
+            org-level-3
+            org-level-4
+            org-special-keyword
+            org-meta-line
+            org-document-info
+            org-document-info-keyword
+            org-document-title
+            org-tag
+            org-table
+            org-level-5 org-level-6 org-level-7 org-level-8
+            org-list-dt bold italic underline org-verbatim org-code org-footnote
+            org-done  org-date org-todo org-link
+            org-checkbox org-block-begin-line
+            org-block-end-line))
+
+    (defface strike-through
+      (org-compatible-face nil
+        '((t :strike-through t)))
+      "Face for strike-through textn."
+      :group 'basic-faces)
+    (push '("+" strike-through verbatim) org-emphasis-alist)
 
     (defun kek-html-htmlize-generate-css ()
       (interactive)

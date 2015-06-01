@@ -20,10 +20,10 @@
      (git :variables
           git-magit-status-fullscreen t
           git-enable-github-support t
-          git-gutter-use-fringe nil)
+          git-gutter-use-fringe t)
      prodigy
      (colors :variables
-             colors-enable-nyan-cat-progress-bar ,(display-graphic-p)
+             colors-enable-nyan-cat-progress-bar `,(display-graphic-p)
              colors-enable-rainbow-identifiers nil)
      ;; (perspectives :variables
      ;;               perspective-enable-persp-projectile t)
@@ -57,7 +57,7 @@
      (auto-completion
       :variables
       auto-completion-enable-help-tooltip t
-      auto-completion-return-key-behavior complete
+      auto-completion-return-key-behavior 'complete
       auto-completion-complete-with-key-sequence "jk")
      slime
      ycmd
@@ -68,7 +68,7 @@
      ;; Shells
      eshell
      (shell :variables
-            shell-default-shell ansi-term
+            shell-default-shell 'ansi-term
             shell-pop-autocd-to-working-dir nil
             shell-default-term-shell "/bin/zsh")
      ;; Lang
@@ -134,9 +134,9 @@ before layers configuration."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
                          monokai
+                         solarized-dark
                          gotham
                          zenburn ;; This works without erc
-                         solarized-dark
                          leuven  ;; This works without erc
                          )
    ;; If non nil the cursor color matches the state color.
@@ -399,32 +399,7 @@ layers configuration."
                                          (spacemacs//zoom-frm-powerline-reset)))
   (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
   (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
-
-  (setq op/personal-github-link "https://github.com/CestDiego/")
-  (setq op/repository-directory "~/Projects/le_blog/")
-  (setq op/site-domain "http://cestdiego.github.com/")
-  ;; This two are optional , only if you want have a custom theme
-  (setq op/theme-root-directory "~/spacemacs_conf/org-cestdiego/org-page-themes/")
-  (setq op/theme 'just_right)
-
-  ;; (add-to-list 'op/category-ignore-list "temp")
-  ;; (setq op/repository-org-branch "master")
-  ;; (setq op/repository-html-branch "gh-pages")
-  (setq op/site-main-title "Diego Berrocal")
-  (setq op/site-sub-title "it's personal")
-  ;; (setq op/personal-avatar "https://avatars0.githubusercontent.com/u/3291619?v=3&s=460")
-
-
-
-  (evil-leader/set-key
-    "opo" '(lambda () (interactive)
-             (magit-status op/repository-directory))
-    "opp" '(lambda() (interactive)
-             (op/do-publication t nil t nil)
-             (find-file op/repository-directory))
-    "opP" '(lambda() (interactive)
-             (op/do-publication t t "~/Projects/le_blog_built/"))
-    ))
+  )
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -461,4 +436,6 @@ layers configuration."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:family "Anonymous Pro" :foundry "unknown" :slant normal :weight normal :height 128 :width normal))))
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))

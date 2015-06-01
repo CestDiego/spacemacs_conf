@@ -24,6 +24,15 @@
   (use-package org-page
     :commands (op/do-publication op/new-post op/new-repository)
     :init
+    (evil-leader/set-key
+      "opo" '(lambda () (interactive)
+               (magit-status op/repository-directory))
+      "opp" '(lambda() (interactive)
+               (op/do-publication t nil t nil)
+               (find-file op/repository-directory))
+      "opP" '(lambda() (interactive)
+               (op/do-publication t t "~/Projects/le_blog_built/")))
+    (setq org-html-doctype "html5")
     (setq org-html-html5-fancy t)
     (setq org-html-htmlize-output-type 'css)
     (setq theme-faces-for-generation
@@ -78,12 +87,10 @@
             org-block-end-line))
 
     (defface strike-through
-      (org-compatible-face nil
-        '((t :strike-through t)))
-      "Face for strike-through textn."
+      '((t :strike-through t))
+      "Basic strike-through face."
       :group 'basic-faces)
-    (push '("+" strike-through verbatim) org-emphasis-alist)
-
+    (push '("+" ,(if (featurep 'xemacs) 'org-table strike-through)) org-emphasis-alist)
     (defun kek-html-htmlize-generate-css ()
       (interactive)
       (require 'htmlize)
@@ -107,6 +114,36 @@
       (beginning-of-line 1)
       (if (looking-at " +") (replace-match ""))
       (goto-char (point-min)))
+    :config
+    (setq op/personal-github-link "https://github.com/CestDiego/")
+    (setq op/repository-directory "~/Projects/le_blog/")
+    ;; (setq op/repository-directory "~/Documents/my-blog/")
+    (setq op/site-domain "http://cestdiego.github.com/")
+    ;; This two are optional , only if you want have a custom theme
+    (setq op/theme-root-directory "~/spacemacs_conf/org-cestdiego/org-page-themes/")
+    (setq op/theme 'just_right)
+    (add-to-list 'op/category-ignore-list "blog")
+    (add-to-list 'op/category-ignore-list "about")
+    ;; (setq op/repository-org-branch "master")
+    ;; (setq op/repository-html-branch "gh-pages")
+    (setq op/site-main-title "Diego Berrocal")
+    (setq op/site-sub-title "it's personal")
+    ;; (setq op/personal-avatar "https://avatars0.githubusercontent.com/u/3291619?v=3&s=460")
+    (setq op/category-config-alist
+          '(("articles"
+             :show-meta t
+             :show-comment t
+             :uri-generator op/generate-uri
+             :uri-template "/articles/%y/%m/%d/%t/"
+             :sort-by :date
+             :category-index t)
+            ("index"
+             :show-meta nil
+             :show-comment nil
+             :uri-generator op/generate-uri
+             :uri-template "/"
+             :sort-by :date
+             :category-index nil)))
     ))
 
 (defun org-cestdiego/init-ox-koma-letter ()

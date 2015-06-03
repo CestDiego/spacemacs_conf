@@ -14,15 +14,7 @@ P.S. wakati means time in Swahili
 
 ## Install
 
-### Layer
-
-To use this contribution add it to your `~/.spacemacs`
-
-```elisp
-(setq-default dotspacemacs-configuration-layers '(wakatime))
-```
-
-## Wakatime Program
+### Wakatime Program
 
 You can follow wakatime installation instructions here
 https://github.com/wakatime/wakatime-mode.
@@ -35,7 +27,32 @@ For some linux users
 sudo pip install wakatime
 ```
 
-## API Keys
+### Layer
+
+To use this contribution add it to your `~/.spacemacs`
+
+```elisp
+(setq-default dotspacemacs-configuration-layers '(wakatime))
+```
+### API Keys
+
+After this go to your wakatime account and have your API key handy https://wakatime.com/settings/account?apikey=true .
+
+Restart emacs and it will prompt you for the location of the wakatime installer
+(just put in whatever `which wakatime` gives you in the terminal e.g.
+`/usr/bin/wakatime` for example) and that's it.
 
 
-https://wakatime.com/settings/account?apikey=true
+
+## Note to `venv-workon` users:
+
+Right now wakatime uses `python` as python bin executable, so if you use
+`venv-workon` because you have python projects which need to have a virtual env,
+then wakatime, which is installed system-wide will have trouble locating
+wakatime files, so it's best to define by yourself the python path where
+wakatime can always find it's stuff, via this variable:
+
+
+```elisp
+(setq wakatime-python-bin "/path/to/python")
+```

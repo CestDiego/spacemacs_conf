@@ -50,7 +50,7 @@
      ;; Miscellaneous
      emoji
      ;; webkit
-     ;; wakatime
+     wakatime
      ;; Media
      bongo
      ;; Completings Stuff
@@ -400,6 +400,8 @@ layers configuration."
   (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
   (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
   (add-to-list 'custom-theme-load-path "~/.emacs.d/private/spacemacs-theme")
+
+  (setq wakatime-python-bin "/usr/bin/python")
   )
 
 (custom-set-variables

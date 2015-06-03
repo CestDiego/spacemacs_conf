@@ -50,7 +50,7 @@
      ;; Miscellaneous
      emoji
      ;; webkit
-     wakatime
+     ;; wakatime
      ;; Media
      bongo
      ;; Completings Stuff
@@ -125,7 +125,7 @@ before layers configuration."
    ;; dotspacemacs-startup-banner 'official
    dotspacemacs-startup-banner 'official
    ;; t if you always want to see the changelog at startup
-   dotspacemacs-always-show-changelog t
+   dotspacemacs-always-show-changelog nil
    ;; List of items to show in the startup buffer. If nil it is disabled.
    ;; Possible values are: `recents' `bookmarks' `projects'."
    dotspacemacs-startup-lists '(recents projects)
@@ -399,6 +399,7 @@ layers configuration."
                                          (spacemacs//zoom-frm-powerline-reset)))
   (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
   (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/private/spacemacs-theme")
   )
 
 (custom-set-variables
@@ -430,7 +431,9 @@ layers configuration."
      (firestarter start-process "le_process" "le_buffer" "rsync" "-avzP" "--filter=:- .gitignore" "miraflowers:/home/diego/miraflowers")
      (org-export-allow-bind-keywords . t)
      (set-input-method "latin-1-prefix" t))))
- '(send-mail-function (quote smtpmail-send-it)))
+ '(send-mail-function (quote smtpmail-send-it))
+ '(wakatime-api-key "813b0d78-1f17-43eb-bede-a5c008651d4a")
+ '(wakatime-cli-path "/home/io/.local/bin/wakatime"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

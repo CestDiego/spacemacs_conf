@@ -85,9 +85,8 @@
             org-done  org-date org-todo org-link
             org-checkbox org-block-begin-line
             org-block-end-line))
-
     (defface strike-through
-      '((t :strike-through t))
+     '((t :strike-through t))
       "Basic strike-through face."
       :group 'basic-faces)
     (push '("+" ,(if (featurep 'xemacs) 'org-table strike-through)) org-emphasis-alist)
@@ -129,21 +128,21 @@
     (setq op/site-main-title "Diego Berrocal")
     (setq op/site-sub-title "it's personal")
     ;; (setq op/personal-avatar "https://avatars0.githubusercontent.com/u/3291619?v=3&s=460")
-    (setq op/category-config-alist
-          '(("articles"
-             :show-meta t
-             :show-comment t
-             :uri-generator op/generate-uri
-             :uri-template "/articles/%y/%m/%d/%t/"
-             :sort-by :date
-             :category-index t)
-            ("index"
-             :show-meta nil
-             :show-comment nil
-             :uri-generator op/generate-uri
-             :uri-template "/"
-             :sort-by :date
-             :category-index nil)))
+    ;; (setq op/category-config-alist
+    ;;       '(("articles"
+    ;;          :show-meta t
+    ;;          :show-comment nil
+    ;;          :uri-generator op/generate-uri
+    ;;          :uri-template "/articles/%y/%m/%d/%t/"
+    ;;          :sort-by :date
+    ;;          :category-index t)
+    ;;         ("index"
+    ;;          :show-meta nil
+    ;;          :show-comment nil
+    ;;          :uri-generator op/generate-uri
+    ;;          :uri-template "/"
+    ;;          :sort-by :date
+    ;;          :category-index nil)))
     ))
 
 (defun org-cestdiego/init-ox-koma-letter ()

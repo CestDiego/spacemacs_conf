@@ -117,7 +117,7 @@
     (setq op/personal-github-link "https://github.com/CestDiego/")
     (setq op/repository-directory "~/Projects/le_blog/")
     ;; (setq op/repository-directory "~/Documents/my-blog/")
-    (setq op/site-domain "http://cestdiego.github.com/")
+    (setq op/site-domain "http://cestdiego.github.io/")
     ;; This two are optional , only if you want have a custom theme
     (setq op/theme-root-directory "~/spacemacs_conf/org-cestdiego/org-page-themes/")
     (setq op/theme 'just_right)
@@ -127,6 +127,9 @@
     ;; (setq op/repository-html-branch "gh-pages")
     (setq op/site-main-title "Diego Berrocal")
     (setq op/site-sub-title "it's personal")
+
+    (setq op/personal-disqus-shortname "cestdiego")
+    (setq op/personal-google-analytics-id "UA-40864129-3")
     ;; (setq op/personal-avatar "https://avatars0.githubusercontent.com/u/3291619?v=3&s=460")
     ;; (setq op/category-config-alist
     ;;       '(("articles"

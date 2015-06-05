@@ -135,8 +135,10 @@ before layers configuration."
    dotspacemacs-themes '(
                          monokai
                          solarized-dark
+                         spacemacs-dark
                          gotham
                          zenburn ;; This works without erc
+                         spacemacs-light
                          leuven  ;; This works without erc
                          )
    ;; If non nil the cursor color matches the state color.
@@ -399,7 +401,6 @@ layers configuration."
                                          (spacemacs//zoom-frm-powerline-reset)))
   (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
   (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
-  (add-to-list 'custom-theme-load-path "~/.emacs.d/private/spacemacs-theme")
 
   (setq wakatime-python-bin "/usr/bin/python")
   )

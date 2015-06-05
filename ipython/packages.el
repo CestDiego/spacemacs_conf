@@ -28,11 +28,37 @@
       (interactive)
       (ein:worksheet-merge-cell (ein:worksheet--get-ws-or-error) (ein:worksheet-get-current-cell) t t))
 
+    (defvar spacemacs--ipython-notebook-ms-doc-toggle 0
+      "Display a short doc when nil, full doc otherwise.")
+
+    (defun spacemacs//ipython-notebook-ms-doc ()
+      (if (equal 0 spacemacs--ipython-notebook-ms-doc-toggle)
+          "[?] for help"
+        "
+        [?] display this help
+        [k,j]: [prev,next] cell   [K,J]: move cell [up,down]
+        [h,l]: prev,next worksheet   [H,L]: move worksheet [left,right]
+        [d,y,p,RET]: [kill,copy,paste, execute] cell  [t,C-l,C-S-L]: [toggle,clear,clear all] output
+        [o,O]: insert cell [bellow,above]
+        [C-o]: open console [C-k,C-j]: merge cell [above,bellow]
+        [1,2,...,8,9]: open [1st,2nd,..,8th,last] worksheet
+        [C-s, C-r]: [save, rename] notebook
+        [+,-]: [create,delete] worksheet
+        [x]: close notebook
+        [q] quit"))
+
+    (defun spacemacs//ipython-notebook-ms-toggle-doc ()
+      (interactive)
+      (setq spacemacs--ipython-notebook-ms-doc-toggle
+            (logxor spacemacs--ipython-notebook-ms-doc-toggle 1)))
+
     (spacemacs|define-micro-state ipython-notebook
+      :doc (spacemacs//ipython-notebook-ms-doc)
       :use-minibuffer t
       :evil-leader "ein"
       :bindings
       ("q" nil :exit t)
+      ("?" spacemacs//ipython-notebook-ms-toggle-doc)
       ("h" ein:notebook-worksheet-open-prev-or-last)
       ("j" ein:worksheet-goto-next-input)
       ("k" ein:worksheet-goto-prev-input)

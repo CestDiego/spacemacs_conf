@@ -5,5 +5,5 @@
 
 (defun wakatime/init-wakatime-mode ()
   (use-package wakatime-mode
-    :config
+    :init
     (add-hook 'prog-mode-hook 'global-wakatime-mode)))

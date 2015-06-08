@@ -17,6 +17,7 @@
      ;; ocodo-svg-modeline
      ;; vim-powerline
      ;; spaceppets
+     twitter
      (git :variables
           git-magit-status-fullscreen t
           git-enable-github-support t

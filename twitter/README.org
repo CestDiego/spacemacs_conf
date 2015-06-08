@@ -1,10 +1,15 @@
 #+TITLE: Twitter contribution layer for Spacemacs
 [[file:img/twitter.png]]
-#+TOC: headlines 2
+* Table of Contents                                                     :TOC:
+ - [[#description-][Description ]]
+ - [[#features][Features]]
+ - [[#install][Install]]
+     - [[#layer][Layer]]
+ - [[#key-bindings][Key Bindings]]
+
 * Description 
 This layer adds Twitter support to Spacemacs via the package =twittering-mode=
 Do not hesitate to check the original package README [[https://github.com/hayamiz/twittering-mode][here]]. 
-
 * Features
 - Activities on Twitter
   - Viewing various timelines

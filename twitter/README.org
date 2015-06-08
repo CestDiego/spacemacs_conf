@@ -1,5 +1,7 @@
+#+TITLE: Twitter
 [[file:img/twitter.png]]
 * Twitter contribution layer for Spacemacs
+#+TOC: headlines 2
 ** Description 
 This layer adds Twitter support to Spacemacs via the package =twittering-mode=
 Do not hesitate to check the original package README [[https://github.com/hayamiz/twittering-mode][here]]. 

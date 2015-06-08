@@ -1,3 +1,4 @@
+[[file:img/twitter.png]]
 * Twitter contribution layer for Spacemacs
 ** Description 
 This layer adds Twitter support to Spacemacs via the package =twittering-mode=

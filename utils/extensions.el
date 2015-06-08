@@ -11,16 +11,15 @@
 ;;; License: GPLv3
 
 
-(defvar utils-post-extensions
+(setq utils-post-extensions
   '(
-    ;; narow-reindent
-    )
-  "List of all extensions to load after the packages.")
+    frames-only-mode
+    ))
 
 ;; For each extension, define a function utils/init-<extension-utils>
 ;;
-;; (defun utils/init-narrow-reindent ()
-;;   (use-package narrow-reindent))
+(defun utils/init-frames-only-mode ()
+  (use-package frames-only-mode))
 
 ;;
 ;; Often the body of an initialize function uses `use-package'

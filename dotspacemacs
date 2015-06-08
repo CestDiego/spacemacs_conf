@@ -31,7 +31,8 @@
      ;;               perspective-enable-persp-projectile t)
      eyebrowse
      chrome
-     erc
+     (erc :variables
+          erc-use-sasl-auth t)
      (rcirc :variables
             rcirc-default-nick "cestdiego"
             rcirc-default-user-name "cestdiego"

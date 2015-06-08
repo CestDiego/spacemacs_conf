@@ -16,10 +16,8 @@
     frames-only-mode
     ))
 
-;; For each extension, define a function utils/init-<extension-utils>
-;;
-(defun utils/init-frames-only-mode ()
-  (use-package frames-only-mode))
+;; (defun utils/init-frames-only-mode ()
+;;   (use-package frames-only-mode))
 
 ;;
 ;; Often the body of an initialize function uses `use-package'

@@ -233,6 +233,7 @@ before layers configuration."
 
   ;; (set-face-attribute 'vertical-border nil :foreground "#1f1f1f")
 
+  (setq helm-ag-command-option " --search-zip ")
   (setq-default evil-escape-key-sequence "nj")
   (setq delete-by-moving-to-trash t)
   (setq rcirc-server-alist

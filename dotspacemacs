@@ -333,9 +333,6 @@ layers configuration."
   (setq powerline-default-separator 'slant)
   (setq vc-follow-symlinks t)
 
-  (evil-leader/set-key
-    "m/" 'evil-search-highlight-persist-remove-all)
-
   (setq zone-timer (run-with-idle-timer 6000 t 'zone))
   (setq zone-programs [zone-pgm-rotate-LR-lockstep])
 

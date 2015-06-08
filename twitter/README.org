@@ -8,8 +8,9 @@
  - [[#key-bindings][Key Bindings]]
 
 * Description 
-This layer adds Twitter support to Spacemacs via the package =twittering-mode=
-Do not hesitate to check the original package README [[https://github.com/hayamiz/twittering-mode][here]]. 
+This layer adds Twitter support to Spacemacs via the package =twittering-mode=,
+do not hesitate to check the original package README [[https://github.com/hayamiz/twittering-mode][here]].
+
 * Features
 - Activities on Twitter
   - Viewing various timelines

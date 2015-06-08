@@ -217,7 +217,6 @@ before layers configuration."
   ;; User initialization goes here
 
   ;; Use Package indication of lazy loadiness
-  (setq use-package-verbose t)
 
   ;; (set-face-background 'region "#0f0f0f")
 
@@ -251,6 +250,7 @@ before layers configuration."
           ))
 
   (setq ycmd-server-command "~/build/ycmd/")
+  (setq use-package-verbose t)
   )
 
 (defun dotspacemacs/config ()

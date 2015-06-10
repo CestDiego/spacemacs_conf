@@ -19,10 +19,11 @@
      ;; vim-powerline
      ;; spaceppets
      twitter
+     ;;Version Control
+     version-control
      (git :variables
-          git-magit-status-fullscreen t
-          git-enable-github-support t
-          git-gutter-use-fringe t)
+          git-magit-status-fullscreen t)
+     github
      prodigy
      (colors :variables
              colors-enable-nyan-cat-progress-bar `,(display-graphic-p)

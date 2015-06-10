@@ -239,21 +239,20 @@ before layers configuration."
   (setq helm-ag-command-option " --search-zip ")
   (setq-default evil-escape-key-sequence "nj")
   (setq delete-by-moving-to-trash t)
-  (setq rcirc-server-alist
-        '(("freenode"
-           :host "freenode.berrocal.me"
-           :port "1984"
-           :auth "cestdiego/freenode"
-           :channels ("#emacs"))
+  (when (configuration-layer/layer-usedp 'rcirc)
+    (setq rcirc-server-alist
+          '(("freenode"
+             :host "freenode.berrocal.me"
+             :port "1984"
+             :auth "cestdiego/freenode"
+             :channels ("#emacs"))
 
-          ("geekshed"
-           :host "geekshed.berrocal.me"
-           :port "1984"
-           :auth "cestdiego/geekshed"
-           :channels ("#jupiterbroadcasting"))
-          ))
-
-  (setq ycmd-server-command "~/build/ycmd/")
+            ("geekshed"
+             :host "geekshed.berrocal.me"
+             :port "1984"
+             :auth "cestdiego/geekshed"
+             :channels ("#jupiterbroadcasting"))
+            )))
   (setq use-package-verbose t)
   )
 
@@ -298,19 +297,19 @@ layers configuration."
 
   ;; (setq web-mode-enable-current-column-highlight t)
 
-  (defun custom-persp/bbspwm ()
-    (interactive)
-    (custom-persp "bbspwm"
-                  (progn
-                    (find-file "~/dotbspwm/.config/sxhkd/sxhkdrc")
-                    (split-window-right-and-focus)
-                    (find-file "~/dotbspwm/.config/bspwm/bspwmrc")
-                    (split-window-below-and-focus)
-                    (find-file "~/dotbspwm/.config/bspwm/autostart")
-                    )
-                  ))
-  (evil-leader/set-key
-    "Lob" 'custom-persp/bbspwm)
+  (when (configuration-layer/layer-usedp 'perspectives)
+    (defun custom-persp/bbspwm ()
+      (interactive)
+      (custom-persp
+       "bbspwm"
+       (progn (find-file "~/dotbspwm/.config/sxhkd/sxhkdrc")
+              (split-window-right-and-focus)
+              (find-file "~/dotbspwm/.config/bspwm/bspwmrc")
+              (split-window-below-and-focus)
+              (find-file "~/dotbspwm/.config/bspwm/autostart"))))
+    (evil-leader/set-key
+      "Lob" 'custom-persp/bbspwm))
+
   (setq browse-url-browser-function 'browse-url-generic
         engine/browser-function 'browse-url-generic
         browse-url-generic-program "google-chrome")
@@ -343,39 +342,61 @@ layers configuration."
   (nyan-mode -1)
   (setq js2-strict-missing-semi-warning nil)
 
-  (prodigy-define-service
-    :name "HackSpace"
-    :command "nodemon"
-    :args '("dev" )
-    :cwd "~/Projects/flat"
-    :kill-signal 'sigkill
-    :kill-process-buffer-on-stop t)
+  (when (configuration-layer/layer-usedp 'prodigy)
+    (prodigy-define-service
+      :name "HackSpace"
+      :command "nodemon"
+      :args '("dev" )
+      :cwd "~/Projects/flat"
+      :kill-signal 'sigkill
+      :kill-process-buffer-on-stop t))
 
-  (evil-define-key 'normal term-raw-map
-    "p" 'term-paste)
+  (when (configuration-layer/layer-usedp 'shell)
+    (evil-define-key 'normal term-raw-map
+      "p" 'term-paste)
+    (evil-define-key 'insert term-raw-map (kbd "C-k") 'term-send-up)
+    (evil-define-key 'insert term-raw-map (kbd "C-j") 'term-send-down)
+    (global-set-key (kbd "C-'") 'spacemacs/default-pop-shell)
+    )
 
   (add-to-list 'helm-completing-read-handlers-alist '(pony-manage . ido))
 
-  (eval-after-load "shell"
-    '(progn
-       (evil-define-key 'insert term-raw-map (kbd "C-k") 'term-send-up)
-       (evil-define-key 'insert term-raw-map (kbd "C-j") 'term-send-down)))
+  (when (configuration-layer/layer-usedp 'eyebrowse)
 
-  (global-set-key (kbd "<C-tab>") 'eyebrowse-next-window-config)
-  (global-set-key (kbd "<C-iso-lefttab>") 'eyebrowse-prev-window-config)
+    (global-set-key (kbd "<C-tab>") 'eyebrowse-next-window-config)
+    (global-set-key (kbd "<C-iso-lefttab>") 'eyebrowse-prev-window-config))
 
-  (global-set-key (kbd "C-'") 'spacemacs/default-pop-shell)
 
-  (setq erc-nick "cestdiego"
-        erc-user-full-name "Diego Berrocal")
+  (when (configuration-layer/layer-usedp 'erc)
+    (setq erc-nick "cestdiego"
+          erc-user-full-name "Diego Berrocal")
+    )
 
   ;; Insert thing at point for Helm-aG!!
   (setq helm-ag-insert-at-point 'symbol)
 
-  (add-to-list 'auto-mode-alist '("\\.tern-config\\'" . json-mode))
-  (add-to-list 'auto-mode-alist '("\\.tern-project\\'" . json-mode))
-  (add-to-list 'auto-mode-alist '("dmenuExtended_preferences.txt\\'" . json-mode))
-  (add-to-list 'auto-mode-alist '("\\.touchegg.conf\\'" . web-mode))
+  (when (configuration-layer/layer-usedp 'javascript)
+    (add-to-list 'auto-mode-alist '("\\.tern-config\\'" . json-mode))
+    (add-to-list 'auto-mode-alist '("\\.tern-project\\'" . json-mode))
+    (add-to-list 'auto-mode-alist '("dmenuExtended_preferences.txt\\'" . json-mode)))
+
+  (when (configuration-layer/layer-usedp 'html)
+    (add-to-list 'auto-mode-alist '("\\.touchegg.conf\\'" . web-mode)))
+
+  (when (configuration-layer/layer-usedp 'blog)
+    (setq op/personal-github-link "https://github.com/CestDiego/")
+    (setq op/repository-directory "~/Projects/le_blog/")
+    ;; (setq op/repository-directory "~/Documents/my-blog/")
+    (setq op/site-domain "http://cestdiego.github.io/")
+    ;; This two are optional , only if you want have a custom theme
+    (setq op/theme-root-directory "~/spacemacs_conf/blog/themes/")
+    (setq op/theme 'just_right)
+    (setq op/site-main-title "Diego Berrocal")
+    (setq op/site-sub-title "it's personal")
+
+    (setq op/personal-disqus-shortname "cestdiego")
+    (setq op/personal-google-analytics-id "UA-40864129-3"))
+
   ;; (setq org-hide-emphasis-markers t)
   ;; (regexp-opt (list " @@html:</kbd>@@[a-zA-Z0-9k ]"))
   ;; Got the org-link from
@@ -405,7 +426,6 @@ layers configuration."
   (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
   (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
 
-  (setq wakatime-python-bin "/usr/bin/python")
   )
 
 (custom-set-variables
@@ -418,10 +438,6 @@ layers configuration."
  '(ahs-idle-interval 0.25)
  '(ahs-idle-timer 0 t)
  '(ahs-inhibit-face-list nil)
- '(cua-global-mark-cursor-color "#2aa198")
- '(cua-normal-cursor-color "#839496")
- '(cua-overwrite-cursor-color "#b58900")
- '(cua-read-only-cursor-color "#859900")
  '(expand-region-contract-fast-key "V")
  '(expand-region-reset-fast-key "r")
  '(magit-use-overlays nil)

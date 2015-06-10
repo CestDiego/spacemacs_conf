@@ -48,13 +48,14 @@
      ;; Helm
      helm
      ;; Code Navigation
-     ecb
-     ;; multimedia
+     ;; ecb
+     ;; Multimedia
      presentations
      ;; Miscellaneous
      emoji
      ;; webkit
-     wakatime
+     (wakatime :variables
+               wakatime-python-bin "/usr/bin/python")
      ;; Media
      bongo
      ;; Completings Stuff

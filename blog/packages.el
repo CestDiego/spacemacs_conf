@@ -12,14 +12,13 @@
 
 ;; List of all packages to install and/or initialize. Built-in packages
 ;; which require an initialization must be listed explicitly in the list.
-(setq blog-packages
-    '(
-      org-page
-      ))
+(setq blog-packages '())
+
+(if org-page-use-melpa-version
+      (push 'org-page blog-packages))
 
 (defun blog/init-org-page ()
   (use-package org-page
-    :if org-page-use-package
     :commands (op/do-publication op/new-post op/new-repository)
     :init
     (evil-leader/set-key

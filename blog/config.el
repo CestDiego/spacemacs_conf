@@ -1,4 +1,4 @@
-(defvar org-page-use-package t
+(defvar org-page-use-melpa-version t
   "If non-nil org-page will install package from MELPA, otherwise
   it will use the extension bundled in the layer")
 

@@ -10,14 +10,13 @@
 ;;
 ;;; License: GPLv3
 
-(setq blog-post-extensions
-      '(
-        org-page
-        ))
+(setq blog-post-extensions '())
+
+(unless org-page-use-melpa-version
+  (push 'org-page blog-post-extensions))
 
 (defun blog/init-org-page ()
   (use-package org-page
-    :if (not org-page-use-package)
     :commands (op/do-publication op/new-post op/new-repository)
     :init
     (evil-leader/set-key

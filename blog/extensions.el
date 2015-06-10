@@ -23,13 +23,16 @@
       "opo" '(lambda () (interactive)
                (magit-status op/repository-directory))
       "opp" '(lambda() (interactive)
-               (op/do-publication t nil t nil)
+               (let ((org-html-htmlize-output-type 'css))
+                 (op/do-publication t nil t nil))
                (find-file op/repository-directory))
       "opP" '(lambda() (interactive)
-               (op/do-publication t t org-page-built-directory)))
+               (let ((org-html-htmlize-output-type 'css))
+                 (op/do-publication t t org-page-built-directory))))
+
     (setq org-html-doctype "html5")
     (setq org-html-html5-fancy t)
-    (setq org-html-htmlize-output-type 'css)
+
     (defface strike-through
       '((t :strike-through t))
       "Basic strike-through face."

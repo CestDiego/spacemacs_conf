@@ -33,10 +33,11 @@
     (setq org-html-html5-fancy t)
     (setq org-html-htmlize-output-type 'css)
     (defface strike-through
-      '((t :strike-through t))
+     '((t :strike-through t))
       "Basic strike-through face."
       :group 'basic-faces)
     (push '("+" ,(if (featurep 'xemacs) 'org-table strike-through)) org-emphasis-alist)
+
     :config
     (unless (file-exists-p org-page-built-directory)
       (make-directory org-page-built-directory))))

@@ -31,12 +31,6 @@ which require an initialization must be listed explicitly in the list.")
 (defvar org-excluded-packages '()
   "List of packages to exclude.")
 
-(defun org-cestdiego/init-mustache ()
-  (use-package mustache))
-
-(defun org-cestdiego/init-ht ()
-  (use-package ht))
-
 
 ;; (defun org-cestdiego/init-org-trello ()
 ;;   (use-package org-trello

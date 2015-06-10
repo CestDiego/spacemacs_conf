@@ -15,7 +15,10 @@
 (setq blog-packages '())
 
 (if org-page-use-melpa-version
-      (push 'org-page blog-packages))
+      (push 'org-page blog-packages)
+  ;; If we are using the extension, install dependencies
+  (push 'mustache blog-packages)
+  (push 'ht blog-packages))
 
 (defun blog/init-org-page ()
   (use-package org-page
@@ -44,3 +47,9 @@
     :config
     (unless (file-exists-p org-page-built-directory)
       (make-directory org-page-built-directory))))
+
+(defun blog/init-mustache ()
+  (use-package mustache))
+
+(defun blog/init-ht ()
+  (use-package ht))

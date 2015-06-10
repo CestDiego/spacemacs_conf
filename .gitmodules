@@ -1,6 +1,6 @@
 [submodule "org-cestdiego/extensions/org-page"]
-	path = org-cestdiego/extensions/org-page
+	path = blog/extensions/org-page
 	url = git@github.com:CestDiego/org-page.git
 [submodule "org-cestdiego/org-page-themes/just_right"]
-	path = org-cestdiego/org-page-themes/just_right
+	path = blog/themes/just_right
 	url = git@github.com:CestDiego/just_right.git

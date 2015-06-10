@@ -14,6 +14,9 @@
    dotspacemacs-configuration-layers
    '(
      appearance
+     (blog :variables
+           org-page-use-package nil
+           org-page-built-directory "~/Projects/le_blog_built/")
      ;;Test;;
      ;; ocodo-svg-modeline
      ;; vim-powerline

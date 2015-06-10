@@ -143,6 +143,7 @@ before layers configuration."
                          gotham
                          zenburn ;; This works without erc
                          spacemacs-light
+                         solarized-light
                          leuven  ;; This works without erc
                          )
    ;; If non nil the cursor color matches the state color.

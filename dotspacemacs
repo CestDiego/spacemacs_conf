@@ -88,7 +88,7 @@
      latex
      c-c++
      python
-     ipython
+     ipython-notebook
      sql
      haskell
      javascript
@@ -278,14 +278,12 @@ layers configuration."
   ;; (setq projectile-require-project-root nil)
 
   ;; UTF-8 please
-  ;; (setq locale-coding-system 'utf-8) ; pretty
-  ;; (set-terminal-coding-system 'utf-8) ; pretty
-  ;; (set-keyboard-coding-system 'utf-8) ; pretty
-  ;; (set-selection-coding-system 'utf-8) ; please
-  ;; (prefer-coding-system 'utf-8) ; with sugar on top
-  ;; (set-language-environment 'utf-8)
-  ;; Sentences do not need double spaces to end. Period.
-  ;; (set-default 'sentence-end-double-space nil)
+  (setq locale-coding-system 'utf-8) ; pretty
+  (set-terminal-coding-system 'utf-8) ; pretty
+  (set-keyboard-coding-system 'utf-8) ; pretty
+  (set-selection-coding-system 'utf-8) ; please
+  (prefer-coding-system 'utf-8) ; with sugar on top
+  (set-language-environment 'utf-8)
 
   (eval-after-load 'org2blog
     (progn
@@ -431,7 +429,6 @@ layers configuration."
   (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
 
   )
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -442,22 +439,8 @@ layers configuration."
  '(ahs-idle-interval 0.25)
  '(ahs-idle-timer 0 t)
  '(ahs-inhibit-face-list nil)
- '(expand-region-contract-fast-key "V")
- '(expand-region-reset-fast-key "r")
  '(magit-use-overlays nil)
- '(org-agenda-files
-   (quote
-    ("~/Dropbox/Org-Notes/main.org" "~/dotfiles/README.org")))
- '(paradox-github-token t)
  '(ring-bell-function (quote ignore) t)
- '(safe-local-variable-values
-   (quote
-    ((firestarter op/do-publication t t "~/Projects/le_blog_built")
-     (nil . firestarter-mode)
-     (firestarter start-process "le_process" "le_buffer" "rsync" "-avzP" "--filter=:- .gitignore" "miraflowers:/home/diego/miraflowers")
-     (org-export-allow-bind-keywords . t)
-     (set-input-method "latin-1-prefix" t))))
- '(send-mail-function (quote smtpmail-send-it))
  '(wakatime-api-key "813b0d78-1f17-43eb-bede-a5c008651d4a")
  '(wakatime-cli-path "/home/io/.local/bin/wakatime"))
 (custom-set-faces
@@ -465,5 +448,6 @@ layers configuration."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Source Code Pro" :foundry "adobe" :slant normal :weight normal :height 113 :width normal))))
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))

@@ -427,7 +427,7 @@ layers configuration."
                                          (spacemacs//zoom-frm-powerline-reset)))
   (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
   (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
-
+  (evil-set-initial-state 'git-commit-mode 'insert)
   )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

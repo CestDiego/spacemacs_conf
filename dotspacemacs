@@ -375,6 +375,7 @@ layers configuration."
 
   ;; Insert thing at point for Helm-aG!!
   (setq helm-ag-insert-at-point 'symbol)
+  (setq helm-ag-fuzzy-match t)
 
   (when (configuration-layer/layer-usedp 'javascript)
     (add-to-list 'auto-mode-alist '("\\.tern-config\\'" . json-mode))

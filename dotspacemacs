@@ -20,6 +20,7 @@
            org-page-built-directory "~/Projects/le_blog_built/")
      ;;Test;;
      ;; ocodo-svg-modeline
+     dash
      ;; vim-powerline
      twitter
      ;;Version Control

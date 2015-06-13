@@ -16,4 +16,7 @@
         ))
 
 (defun desktop-customizations/init-fontawesome ()
-  (use-package fontawesome))
+  (use-package fontawesome
+    :init
+    (evil-leader/set-key
+      "if" 'helm-fontawesome)))

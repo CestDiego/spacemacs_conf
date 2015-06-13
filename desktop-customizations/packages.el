@@ -22,6 +22,5 @@
     :config
     (defun insert-font-awesome ()
       (interactive)
-      (ov-set (ov-insert (call-interactively 'fontawesome)) 'face '(:family "FontAwesome" :height 1.5)))
-    (evil-leader/set-key
-      "if" 'insert-font-awesome)))
+      (ov-set (ov-insert (call-interactively 'fontawesome))
+              'face '(:family "FontAwesome" :height 1.5))))

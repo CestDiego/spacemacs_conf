@@ -225,6 +225,12 @@ before layers configuration."
 
   ;; User initialization goes here
 
+  (add-to-list 'default-frame-alist '(minibuffer))
+  (add-to-list 'minibuffer-frame-alist '(minibuffer . only))
+  (add-to-list 'minibuffer-frame-alist '(left . 525))
+  (add-to-list 'minibuffer-frame-alist '(top . -1))
+  (add-to-list 'minibuffer-frame-alist '(width . 100))
+  (add-to-list 'minibuffer-frame-alist '(name . "Minibuf"))
   ;; Use Package indication of lazy loadiness
 
   ;; (set-face-background 'region "#0f0f0f")
@@ -433,8 +439,7 @@ layers configuration."
   (defun create-empty-modeline-frame ()
     (interactive)
     (with-current-buffer (generate-new-buffer "*empty*")
-      (make-frame '((minibuffer . nil
-                                )
+      (make-frame '((minibuffer . nil)
                     (unsplittable . t)
                     (buffer-predicate . (lambda (x) nil))
                     (height . 2)
@@ -446,13 +451,28 @@ layers configuration."
        (get-buffer-window (current-buffer) t) t)))
 
   ;; (set-face-attribute 'mode-line-inactive nil
-  ;;                     :underline nil
+  ;;                     :underline "#202020"
   ;;                     :box nil
   ;;                     :height 1
-  ;;                     :background (face-background 'default)
-  ;;                     )
+  ;;                     :background (face-background 'default))
 
-  (guide-key-mode -1)
+  ;; (add-hook 'focus-in-hook (lambda ()
+  ;;                             (force-mode-line-update)
+  ;;                             ;; Apparently force-mode-line-update is not always enough to
+  ;;                             ;; redisplay the mode-line
+  ;;                             (redraw-display)
+  ;;                             ))
+  ;; (add-hook 'focus-out-hook (lambda ()
+  ;;                            (force-mode-line-update)
+  ;;                            ;; Apparently force-mode-line-update is not always enough to
+  ;;                            ;; redisplay the mode-line
+  ;;                            (redraw-display)
+  ;;                            ))
+
+  ;; (guide-key-mode -1)
+  (set-face-attribute 'vertical-border
+                      nil
+                      :foreground "#202020")
   )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

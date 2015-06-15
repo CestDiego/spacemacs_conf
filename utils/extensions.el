@@ -13,7 +13,7 @@
 
 (setq utils-post-extensions
   '(
-    frames-only-mode
+    ;; frames-only-mode
     ;; i3-emacs
 
 (defun utils/init-i3-emacs ()

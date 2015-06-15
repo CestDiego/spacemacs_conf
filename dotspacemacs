@@ -430,6 +430,8 @@ layers configuration."
   (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
   (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
   (evil-set-initial-state 'git-commit-mode 'insert)
+
+  (guide-key-mode -1)
   )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

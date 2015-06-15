@@ -4,3 +4,6 @@
 [submodule "org-cestdiego/org-page-themes/just_right"]
 	path = blog/themes/just_right
 	url = git@github.com:CestDiego/just_right.git
+[submodule "utils/extensions/i3-emacs"]
+	path = utils/extensions/i3-emacs
+	url = git@github.com:vava/i3-emacs.git

@@ -14,6 +14,13 @@
 (setq utils-post-extensions
   '(
     frames-only-mode
+    ;; i3-emacs
+
+(defun utils/init-i3-emacs ()
+  (use-package i3-integration
+    :config
+    (i3-one-window-per-frame-mode-on)
+    (i3-advise-visible-frame-list-on)))
     ))
 
 ;; (defun utils/init-frames-only-mode ()

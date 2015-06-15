@@ -430,6 +430,27 @@ layers configuration."
   (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
   (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
   (evil-set-initial-state 'git-commit-mode 'insert)
+  (defun create-empty-modeline-frame ()
+    (interactive)
+    (with-current-buffer (generate-new-buffer "*empty*")
+      (make-frame '((minibuffer . nil
+                                )
+                    (unsplittable . t)
+                    (buffer-predicate . (lambda (x) nil))
+                    (height . 2)
+                    (left-fringe . 0)
+                    (right-fringe . 0)
+                    (tool-bar-lines . 0)
+                    (menu-bar-lines . 0)))
+      (set-window-dedicated-p
+       (get-buffer-window (current-buffer) t) t)))
+
+  ;; (set-face-attribute 'mode-line-inactive nil
+  ;;                     :underline nil
+  ;;                     :box nil
+  ;;                     :height 1
+  ;;                     :background (face-background 'default)
+  ;;                     )
 
   (guide-key-mode -1)
   )

@@ -15,12 +15,20 @@
   '(
     ;; frames-only-mode
     ;; i3-emacs
+    ;; mode-line-frame
+    ))
 
 (defun utils/init-i3-emacs ()
   (use-package i3-integration
     :config
     (i3-one-window-per-frame-mode-on)
     (i3-advise-visible-frame-list-on)))
+
+(defun utils/init-mode-line-frame ()
+  (use-package mode-line-frame
+    :init
+    (evil-leader/set-key
+      "tmC" 'mode-line-frame-create)
     ))
 
 ;; (defun utils/init-frames-only-mode ()

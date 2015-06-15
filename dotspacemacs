@@ -13,7 +13,7 @@
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
-     desktop-customizations
+     ;; desktop-customizations
      appearance
      (blog :variables
            org-page-use-melpa-version nil

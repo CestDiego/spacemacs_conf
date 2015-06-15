@@ -18,6 +18,9 @@
     ;; mode-line-frame
     ))
 
+(defun utils/init-frames-only-mode ()
+  (use-package frames-only-mode))
+
 (defun utils/init-i3-emacs ()
   (use-package i3-integration
     :config
@@ -31,8 +34,6 @@
       "tmC" 'mode-line-frame-create)
     ))
 
-;; (defun utils/init-frames-only-mode ()
-;;   (use-package frames-only-mode))
 
 ;;
 ;; Often the body of an initialize function uses `use-package'

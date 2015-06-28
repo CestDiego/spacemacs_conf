@@ -26,7 +26,8 @@
      ;;Version Control
      version-control
      (git :variables
-          git-magit-status-fullscreen t)
+          ;; git-use-magit-next t
+          )
      github
      prodigy
      ;; (colors :variables
@@ -224,28 +225,13 @@ before layers configuration."
    dotspacemacs-default-package-repository nil)
 
   ;; User initialization goes here
-
-  (add-to-list 'default-frame-alist '(minibuffer))
-  (add-to-list 'minibuffer-frame-alist '(minibuffer . only))
-  (add-to-list 'minibuffer-frame-alist '(left . 525))
-  (add-to-list 'minibuffer-frame-alist '(top . -1))
-  (add-to-list 'minibuffer-frame-alist '(width . 100))
-  (add-to-list 'minibuffer-frame-alist '(name . "Minibuf"))
   ;; Use Package indication of lazy loadiness
-
-  ;; (set-face-background 'region "#0f0f0f")
 
   ;; (eval-after-load 'fringe-mode
   ;;   '(progn
   ;;      (fringe-mode -1)))
   ;; (set-fringe-mode '(0 . 0))
   ;; (set-face-attribute 'fringe nil :background "#1f1f1f")
-
-  ;; (set-face-attribute 'mode-line nil
-  ;;                     :inverse-video nil :box nil)
-  ;; (set-face-attribute 'mode-line-inactive nil :box nil)
-
-  ;; (set-face-attribute 'vertical-border nil :foreground "#1f1f1f")
 
   (setq helm-ag-command-option " --search-zip ")
   (setq-default evil-escape-key-sequence "nj")
@@ -272,10 +258,10 @@ before layers configuration."
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
   (setq spacemacs-mode-line-minor-modesp nil)
-  (setq spacemacs/mode-line-battery-time t)
+  (setq spacemacs/mode-line-battery-time 1)
 
   (global-vi-tilde-fringe-mode -1)
-  (setq git-gutter-fr:side 'left-fringe)
+  ;; (setq git-gutter-fr:side 'left-fringe)
   ;;; SANE DEFAULTS!!
   ;; decent navigation like a good citizen
   (global-set-key (kbd "<C-s-tab>") 'persp-next)
@@ -301,8 +287,7 @@ layers configuration."
                :default-title "Hello World"
                :default-categories ("org2blog" "emacs")
                :tags-as-categories nil)))
-      (setq org2blog/wp-confirm-post t)
-      ))
+      (setq org2blog/wp-confirm-post t)))
 
   ;; (setq web-mode-enable-current-column-highlight t)
 
@@ -365,8 +350,7 @@ layers configuration."
       "p" 'term-paste)
     (evil-define-key 'insert term-raw-map (kbd "C-k") 'term-send-up)
     (evil-define-key 'insert term-raw-map (kbd "C-j") 'term-send-down)
-    (global-set-key (kbd "C-'") 'spacemacs/default-pop-shell)
-    )
+    (global-set-key (kbd "C-'") 'spacemacs/default-pop-shell))
 
   (add-to-list 'helm-completing-read-handlers-alist '(pony-manage . ido))
 
@@ -375,14 +359,12 @@ layers configuration."
     (global-set-key (kbd "<C-tab>") 'eyebrowse-next-window-config)
     (global-set-key (kbd "<C-iso-lefttab>") 'eyebrowse-prev-window-config))
 
-
   (when (configuration-layer/layer-usedp 'erc)
     (setq erc-nick "cestdiego"
-          erc-user-full-name "Diego Berrocal")
-    )
+          erc-user-full-name "Diego Berrocal"))
 
   ;; Insert thing at point for Helm-aG!!
-  (setq helm-ag-insert-at-point 'symbol)
+  ;; (setq helm-ag-insert-at-point 'symbol)
   (setq helm-ag-fuzzy-match t)
 
   (when (configuration-layer/layer-usedp 'javascript)
@@ -407,18 +389,6 @@ layers configuration."
     (setq op/personal-disqus-shortname "cestdiego")
     (setq op/personal-google-analytics-id "UA-40864129-3"))
 
-  ;; (setq org-hide-emphasis-markers t)
-  ;; (regexp-opt (list " @@html:</kbd>@@[a-zA-Z0-9k ]"))
-  ;; Got the org-link from
-  ;; http://emacs.stackexchange.com/questions/7323/how-to-add-new-markup-to-org-mode-html-export
-  ;; (org-add-link-type "kbd" #'ignore #'spacemacs/export-kbd-tag)
-  ;; (defun spacemacs/export-kbd-tag (path desc format)
-  ;;   "Export org audio links to hmtl."
-  ;;   (cl-case format
-  ;;     (html (format "<kbd>%s</kbd>" (or desc "")))
-  ;;     (latex (format "(HOW DO I EXPORT AUDIO TO LATEX? \"%s\")" path))))
-  ;; check out https://github.com/capitaomorte/yasnippet/issues/349
-
   ;; (setq line-move-visual nil)
   ;; (if (eq (cdr (window-margins)) nil)
   ;;     (set-window-margins nil 0 (- (window-body-width) fill-column))
@@ -435,7 +405,9 @@ layers configuration."
                                          (spacemacs//zoom-frm-powerline-reset)))
   (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
   (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
+
   (evil-set-initial-state 'git-commit-mode 'insert)
+
   (defun create-empty-modeline-frame ()
     (interactive)
     (with-current-buffer (generate-new-buffer "*empty*")
@@ -456,23 +428,15 @@ layers configuration."
   ;;                     :height 1
   ;;                     :background (face-background 'default))
 
-  ;; (add-hook 'focus-in-hook (lambda ()
-  ;;                             (force-mode-line-update)
-  ;;                             ;; Apparently force-mode-line-update is not always enough to
-  ;;                             ;; redisplay the mode-line
-  ;;                             (redraw-display)
-  ;;                             ))
-  ;; (add-hook 'focus-out-hook (lambda ()
-  ;;                            (force-mode-line-update)
-  ;;                            ;; Apparently force-mode-line-update is not always enough to
-  ;;                            ;; redisplay the mode-line
-  ;;                            (redraw-display)
-  ;;                            ))
-
   ;; (guide-key-mode -1)
-  (set-face-attribute 'vertical-border
-                      nil
-                      :foreground "#202020")
+  ;; (popwin-mode -1)
+  ;; (add-to-list 'default-frame-alist '(minibuffer))
+  ;; ;; (add-to-list 'default-frame-alist '(unsplittable . t))
+  ;; (add-to-list 'minibuffer-frame-alist '(minibuffer . only))
+  ;; (add-to-list 'minibuffer-frame-alist '(left . 525))
+  ;; (add-to-list 'minibuffer-frame-alist '(top . -1))
+  ;; (add-to-list 'minibuffer-frame-alist '(width . 100))
+  ;; (add-to-list 'minibuffer-frame-alist '(name . "Minibuf"))
   )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

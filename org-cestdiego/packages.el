@@ -101,6 +101,18 @@ which require an initialization must be listed explicitly in the list.")
                (message "Call the function again when you're done fixing this subtree.")
                (recursive-edit))
            (message "All subtrees checked."))))))
+
+  ;; (setq org-hide-emphasis-markers t)
+  ;; (regexp-opt (list " @@html:</kbd>@@[a-zA-Z0-9k ]"))
+  ;; Got the org-link from
+  ;; http://emacs.stackexchange.com/questions/7323/how-to-add-new-markup-to-org-mode-html-export
+  ;; (org-add-link-type "kbd" #'ignore #'spacemacs/export-kbd-tag)
+  ;; (defun spacemacs/export-kbd-tag (path desc format)
+  ;;   "Export org audio links to hmtl."
+  ;;   (cl-case format
+  ;;     (html (format "<kbd>%s</kbd>" (or desc "")))
+  ;;     (latex (format "(HOW DO I EXPORT AUDIO TO LATEX? \"%s\")" path))))
+  ;; check out https://github.com/capitaomorte/yasnippet/issues/349
   )
 
 (defun org-cestdiego/init-ob-browser()

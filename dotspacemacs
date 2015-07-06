@@ -25,9 +25,7 @@
      twitter
      ;;Version Control
      version-control
-     (git :variables
-          ;; git-use-magit-next t
-          )
+     git
      github
      prodigy
      ;; (colors :variables
@@ -350,6 +348,12 @@ layers configuration."
       "p" 'term-paste)
     (evil-define-key 'insert term-raw-map (kbd "C-k") 'term-send-up)
     (evil-define-key 'insert term-raw-map (kbd "C-j") 'term-send-down)
+
+    (evil-define-key 'insert cider-repl-mode-map (kbd "C-k") 'cider-repl-backward-input)
+    (evil-define-key 'insert cider-repl-mode-map (kbd "C-j") 'cider-repl-forward-input)
+    (evil-define-key 'insert cider-repl-mode-map (kbd "C-r") 'cider-repl-previous-matching-input)
+    (evil-define-key 'insert cider-repl-mode-map (kbd "C-s") 'cider-repl-next-matching-input)
+
     (global-set-key (kbd "C-'") 'spacemacs/default-pop-shell))
 
   (add-to-list 'helm-completing-read-handlers-alist '(pony-manage . ido))
@@ -422,14 +426,43 @@ layers configuration."
       (set-window-dedicated-p
        (get-buffer-window (current-buffer) t) t)))
 
+  (define-key evil-insert-state-map
+    (kbd "S-<return>") 'evil-open-below)
+
+  (setq js2-global-externs '("require" "module" "jest" "jasmine"
+                             "it" "expect" "describe" "beforeEach"))
+
+  (eval-after-load 'flycheck-mode
+    '(flycheck-define-checker jsxhint-checker
+                              "A JSX syntax and style checker based on JSXHint."
+                              :command ("jsxhint" source)
+                              :error-patterns
+                              ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
+                              :modes (web-mode)))
+  (add-hook 'web-mode-hook
+            (lambda ()
+              (when (equal web-mode-content-type "jsx")
+                ;; enable flycheck
+                (setq web-mode-indent-style 2
+                      web-mode-markup-indent-offset 2
+                      web-mode-css-indent-offset 2
+                      web-mode-code-indent-offset 2)
+                (flycheck-select-checker 'jsxhint-checker)
+                (flycheck-mode))))
+  (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
+
+  (defadvice web-mode-highlight-part (around tweak-jsx activate)
+    (if (equal web-mode-content-type "jsx")
+        (let ((web-mode-enable-part-face nil))
+          ad-do-it)
+      ad-do-it))
+
   ;; (set-face-attribute 'mode-line-inactive nil
   ;;                     :underline "#202020"
   ;;                     :box nil
   ;;                     :height 1
   ;;                     :background (face-background 'default))
 
-  ;; (guide-key-mode -1)
-  ;; (popwin-mode -1)
   ;; (add-to-list 'default-frame-alist '(minibuffer))
   ;; ;; (add-to-list 'default-frame-alist '(unsplittable . t))
   ;; (add-to-list 'minibuffer-frame-alist '(minibuffer . only))
@@ -437,6 +470,7 @@ layers configuration."
   ;; (add-to-list 'minibuffer-frame-alist '(top . -1))
   ;; (add-to-list 'minibuffer-frame-alist '(width . 100))
   ;; (add-to-list 'minibuffer-frame-alist '(name . "Minibuf"))
+  (setq evil-move-cursor-back nil)
   )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

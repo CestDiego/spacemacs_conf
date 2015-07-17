@@ -1,14 +1,10 @@
 (defvar eshell-packages
   '(
-    eshell-prompt-extras
-    esh-help
     virtualenvwrapper
     eshell
     ))
 
 (defun eshell/init-virtualenvwrapper ())
-
-(defun eshell/init-eshell-prompt-extras())
 
 (defun eshell/init-eshell ()
   (use-package eshell
@@ -70,10 +66,3 @@
            (add-hook 'eshell-hook
                      #'(lambda ()
                          (define-key eshell-mode-map (kbd "M-l")  'helm-eshell-history))))))
-
-(defun eshell/init-esh-help ()
-  (use-package esh-help
-    :init
-    (progn
-      (add-hook 'eshell-mode-hook 'eldoc-mode)
-      (setup-esh-help-eldoc))))

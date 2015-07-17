@@ -19,12 +19,19 @@
     ;; aggressive-fill-paragraph
     python-environment
     firestarter
+    evil-ranger
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
 
 (defvar utils-excluded-packages '()
   "List of packages to exclude.")
+
+(defun utils/init-evil-ranger ()
+  (use-package evil-ranger
+    :defer t
+    :init
+    (evil-leader/set-key "ar" 'evil-ranger)))
 
 (defun utils/init-define-word ()
   (use-package define-word

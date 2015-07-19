@@ -59,8 +59,8 @@
      ;; Miscellaneous
      emoji
      ;; webkit
-     (wakatime :variables
-               wakatime-python-bin "/usr/bin/python")
+     ;; (wakatime :variables
+     ;;           wakatime-python-bin "/run/current-system/sw/bin/python")
      ;; Media
      bongo
      ;; Completings Stuff
@@ -78,7 +78,7 @@
      (shell :variables
             shell-default-shell 'ansi-term
             shell-pop-autocd-to-working-dir nil
-            shell-default-term-shell "/bin/zsh")
+            shell-default-term-shell "zsh")
      ;; Lang
      ansible
      markdown
@@ -97,8 +97,6 @@
      extra-langs
      ;; Utils
      search-engine
-     calfw
-     ;; floobits
      utils
      xkcd
      vagrant)
@@ -153,7 +151,7 @@ before layers configuration."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 15
+                               :size 16
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -302,7 +300,7 @@ layers configuration."
 
   (setq browse-url-browser-function 'browse-url-generic
         engine/browser-function 'browse-url-generic
-        browse-url-generic-program "google-chrome")
+        browse-url-generic-program "chromium")
 
   (defadvice evil-inner-word (around underscore-as-word activate)
     (let ((table (copy-syntax-table (syntax-table))))
@@ -370,6 +368,10 @@ layers configuration."
   (setq helm-ag-fuzzy-match t)
 
   (when (configuration-layer/layer-usedp 'javascript)
+    (defun json-format ()
+      (interactive)
+      (save-excursion
+        (shell-command-on-region (mark) (point) "python -m json.tool" (buffer-name) t)))
     (add-to-list 'auto-mode-alist '("\\.tern-config\\'" . json-mode))
     (add-to-list 'auto-mode-alist '("\\.tern-project\\'" . json-mode))
     (add-to-list 'auto-mode-alist '("dmenuExtended_preferences.txt\\'" . json-mode)))
@@ -518,12 +520,12 @@ layers configuration."
              (quote package-build-recipes-dir))
             default-directory)))))
  '(wakatime-api-key "813b0d78-1f17-43eb-bede-a5c008651d4a")
- '(wakatime-cli-path "/home/io/.local/bin/wakatime"))
+ '(wakatime-cli-path "/home/jarvis/nixos-config/common/"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Source Code Pro" :foundry "adobe" :slant normal :weight normal :height 113 :width normal))))
+ '(default ((t (:family "Source Code Pro" :foundry "adobe" :slant normal :weight normal :height 120 :width normal))))
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))

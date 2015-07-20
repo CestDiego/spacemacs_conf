@@ -14,7 +14,7 @@
   (use-package helm-nixos-options
     :config
     (evil-leader/set-key
-      "h." 'helm-search-nixos-options)))
+      "h>" 'helm-search-nixos-options)))
 
 (when (configuration-layer/layer-usedp 'auto-completion)
   (defun nix/post-init-company ()

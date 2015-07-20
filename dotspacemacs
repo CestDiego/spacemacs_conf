@@ -14,7 +14,7 @@
    dotspacemacs-configuration-layers
    '(
      ;; desktop-customizations
-     nix
+     nixos
      appearance
      (blog :variables
            org-page-use-melpa-version nil
@@ -64,11 +64,10 @@
      ;; Media
      bongo
      ;; Completings Stuff
-     (auto-completion
-      :variables
-      auto-completion-enable-help-tooltip t
-      auto-completion-return-key-behavior 'complete
-      auto-completion-complete-with-key-sequence "jk")
+     (auto-completion :variables
+                      auto-completion-enable-help-tooltip t
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-complete-with-key-sequence "jk")
      ;; (ycmd :variables
      ;;       ycmd-server-command "~/build/ycmd/")
      ;; Syntax Checking Stuff

@@ -19,7 +19,7 @@
     ;; aggressive-fill-paragraph
     python-environment
     firestarter
-    evil-ranger
+    ranger
     flycheck-package
     )
   "List of all packages to install and/or initialize. Built-in packages
@@ -34,11 +34,11 @@ which require an initialization must be listed explicitly in the list.")
     (flycheck-package-setup)
     ))
 
-(defun utils/init-evil-ranger ()
-  (use-package evil-ranger
+(defun utils/init-ranger ()
+  (use-package ranger
     :defer t
     :init
-    (evil-leader/set-key "ar" 'evil-ranger)))
+    (evil-leader/set-key "ar" 'ranger)))
 
 (defun utils/init-define-word ()
   (use-package define-word

@@ -15,6 +15,7 @@
    '(
      ;; desktop-customizations
      nixos
+     soundcloud
      appearance
      (blog :variables
            org-page-use-melpa-version nil

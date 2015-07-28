@@ -8,7 +8,7 @@
    ;; List of additional paths where to look for configuration layers.
 
    ;; Paths must have a trailing slash (ie. `~/.mycontribs/')
-   dotspacemacs-configuration-layer-path '("~/spacemacs_conf/")
+   dotspacemacs-configuration-layer-path '("~/.spacemacs.d/")
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
@@ -51,8 +51,6 @@
      org
      ;; org-notify
      org-cestdiego
-     ;; Helm
-     helm
      ;; Code Navigation
      ;; ecb
      ;; Multimedia
@@ -62,8 +60,8 @@
      ;; webkit
      ;; (wakatime :variables
      ;;           wakatime-python-bin "/run/current-system/sw/bin/python")
-     ;; Media
-     bongo
+     ;;;; Media
+     ;; bongo
      ;; Completings Stuff
      (auto-completion :variables
                       auto-completion-enable-help-tooltip t
@@ -76,6 +74,7 @@
      ;; Shells
      eshell
      (shell :variables
+            shell-protect-eshell-prompt t
             shell-default-shell 'ansi-term
             shell-pop-autocd-to-working-dir nil
             shell-default-term-shell "zsh")
@@ -95,6 +94,7 @@
      javascript
      ruby
      extra-langs
+     ranger
      ;; Utils
      search-engine
      utils
@@ -140,8 +140,8 @@ before layers configuration."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
-                         spacemacs-dark
                          monokai
+                         spacemacs-dark
                          zenburn ;; This works without erc
                          spacemacs-light
                          leuven  ;; This works without erc
@@ -150,11 +150,11 @@ before layers configuration."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 16
+   dotspacemacs-default-font '("InputMono"
+                               :size 18
                                :weight normal
                                :width normal
-                               :powerline-scale 1.1)
+                               :powerline-scale 1.0)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -311,8 +311,8 @@ layers configuration."
   ;; (setq python-shell-virtualenv-path "~/Enthought/Canopy_64bit/User/")
   ;; (setq python-shell-interpreter "~/Enthought/Canopy_64bit/User/bin/python")
 
-  (setenv "PYTHONPATH" "/home/io/build/horton-dev")
-  (setenv "HORTONDATA" "/home/io/build/horton-dev/data")
+  ;; (setenv "PYTHONPATH" "/home/io/build/horton-dev")
+  ;; (setenv "HORTONDATA" "/home/io/build/horton-dev/data")
 
   ;; (setq python-shell-virtualenv-path "/usr/")
   (setq python-shell-interpreter "ipython")
@@ -321,7 +321,7 @@ layers configuration."
   (setq eshell-rc-script "~/spacemacs_conf/.eshellrc")
   (setq eshell-path-env exec-path)
 
-  (setq powerline-default-separator 'slant)
+  (setq powerline-default-separator 'alternate)
   (setq vc-follow-symlinks t)
 
   (setq zone-timer (run-with-idle-timer 6000 t 'zone))
@@ -345,13 +345,15 @@ layers configuration."
     (evil-define-key 'insert term-raw-map (kbd "C-k") 'term-send-up)
     (evil-define-key 'insert term-raw-map (kbd "C-j") 'term-send-down)
 
-    (evil-define-key 'insert cider-repl-mode-map (kbd "C-k") 'cider-repl-backward-input)
-    (evil-define-key 'insert cider-repl-mode-map (kbd "C-j") 'cider-repl-forward-input)
-    (evil-define-key 'insert cider-repl-mode-map (kbd "C-r") 'cider-repl-previous-matching-input)
-    (evil-define-key 'insert cider-repl-mode-map (kbd "C-s") 'cider-repl-next-matching-input)
+    (evil-define-key 'insert eshell-mode-map (kbd "C-k") 'eshell-previous-input)
+    (evil-define-key 'insert eshell-mode-map (kbd "C-j") 'eshell-next-input)
 
     (global-set-key (kbd "C-'") 'spacemacs/default-pop-shell))
 
+  (evil-define-key 'insert cider-repl-mode-map (kbd "C-k") 'cider-repl-backward-input)
+  (evil-define-key 'insert cider-repl-mode-map (kbd "C-j") 'cider-repl-forward-input)
+  (evil-define-key 'insert cider-repl-mode-map (kbd "C-r") 'cider-repl-previous-matching-input)
+  (evil-define-key 'insert cider-repl-mode-map (kbd "C-s") 'cider-repl-next-matching-input)
   (add-to-list 'helm-completing-read-handlers-alist '(pony-manage . ido))
 
   (when (configuration-layer/layer-usedp 'eyebrowse)
@@ -359,13 +361,76 @@ layers configuration."
     (global-set-key (kbd "<C-tab>") 'eyebrowse-next-window-config)
     (global-set-key (kbd "<C-iso-lefttab>") 'eyebrowse-prev-window-config))
 
+  ;;
+  ;; OVERRIDING GLOBALLY STUFF
+  ;;
+
+  (defvar custom-keys-mode-map (make-keymap) "custom-keys-mode keymap.")
+  (define-minor-mode custom-keys-mode
+    "A minor mode so that my key settings override annoying major modes."
+    t " my-keys" 'custom-keys-mode-map)
+  (custom-keys-mode 1)
+
+  (defun my-minibuffer-setup-hook ()
+    (custom-keys-mode 0))
+  (add-hook 'minibuffer-setup-hook 'my-minibuffer-setup-hook)
+
+  (defadvice load (after give-my-keybindings-priority)
+    "Try to ensure that my keybindings always have priority."
+    (if (not (eq (car (car minor-mode-map-alist)) 'custom-keys-mode))
+        (let ((mykeys (assq 'custom-keys-mode minor-mode-map-alist)))
+          (assq-delete-all 'custom-keys-mode minor-mode-map-alist)
+          (add-to-list 'minor-mode-map-alist mykeys))))
+  (ad-activate 'load)
+  (define-key custom-keys-mode-map (kbd "<C-tab>") 'eyebrowse-next-window-config)
+  (define-key custom-keys-mode-map (kbd "<C-iso-lefttab>") 'eyebrowse-prev-window-config)
+
+  ;;
+  ;; FINISH LE GLOBAL OVERRIDE
+  ;;
+
   (when (configuration-layer/layer-usedp 'erc)
+    ;; IRC
+    (erc-track-mode -1)
+    (add-hook 'erc-insert-pre-hook
+              (defun bb/erc-foolish-filter (msg)
+                "Ignores messages matching `erc-foolish-content'."
+                (when (erc-list-match erc-foolish-content msg)
+                  (setq erc-insert-this nil))))
+    (add-hook 'erc-insert-modify-hook
+              (defun bb/erc-github-filter ()
+                "Shortens messages from gitter."
+                (interactive)
+                (when (and (< 18 (- (point-max) (point-min)))
+                           (string= (buffer-substring (point-min)
+                                                      (+ (point-min) 18))
+                                    "<gitter> [Github] "))
+                  (dolist (regexp '(" \\[Github\\]"
+                                    " \\(?:in\\|to\\) [^ /]+/[^ /:]+"
+                                    "https?://github\\.com/[^/]+/[^/]+/[^/]+/"
+                                    "#issuecomment-[[:digit:]]+"))
+                    (goto-char (point-min))
+                    (when (re-search-forward regexp (point-max) t)
+                      (replace-match "")))
+                  (goto-char (point-min))
+                  (when (re-search-forward "[[:digit:]]+$" (point-max) t)
+                    (replace-match (format "(#%s)" (match-string 0)))))))
     (setq erc-nick "cestdiego"
-          erc-user-full-name "Diego Berrocal"))
+          erc-user-full-name "Diego Berrocal"
+          erc-fill-function 'erc-fill-static
+          erc-fill-static-center 19
+          erc-prompt-for-nickserv-password nil
+          erc-image-inline-rescale 300
+          erc-hide-list '("JOIN" "PART" "QUIT" "NICK")
+          erc-foolish-content '("\\[Github\\].* starred"
+                                "\\[Github\\].* forked"
+                                "\\[Github\\].* synchronize a Pull Request"
+                                "\\[Github\\].* labeled an issue in"
+                                "\\[Github\\].* unlabeled an issue in")))
 
   ;; Insert thing at point for Helm-aG!!
   ;; (setq helm-ag-insert-at-point 'symbol)
-  (setq helm-ag-fuzzy-match t)
+  ;; (setq helm-ag-fuzzy-match t)
 
   (when (configuration-layer/layer-usedp 'javascript)
     (defun json-format ()
@@ -449,7 +514,6 @@ layers configuration."
                       web-mode-code-indent-offset 2)
                 (flycheck-select-checker 'jsxhint-checker)
                 (flycheck-mode))))
-  (add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
 
   (defadvice web-mode-highlight-part (around tweak-jsx activate)
     (if (equal web-mode-content-type "jsx")
@@ -483,6 +547,7 @@ layers configuration."
  '(ahs-idle-timer 0 t)
  '(ahs-inhibit-face-list nil)
  '(magit-use-overlays nil)
+ '(org-agenda-files (quote ("~/Dropbox/Org-Notes/main.org")))
  '(ring-bell-function (quote ignore) t)
  '(safe-local-variable-values
    (quote

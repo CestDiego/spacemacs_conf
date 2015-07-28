@@ -19,26 +19,33 @@
     ;; aggressive-fill-paragraph
     python-environment
     firestarter
-    ranger
     flycheck-package
+    general-close
+    fontawesome
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
 
-(defvar utils-excluded-packages '()
-  "List of packages to exclude.")
+(defun utils/init-fontawesome ()
+  (use-package fontawesome
+    :init
+    (evil-leader/set-key
+      "fa" 'helm-fontawesome)
+    ))
+
+
+(defun utils/init-general-close ()
+  (use-package general-close
+    :config
+    (global-set-key (kbd "M-`") 'general-close)
+    ))
+
 
 (defun utils/init-flycheck-package ()
   (use-package flycheck-package
     :config
     (flycheck-package-setup)
     ))
-
-(defun utils/init-ranger ()
-  (use-package ranger
-    :defer t
-    :init
-    (evil-leader/set-key "ar" 'ranger)))
 
 (defun utils/init-define-word ()
   (use-package define-word

@@ -359,32 +359,30 @@ layers configuration."
 
   (when (configuration-layer/layer-usedp 'eyebrowse)
 
-    (global-set-key (kbd "<C-tab>") 'eyebrowse-next-window-config)
-    (global-set-key (kbd "<C-iso-lefttab>") 'eyebrowse-prev-window-config))
+    ;;
+    ;; OVERRIDING GLOBALLY STUFF
+    ;;
 
-  ;;
-  ;; OVERRIDING GLOBALLY STUFF
-  ;;
+    (defvar custom-keys-mode-map (make-keymap) "custom-keys-mode keymap.")
+    (define-minor-mode custom-keys-mode
+      "A minor mode so that my key settings override annoying major modes."
+      t " my-keys" 'custom-keys-mode-map)
+    (custom-keys-mode 1)
 
-  (defvar custom-keys-mode-map (make-keymap) "custom-keys-mode keymap.")
-  (define-minor-mode custom-keys-mode
-    "A minor mode so that my key settings override annoying major modes."
-    t " my-keys" 'custom-keys-mode-map)
-  (custom-keys-mode 1)
+    (defun my-minibuffer-setup-hook ()
+      (custom-keys-mode 0))
+    (add-hook 'minibuffer-setup-hook 'my-minibuffer-setup-hook)
 
-  (defun my-minibuffer-setup-hook ()
-    (custom-keys-mode 0))
-  (add-hook 'minibuffer-setup-hook 'my-minibuffer-setup-hook)
+    (defadvice load (after give-my-keybindings-priority)
+      "Try to ensure that my keybindings always have priority."
+      (if (not (eq (car (car minor-mode-map-alist)) 'custom-keys-mode))
+          (let ((mykeys (assq 'custom-keys-mode minor-mode-map-alist)))
+            (assq-delete-all 'custom-keys-mode minor-mode-map-alist)
+            (add-to-list 'minor-mode-map-alist mykeys))))
+    (ad-activate 'load)
+    (define-key custom-keys-mode-map (kbd "<C-tab>") 'eyebrowse-next-window-config)
+    (define-key custom-keys-mode-map (kbd "<C-iso-lefttab>") 'eyebrowse-prev-window-config))
 
-  (defadvice load (after give-my-keybindings-priority)
-    "Try to ensure that my keybindings always have priority."
-    (if (not (eq (car (car minor-mode-map-alist)) 'custom-keys-mode))
-        (let ((mykeys (assq 'custom-keys-mode minor-mode-map-alist)))
-          (assq-delete-all 'custom-keys-mode minor-mode-map-alist)
-          (add-to-list 'minor-mode-map-alist mykeys))))
-  (ad-activate 'load)
-  (define-key custom-keys-mode-map (kbd "<C-tab>") 'eyebrowse-next-window-config)
-  (define-key custom-keys-mode-map (kbd "<C-iso-lefttab>") 'eyebrowse-prev-window-config)
 
   ;;
   ;; FINISH LE GLOBAL OVERRIDE

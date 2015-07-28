@@ -119,7 +119,7 @@ which require an initialization must be listed explicitly in the list.")
   (use-package ob-browser
     :init
     (progn
-      (add-to-list 'exec-path "/home/io/.installed/phantomjs/bin")
+      ;; (add-to-list 'exec-path "/home/io/.installed/phantomjs/bin")
       (setenv "PATH" (mapconcat 'identity exec-path ":"))
       )))
 

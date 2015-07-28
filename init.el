@@ -245,6 +245,8 @@ before layers configuration."
              :channels ("#jupiterbroadcasting"))
             )))
   (setq use-package-verbose t)
+
+  (add-to-list 'exec-path "/home/io/.local/bin")
   )
 
 (defun dotspacemacs/config ()
@@ -315,6 +317,7 @@ layers configuration."
   ;; (setenv "HORTONDATA" "/home/io/build/horton-dev/data")
 
   ;; (setq python-shell-virtualenv-path "/usr/")
+
 
   (setq python-shell-interpreter "ipython")
   (setq python-shell-interpreter-args "-i --gui=wx")

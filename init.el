@@ -315,10 +315,11 @@ layers configuration."
   ;; (setenv "HORTONDATA" "/home/io/build/horton-dev/data")
 
   ;; (setq python-shell-virtualenv-path "/usr/")
+
   (setq python-shell-interpreter "ipython")
   (setq python-shell-interpreter-args "-i --gui=wx")
 
-  (setq eshell-rc-script "~/spacemacs_conf/.eshellrc")
+  (setq eshell-rc-script (expand-file-name ".eshellrc" (car dotspacemacs-configuration-layer-path)))
   (setq eshell-path-env exec-path)
 
   (setq powerline-default-separator 'alternate)
@@ -450,7 +451,7 @@ layers configuration."
     ;; (setq op/repository-directory "~/Documents/my-blog/")
     (setq op/site-domain "http://cestdiego.github.io/")
     ;; This two are optional , only if you want have a custom theme
-    (setq op/theme-root-directory "~/spacemacs_conf/blog/themes/")
+    (setq op/theme-root-directory "~/.spacemacs.d/blog/themes/")
     (setq op/theme 'just_right)
     (setq op/site-main-title "Diego Berrocal")
     (setq op/site-sub-title "it's personal")

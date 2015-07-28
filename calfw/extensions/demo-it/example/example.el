@@ -31,7 +31,7 @@
 
 (defun dit-run-code ()
   "Execute our source code in an Eshell buffer."
-  (demo-it-run-in-eshell "~/spacemacs_conf/presentations/extensions/demo-it/example" "python example.py Snoopy" "Python Code" 'below)
+  (demo-it-run-in-eshell "~/.spacemacs.d/presentations/extensions/demo-it/example" "python example.py Snoopy" "Python Code" 'below)
   (demo-it-presentation-advance)
   )
 

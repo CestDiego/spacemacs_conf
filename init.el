@@ -39,7 +39,7 @@
      eyebrowse
      chrome
      (erc :variables
-          erc-use-sasl-auth t)
+          erc-enable-sasl-auth t)
      (rcirc :variables
             rcirc-default-nick "cestdiego"
             rcirc-default-user-name "cestdiego"
@@ -77,7 +77,7 @@
             shell-protect-eshell-prompt t
             shell-default-shell 'ansi-term
             shell-pop-autocd-to-working-dir nil
-            shell-default-term-shell "zsh")
+            shell-default-term-shell "bash")
      ;; Lang
      ansible
      markdown
@@ -246,7 +246,6 @@ before layers configuration."
             )))
   (setq use-package-verbose t)
 
-  (add-to-list 'exec-path "/home/io/.local/bin")
   )
 
 (defun dotspacemacs/config ()
@@ -317,7 +316,6 @@ layers configuration."
   ;; (setenv "HORTONDATA" "/home/io/build/horton-dev/data")
 
   ;; (setq python-shell-virtualenv-path "/usr/")
-
 
   (setq python-shell-interpreter "ipython")
   (setq python-shell-interpreter-args "-i --gui=wx")
@@ -536,7 +534,10 @@ layers configuration."
   ;; (add-to-list 'minibuffer-frame-alist '(top . -1))
   ;; (add-to-list 'minibuffer-frame-alist '(width . 100))
   ;; (add-to-list 'minibuffer-frame-alist '(name . "Minibuf"))
+  ;; is this fixed yet?
   (setq evil-move-cursor-back nil)
+
+  (setq magit-repository-directories "~")
   )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

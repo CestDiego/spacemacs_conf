@@ -13,13 +13,21 @@
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
-     ;; desktop-customizations
-     nixos
-     soundcloud
+     ;; MY Own layers
      appearance
      (blog :variables
            org-page-use-melpa-version nil
            org-page-built-directory "~/Projects/le_blog_built/")
+     ;;;; Media
+     ;; bongo
+     ;; desktop-customizations
+     ;; Code Navigation
+     ;; ecb
+     eshell
+
+     ;; Spacemacs
+     nixos
+     soundcloud
      ;;Test;;
      ;; ocodo-svg-modeline
      dash
@@ -51,8 +59,6 @@
      org
      ;; org-notify
      org-cestdiego
-     ;; Code Navigation
-     ;; ecb
      ;; Multimedia
      presentations
      ;; Miscellaneous
@@ -60,8 +66,6 @@
      ;; webkit
      ;; (wakatime :variables
      ;;           wakatime-python-bin "/run/current-system/sw/bin/python")
-     ;;;; Media
-     ;; bongo
      ;; Completings Stuff
      (auto-completion :variables
                       auto-completion-enable-help-tooltip t
@@ -72,7 +76,6 @@
      ;; Syntax Checking Stuff
      syntax-checking
      ;; Shells
-     eshell
      (shell :variables
             shell-protect-eshell-prompt t
             shell-default-shell 'ansi-term
@@ -537,7 +540,7 @@ layers configuration."
   ;; is this fixed yet?
   (setq evil-move-cursor-back nil)
 
-  (setq magit-repository-directories "~")
+  ;; (setq magit-repository-directories "~")
   )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

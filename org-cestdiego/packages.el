@@ -17,13 +17,13 @@
     ob-http
     ob-mongo
     ob-browser
-    org-projectile
+    ;; org-projectile
     org-gcal
-    ;; org-trello
     ox-ioslide
     ox-cv
     mustache
     ht
+    ;; org-trello
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
@@ -123,18 +123,20 @@ which require an initialization must be listed explicitly in the list.")
       (setenv "PATH" (mapconcat 'identity exec-path ":"))
       )))
 
-(defun org-cestdiego/init-org-projectile ()
-  (use-package org-projectile
-    :config
-    (org-projectile:per-repo)
-    (setq org-projectile:per-repo-filename "TODO.org"
-          org-agenda-files (append org-agenda-files (org-projectile:todo-files)))
-    (add-to-list 'org-capture-templates (org-projectile:project-todo-entry "p"))
-    (add-to-list 'org-capture-templates (org-projectile:project-todo-entry "l" "* TODO [[%l][%? ]] \t %^g\n \t\t\t\tCaptured at: %T\n" "Linked Project TODO"))
-    (evil-leader/set-key
-      "oC" 'org-capture
-      "pC" 'org-projectile:project-todo-completing-read)
-    ))
+;; (defun org-cestdiego/init-org-projectile ()
+;;   (use-package org-projectile
+;;     :ensure t
+;;     :init
+;;     (evil-leader/set-key
+;;       "oC" 'org-capture
+;;       "pC" 'org-projectile:project-todo-completing-read)
+;;     :config
+;;     (org-projectile:per-repo)
+;;     (setq org-projectile:per-repo-filename "TODO.org"
+;;           org-agenda-files (append org-agenda-files (org-projectile:todo-files)))
+;;     (add-to-list 'org-capture-templates (org-projectile:project-todo-entry "p"))
+;;     (add-to-list 'org-capture-templates (org-projectile:project-todo-entry "l" "* TODO [[%l][%? ]] \t %^g\n \t\t\t\tCaptured at: %T\n" "Linked Project TODO"))
+;;     ))
 
 (defun org-cestdiego/init-org-gcal ()
   (use-package org-gcal

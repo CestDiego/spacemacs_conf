@@ -18,24 +18,21 @@
      (blog :variables
            org-page-use-melpa-version nil
            org-page-built-directory "~/Projects/le_blog_built/")
-     ;;;; Media
-     ;; bongo
-     ;; desktop-customizations
-     ;; Code Navigation
-     ;; ecb
      eshell
+     org-cestdiego
+     presentations
+     soundcloud
+     twitter
+     utils
 
      ;; Spacemacs
      nixos
-     soundcloud
-     ;;Test;;
-     ;; ocodo-svg-modeline
      dash
      ;; vim-powerline
-     twitter
      ;;Version Control
      version-control
-     git
+     (git :variables
+          git-magit-status-fullscreen t)
      github
      prodigy
      ;; (colors :variables
@@ -57,13 +54,8 @@
      restclient
      ;; Org
      org
-     ;; org-notify
-     org-cestdiego
-     ;; Multimedia
-     presentations
      ;; Miscellaneous
      emoji
-     ;; webkit
      ;; (wakatime :variables
      ;;           wakatime-python-bin "/run/current-system/sw/bin/python")
      ;; Completings Stuff
@@ -100,7 +92,6 @@
      ranger
      ;; Utils
      search-engine
-     utils
      xkcd
      vagrant)
    ;; List of additional packages that will be installed wihout being
@@ -362,11 +353,9 @@ layers configuration."
   (add-to-list 'helm-completing-read-handlers-alist '(pony-manage . ido))
 
   (when (configuration-layer/layer-usedp 'eyebrowse)
-
-    ;;
-    ;; OVERRIDING GLOBALLY STUFF
-    ;;
-
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;;;;;; OVERRIDING GLOBALLY STUFF ;;;;;;;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     (defvar custom-keys-mode-map (make-keymap) "custom-keys-mode keymap.")
     (define-minor-mode custom-keys-mode
       "A minor mode so that my key settings override annoying major modes."
@@ -385,13 +374,11 @@ layers configuration."
             (add-to-list 'minor-mode-map-alist mykeys))))
     (ad-activate 'load)
     (define-key custom-keys-mode-map (kbd "<C-tab>") 'eyebrowse-next-window-config)
-    (define-key custom-keys-mode-map (kbd "<C-iso-lefttab>") 'eyebrowse-prev-window-config))
-
-
-  ;;
-  ;; FINISH LE GLOBAL OVERRIDE
-  ;;
-
+    (define-key custom-keys-mode-map (kbd "<C-iso-lefttab>") 'eyebrowse-prev-window-config)
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;;;;;; FINISH LE GLOBAL OVERRIDE ;;;;;;;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    )
   (when (configuration-layer/layer-usedp 'erc)
     ;; IRC
     (erc-track-mode -1)
@@ -538,7 +525,7 @@ layers configuration."
   ;; (add-to-list 'minibuffer-frame-alist '(width . 100))
   ;; (add-to-list 'minibuffer-frame-alist '(name . "Minibuf"))
   ;; is this fixed yet?
-  (setq evil-move-cursor-back nil)
+  ;; (setq evil-move-cursor-back nil)
 
   ;; (setq magit-repository-directories "~")
   )

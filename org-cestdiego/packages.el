@@ -56,14 +56,17 @@ which require an initialization must be listed explicitly in the list.")
      (sql . t)
      (ditaa . t)
      ))
+
   (setq org-latex-packages-alist '(("" "color" t) ("" "minted" t) ("" "parskip" t))
         org-latex-pdf-process
         '("pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"
           "bibtex $(basename %b)"
           "pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"
           "pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"))
+
   (setq org-latex-custom-lang-environments
         '((python "pythoncode")))
+
   (setq org-ditaa-jar-path "/usr/bin/ditaa")
 
   (defun org-check-misformatted-subtree ()
@@ -82,6 +85,11 @@ which require an initialization must be listed explicitly in the list.")
                (message "Call the function again when you're done fixing this subtree.")
                (recursive-edit))
            (message "All subtrees checked."))))))
+
+  (defun org-mode/prettify-symbols ()
+    (push '("link" . ?) prettify-symbols-alist))
+
+  (add-hook 'org-mode-hook 'org-mode/prettify-symbols)
 
   ;; (setq org-hide-emphasis-markers t)
   ;; (regexp-opt (list " @@html:</kbd>@@[a-zA-Z0-9k ]"))

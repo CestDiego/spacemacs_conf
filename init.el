@@ -72,7 +72,7 @@
             shell-protect-eshell-prompt t
             shell-default-shell 'ansi-term
             shell-pop-autocd-to-working-dir nil
-            shell-default-term-shell "bash")
+            shell-default-term-shell "zsh")
      ;; Lang
      ansible
      markdown
@@ -240,6 +240,7 @@ before layers configuration."
             )))
   (setq use-package-verbose t)
 
+  (global-prettify-symbols-mode)
   )
 
 (defun dotspacemacs/config ()
@@ -525,7 +526,8 @@ layers configuration."
   ;; (add-to-list 'minibuffer-frame-alist '(width . 100))
   ;; (add-to-list 'minibuffer-frame-alist '(name . "Minibuf"))
   ;; is this fixed yet?
-  ;; (setq evil-move-cursor-back nil)
+  (setq evil-move-cursor-back nil)
+  (setq evil-move-beyond-eol nil)
 
   ;; (setq magit-repository-directories "~")
   )

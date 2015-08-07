@@ -14,7 +14,6 @@
   '(
     define-word
     string-inflection
-    evil-annoying-arrows
     ;; pdf-tools
     ;; aggressive-fill-paragraph
     python-environment
@@ -64,14 +63,6 @@ which require an initialization must be listed explicitly in the list.")
       (evil-leader/set-key
         "msi" 'string-inflection-cycle)
       ))
-  )
-
-(defun utils/init-evil-annoying-arrows ()
-  "Initialize my package"
-  (use-package evil-annoying-arrows-mode
-    :init
-    (global-evil-annoying-arrows-mode)
-    )
   )
 
 ;;(defun utils/init-pdf-tools ()

@@ -87,7 +87,7 @@ which require an initialization must be listed explicitly in the list.")
            (message "All subtrees checked."))))))
 
   (defun org-mode/prettify-symbols ()
-    (push '("link" . ?) prettify-symbols-alist))
+    (push '("href-link" . ?) prettify-symbols-alist))
 
   (add-hook 'org-mode-hook 'org-mode/prettify-symbols)
 

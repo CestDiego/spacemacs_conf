@@ -438,7 +438,6 @@ layers configuration."
   (when (configuration-layer/layer-usedp 'blog)
     (setq op/personal-github-link "https://github.com/CestDiego/")
     (setq op/repository-directory "~/Projects/le_blog/")
-    ;; (setq op/repository-directory "~/Documents/my-blog/")
     (setq op/site-domain "http://cestdiego.github.io/")
     ;; This two are optional , only if you want have a custom theme
     (setq op/theme-root-directory "~/.spacemacs.d/blog/themes/")
@@ -546,7 +545,8 @@ layers configuration."
  '(ring-bell-function (quote ignore) t)
  '(safe-local-variable-values
    (quote
-    ((eval when
+    ((firestarter op/do-publication t t "~/Projects/le_blog_built")
+     (eval when
            (and
             (buffer-file-name)
             (file-regular-p

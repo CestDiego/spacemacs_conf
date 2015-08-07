@@ -39,6 +39,5 @@
       :group 'basic-faces)
     (push '("+" ,(if (featurep 'xemacs) 'org-table strike-through)) org-emphasis-alist)
 
-    :config
     (unless (file-exists-p org-page-built-directory)
       (make-directory org-page-built-directory))))

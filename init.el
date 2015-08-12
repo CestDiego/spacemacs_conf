@@ -24,6 +24,7 @@
      soundcloud
      twitter
      utils
+     nand2tetris
 
      ;; Spacemacs
      nixos
@@ -221,9 +222,11 @@ before layers configuration."
   ;; (set-fringe-mode '(0 . 0))
   ;; (set-face-attribute 'fringe nil :background "#1f1f1f")
 
+
   (setq helm-ag-command-option " --search-zip ")
   (setq-default evil-escape-key-sequence "nj")
   (setq delete-by-moving-to-trash t)
+
   (when (configuration-layer/layer-usedp 'rcirc)
     (setq rcirc-server-alist
           '(("freenode"
@@ -238,9 +241,18 @@ before layers configuration."
              :auth "cestdiego/geekshed"
              :channels ("#jupiterbroadcasting"))
             )))
+
   (setq use-package-verbose t)
 
+  (add-hook 'emacs-lisp-mode-hook
+            '(lambda ()
+               (push '("add-hook" . ?) prettify-symbols-alist)
+               (push '("defun" . ?𝆑) prettify-symbols-alist)))
+
   (global-prettify-symbols-mode)
+
+  (setq source-directory "~/Projects/emacs")
+
   )
 
 (defun dotspacemacs/config ()
@@ -343,9 +355,7 @@ layers configuration."
     (evil-define-key 'insert term-raw-map (kbd "C-j") 'term-send-down)
 
     (evil-define-key 'insert eshell-mode-map (kbd "C-k") 'eshell-previous-input)
-    (evil-define-key 'insert eshell-mode-map (kbd "C-j") 'eshell-next-input)
-
-    (global-set-key (kbd "C-'") 'spacemacs/default-pop-shell))
+    (evil-define-key 'insert eshell-mode-map (kbd "C-j") 'eshell-next-input))
 
   (evil-define-key 'insert cider-repl-mode-map (kbd "C-k") 'cider-repl-backward-input)
   (evil-define-key 'insert cider-repl-mode-map (kbd "C-j") 'cider-repl-forward-input)
@@ -376,10 +386,15 @@ layers configuration."
     (ad-activate 'load)
     (define-key custom-keys-mode-map (kbd "<C-tab>") 'eyebrowse-next-window-config)
     (define-key custom-keys-mode-map (kbd "<C-iso-lefttab>") 'eyebrowse-prev-window-config)
+    (define-key custom-keys-mode-map (kbd "C-\"") 'org-cycle-agenda-files)
+    (define-key custom-keys-mode-map (kbd "C-'") 'spacemacs/default-pop-shell)
+
+
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;;;;;;; FINISH LE GLOBAL OVERRIDE ;;;;;;;;
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     )
+
   (when (configuration-layer/layer-usedp 'erc)
     ;; IRC
     (erc-track-mode -1)
@@ -525,10 +540,11 @@ layers configuration."
   ;; (add-to-list 'minibuffer-frame-alist '(width . 100))
   ;; (add-to-list 'minibuffer-frame-alist '(name . "Minibuf"))
   ;; is this fixed yet?
-  (setq evil-move-cursor-back nil)
-  (setq evil-move-beyond-eol nil)
+  ;; (setq evil-move-cursor-back nil)
+  ;; (setq evil-move-beyond-eol nil)
 
   ;; (setq magit-repository-directories "~")
+  (setq company-tooltip-align-annotations t)
   )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

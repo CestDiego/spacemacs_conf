@@ -490,7 +490,7 @@ layers configuration."
   (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
   (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
 
-  (evil-set-initial-state 'git-commit-mode 'insert)
+  (push 'git-commit-mode evil-insert-state-modes)
 
   (defun create-empty-modeline-frame ()
     (interactive)

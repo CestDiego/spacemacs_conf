@@ -549,12 +549,9 @@ layers configuration."
   ;; (add-to-list 'minibuffer-frame-alist '(top . -1))
   ;; (add-to-list 'minibuffer-frame-alist '(width . 100))
   ;; (add-to-list 'minibuffer-frame-alist '(name . "Minibuf"))
-  ;; is this fixed yet?
-  ;; (setq evil-move-cursor-back nil)
-  ;; (setq evil-move-beyond-eol nil)
 
   ;; (setq magit-repository-directories "~")
-  (setq company-tooltip-align-annotations t)
+  (setq flycheck-emacs-lisp-load-path 'inherit)
   )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

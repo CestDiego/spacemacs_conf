@@ -84,7 +84,7 @@
      latex
      c-c++
      python
-     ipython-notebook
+     ;; ipython-notebook
      sql
      haskell
      javascript

@@ -42,6 +42,7 @@ which require an initialization must be listed explicitly in the list.")
 
 (defun utils/init-flycheck-package ()
   (use-package flycheck-package
+    :defer t
     :config
     (flycheck-package-setup)
     ))

@@ -253,6 +253,16 @@ before layers configuration."
 
   (setq source-directory "~/Projects/emacs")
 
+  ;; Only Usedul with `SPC t ~'
+  (setq vi-tilde-fringe-bitmap-array
+        [#b00000000
+         #b00000000
+         #b00010000
+         #b00111000
+         #b01111100
+         #b00111000
+         #b00010000
+         #b00000000])
   )
 
 (defun dotspacemacs/config ()

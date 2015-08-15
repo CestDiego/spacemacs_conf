@@ -67,6 +67,7 @@
      ;; (ycmd :variables
      ;;       ycmd-server-command "~/build/ycmd/")
      ;; Syntax Checking Stuff
+     spell-checking
      syntax-checking
      ;; Shells
      (shell :variables
@@ -491,6 +492,7 @@ layers configuration."
   (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
 
   (push 'git-commit-mode evil-insert-state-modes)
+  (push 'image-mode evil-insert-state-modes)
 
   (defun create-empty-modeline-frame ()
     (interactive)
@@ -553,6 +555,7 @@ layers configuration."
   ;; (setq magit-repository-directories "~")
   (setq flycheck-emacs-lisp-load-path 'inherit)
   )
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

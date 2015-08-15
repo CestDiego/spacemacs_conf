@@ -31,7 +31,7 @@
 (defun nand2tetris/init-nand2tetris ()
   (use-package nand2tetris
     :init
-    (setq nand2tetris-base-dir "~/Projects/nand2tetris")
+    (setq nand2tetris-base-dir "~/Dropbox/nand2tetris")
     :config
     (when (configuration-layer/package-usedp 'company)
       (push 'company-nand2tetris company-backends-nand2tetris-mode))))

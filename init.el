@@ -555,6 +555,52 @@ layers configuration."
 
   ;; (setq magit-repository-directories "~")
   (setq flycheck-emacs-lisp-load-path 'inherit)
+
+  ;; Multiple cursors bindings!!!
+  (global-set-key (kbd "C-;") 'mc/edit-lines)
+  (global-set-key (kbd "C-:") 'mc/mark-all-like-this)
+
+  ;; (defun my-expand-lines ()
+  ;;   (interactive)
+  ;;   (let ((hippie-expand-try-functions-list
+  ;;          '(try-expand-line)))
+  ;;     (call-interactively 'hippie-expand)))
+
+  ;; (define-key evil-insert-state-map (kbd "C-x C-l") 'my-expand-lines)
+
+  ;; (defadvice he-substitute-string (after he-paredit-fix)
+  ;;   "remove extra paren when expanding line in paredit"
+  ;;   (if (and paredit-mode (equal (substring str -1) ")"))
+  ;;       (progn (backward-delete-char 1) (forward-char))))
+
+  (defun spacemacs/workspace-number ()
+    "Return the number of the current workspace."
+    (let* ((num (eyebrowse--get 'current-slot))
+           (str (if num (int-to-string num))))
+      (cond
+       ((not (dotspacemacs|symbol-value
+              dotspacemacs-mode-line-unicode-symbols)) str)
+       ((equal str "1") "α")
+       ((equal str "2") "β")
+       ((equal str "3") "γ")
+       ((equal str "4") "δ")
+       ((equal str "5") "ε")
+       ((equal str "6") "ζ")
+       ((equal str "7") "η")
+       ((equal str "8") "θ")
+       ((equal str "9") "ι")
+       ((equal str "0") "κ"))))
+
+;;   (evil-define-command evil-edit (file &optional bang)
+;;     "Open FILE.
+;; If no FILE is specified, reload the current buffer from disk."
+;;     :repeat nil
+;;     (interactive "<f><!>")
+;;     (let* ((projectile-require-project-root nil)
+;;            (default-directory (projectile-project-root)))
+;;       (if file
+;;           (find-file file)
+;;         (revert-buffer bang (or bang (not (buffer-modified-p))) t))))
   )
 
 (custom-set-variables

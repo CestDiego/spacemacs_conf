@@ -137,6 +137,7 @@ before layers configuration."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
                          monokai
+                         aurora
                          spacemacs-dark
                          zenburn ;; This works without erc
                          spacemacs-light

@@ -149,7 +149,7 @@ before layers configuration."
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("InputMono"
                                :size 18
-                               :weight normal
+                               :weight bold
                                :width normal
                                :powerline-scale 1.0)
    ;; The leader key
@@ -613,6 +613,5 @@ layers configuration."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Source Code Pro" :foundry "adobe" :slant normal :weight normal :height 120 :width normal))))
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))

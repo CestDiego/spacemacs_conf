@@ -29,7 +29,6 @@ which require an initialization must be listed explicitly in the list.")
 (defvar org-excluded-packages '()
   "List of packages to exclude.")
 
-
 (defun org-cestdiego/init-ob-http()
   (use-package ob-http))
 
@@ -57,7 +56,9 @@ which require an initialization must be listed explicitly in the list.")
      (ditaa . t)
      ))
 
-  (setq org-latex-packages-alist '(("" "color" t) ("" "minted" t) ("" "parskip" t))
+  (setq org-latex-packages-alist '(("" "color" t)
+                                   ("" "minted" t)
+                                   ("" "parskip" t))
         org-latex-pdf-process
         '("pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"
           "bibtex $(basename %b)"

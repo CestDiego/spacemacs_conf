@@ -102,6 +102,37 @@ which require an initialization must be listed explicitly in the list.")
   ;;     (html (format "<kbd>%s</kbd>" (or desc "")))
   ;;     (latex (format "(HOW DO I EXPORT AUDIO TO LATEX? \"%s\")" path))))
   ;; check out https://github.com/capitaomorte/yasnippet/issues/349
+
+  ;;; Org Agenda
+  (setq org-agenda-custom-commands
+        '(("v" tags "Movies")
+          ("e" tags "Eventos")))
+
+  ;;; Capture Templates
+  ;;;; Add idea, mind-onanism, contacts, movies to download das
+  (setq org-capture-templates
+        '(("t" "Todo" entry
+           (file+headline "gtd.org" "Tasks")
+           "* TODO %?\n %i\n")
+          ("i" "For jotting quick ideas" entry
+           (file+headline "gtd.org" "Ideas")
+           "* %?\n %i\n%t\n%A")
+          ;; ("c" "Contacts" entry (file "contacts.org")
+          ;;  "* %(org-contacts-template-name)\n
+          ;;  :PROPERTIES:\n
+          ;;  :EMAIL:
+          ;;  %(org-contacts-template-email)\n  :END:")
+          ("b" "Bookmark links" entry
+           (file+headline "links.org" "Bookmarks")
+           "* %?%^g")
+          ("m" "Movies to see" entry
+           (file "movies.org")
+           "* ToDownload %? \n  :PROPERTIES:\n  :DATE: %t\n  :URL: %c\n  :END:")
+          ("L" "Temp Links from the interwebs" item
+           (file+headline "links.org" "Temporary Links")
+           "%?\nEntered on %U\n \%i\n %a")
+          ("w" "Weight Log" table-line (file+headline "weight.org" "Diario de Peso") " | %? | %t |")
+          ("c" "Lucuma Clock In" table-line (file+headline "lucuma.org" "Bitácora de Asistencia") " | %T |")))
   )
 
 (defun org-cestdiego/init-ob-browser()

@@ -1,4 +1,3 @@
 /#*#
-/dotspacemacs.before_ecb_2.40*
-/npm-debug.log
-/.tern-port
+npm-debug.log
+.tern-port

@@ -85,7 +85,7 @@
      latex
      c-c++
      python
-     ;; ipython-notebook
+     ipython-notebook
      sql
      haskell
      javascript
@@ -136,8 +136,8 @@ before layers configuration."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
-                         monokai
                          aurora
+                         monokai
                          spacemacs-dark
                          zenburn ;; This works without erc
                          spacemacs-light

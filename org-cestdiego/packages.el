@@ -36,6 +36,7 @@ which require an initialization must be listed explicitly in the list.")
   (use-package ob-mongo))
 
 (defun org-cestdiego/post-init-org()
+  (require 'org-protocol)
   (require 'org-capture)
   "Initialize my package"
   (setq org-startup-folded nil)
@@ -146,11 +147,15 @@ which require an initialization must be listed explicitly in the list.")
           ("m" "Movies to see" entry
            (file "movies.org")
            "* ToDownload %? \n  :PROPERTIES:\n  :DATE: %t\n  :URL: %c\n  :END:")
-          ("L" "Temp Links from the interwebs" item
+          ("l" "Temp Links from the interwebs" item
            (file+headline "links.org" "Temporary Links")
-           "%?\nEntered on %U\n \%i\n %a")
+           "%?\nEntered on %U\n \%i\n %a"
+           ;; :immediate-finish t
+           )
           ("w" "Weight Log" table-line (file+headline "weight.org" "Diario de Peso") " | %? | %t |")
-          ("c" "Lucuma Clock In" table-line (file+headline "lucuma.org" "Bitácora de Asistencia") " | %T |")))
+          ("c" "Clock In" table-line (file+headline "clokin.org" "Bitácora de Asistencia") " | %T |")
+          )
+        )
   )
 
 (defun org-cestdiego/init-ob-browser()

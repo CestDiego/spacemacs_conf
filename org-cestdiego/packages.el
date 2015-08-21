@@ -36,6 +36,7 @@ which require an initialization must be listed explicitly in the list.")
   (use-package ob-mongo))
 
 (defun org-cestdiego/post-init-org()
+  (require 'org-capture)
   "Initialize my package"
   (setq org-startup-folded nil)
   (setq org-src-fontify-natively t)
@@ -108,6 +109,22 @@ which require an initialization must be listed explicitly in the list.")
   (setq org-agenda-custom-commands
         '(("v" tags "Movies")
           ("e" tags "Eventos")))
+
+  ;;; Org Capture
+  ;;;; Thank you random guy from StackOverflow
+  ;;;; http://stackoverflow.com/questions/23517372/hook-or-advice-when-aborting-org-capture-before-template-selection
+
+  (defadvice org-capture
+      (after make-full-window-frame activate)
+    "Advise capture-finalize to close the frame"
+    (if (equal "emacs-capture" (frame-parameter nil 'name))
+        (delete-other-windows)))
+
+  (defadvice org-capture-finalize
+      (after delete-capture-frame activate)
+    "Advise capture-finalize to close the frame"
+    (if (equal "emacs-capture" (frame-parameter nil 'name))
+        (delete-frame)))
 
   ;;; Capture Templates
   ;;;; Add idea, mind-onanism, contacts, movies to download das

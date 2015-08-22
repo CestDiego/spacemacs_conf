@@ -13,8 +13,18 @@
 (defvar org-cestdiego-post-extensions
   '(
     ox-koma-letter
+    org-protocol-github-lines
     )
   "List of all extensions to load after the packages.")
+
+(defun org-cestdiego/init-org-protocol-github-lines ()
+  (use-package org-protocol-github-lines
+    :config
+    (setq org-protocol-github-project-directories
+          '("~/Projects/"))
+    (setq org-protocol-github-projects
+          '(("syl20bnr/spacemacs" . "~/.emacs.d")))
+    ))
 
 
 (defun org-cestdiego/init-ox-koma-letter ()

@@ -253,8 +253,6 @@ before layers configuration."
 
   (global-prettify-symbols-mode)
 
-  (setq source-directory "~/Projects/emacs")
-
   ;; Only Usedul with `SPC t ~'
   (setq vi-tilde-fringe-bitmap-array
         [#b00000000

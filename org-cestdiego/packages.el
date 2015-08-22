@@ -113,7 +113,11 @@ which require an initialization must be listed explicitly in the list.")
   ;;; Org Agenda
   (setq org-agenda-custom-commands
         '(("v" tags "Movies")
-          ("e" tags "Eventos")))
+          ("l" tags "links"
+           ((org-agenda-overriding-header "Links that I have to Read: ")
+            (org-agenda-skip-function
+             '(org-agenda-skip-entry-if 'todo '("READING" "READ")))))
+          ("e" tags-todo "Eventos")))
 
   ;;; Org Capture
   ;;;; Thank you random guy from StackOverflow

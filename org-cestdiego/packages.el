@@ -23,6 +23,7 @@
     mustache
     ht
     (org-protocol :location local)
+    (org-capture :location local)
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
@@ -39,8 +40,61 @@ which require an initialization must be listed explicitly in the list.")
 (defun org-cestdiego/init-org-protocol ()
   (use-package org-protocol))
 
+(defun org-cestdiego/init-org-capture ()
+  (use-package org-capture
+    :commands org-capture
+    :defer t
+    :init
+    (add-hook 'org-capture-mode-hook 'evil-insert-state)
+    :config
+    ;;; Org Capture
+    ;;;; Thank you random guy from StackOverflow
+    ;;;; http://goo.gl/OOWIVp
+
+    (defadvice org-capture
+        (after make-full-window-frame activate)
+      "Advise capture-finalize to close the frame"
+      (if (equal "emacs-capture" (frame-parameter nil 'name))
+          (delete-other-windows)))
+
+    (defadvice org-capture-finalize
+        (after delete-capture-frame activate)
+      "Advise capture-finalize to close the frame"
+      (if (equal "emacs-capture" (frame-parameter nil 'name))
+          (delete-frame)))
+
+    ;;; Capture Templates
+    ;;;; Add idea, mind-onanism, contacts, movies to download das
+    (setq org-capture-templates
+          '(("t" "Todo" entry
+             (file+headline "gtd.org" "Tasks")
+             "* TODO %?\n %i\n")
+            ("i" "For jotting quick ideas" entry
+             (file+headline "gtd.org" "Ideas")
+             "* %?\n %i\n%t\n%A")
+            ;; ("c" "Contacts" entry (file "contacts.org")
+            ;;  "* %(org-contacts-template-name)\n
+            ;;  :PROPERTIES:\n
+            ;;  :EMAIL:
+            ;;  %(org-contacts-template-email)\n  :END:")
+            ("b" "Bookmark links" entry
+             (file+headline "links.org" "Bookmarks")
+             "* %?%^g")
+            ("m" "Movies to see" entry
+             (file "movies.org")
+             "* ToDownload %? \n  :PROPERTIES:\n  :DATE: %t\n  :URL: %c\n  :END:")
+            ("l" "Temp Links from the interwebs" entry
+             (file+headline "~/Dropbox/Org-Notes/links.org" "Links")
+             "* TO-READ %c %^g\n Entered on: %U\n %?\n%i\n"
+             :empy-lines 1)
+            ("w" "Weight Log" table-line (file+headline "weight.org" "Diario de Peso") " | %? | %t |")
+            ("c" "Clock In" table-line (file+headline "clokin.org" "Bitácora de Asistencia") " | %T |")
+            )
+          )
+    ))
+
+
 (defun org-cestdiego/post-init-org()
-  (require 'org-capture)
   "Initialize my package"
   (setq org-startup-folded nil)
   (setq org-src-fontify-natively t)
@@ -119,51 +173,6 @@ which require an initialization must be listed explicitly in the list.")
              '(org-agenda-skip-entry-if 'todo '("READING" "READ")))))
           ("e" tags-todo "Eventos")))
 
-  ;;; Org Capture
-  ;;;; Thank you random guy from StackOverflow
-  ;;;; http://stackoverflow.com/questions/23517372/hook-or-advice-when-aborting-org-capture-before-template-selection
-
-  (defadvice org-capture
-      (after make-full-window-frame activate)
-    "Advise capture-finalize to close the frame"
-    (if (equal "emacs-capture" (frame-parameter nil 'name))
-        (delete-other-windows)))
-
-  (defadvice org-capture-finalize
-      (after delete-capture-frame activate)
-    "Advise capture-finalize to close the frame"
-    (if (equal "emacs-capture" (frame-parameter nil 'name))
-        (delete-frame)))
-
-  ;;; Capture Templates
-  ;;;; Add idea, mind-onanism, contacts, movies to download das
-  (setq org-capture-templates
-        '(("t" "Todo" entry
-           (file+headline "gtd.org" "Tasks")
-           "* TODO %?\n %i\n")
-          ("i" "For jotting quick ideas" entry
-           (file+headline "gtd.org" "Ideas")
-           "* %?\n %i\n%t\n%A")
-          ;; ("c" "Contacts" entry (file "contacts.org")
-          ;;  "* %(org-contacts-template-name)\n
-          ;;  :PROPERTIES:\n
-          ;;  :EMAIL:
-          ;;  %(org-contacts-template-email)\n  :END:")
-          ("b" "Bookmark links" entry
-           (file+headline "links.org" "Bookmarks")
-           "* %?%^g")
-          ("m" "Movies to see" entry
-           (file "movies.org")
-           "* ToDownload %? \n  :PROPERTIES:\n  :DATE: %t\n  :URL: %c\n  :END:")
-          ("l" "Temp Links from the interwebs" item
-           (file+headline "links.org" "Temporary Links")
-           "%?\nEntered on %U\n \%i\n %a"
-           ;; :immediate-finish t
-           )
-          ("w" "Weight Log" table-line (file+headline "weight.org" "Diario de Peso") " | %? | %t |")
-          ("c" "Clock In" table-line (file+headline "clokin.org" "Bitácora de Asistencia") " | %T |")
-          )
-        )
   )
 
 (defun org-cestdiego/init-ob-browser()

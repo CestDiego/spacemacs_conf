@@ -22,6 +22,7 @@
     ox-cv
     mustache
     ht
+    (org-protocol :location local)
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
@@ -35,8 +36,10 @@ which require an initialization must be listed explicitly in the list.")
 (defun org-cestdiego/init-ob-mongo()
   (use-package ob-mongo))
 
+(defun org-cestdiego/init-org-protocol ()
+  (use-package org-protocol))
+
 (defun org-cestdiego/post-init-org()
-  (require 'org-protocol)
   (require 'org-capture)
   "Initialize my package"
   (setq org-startup-folded nil)

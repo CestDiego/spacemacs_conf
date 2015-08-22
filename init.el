@@ -100,7 +100,7 @@
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dostspacemacs/config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(visual-fill-column)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(evil-org)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -278,6 +278,8 @@ layers configuration."
   ;; decent navigation like a good citizen
   (global-set-key (kbd "<C-s-tab>") 'persp-next)
   (global-set-key (kbd "<M-s-tab>") 'persp-prev)
+
+  (add-hook 'visual-line-mode-hook 'visual-fill-column-mode)
 
   ;; Use helm-projectile anywhere
   ;; (setq projectile-require-project-root nil)

@@ -54,7 +54,7 @@ which require an initialization must be listed explicitly in the list.")
 
     (defadvice org-capture
         (after make-full-window-frame activate)
-      "Advise capture-finalize to close the frame"
+      "Advise capture to be the sole window when in a popup frame"
       (if (equal "emacs-capture" (frame-parameter nil 'name))
           (delete-other-windows)))
 
@@ -68,7 +68,7 @@ which require an initialization must be listed explicitly in the list.")
     ;;;; Add idea, mind-onanism, contacts, movies to download das
     (setq org-capture-templates
           '(("t" "Todo" entry
-             (file+headline "gtd.org" "Tasks")
+             (file+headline "~/Dropbox/Org-Notes/main.org" "Tasks")
              "* TODO %?\n %i\n")
             ("i" "For jotting quick ideas" entry
              (file+headline "gtd.org" "Ideas")

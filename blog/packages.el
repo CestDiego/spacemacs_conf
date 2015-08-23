@@ -17,6 +17,7 @@
 (if org-page-use-melpa-version
       (push 'org-page blog-packages)
   ;; If we are using the extension, install dependencies
+  (push '(org-page :location local) blog-packages)
   (push 'mustache blog-packages)
   (push 'ht blog-packages))
 
@@ -34,17 +35,13 @@
       "opP" '(lambda() (interactive)
                (let ((org-html-htmlize-output-type 'css))
                  (op/do-publication t t org-page-built-directory))))
-
     (setq org-html-doctype "html5")
     (setq org-html-html5-fancy t)
-
     (defface strike-through
-     '((t :strike-through t))
+      '((t :strike-through t))
       "Basic strike-through face."
       :group 'basic-faces)
     (push '("+" ,(if (featurep 'xemacs) 'org-table strike-through)) org-emphasis-alist)
-
-    :config
     (unless (file-exists-p org-page-built-directory)
       (make-directory org-page-built-directory))))
 

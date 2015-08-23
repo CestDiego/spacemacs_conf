@@ -224,6 +224,7 @@ before layers configuration."
   ;; (set-fringe-mode '(0 . 0))
   ;; (set-face-attribute 'fringe nil :background "#1f1f1f")
 
+  (setq source-directory "~/Projects/emacs")
 
   (setq helm-ag-command-option " --search-zip ")
   (setq-default evil-escape-key-sequence "nj")

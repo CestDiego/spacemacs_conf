@@ -24,6 +24,7 @@
     ht
     (org-protocol :location local)
     (org-capture :location local)
+    (org-agenda :location local)
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
@@ -91,6 +92,29 @@ which require an initialization must be listed explicitly in the list.")
             ("c" "Clock In" table-line (file+headline "clokin.org" "Bitácora de Asistencia") " | %T |")
             )
           )
+    ))
+
+(defun org-cestdiego/init-org-agenda ()
+  (use-package org-agenda
+    :commands org-agenda
+    :defer t
+    :config
+    ;; This function changes to org-agenda
+    (defadvice org-switch-to-buffer-other-window (after make-full-window-frame activate)
+      "Advise org-agenda to be the sole window when in a popup frame"
+      (if (equal "emacs-capture" (frame-parameter nil 'name))
+          (delete-other-windows)))
+
+    ;; (org-agenda)
+
+    (setq org-agenda-custom-commands
+          (append '(("v" tags "Movies")
+            ("l" tags "links"
+             ((org-agenda-overriding-header "Links that I have to Read: ")
+              (org-agenda-skip-function
+               '(org-agenda-skip-entry-if 'todo '("READING" "READ")))))
+            ("e" tags-todo "Eventos"))
+          org-agenda-custom-commands))
     ))
 
 
@@ -163,15 +187,6 @@ which require an initialization must be listed explicitly in the list.")
   ;;     (html (format "<kbd>%s</kbd>" (or desc "")))
   ;;     (latex (format "(HOW DO I EXPORT AUDIO TO LATEX? \"%s\")" path))))
   ;; check out https://github.com/capitaomorte/yasnippet/issues/349
-
-  ;;; Org Agenda
-  (setq org-agenda-custom-commands
-        '(("v" tags "Movies")
-          ("l" tags "links"
-           ((org-agenda-overriding-header "Links that I have to Read: ")
-            (org-agenda-skip-function
-             '(org-agenda-skip-entry-if 'todo '("READING" "READ")))))
-          ("e" tags-todo "Eventos")))
 
   )
 

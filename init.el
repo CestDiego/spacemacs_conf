@@ -303,6 +303,29 @@ layers configuration."
     (when (not (string= (getenv "BACKGROUND") "black"))
       (message (shell-command-to-string "change-theme"))))
 
+  (defun spacemacs//responsive-modeline ()
+    (let ((current-window (selected-window))
+          (live-windows (reverse (window-list-1 (selected-window)
+                                       'not-minibuffers 'visible))))
+      (dolist (window live-windows)
+        (select-window window)
+        (let* ((width (window-total-width))
+               (enough-space (> width 87)))
+          (setq-local spacemacs-mode-line-right
+                      `((battery :when active)
+                        selection-info
+                        ((,(when enough-space
+                             'buffer-encoding-abbrev)
+                          point-position
+                          line-column)
+                         :separator " | ")
+                        ((global-mode new-version)
+                         :when active)
+                        buffer-position
+                        ,(when enough-space 'hud)))))))
+
+  (add-hook 'window-configuration-change-hook 'spacemacs//responsive-modeline)
+
   ;; Use helm-projectile anywhere
   ;; (setq projectile-require-project-root nil)
 

@@ -354,6 +354,12 @@ layers configuration."
 
   (setq js2-strict-missing-semi-warning nil)
 
+  (setq tab-width 2)
+  (setq js-indent-level 2)
+  (setq js2-basic-offset 2)
+  (setq js-switch-indent-offset 2)
+  (setq js2-indent-switch-body 2)
+
   (when (configuration-layer/layer-usedp 'prodigy)
     (prodigy-define-service
       :name "HackSpace"

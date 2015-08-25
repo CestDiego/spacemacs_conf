@@ -36,9 +36,9 @@
           git-magit-status-fullscreen t)
      github
      prodigy
-     ;; (colors :variables
-     ;;         colors-enable-nyan-cat-progress-bar `,(display-graphic-p)
-     ;;         colors-enable-rainbow-identifiers nil)
+     (colors :variables
+             colors-enable-nyan-cat-progress-bar `,(display-graphic-p)
+             colors-enable-rainbow-identifiers nil)
 
      ;; (perspectives :variables
      ;;               perspective-enable-persp-projectile t)
@@ -349,7 +349,9 @@ layers configuration."
   (setq zone-timer (run-with-idle-timer 6000 t 'zone))
   (setq zone-programs [zone-pgm-rotate-LR-lockstep])
 
-  ;; (nyan-mode -1)
+  (when (configuration-layer/package-usedp 'nyan-mode)
+    (nyan-mode -1))
+
   (setq js2-strict-missing-semi-warning nil)
 
   (when (configuration-layer/layer-usedp 'prodigy)

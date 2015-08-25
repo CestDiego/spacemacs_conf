@@ -48,15 +48,20 @@ which require an initialization must be listed explicitly in the list.")
     :init
     (add-hook 'org-capture-mode-hook 'evil-insert-state)
     :config
-    ;;; Org Capture
+    (defadvice org-switch-to-buffer-other-window
+        (after make-full-capture-window-frame activate)
+      "Agenda to be the sole window when it is in a popup frame"
+      (when (equal "emacs-capture" (frame-parameter nil 'name))
+        (delete-other-windows)
+        (hidden-mode-line-mode)))
+
     ;;;; Thank you random guy from StackOverflow
     ;;;; http://goo.gl/OOWIVp
-
     (defadvice org-capture
         (after make-full-window-frame activate)
       "Advise capture to be the sole window when in a popup frame"
-      (if (equal "emacs-capture" (frame-parameter nil 'name))
-          (delete-other-windows)))
+      (when (equal "emacs-capture" (frame-parameter nil 'name))
+        (delete-other-windows)))
 
     (defadvice org-capture-finalize
         (after delete-capture-frame activate)
@@ -69,7 +74,7 @@ which require an initialization must be listed explicitly in the list.")
     (setq org-capture-templates
           '(("t" "Todo" entry
              (file+headline "~/Dropbox/Org-Notes/main.org" "Tasks")
-             "* TODO %?\n %i\n")
+             "* TODO %? %^g \n %i\n")
             ("i" "For jotting quick ideas" entry
              (file+headline "gtd.org" "Ideas")
              "* %?\n %i\n%t\n%A")
@@ -99,12 +104,16 @@ which require an initialization must be listed explicitly in the list.")
     :commands org-agenda
     :defer t
     :config
-    ;; This function changes to org-agenda
-    (defadvice org-switch-to-buffer-other-window (after make-full-window-frame activate)
-      "Advise org-agenda to be the sole window when in a popup frame"
-      (if (equal "emacs-capture" (frame-parameter nil 'name))
-          (delete-other-windows)))
+    (defadvice org-switch-to-buffer-other-window (after make-full-agenda-window-frame activate)
+      "Advice this function inside the agenda to be the sole window when in a popup frame"
+      (when (equal "emacs-agenda" (frame-parameter nil 'name))
+        (delete-other-windows)
+        (hidden-mode-line-mode)))
 
+    (defadvice org-agenda-quit (after make-full-window-frame activate)
+      "Advise org-agenda to be the sole window when in a popup frame"
+      (if (equal "emacs-agenda" (frame-parameter nil 'name))
+          (delete-frame)))
     ;; (org-agenda)
 
     (setq org-agenda-custom-commands

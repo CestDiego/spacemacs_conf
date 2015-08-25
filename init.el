@@ -138,8 +138,8 @@ before layers configuration."
    dotspacemacs-themes '(
                          aurora
                          monokai
-                         spacemacs-dark
                          zenburn ;; This works without erc
+                         spacemacs-dark
                          spacemacs-light
                          leuven  ;; This works without erc
                          )
@@ -148,7 +148,7 @@ before layers configuration."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("InputMono"
-                               :size 18
+                               :size 17
                                :weight bold
                                :width normal
                                :powerline-scale 1.0)

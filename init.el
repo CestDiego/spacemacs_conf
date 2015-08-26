@@ -282,6 +282,12 @@ layers configuration."
 
   (add-hook 'visual-line-mode-hook 'visual-fill-column-mode)
 
+  ;; (defadvice helm-do-ag (around add-commands first (command-options) activate)
+  ;;   "Specify which command options you want ag to use"
+  ;;   (interactive "sSpecify ag-commands to use: ")
+  ;;   (let ((helm-ag-command-option command-options))
+  ;;     ad-do-it))
+
   (defadvice spacemacs/post-theme-init (after set-colors-as-env-variables activate)
     "Change Window Manager Theme as well! :O"
     (setenv "BACKGROUND"     (cdr (aref ansi-color-map 40)))

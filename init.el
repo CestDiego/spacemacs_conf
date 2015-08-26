@@ -248,9 +248,9 @@ before layers configuration."
   (setq use-package-verbose t)
 
   (add-hook 'emacs-lisp-mode-hook
-            '(lambda ()
-               (push '("add-hook" . ?) prettify-symbols-alist)
-               (push '("defun" . ?𝆑) prettify-symbols-alist)))
+     '(lambda ()
+        (push '("add-hook" . ?) prettify-symbols-alist)
+        (push '("defun" . ?𝆑) prettify-symbols-alist)))
 
   (global-prettify-symbols-mode)
 
@@ -306,7 +306,7 @@ layers configuration."
   (defun spacemacs//responsive-modeline ()
     (let ((current-window (selected-window))
           (live-windows (reverse (window-list-1 (selected-window)
-                                       'not-minibuffers 'visible))))
+                                                'not-minibuffers 'visible))))
       (dolist (window live-windows)
         (select-window window)
         (let* ((width (window-total-width))
@@ -464,28 +464,28 @@ layers configuration."
     ;; IRC
     (erc-track-mode -1)
     (add-hook 'erc-insert-pre-hook
-              (defun bb/erc-foolish-filter (msg)
-                "Ignores messages matching `erc-foolish-content'."
-                (when (erc-list-match erc-foolish-content msg)
-                  (setq erc-insert-this nil))))
+       (defun bb/erc-foolish-filter (msg)
+         "Ignores messages matching `erc-foolish-content'."
+         (when (erc-list-match erc-foolish-content msg)
+           (setq erc-insert-this nil))))
     (add-hook 'erc-insert-modify-hook
-              (defun bb/erc-github-filter ()
-                "Shortens messages from gitter."
-                (interactive)
-                (when (and (< 18 (- (point-max) (point-min)))
-                           (string= (buffer-substring (point-min)
-                                                      (+ (point-min) 18))
-                                    "<gitter> [Github] "))
-                  (dolist (regexp '(" \\[Github\\]"
-                                    " \\(?:in\\|to\\) [^ /]+/[^ /:]+"
-                                    "https?://github\\.com/[^/]+/[^/]+/[^/]+/"
-                                    "#issuecomment-[[:digit:]]+"))
-                    (goto-char (point-min))
-                    (when (re-search-forward regexp (point-max) t)
-                      (replace-match "")))
-                  (goto-char (point-min))
-                  (when (re-search-forward "[[:digit:]]+$" (point-max) t)
-                    (replace-match (format "(#%s)" (match-string 0)))))))
+       (defun bb/erc-github-filter ()
+         "Shortens messages from gitter."
+         (interactive)
+         (when (and (< 18 (- (point-max) (point-min)))
+                    (string= (buffer-substring (point-min)
+                                               (+ (point-min) 18))
+                             "<gitter> [Github] "))
+           (dolist (regexp '(" \\[Github\\]"
+                             " \\(?:in\\|to\\) [^ /]+/[^ /:]+"
+                             "https?://github\\.com/[^/]+/[^/]+/[^/]+/"
+                             "#issuecomment-[[:digit:]]+"))
+             (goto-char (point-min))
+             (when (re-search-forward regexp (point-max) t)
+               (replace-match "")))
+           (goto-char (point-min))
+           (when (re-search-forward "[[:digit:]]+$" (point-max) t)
+             (replace-match (format "(#%s)" (match-string 0)))))))
     (setq erc-nick "cestdiego"
           erc-user-full-name "Diego Berrocal"
           erc-fill-function 'erc-fill-static
@@ -535,13 +535,13 @@ layers configuration."
   ;; Org Page!!!
 
   (global-set-key (kbd "<C-s-mouse-4>") '(lambda ()
-                                         (interactive)
-                                         (spacemacs/zoom-frm-in)
-                                         (spacemacs//zoom-frm-powerline-reset)))
+                                           (interactive)
+                                           (spacemacs/zoom-frm-in)
+                                           (spacemacs//zoom-frm-powerline-reset)))
   (global-set-key (kbd "<C-s-mouse-5>") '(lambda ()
-                                         (interactive)
-                                         (spacemacs/zoom-frm-out)
-                                         (spacemacs//zoom-frm-powerline-reset)))
+                                           (interactive)
+                                           (spacemacs/zoom-frm-out)
+                                           (spacemacs//zoom-frm-powerline-reset)))
   (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
   (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
 
@@ -576,15 +576,15 @@ layers configuration."
                               ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
                               :modes (web-mode)))
   (add-hook 'web-mode-hook
-            (lambda ()
-              (when (equal web-mode-content-type "jsx")
-                ;; enable flycheck
-                (setq web-mode-indent-style 2
-                      web-mode-markup-indent-offset 2
-                      web-mode-css-indent-offset 2
-                      web-mode-code-indent-offset 2)
-                (flycheck-select-checker 'jsxhint-checker)
-                (flycheck-mode))))
+     (lambda ()
+       (when (equal web-mode-content-type "jsx")
+         ;; enable flycheck
+         (setq web-mode-indent-style 2
+               web-mode-markup-indent-offset 2
+               web-mode-css-indent-offset 2
+               web-mode-code-indent-offset 2)
+         (flycheck-select-checker 'jsxhint-checker)
+         (flycheck-mode))))
 
   (defadvice web-mode-highlight-part (around tweak-jsx activate)
     (if (equal web-mode-content-type "jsx")
@@ -644,16 +644,16 @@ layers configuration."
        ((equal str "9") "ι")
        ((equal str "0") "κ"))))
 
-;;   (evil-define-command evil-edit (file &optional bang)
-;;     "Open FILE.
-;; If no FILE is specified, reload the current buffer from disk."
-;;     :repeat nil
-;;     (interactive "<f><!>")
-;;     (let* ((projectile-require-project-root nil)
-;;            (default-directory (projectile-project-root)))
-;;       (if file
-;;           (find-file file)
-;;         (revert-buffer bang (or bang (not (buffer-modified-p))) t))))
+  ;;   (evil-define-command evil-edit (file &optional bang)
+  ;;     "Open FILE.
+  ;; If no FILE is specified, reload the current buffer from disk."
+  ;;     :repeat nil
+  ;;     (interactive "<f><!>")
+  ;;     (let* ((projectile-require-project-root nil)
+  ;;            (default-directory (projectile-project-root)))
+  ;;       (if file
+  ;;           (find-file file)
+  ;;         (revert-buffer bang (or bang (not (buffer-modified-p))) t))))
   )
 
 (custom-set-variables
@@ -666,18 +666,15 @@ layers configuration."
  '(ahs-idle-interval 0.25)
  '(ahs-idle-timer 0 t)
  '(ahs-inhibit-face-list nil)
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
  '(compilation-message-face (quote default))
- '(magit-diff-use-overlays nil)
- '(magit-use-overlays nil)
  '(org-agenda-files
    (quote
     ("~/Dropbox/Org-Notes/main.org" "~/Dropbox/Org-Notes/links.org")))
  '(ring-bell-function (quote ignore) t)
  '(safe-local-variable-values
    (quote
-    ((firestarter let
+    ((set-input-method "latin-1-prefix" t)
+     (firestarter let
                   ((org-html-htmlize-output-type
                     (quote css)))
                   (op/do-publication t t org-page-built-directory))

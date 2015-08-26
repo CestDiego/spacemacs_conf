@@ -2,7 +2,18 @@
   '(
     auto-dim-other-buffers
     hexrgb
+    (spacemacs-theme :location
+                     (recipe :fetcher github
+                             :repo "CestDiego/spacemacs-theme"))
     ))
+
+(defun appearance/init-spacemacs-theme ()
+  (use-package spacemacs-theme
+    :defer t
+    :init
+    (progn
+      (setq spacemacs-theme-comment-bg t)
+      (setq spacemacs-theme-org-height t))))
 
 ;; (defun appearance/init-auto-dim-other-buffers ()
 ;;   (use-package auto-dim-other-buffers

@@ -54,7 +54,8 @@
      html
      restclient
      ;; Org
-     org
+     (org :variables
+          org-mapping-style 'worf)
      ;; Miscellaneous
      emoji
      ;; (wakatime :variables

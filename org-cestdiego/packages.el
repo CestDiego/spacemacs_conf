@@ -118,12 +118,12 @@ which require an initialization must be listed explicitly in the list.")
 
     (setq org-agenda-custom-commands
           (append '(("v" tags "Movies")
-            ("l" tags "links"
-             ((org-agenda-overriding-header "Links that I have to Read: ")
-              (org-agenda-skip-function
-               '(org-agenda-skip-entry-if 'todo '("READING" "READ")))))
-            ("e" tags-todo "Eventos"))
-          org-agenda-custom-commands))
+                    ("l" tags "links"
+                     ((org-agenda-overriding-header "Links that I have to Read: ")
+                      (org-agenda-skip-function
+                       '(org-agenda-skip-entry-if 'todo '("READING" "READ")))))
+                    ("e" tags-todo "Eventos"))
+                  org-agenda-custom-commands))
     ))
 
 
@@ -204,8 +204,7 @@ which require an initialization must be listed explicitly in the list.")
     :init
     (progn
       ;; (add-to-list 'exec-path "/home/io/.installed/phantomjs/bin")
-      (setenv "PATH" (mapconcat 'identity exec-path ":"))
-      )))
+      (setenv "PATH" (mapconcat 'identity exec-path ":")))))
 
 (defun org-cestdiego/init-org-gcal ()
   (use-package org-gcal

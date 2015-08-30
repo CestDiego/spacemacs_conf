@@ -422,7 +422,7 @@ layers configuration."
 
   (when (configuration-layer/layer-usedp 'shell)
     (evil-define-key 'normal term-raw-map
-      "p" 'term-paste)
+      "p" 'term-paste) ;; why paste-microstate doesn't work?
     (evil-define-key 'insert term-raw-map (kbd "C-k") 'term-send-up)
     (evil-define-key 'insert term-raw-map (kbd "C-j") 'term-send-down)
 

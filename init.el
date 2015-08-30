@@ -426,6 +426,8 @@ layers configuration."
     (evil-define-key 'insert term-raw-map (kbd "C-k") 'term-send-up)
     (evil-define-key 'insert term-raw-map (kbd "C-j") 'term-send-down)
 
+    (evil-define-key 'insert term-raw-map (kbd "<C-backspace>") 'term-send-raw-meta)
+
     (evil-define-key 'insert eshell-mode-map (kbd "C-k") 'eshell-previous-input)
     (evil-define-key 'insert eshell-mode-map (kbd "C-j") 'eshell-next-input))
 

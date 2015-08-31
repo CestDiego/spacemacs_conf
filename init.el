@@ -249,7 +249,7 @@ before layers configuration."
   (setq use-package-verbose t)
 
   (add-hook 'emacs-lisp-mode-hook
-     '(lambda ()
+     (lambda ()
         (push '("add-hook" . ?) prettify-symbols-alist)
         (push '("defun" . ?𝆑) prettify-symbols-alist)))
 
@@ -543,11 +543,11 @@ layers configuration."
   ;;   (set-window-margins nil 0 0) )
   ;; Org Page!!!
 
-  (global-set-key (kbd "<C-s-mouse-4>") '(lambda ()
+  (global-set-key (kbd "<C-s-mouse-4>") (lambda ()
                                            (interactive)
                                            (spacemacs/zoom-frm-in)
                                            (spacemacs//zoom-frm-powerline-reset)))
-  (global-set-key (kbd "<C-s-mouse-5>") '(lambda ()
+  (global-set-key (kbd "<C-s-mouse-5>") (lambda ()
                                            (interactive)
                                            (spacemacs/zoom-frm-out)
                                            (spacemacs//zoom-frm-powerline-reset)))

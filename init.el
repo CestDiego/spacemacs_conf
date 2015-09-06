@@ -40,9 +40,9 @@
              colors-enable-nyan-cat-progress-bar `,(display-graphic-p)
              colors-enable-rainbow-identifiers nil)
 
-     ;; (perspectives :variables
-     ;;               perspective-enable-persp-projectile t)
-     eyebrowse
+     (perspectives :variables
+                   perspectives-display-help t)
+     ;; eyebrowse
      chrome
      (erc :variables
           erc-enable-sasl-auth t)

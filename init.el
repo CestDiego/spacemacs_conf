@@ -267,20 +267,17 @@ before layers configuration."
          #b00000000])
   )
 
-(defun dotspacemacs/config ()
+(defun dotspacemacs/user-config ()
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
   (setq spacemacs-mode-line-minor-modesp nil)
+  ;; (setq dotspacemacs-mode-line-unicode-symbols t)
   (setq spacemacs/mode-line-battery-time 1)
 
   (global-vi-tilde-fringe-mode -1)
   ;; (setq git-gutter-fr:side 'left-fringe)
   ;;; SANE DEFAULTS!!
-  ;; decent navigation like a good citizen
-  (global-set-key (kbd "<C-s-tab>") 'persp-next)
-  (global-set-key (kbd "<M-s-tab>") 'persp-prev)
-
   (add-hook 'visual-line-mode-hook 'visual-fill-column-mode)
 
   ;; (defadvice helm-do-ag (around add-commands first (command-options) activate)
@@ -288,9 +285,8 @@ layers configuration."
   ;;   (interactive "sSpecify ag-commands to use: ")
   ;;   (let ((helm-ag-command-option command-options))
   ;;     ad-do-it))
-
-  (defadvice spacemacs/post-theme-init (after set-colors-as-env-variables activate)
-    "Change Window Manager Theme as well! :O"
+  (defun spacemacs/set-color-env-vars ()
+    (interactive)
     (setenv "BACKGROUND"     (cdr (aref ansi-color-map 40)))
     (setenv "FOREGROUND"     (cdr (aref ansi-color-map 37)))
     (setenv "LIGHT_GREY"     (cdr (aref ansi-color-map 30)))
@@ -306,7 +302,11 @@ layers configuration."
     (setenv "DARK_BLUE"      (cdr (aref ansi-color-map 44)))
     (setenv "DARK_MAGENTA"   (cdr (aref ansi-color-map 45)))
     (setenv "DARK_CYAN"      (cdr (aref ansi-color-map 46)))
-    (setenv "DARK_GREY"      (cdr (aref ansi-color-map 47)))
+    (setenv "DARK_GREY"      (cdr (aref ansi-color-map 47))))
+
+  (defadvice spacemacs/post-theme-init (after set-colors-as-env-variables activate)
+    "Change Window Manager Theme as well! :O"
+    (spacemacs/set-color-env-vars)
     (when (not (string= (getenv "BACKGROUND") "black"))
       (message (shell-command-to-string "change-theme"))))
 
@@ -367,9 +367,9 @@ layers configuration."
               (find-file "~/dotbspwm/.config/bspwm/bspwmrc")
               (split-window-below-and-focus)
               (find-file "~/dotbspwm/.config/bspwm/autostart"))))
-    (evil-leader/set-key
-      "Lob" 'custom-persp/bbspwm))
-
+    ;; (evil-leader/set-key
+    ;;   "Lob" 'custom-persp/bbspwm))
+  )
   (setq browse-url-browser-function 'browse-url-generic
         engine/browser-function 'browse-url-generic
         browse-url-generic-program "chromium")
@@ -437,37 +437,42 @@ layers configuration."
   (evil-define-key 'insert cider-repl-mode-map (kbd "C-s") 'cider-repl-next-matching-input)
   (add-to-list 'helm-completing-read-handlers-alist '(pony-manage . ido))
 
-  (when (configuration-layer/layer-usedp 'eyebrowse)
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;;;;;;; OVERRIDING GLOBALLY STUFF ;;;;;;;;
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    (defvar custom-keys-mode-map (make-keymap) "custom-keys-mode keymap.")
-    (define-minor-mode custom-keys-mode
-      "A minor mode so that my key settings override annoying major modes."
-      t " my-keys" 'custom-keys-mode-map)
-    (custom-keys-mode 1)
+  (defvar custom-keys-mode-map (make-keymap) "custom-keys-mode keymap.")
+  (define-minor-mode custom-keys-mode
+    "A minor mode so that my key settings override annoying major modes."
+    t " my-keys" 'custom-keys-mode-map)
+  (custom-keys-mode 1)
 
-    (defun my-minibuffer-setup-hook ()
-      (custom-keys-mode 0))
-    (add-hook 'minibuffer-setup-hook 'my-minibuffer-setup-hook)
+  (defun my-minibuffer-setup-hook ()
+    (custom-keys-mode 0))
+  (add-hook 'minibuffer-setup-hook 'my-minibuffer-setup-hook)
 
-    (defadvice load (after give-my-keybindings-priority)
-      "Try to ensure that my keybindings always have priority."
-      (if (not (eq (car (car minor-mode-map-alist)) 'custom-keys-mode))
-          (let ((mykeys (assq 'custom-keys-mode minor-mode-map-alist)))
-            (assq-delete-all 'custom-keys-mode minor-mode-map-alist)
-            (add-to-list 'minor-mode-map-alist mykeys))))
-    (ad-activate 'load)
-    (define-key custom-keys-mode-map (kbd "<C-tab>") 'eyebrowse-next-window-config)
-    (define-key custom-keys-mode-map (kbd "<C-iso-lefttab>") 'eyebrowse-prev-window-config)
-    (define-key custom-keys-mode-map (kbd "C-\"") 'org-cycle-agenda-files)
-    (define-key custom-keys-mode-map (kbd "C-'") 'spacemacs/default-pop-shell)
+  (defadvice load (after give-my-keybindings-priority)
+    "Try to ensure that my keybindings always have priority."
+    (if (not (eq (car (car minor-mode-map-alist)) 'custom-keys-mode))
+        (let ((mykeys (assq 'custom-keys-mode minor-mode-map-alist)))
+          (assq-delete-all 'custom-keys-mode minor-mode-map-alist)
+          (add-to-list 'minor-mode-map-alist mykeys))))
 
+  (ad-activate 'load)
+
+  (define-key custom-keys-mode-map (kbd "C-\"") 'org-cycle-agenda-files)
+  (define-key custom-keys-mode-map (kbd "C-'") 'spacemacs/default-pop-shell)
+
+  (when (configuration-layer/package-usedp 'eyebrowse)
+    (define-key custom-keys-mode-map (kbd "<C-s-tab>") 'eyebrowse-next-window-config)
+    (define-key custom-keys-mode-map (kbd "<C-s-iso-lefttab>") 'eyebrowse-prev-window-config))
+
+  (when (configuration-layer/layer-usedp 'perspectives)
+    (define-key custom-keys-mode-map (kbd "<C-tab>") 'persp-next)
+    (define-key custom-keys-mode-map (kbd "<C-iso-lefttab>") 'persp-prev))
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;;;;;;; FINISH LE GLOBAL OVERRIDE ;;;;;;;;
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    )
 
   (when (configuration-layer/layer-usedp 'erc)
     ;; IRC
@@ -544,13 +549,13 @@ layers configuration."
   ;; Org Page!!!
 
   (global-set-key (kbd "<C-s-mouse-4>") (lambda ()
-                                           (interactive)
-                                           (spacemacs/zoom-frm-in)
-                                           (spacemacs//zoom-frm-powerline-reset)))
+                                          (interactive)
+                                          (spacemacs/zoom-frm-in)
+                                          (spacemacs//zoom-frm-powerline-reset)))
   (global-set-key (kbd "<C-s-mouse-5>") (lambda ()
-                                           (interactive)
-                                           (spacemacs/zoom-frm-out)
-                                           (spacemacs//zoom-frm-powerline-reset)))
+                                          (interactive)
+                                          (spacemacs/zoom-frm-out)
+                                          (spacemacs//zoom-frm-powerline-reset)))
   (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
   (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
 
@@ -663,6 +668,8 @@ layers configuration."
   ;;       (if file
   ;;           (find-file file)
   ;;         (revert-buffer bang (or bang (not (buffer-modified-p))) t))))
+
+  ;; (add-hook 'prog-mode-hook 'turn-on-fci-mode)
   )
 
 (custom-set-variables

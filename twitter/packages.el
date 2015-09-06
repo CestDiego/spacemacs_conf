@@ -13,28 +13,21 @@
 ;; List of all packages to install and/or initialize. Built-in packages
 ;; which require an initialization must be listed explicitly in the list.
 (setq twitter-packages
-    '(
-      twittering-mode
-      ))
-
-;; List of packages to exclude.
-(setq twitter-excluded-packages '())
+    '(twittering-mode))
 
 (defun twitter/init-twittering-mode ()
   (use-package twittering-mode
-    :commands (twit)
+    :commands twit
     :init
     (evil-leader/set-key
       "at" 'twit)
     (when (configuration-layer/package-usedp 'flyspell)
-      (add-hook 'twittering-edit-mode-hook (lambda ()
-                                             (flyspell-mode 1))))
+      (add-hook 'twittering-edit-mode-hook (lambda () (flyspell-mode 1))))
     (push 'twittering-edit-mode evil-insert-state-modes)
     :config
     (setq twitter-images-directory
           (expand-file-name
-           (concat spacemacs-cache-directory
-                   "twitter-images")))
+           (concat spacemacs-cache-directory "twitter-images")))
     (unless (file-exists-p twitter-images-directory)
       (make-directory twitter-images-directory))
     (setq twittering-icon-mode t)

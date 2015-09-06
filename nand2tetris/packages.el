@@ -26,12 +26,12 @@
     (push 'company-capf company-backends-nand2tetris-mode)))
 
 (defun nand2tetris/post-init-eldoc ()
-  (add-hook 'python-mode-hook 'eldoc-mode))
+  (add-hook 'nand2tetris-mode-hook 'eldoc-mode))
 
 (defun nand2tetris/init-nand2tetris ()
   (use-package nand2tetris
     :init
-    (setq nand2tetris-base-dir "~/Dropbox/nand2tetris")
+    (setq nand2tetris-core-base-dir "~/Dropbox/nand2tetris")
     :config
     (when (configuration-layer/package-usedp 'company)
       (push 'company-nand2tetris company-backends-nand2tetris-mode))))

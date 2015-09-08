@@ -64,6 +64,8 @@
      (auto-completion :variables
                       auto-completion-enable-help-tooltip t
                       auto-completion-return-key-behavior 'complete
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-sort-by-usage t
                       auto-completion-complete-with-key-sequence "jk")
      ;; (ycmd :variables
      ;;       ycmd-server-command "~/build/ycmd/")

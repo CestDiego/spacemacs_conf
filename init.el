@@ -672,6 +672,21 @@ layers configuration."
   ;;         (revert-buffer bang (or bang (not (buffer-modified-p))) t))))
 
   ;; (add-hook 'prog-mode-hook 'turn-on-fci-mode)
+
+  (spacemacs|define-custom-persp "NixOS Configuration"
+      :binding "N"
+      :body
+      (dired "~/Projects/nixpkgs/pkgs/")
+      (split-window-right)
+      (find-file "~/nixos-config/common/desktop.nix"))
+
+  (spacemacs|define-custom-persp "Blog"
+    :binding "b"
+    :body
+    (when (y-or-n-p "Hi, do you want to create a new post?")
+      (call-interactively 'op/new-post))
+    )
+
   )
 
 (custom-set-variables

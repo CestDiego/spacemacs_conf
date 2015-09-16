@@ -24,7 +24,7 @@
      soundcloud
      twitter
      utils
-     nand2tetris
+     ;; nand2tetris
 
      ;; Spacemacs
      nixos

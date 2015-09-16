@@ -22,6 +22,7 @@
     ox-cv
     mustache
     ht
+    (ob :location local)
     (org-protocol :location local)
     (org-capture :location local)
     (org-agenda :location local)
@@ -127,26 +128,33 @@ which require an initialization must be listed explicitly in the list.")
     ))
 
 
+(defun org-cestdiego/init-org-babel ()
+  (use-package org-babel
+    :config
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((R . t)
+       (emacs-lisp . t)
+       (python . t)
+       (sh . t)
+       (haskell . t)
+       (js . t)
+       (latex . t)
+       (gnuplot . t)
+       (C . t)
+       (sql . t)
+       (ditaa . t)
+       ))
+    ))
+
+
 (defun org-cestdiego/post-init-org()
   "Initialize my package"
   (setq org-startup-folded nil)
   (setq org-src-fontify-natively t)
   (setq org-src-tab-acts-natively t)
   (setq org-confirm-babel-evaluate nil)
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((R . t)
-     (emacs-lisp . t)
-     (python . t)
-     (sh . t)
-     (haskell . t)
-     (js . t)
-     (latex . t)
-     (gnuplot . t)
-     (C . t)
-     (sql . t)
-     (ditaa . t)
-     ))
+  
 
   (setq org-latex-packages-alist '(("" "color" t)
                                    ("" "minted" t)

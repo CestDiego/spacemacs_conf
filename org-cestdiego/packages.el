@@ -26,12 +26,11 @@
     (org-protocol :location local)
     (org-capture :location local)
     (org-agenda :location local)
+    (ox-koma-letter :location local)
+    (org-protocol-github-lines :location local)
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
-
-(defvar org-excluded-packages '()
-  "List of packages to exclude.")
 
 (defun org-cestdiego/init-ob-http()
   (use-package ob-http))
@@ -231,3 +230,35 @@ which require an initialization must be listed explicitly in the list.")
   (use-package ox-ioslide
     :config
     (require 'ox-ioslide-helper)))
+
+(defun org-cestdiego/init-org-protocol-github-lines ()
+  (use-package org-protocol-github-lines
+    :config
+    (setq org-protocol-github-project-directories
+          '("~/Projects/"))
+    (setq org-protocol-github-projects
+          '(("syl20bnr/spacemacs" . "~/.emacs.d")))
+    ))
+
+(defun org-cestdiego/init-ox-koma-letter ()
+  "Initialize ox-koma-letter"
+  (use-package ox-koma-letter
+    :init
+    (add-to-list 'org-latex-classes
+                 '("my-letter"
+                   "\\documentclass\[%
+      DIV=14,
+      fontsize=12pt,
+      parskip=half,
+      subject=titled,
+      backaddress=false,
+      fromalign=left,
+      fromemail=true,
+      fromphone=true\]\{scrlttr2\}
+      \[DEFAULT-PACKAGES]
+      \[PACKAGES]
+      \[EXTRA]"))
+    (setq org-koma-letter-default-class "my-letter")
+    (add-to-list 'org-latex-packages-alist '("AUTO" "babel" t) t)
+    )
+  )

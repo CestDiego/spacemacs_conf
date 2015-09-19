@@ -1,6 +1,7 @@
 (defvar presentations-packages
   '(
     org-tree-slide
+    (demo-it :location local)
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
@@ -14,3 +15,12 @@ which require an initialization must be listed explicitly in the list.")
       (define-key org-mode-map (kbd "S-<f8>") 'org-tree-slide-skip-done-toggle)
       )
     ))
+
+(defun presentations/init-demo-it()
+  (use-package demo-it
+    :init
+    (progn
+      (global-set-key (kbd "<f6>") 'demo-it-step)
+      (global-set-key (kbd "<f5>") '(lambda () (interactive) (demo-it-presentation-return-noadvance) ))
+      (global-set-key (kbd "S-<f6>") 'demo-it-end)
+      )))

@@ -19,7 +19,7 @@
            org-page-use-melpa-version nil
            org-page-built-directory "~/Projects/le_blog_built/")
      eshell
-     org-cestdiego
+     ;; org-cestdiego
      presentations
      soundcloud
      twitter
@@ -451,268 +451,268 @@ layers configuration."
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;;;;;;; FINISH LE GLOBAL OVERRIDE ;;;;;;;;
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-	)
+    )
 
-    (when (configuration-layer/layer-usedp 'erc)
-      ;; IRC
-      (erc-track-mode -1)
-      (add-hook 'erc-insert-pre-hook
-         (defun bb/erc-foolish-filter (msg)
-           "Ignores messages matching `erc-foolish-content'."
-           (when (erc-list-match erc-foolish-content msg)
-             (setq erc-insert-this nil))))
-      (add-hook 'erc-insert-modify-hook
-         (defun bb/erc-github-filter ()
-           "Shortens messages from gitter."
-           (interactive)
-           (when (and (< 18 (- (point-max) (point-min)))
-                      (string= (buffer-substring (point-min)
-                                                 (+ (point-min) 18))
-                               "<gitter> [Github] "))
-             (dolist (regexp '(" \\[Github\\]"
-                               " \\(?:in\\|to\\) [^ /]+/[^ /:]+"
-                               "https?://github\\.com/[^/]+/[^/]+/[^/]+/"
-                               "#issuecomment-[[:digit:]]+"))
-               (goto-char (point-min))
-               (when (re-search-forward regexp (point-max) t)
-                 (replace-match "")))
+  (when (configuration-layer/layer-usedp 'erc)
+    ;; IRC
+    (erc-track-mode -1)
+    (add-hook 'erc-insert-pre-hook
+       (defun bb/erc-foolish-filter (msg)
+         "Ignores messages matching `erc-foolish-content'."
+         (when (erc-list-match erc-foolish-content msg)
+           (setq erc-insert-this nil))))
+    (add-hook 'erc-insert-modify-hook
+       (defun bb/erc-github-filter ()
+         "Shortens messages from gitter."
+         (interactive)
+         (when (and (< 18 (- (point-max) (point-min)))
+                    (string= (buffer-substring (point-min)
+                                               (+ (point-min) 18))
+                             "<gitter> [Github] "))
+           (dolist (regexp '(" \\[Github\\]"
+                             " \\(?:in\\|to\\) [^ /]+/[^ /:]+"
+                             "https?://github\\.com/[^/]+/[^/]+/[^/]+/"
+                             "#issuecomment-[[:digit:]]+"))
              (goto-char (point-min))
-             (when (re-search-forward "[[:digit:]]+$" (point-max) t)
-               (replace-match (format "(#%s)" (match-string 0)))))))
-      (setq erc-nick "cestdiego"
-            erc-user-full-name "Diego Berrocal"
-            erc-fill-function 'erc-fill-static
-            erc-fill-static-center 19
-            erc-prompt-for-nickserv-password nil
-            erc-image-inline-rescale 300
-            erc-hide-list '("JOIN" "PART" "QUIT" "NICK")
-            erc-foolish-content '("\\[Github\\].* starred"
-                                  "\\[Github\\].* forked"
-                                  "\\[Github\\].* synchronize a Pull Request"
-                                  "\\[Github\\].* labeled an issue in"
-                                  "\\[Github\\].* unlabeled an issue in")))
+             (when (re-search-forward regexp (point-max) t)
+               (replace-match "")))
+           (goto-char (point-min))
+           (when (re-search-forward "[[:digit:]]+$" (point-max) t)
+             (replace-match (format "(#%s)" (match-string 0)))))))
+    (setq erc-nick "cestdiego"
+          erc-user-full-name "Diego Berrocal"
+          erc-fill-function 'erc-fill-static
+          erc-fill-static-center 19
+          erc-prompt-for-nickserv-password nil
+          erc-image-inline-rescale 300
+          erc-hide-list '("JOIN" "PART" "QUIT" "NICK")
+          erc-foolish-content '("\\[Github\\].* starred"
+                                "\\[Github\\].* forked"
+                                "\\[Github\\].* synchronize a Pull Request"
+                                "\\[Github\\].* labeled an issue in"
+                                "\\[Github\\].* unlabeled an issue in")))
 
-    ;; Insert thing at point for Helm-aG!!
-    ;; (setq helm-ag-insert-at-point 'symbol)
-    ;; (setq helm-ag-fuzzy-match t)
+  ;; Insert thing at point for Helm-aG!!
+  ;; (setq helm-ag-insert-at-point 'symbol)
+  ;; (setq helm-ag-fuzzy-match t)
 
-    (when (configuration-layer/layer-usedp 'javascript)
-      (setq js2-global-externs '("require" "module" "jest" "jasmine"
-                                 "it" "expect" "describe" "beforeEach"))
-      ;; Fix Identation in JS
-      (setq js-indent-level                 2
-            js2-basic-offset                2
-            js-switch-indent-offset         2
-            js2-indent-switch-body          2
-            js2-strict-missing-semi-warning nil)
+  (when (configuration-layer/layer-usedp 'javascript)
+    (setq js2-global-externs '("require" "module" "jest" "jasmine"
+                               "it" "expect" "describe" "beforeEach"))
+    ;; Fix Identation in JS
+    (setq js-indent-level                 2
+          js2-basic-offset                2
+          js-switch-indent-offset         2
+          js2-indent-switch-body          2
+          js2-strict-missing-semi-warning nil)
 
-      (eval-after-load 'flycheck-mode
-        '(flycheck-define-checker jsxhint-checker
-           "A JSX syntax and style checker based on JSXHint."
-           :command ("jsxhint" source)
-           :error-patterns
-           ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
-           :modes (web-mode)))
+    (eval-after-load 'flycheck-mode
+      '(flycheck-define-checker jsxhint-checker
+         "A JSX syntax and style checker based on JSXHint."
+         :command ("jsxhint" source)
+         :error-patterns
+         ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
+         :modes (web-mode)))
 
-      (add-hook 'web-mode-hook
-         (lambda ()
-           (when (equal web-mode-content-type "jsx")
-             ;; enable flycheck
-             (setq web-mode-indent-style 2
-                   web-mode-markup-indent-offset 2
-                   web-mode-css-indent-offset 2
-                   web-mode-code-indent-offset 2)
-             (flycheck-select-checker 'jsxhint-checker)
-             (flycheck-mode))))
+    (add-hook 'web-mode-hook
+       (lambda ()
+         (when (equal web-mode-content-type "jsx")
+           ;; enable flycheck
+           (setq web-mode-indent-style 2
+                 web-mode-markup-indent-offset 2
+                 web-mode-css-indent-offset 2
+                 web-mode-code-indent-offset 2)
+           (flycheck-select-checker 'jsxhint-checker)
+           (flycheck-mode))))
 
-      (defadvice web-mode-highlight-part (around tweak-jsx activate)
-        (if (equal web-mode-content-type "jsx")
-            (let ((web-mode-enable-part-face nil))
-              ad-do-it)
-          ad-do-it))
+    (defadvice web-mode-highlight-part (around tweak-jsx activate)
+      (if (equal web-mode-content-type "jsx")
+          (let ((web-mode-enable-part-face nil))
+            ad-do-it)
+        ad-do-it))
 
-      (defun json-format ()
-        (interactive)
-        (save-excursion
-          (shell-command-on-region (mark) (point)
-                                   "python -m json.tool" (buffer-name) t)))
-      (add-to-list 'auto-mode-alist '("\\.tern-config\\'" . json-mode))
-      (add-to-list 'auto-mode-alist '("\\.tern-project\\'" . json-mode))
-      (add-to-list 'auto-mode-alist '("dmenuExtended_preferences.txt\\'" . json-mode)))
+    (defun json-format ()
+      (interactive)
+      (save-excursion
+        (shell-command-on-region (mark) (point)
+                                 "python -m json.tool" (buffer-name) t)))
+    (add-to-list 'auto-mode-alist '("\\.tern-config\\'" . json-mode))
+    (add-to-list 'auto-mode-alist '("\\.tern-project\\'" . json-mode))
+    (add-to-list 'auto-mode-alist '("dmenuExtended_preferences.txt\\'" . json-mode)))
 
-    (when (configuration-layer/layer-usedp 'html)
-      (add-to-list 'auto-mode-alist '("\\.touchegg.conf\\'" . web-mode)))
+  (when (configuration-layer/layer-usedp 'html)
+    (add-to-list 'auto-mode-alist '("\\.touchegg.conf\\'" . web-mode)))
 
-    (when (configuration-layer/layer-usedp 'blog)
-      (setq op/personal-github-link "https://github.com/CestDiego/")
-      (setq op/repository-directory "~/Projects/le_blog/")
-      (setq op/site-domain "http://cestdiego.github.io/")
-      ;; This two are optional , only if you want have a custom theme
-      (setq op/theme-root-directory "~/.spacemacs.d/blog/themes/")
-      (setq op/theme 'just_right)
-      (setq op/site-main-title "Diego Berrocal")
-      (setq op/site-sub-title "it's personal")
+  (when (configuration-layer/layer-usedp 'blog)
+    (setq op/personal-github-link "https://github.com/CestDiego/")
+    (setq op/repository-directory "~/Projects/le_blog/")
+    (setq op/site-domain "http://cestdiego.github.io/")
+    ;; This two are optional , only if you want have a custom theme
+    (setq op/theme-root-directory "~/.spacemacs.d/blog/themes/")
+    (setq op/theme 'just_right)
+    (setq op/site-main-title "Diego Berrocal")
+    (setq op/site-sub-title "it's personal")
 
-      (setq op/personal-disqus-shortname "cestdiego")
-      (setq op/personal-google-analytics-id "UA-40864129-3"))
+    (setq op/personal-disqus-shortname "cestdiego")
+    (setq op/personal-google-analytics-id "UA-40864129-3"))
 
-    (when (configuration-layer/layer-usedp 'wakatime)
-      (defun wakatime-client-command (savep)
-        "Return client command executable and arguments.
+  (when (configuration-layer/layer-usedp 'wakatime)
+    (defun wakatime-client-command (savep)
+      "Return client command executable and arguments.
    Set SAVEP to non-nil for write action."
-        (format "%s --file \"%s\" %s --plugin %s/%s --key %s --time %.2f"
-                wakatime-cli-path
-                (buffer-file-name (current-buffer))
-                (if savep "--write" "")
-                wakatime-user-agent
-                wakatime-version
-                wakatime-api-key
-                (float-time))))
+      (format "%s --file \"%s\" %s --plugin %s/%s --key %s --time %.2f"
+              wakatime-cli-path
+              (buffer-file-name (current-buffer))
+              (if savep "--write" "")
+              wakatime-user-agent
+              wakatime-version
+              wakatime-api-key
+              (float-time))))
 
   ;;; BEGIN: Mouse Support
-    (global-set-key (kbd "<C-s-mouse-4>") (lambda () (interactive)
-                                            (spacemacs/zoom-frm-in)
-                                            (spacemacs//zoom-frm-powerline-reset)))
-    (global-set-key (kbd "<C-s-mouse-5>") (lambda () (interactive)
-                                            (spacemacs/zoom-frm-out)
-                                            (spacemacs//zoom-frm-powerline-reset)))
-    (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
-    (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
+  (global-set-key (kbd "<C-s-mouse-4>") (lambda () (interactive)
+                                          (spacemacs/zoom-frm-in)
+                                          (spacemacs//zoom-frm-powerline-reset)))
+  (global-set-key (kbd "<C-s-mouse-5>") (lambda () (interactive)
+                                          (spacemacs/zoom-frm-out)
+                                          (spacemacs//zoom-frm-powerline-reset)))
+  (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
+  (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
   ;;; END: Mouse Support
 
   ;;; BEGIN: Extra Hybrid Modes
-    (push 'git-commit-major-mode evil-insert-state-modes)
-    (push 'image-mode evil-insert-state-modes)
+  (push 'git-commit-major-mode evil-insert-state-modes)
+  (push 'image-mode evil-insert-state-modes)
   ;;; END:   Extra Hybrid Modes
 
   ;;; BEGIN: Custom Hybrid Bindings
-    (define-key evil-hybrid-state-map (kbd "S-<return>") 'evil-open-below)
+  (define-key evil-hybrid-state-map (kbd "S-<return>") 'evil-open-below)
   ;;; END:   Custom Hybrid Bindings
 
   ;;; BEGIN: Multiple Cursors
-    (global-set-key (kbd "C-;") 'mc/edit-lines)
-    (global-set-key (kbd "C-:") 'mc/mark-all-like-this)
+  (global-set-key (kbd "C-;") 'mc/edit-lines)
+  (global-set-key (kbd "C-:") 'mc/mark-all-like-this)
   ;;; END:   Multiple Cursors
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;;;;;;;;;;;;;;;; THERE BE DRAGONS AFTER THIS POINT   ;;;;;;;;;;;;;;
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    (defun create-empty-modeline-frame ()
-      (interactive)
-      (with-current-buffer (generate-new-buffer "*empty*")
-        (make-frame '((minibuffer . nil)
-                      (unsplittable . t)
-                      (buffer-predicate . (lambda (x) nil))
-                      (height . 2)
-                      (left-fringe . 0)
-                      (right-fringe . 0)
-                      (tool-bar-lines . 0)
-                      (menu-bar-lines . 0)))
-        (set-window-dedicated-p
-         (get-buffer-window (current-buffer) t) t)))
+  (defun create-empty-modeline-frame ()
+    (interactive)
+    (with-current-buffer (generate-new-buffer "*empty*")
+      (make-frame '((minibuffer . nil)
+                    (unsplittable . t)
+                    (buffer-predicate . (lambda (x) nil))
+                    (height . 2)
+                    (left-fringe . 0)
+                    (right-fringe . 0)
+                    (tool-bar-lines . 0)
+                    (menu-bar-lines . 0)))
+      (set-window-dedicated-p
+       (get-buffer-window (current-buffer) t) t)))
 
-    ;; (set-face-attribute 'mode-line-inactive nil
-    ;;                     :underline "#202020"
-    ;;                     :box nil
-    ;;                     :height 1
-    ;;                     :background (face-background 'default))
+  ;; (set-face-attribute 'mode-line-inactive nil
+  ;;                     :underline "#202020"
+  ;;                     :box nil
+  ;;                     :height 1
+  ;;                     :background (face-background 'default))
 
-    ;; (add-to-list 'default-frame-alist '(minibuffer))
-    ;; ;; (add-to-list 'default-frame-alist '(unsplittable . t))
-    ;; (add-to-list 'minibuffer-frame-alist '(minibuffer . only))
-    ;; (add-to-list 'minibuffer-frame-alist '(left . 525))
-    ;; (add-to-list 'minibuffer-frame-alist '(top . -1))
-    ;; (add-to-list 'minibuffer-frame-alist '(width . 100))
-    ;; (add-to-list 'minibuffer-frame-alist '(name . "Minibuf"))
+  ;; (add-to-list 'default-frame-alist '(minibuffer))
+  ;; ;; (add-to-list 'default-frame-alist '(unsplittable . t))
+  ;; (add-to-list 'minibuffer-frame-alist '(minibuffer . only))
+  ;; (add-to-list 'minibuffer-frame-alist '(left . 525))
+  ;; (add-to-list 'minibuffer-frame-alist '(top . -1))
+  ;; (add-to-list 'minibuffer-frame-alist '(width . 100))
+  ;; (add-to-list 'minibuffer-frame-alist '(name . "Minibuf"))
 
-    ;; (setq magit-repository-directories "~")
+  ;; (setq magit-repository-directories "~")
 
-    (defun my-expand-lines ()
-      (interactive)
-      (let ((hippie-expand-try-functions-list
-             '(try-expand-line)))
-        (call-interactively 'hippie-expand)))
+  (defun my-expand-lines ()
+    (interactive)
+    (let ((hippie-expand-try-functions-list
+           '(try-expand-line)))
+      (call-interactively 'hippie-expand)))
 
-    (define-key evil-insert-state-map (kbd "C-x C-l") 'my-expand-lines)
+  (define-key evil-insert-state-map (kbd "C-x C-l") 'my-expand-lines)
 
-    ;; (defadvice he-substitute-string (after he-paredit-fix)
-    ;;   "remove extra paren when expanding line in paredit"
-    ;;   (if (and paredit-mode (equal (substring str -1) ")"))
-    ;;       (progn (backward-delete-char 1) (forward-char))))
+  ;; (defadvice he-substitute-string (after he-paredit-fix)
+  ;;   "remove extra paren when expanding line in paredit"
+  ;;   (if (and paredit-mode (equal (substring str -1) ")"))
+  ;;       (progn (backward-delete-char 1) (forward-char))))
 
-    ;;   (evil-define-command evil-edit (file &optional bang)
-    ;;     "Open FILE.
-    ;; If no FILE is specified, reload the current buffer from disk."
-    ;;     :repeat nil
-    ;;     (interactive "<f><!>")
-    ;;     (let* ((projectile-require-project-root nil)
-    ;;            (default-directory (projectile-project-root)))
-    ;;       (if file
-    ;;           (find-file file)
-    ;;         (revert-buffer bang (or bang (not (buffer-modified-p))) t))))
-    )
+  ;;   (evil-define-command evil-edit (file &optional bang)
+  ;;     "Open FILE.
+  ;; If no FILE is specified, reload the current buffer from disk."
+  ;;     :repeat nil
+  ;;     (interactive "<f><!>")
+  ;;     (let* ((projectile-require-project-root nil)
+  ;;            (default-directory (projectile-project-root)))
+  ;;       (if file
+  ;;           (find-file file)
+  ;;         (revert-buffer bang (or bang (not (buffer-modified-p))) t))))
+  )
 
-  (custom-set-variables
-   ;; custom-set-variables was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   '(ahs-case-fold-search nil)
-   '(ahs-default-range (quote ahs-range-whole-buffer))
-   '(ahs-idle-interval 0.25)
-   '(ahs-idle-timer 0 t)
-   '(ahs-inhibit-face-list nil)
-   '(compilation-message-face (quote default))
-   '(org-agenda-files
-     (quote
-      ("~/Dropbox/Org-Notes/main.org" "~/Dropbox/Org-Notes/links.org")))
-   '(ring-bell-function (quote ignore) t)
-   '(safe-local-variable-values
-     (quote
-      ((set-input-method "latin-1-prefix" t)
-       (firestarter let
-                    ((org-html-htmlize-output-type
-                      (quote css)))
-                    (op/do-publication t t org-page-built-directory))
-       (firestarter op/do-publication t t "~/Projects/le_blog_built")
-       (eval when
-             (and
-              (buffer-file-name)
-              (file-regular-p
-               (buffer-file-name))
-              (string-match-p "^[^.]"
-                              (buffer-file-name)))
-             (emacs-lisp-mode)
-             (when
-                 (fboundp
-                  (quote flycheck-mode))
-               (flycheck-mode -1))
-             (unless
-                 (featurep
-                  (quote package-build))
-               (let
-                   ((load-path
-                     (cons ".." load-path)))
-                 (require
-                  (quote package-build))))
-             (package-build-minor-mode)
-             (set
-              (make-local-variable
-               (quote package-build-working-dir))
-              (expand-file-name "../working/"))
-             (set
-              (make-local-variable
-               (quote package-build-archive-dir))
-              (expand-file-name "../packages/"))
-             (set
-              (make-local-variable
-               (quote package-build-recipes-dir))
-              default-directory)))))
-   )
-  (custom-set-faces
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
-   '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ahs-case-fold-search nil)
+ '(ahs-default-range (quote ahs-range-whole-buffer))
+ '(ahs-idle-interval 0.25)
+ '(ahs-idle-timer 0 t)
+ '(ahs-inhibit-face-list nil)
+ '(compilation-message-face (quote default))
+ '(org-agenda-files
+   (quote
+    ("~/Dropbox/Org-Notes/main.org" "~/Dropbox/Org-Notes/links.org")))
+ '(ring-bell-function (quote ignore) t)
+ '(safe-local-variable-values
+   (quote
+    ((set-input-method "latin-1-prefix" t)
+     (firestarter let
+                  ((org-html-htmlize-output-type
+                    (quote css)))
+                  (op/do-publication t t org-page-built-directory))
+     (firestarter op/do-publication t t "~/Projects/le_blog_built")
+     (eval when
+           (and
+            (buffer-file-name)
+            (file-regular-p
+             (buffer-file-name))
+            (string-match-p "^[^.]"
+                            (buffer-file-name)))
+           (emacs-lisp-mode)
+           (when
+               (fboundp
+                (quote flycheck-mode))
+             (flycheck-mode -1))
+           (unless
+               (featurep
+                (quote package-build))
+             (let
+                 ((load-path
+                   (cons ".." load-path)))
+               (require
+                (quote package-build))))
+           (package-build-minor-mode)
+           (set
+            (make-local-variable
+             (quote package-build-working-dir))
+            (expand-file-name "../working/"))
+           (set
+            (make-local-variable
+             (quote package-build-archive-dir))
+            (expand-file-name "../packages/"))
+           (set
+            (make-local-variable
+             (quote package-build-recipes-dir))
+            default-directory)))))
+ )
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))

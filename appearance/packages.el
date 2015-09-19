@@ -2,10 +2,17 @@
   '(
     auto-dim-other-buffers
     hexrgb
+    (nerd-fonts :location local)
     (spacemacs-theme :location
                      (recipe :fetcher github
                              :repo "CestDiego/spacemacs-theme"))
     ))
+
+(defun appearance/init-nerd-fonts ()
+  (use-package nerd-fonts
+    :init
+    (evil-leader/set-key
+      "hn" 'helm-nerd-fonts)))
 
 (defun appearance/init-spacemacs-theme ()
   (use-package spacemacs-theme

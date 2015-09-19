@@ -58,8 +58,10 @@
           org-mapping-style 'worf)
      ;; Miscellaneous
      emoji
-     ;; (wakatime :variables
-     ;;           wakatime-python-bin "/run/current-system/sw/bin/python")
+     (wakatime :variables
+               wakatime-api-key    "813b0d78-1f17-43eb-bede-a5c008651d4a"
+               wakatime-cli-path   "/run/current-system/sw/bin/wakatime"
+               wakatime-python-bin "/run/current-system/sw/bin/python")
      ;; Completings Stuff
      (auto-completion :variables
                       auto-completion-enable-help-tooltip t
@@ -179,7 +181,7 @@ before layers configuration."
    ;; `find-contrib-file' (SPC f e c) are replaced. (default nil)
    dotspacemacs-use-ido nil
    ;; If non nil, `helm' will try to miminimize the space it uses. (default nil)
-   dotspacemacs-helm-resize t
+   dotspacemacs-helm-resize nil
    ;; if non nil, the helm header is hidden when there is only one source.
    ;; (default nil)
    dotspacemacs-helm-no-header nil
@@ -352,9 +354,6 @@ layers configuration."
 
   ;; (add-hook 'window-configuration-change-hook 'spacemacs//responsive-modeline)
 
-  ;; Use helm-projectile anywhere
-  ;; (setq projectile-require-project-root nil)
-
   ;; UTF-8 please
   (setq locale-coding-system 'utf-8) ; pretty
   (set-terminal-coding-system 'utf-8) ; pretty
@@ -377,18 +376,30 @@ layers configuration."
   ;; (setq web-mode-enable-current-column-highlight t)
 
   (when (configuration-layer/layer-usedp 'perspectives)
-    (defun custom-persp/bbspwm ()
-      (interactive)
-      (custom-persp
-       "bbspwm"
-       (progn (find-file "~/dotbspwm/.config/sxhkd/sxhkdrc")
-              (split-window-right-and-focus)
-              (find-file "~/dotbspwm/.config/bspwm/bspwmrc")
-              (split-window-below-and-focus)
-              (find-file "~/dotbspwm/.config/bspwm/autostart"))))
-    ;; (evil-leader/set-key
-    ;;   "Lob" 'custom-persp/bbspwm))
-  )
+
+    (spacemacs|define-custom-persp "NixOS Configuration"
+      :binding "N"
+      :body
+      (dired "~/Projects/nixpkgs/pkgs/")
+      (split-window-right)
+      (find-file "~/nixos-config/common/desktop.nix"))
+
+    (spacemacs|define-custom-persp "Blog"
+      :binding "b"
+      :body
+      (when (y-or-n-p "Hi, do you want to create a new post?")
+        (call-interactively 'op/new-post)))
+
+    (spacemacs|define-custom-persp "@bspwm"
+      :binding "B"
+      :body
+      (find-file "~/dotbspwm/.config/sxhkd/sxhkdrc")
+      (split-window-right-and-focus)
+      (find-file "~/dotbspwm/.config/bspwm/bspwmrc")
+      (split-window-below-and-focus)
+      (find-file "~/dotbspwm/.config/bspwm/autostart"))
+    )
+
   (setq browse-url-browser-function 'browse-url-generic
         engine/browser-function 'browse-url-generic
         browse-url-generic-program "chromium")
@@ -410,8 +421,6 @@ layers configuration."
   (setq python-shell-interpreter "ipython")
   (setq python-shell-interpreter-args "-i --gui=wx")
 
-  (setq eshell-rc-script (expand-file-name ".eshellrc" (car dotspacemacs-configuration-layer-path)))
-  (setq eshell-path-env exec-path)
 
   (setq powerline-default-separator 'alternate)
   (setq vc-follow-symlinks t)
@@ -440,12 +449,18 @@ layers configuration."
       :kill-process-buffer-on-stop t))
 
   (when (configuration-layer/layer-usedp 'shell)
+    (setq eshell-rc-script (expand-file-name
+                            ".eshellrc"
+                            (car dotspacemacs-configuration-layer-path))
+          eshell-path-env exec-path)
+
     (evil-define-key 'normal term-raw-map
       "p" 'term-paste) ;; why paste-microstate doesn't work?
     (evil-define-key 'insert term-raw-map (kbd "C-k") 'term-send-up)
     (evil-define-key 'insert term-raw-map (kbd "C-j") 'term-send-down)
 
     (evil-define-key 'insert term-raw-map (kbd "<C-backspace>") 'term-send-raw-meta)
+    (evil-define-key 'hybrid term-raw-map (kbd "<C-backspace>") 'term-send-raw-meta)
 
     (evil-define-key 'insert eshell-mode-map (kbd "C-k") 'eshell-previous-input)
     (evil-define-key 'insert eshell-mode-map (kbd "C-j") 'eshell-next-input))
@@ -537,10 +552,38 @@ layers configuration."
   ;; (setq helm-ag-fuzzy-match t)
 
   (when (configuration-layer/layer-usedp 'javascript)
+    (setq js2-global-externs '("require" "module" "jest" "jasmine"
+                               "it" "expect" "describe" "beforeEach"))
+    (eval-after-load 'flycheck-mode
+      '(flycheck-define-checker jsxhint-checker
+         "A JSX syntax and style checker based on JSXHint."
+         :command ("jsxhint" source)
+         :error-patterns
+         ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
+         :modes (web-mode)))
+
+    (add-hook 'web-mode-hook
+       (lambda ()
+         (when (equal web-mode-content-type "jsx")
+           ;; enable flycheck
+           (setq web-mode-indent-style 2
+                 web-mode-markup-indent-offset 2
+                 web-mode-css-indent-offset 2
+                 web-mode-code-indent-offset 2)
+           (flycheck-select-checker 'jsxhint-checker)
+           (flycheck-mode))))
+
+    (defadvice web-mode-highlight-part (around tweak-jsx activate)
+      (if (equal web-mode-content-type "jsx")
+          (let ((web-mode-enable-part-face nil))
+            ad-do-it)
+        ad-do-it))
+
     (defun json-format ()
       (interactive)
       (save-excursion
-        (shell-command-on-region (mark) (point) "python -m json.tool" (buffer-name) t)))
+        (shell-command-on-region (mark) (point)
+                                 "python -m json.tool" (buffer-name) t)))
     (add-to-list 'auto-mode-alist '("\\.tern-config\\'" . json-mode))
     (add-to-list 'auto-mode-alist '("\\.tern-project\\'" . json-mode))
     (add-to-list 'auto-mode-alist '("dmenuExtended_preferences.txt\\'" . json-mode)))
@@ -561,25 +604,33 @@ layers configuration."
     (setq op/personal-disqus-shortname "cestdiego")
     (setq op/personal-google-analytics-id "UA-40864129-3"))
 
-  ;; (setq line-move-visual nil)
-  ;; (if (eq (cdr (window-margins)) nil)
-  ;;     (set-window-margins nil 0 (- (window-body-width) fill-column))
-  ;;   (set-window-margins nil 0 0) )
-  ;; Org Page!!!
+  (when (configuration-layer/layer-usedp 'wakatime)
+    (defun wakatime-client-command (savep)
+      "Return client command executable and arguments.
+   Set SAVEP to non-nil for write action."
+      (format "%s --file \"%s\" %s --plugin %s/%s --key %s --time %.2f"
+              wakatime-cli-path
+              (buffer-file-name (current-buffer))
+              (if savep "--write" "")
+              wakatime-user-agent
+              wakatime-version
+              wakatime-api-key
+              (float-time))))
 
-  (global-set-key (kbd "<C-s-mouse-4>") (lambda ()
-                                          (interactive)
+  ;;; BEGIN: Mouse Support
+  (global-set-key (kbd "<C-s-mouse-4>") (lambda () (interactive)
                                           (spacemacs/zoom-frm-in)
                                           (spacemacs//zoom-frm-powerline-reset)))
-  (global-set-key (kbd "<C-s-mouse-5>") (lambda ()
-                                          (interactive)
+  (global-set-key (kbd "<C-s-mouse-5>") (lambda () (interactive)
                                           (spacemacs/zoom-frm-out)
                                           (spacemacs//zoom-frm-powerline-reset)))
   (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
   (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
+  ;;; END: Mouse Support
 
-  (push 'git-commit-mode evil-insert-state-modes)
-  (push 'image-mode evil-insert-state-modes)
+  ;;; BEGIN: Extra evil-hybrid-state-modes
+  (push 'git-commit-major-mode evil-hybrid-state-modes)
+  (push 'image-mode evil-hybrid-state-modes)
 
   (defun create-empty-modeline-frame ()
     (interactive)
@@ -595,35 +646,7 @@ layers configuration."
       (set-window-dedicated-p
        (get-buffer-window (current-buffer) t) t)))
 
-  (define-key evil-insert-state-map
-    (kbd "S-<return>") 'evil-open-below)
-
-  (setq js2-global-externs '("require" "module" "jest" "jasmine"
-                             "it" "expect" "describe" "beforeEach"))
-
-  (eval-after-load 'flycheck-mode
-    '(flycheck-define-checker jsxhint-checker
-       "A JSX syntax and style checker based on JSXHint."
-       :command ("jsxhint" source)
-       :error-patterns
-       ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
-       :modes (web-mode)))
-  (add-hook 'web-mode-hook
-     (lambda ()
-       (when (equal web-mode-content-type "jsx")
-         ;; enable flycheck
-         (setq web-mode-indent-style 2
-               web-mode-markup-indent-offset 2
-               web-mode-css-indent-offset 2
-               web-mode-code-indent-offset 2)
-         (flycheck-select-checker 'jsxhint-checker)
-         (flycheck-mode))))
-
-  (defadvice web-mode-highlight-part (around tweak-jsx activate)
-    (if (equal web-mode-content-type "jsx")
-        (let ((web-mode-enable-part-face nil))
-          ad-do-it)
-      ad-do-it))
+  (define-key evil-hybrid-state-map (kbd "S-<return>") 'evil-open-below)
 
   ;; (set-face-attribute 'mode-line-inactive nil
   ;;                     :underline "#202020"
@@ -690,19 +713,6 @@ layers configuration."
 
   ;; (add-hook 'prog-mode-hook 'turn-on-fci-mode)
 
-  (spacemacs|define-custom-persp "NixOS Configuration"
-      :binding "N"
-      :body
-      (dired "~/Projects/nixpkgs/pkgs/")
-      (split-window-right)
-      (find-file "~/nixos-config/common/desktop.nix"))
-
-  (spacemacs|define-custom-persp "Blog"
-    :binding "b"
-    :body
-    (when (y-or-n-p "Hi, do you want to create a new post?")
-      (call-interactively 'op/new-post))
-    )
 
   )
 
@@ -762,8 +772,7 @@ layers configuration."
             (make-local-variable
              (quote package-build-recipes-dir))
             default-directory)))))
- '(wakatime-api-key "813b0d78-1f17-43eb-bede-a5c008651d4a")
- '(wakatime-cli-path "/home/jarvis/nixos-config/common/"))
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -24,6 +24,7 @@
      soundcloud
      twitter
      utils
+     exwm
      ;; nand2tetris
 
      ;; Spacemacs

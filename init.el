@@ -156,7 +156,6 @@ before layers configuration."
                                :size 19
                                :weight normal
                                :width normal
-                               :spacing 70
                                :powerline-scale 1.1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"

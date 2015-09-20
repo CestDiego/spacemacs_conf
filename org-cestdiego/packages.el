@@ -22,7 +22,6 @@
     ox-cv
     mustache
     ht
-    (ob :location local)
     (org-protocol :location local)
     (org-capture :location local)
     (org-agenda :location local)

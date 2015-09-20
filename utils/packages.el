@@ -22,28 +22,40 @@
     flycheck-package
     general-close
     fontawesome
-    ;; wakatime-mode
+    wakatime-mode
     nameless
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
 
-;; (defun utils/pre-init-wakatime-mode ()
-;;   (spacemacs|use-package-add-hook wakatime-mode
-;;     :post-config
-;;     (defun wakatime-client-command (savep)
-;;       "Return client command executable and arguments.
-;;    Set SAVEP to non-nil for write action."
-;;       (format "%s --file \"%s\" %s --plugin %s/%s --key %s --time %.2f"
-;;               wakatime-cli-path
-;;               (buffer-file-name (current-buffer))
-;;               (if savep "--write" "")
-;;               wakatime-user-agent
-;;               wakatime-version
-;;               wakatime-api-key
-;;               (float-time)))
-;;     )
-;;   )
+(defun utils/pre-init-wakatime-mode ()
+  (spacemacs|use-package-add-hook wakatime-mode
+    :post-config
+    (defun wakatime-client-command (savep)
+      "Return client command executable and arguments.
+   Set SAVEP to non-nil for write action."
+      (format "%s --file \"%s\" %s --plugin %s/%s --key %s --time %.2f"
+              wakatime-cli-path
+              (buffer-file-name (current-buffer))
+              (if savep "--write" "")
+              wakatime-user-agent
+              wakatime-version
+              wakatime-api-key
+              (float-time)))
+    )
+  )
+
+(defun utils/init-nameless ()
+  (use-package nameless
+    :defer t
+    :init
+    ;; :vars nameless-prefix `:'
+    ;; :face nameless-face
+    ;; C-c C-- inserts the prefix
+    (add-hook 'emacs-lisp-mode-hook #'nameless-mode-from-hook)
+    (setq nameless-private-prefix t)
+    ))
+
 
 (defun utils/post-init-helm ()
   ;; Helm command to display HTTP status codes.

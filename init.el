@@ -19,7 +19,7 @@
            org-page-use-melpa-version nil
            org-page-built-directory "~/Projects/le_blog_built/")
      eshell
-     ;; org-cestdiego
+     org-cestdiego
      presentations
      soundcloud
      twitter

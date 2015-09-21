@@ -154,7 +154,6 @@
     (push ?\C-q exwm-input-prefix-keys)
     (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
 
-
     ;; Spacemacs Compatibility
     (exwm-input-set-key (kbd "s-:") 'evil-ex)
 

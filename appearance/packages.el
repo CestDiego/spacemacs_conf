@@ -64,26 +64,28 @@
       (setq spacemacs-theme-comment-bg t)
       (setq spacemacs-theme-org-height t))))
 
-;; (defun appearance/init-auto-dim-other-buffers ()
-;;   (use-package auto-dim-other-buffers
-;;     :ensure hexrgb
-;;     :init
-;;     (defadvice load-theme (after activate)
-;;       (setq dim-other-buffers-face-color (hexrgb-increment-equal-rgb
-;;                                           (face-background 'default) 2 -2))
-;;       (custom-set-faces
-;;        '(auto-dim-other-buffers-face ((t :background dim-other-buffers-face-color))))
+(defun appearance/init-auto-dim-other-buffers ()
+  (use-package auto-dim-other-buffers
+    :if nil
+    :ensure hexrgb
+    :init
+    (defadvice load-theme (after activate)
+      (setq dim-other-buffers-face-color (hexrgb-increment-equal-rgb
+                                          (face-background 'default) 2 -2))
+      (custom-set-faces
+       '(auto-dim-other-buffers-face ((t :background dim-other-buffers-face-color))))
 
-;;     :config
-;;     (add-hook 'after-init-hook (lambda ()
-;;                                  (when (fboundp 'auto-dim-other-buffers-mode)
-;;                                    (auto-dim-other-buffers-mode t))))
+    :config
+    (add-hook 'after-init-hook (lambda ()
+                                 (when (fboundp 'auto-dim-other-buffers-mode)
+                                   (auto-dim-other-buffers-mode t))))
 
-;; )))
+)))
 
-;; (defun appearance/init-hexrgb ()
-;;   (use-package hexrgb
-;;     :config
-;;     (setq dim-other-buffers-face-color (hexrgb-increment-equal-rgb (face-background 'default) 2 -10))
-;;     (set-face-attribute 'auto-dim-other-buffers-face nil
-;;                         :background  dim-other-buffers-face-color)))
+(defun appearance/init-hexrgb ()
+  (use-package hexrgb
+    :if nil
+    :config
+    (setq dim-other-buffers-face-color (hexrgb-increment-equal-rgb (face-background 'default) 2 -10))
+    (set-face-attribute 'auto-dim-other-buffers-face nil
+                        :background  dim-other-buffers-face-color)))

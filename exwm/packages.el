@@ -36,6 +36,18 @@
     :config
     (when dotspacemacs-use-ido
       (exwm-enable-ido-workaround))
+    (defun spacemacs/exwm-bind-command (key command &rest bindings)
+      (while key
+        (exwm-input-set-key (kbd key)
+                            `(lambda ()
+                               (interactive)
+                               (start-process-shell-command ,command nil ,command)))
+        (setq key     (pop bindings)
+              command (pop bindings))))
+
+    (spacemacs/exwm-bind-command
+     "<s-return>"  exwm--terminal-command)
+
     ;; All buffers created in EXWM mode are named "*EXWM*". You may want to change
     ;; it in `exwm-update-class-hook' and `exwm-update-title-hook', which are run
     ;; when a new window class name or title is available. Here's some advice on
@@ -103,15 +115,26 @@
         (exwm-layout-set-fullscreen)))
     (exwm-input-set-key (kbd "s-f") #'exwm-layout-toggle-fullscreen)
     ;; + Set shortcuts to switch to a certain workspace.
-    (exwm-input-set-key (kbd "s-0")
-                        (lambda () (interactive) (exwm-workspace-switch 0)))
     (exwm-input-set-key (kbd "s-1")
-                        (lambda () (interactive) (exwm-workspace-switch 1)))
+                        (lambda () (interactive) (exwm-workspace-switch 0)))
     (exwm-input-set-key (kbd "s-2")
-                        (lambda () (interactive) (exwm-workspace-switch 2)))
+                        (lambda () (interactive) (exwm-workspace-switch 1)))
     (exwm-input-set-key (kbd "s-3")
+                        (lambda () (interactive) (exwm-workspace-switch 2)))
+    (exwm-input-set-key (kbd "s-4")
                         (lambda () (interactive) (exwm-workspace-switch 3)))
-
+    (exwm-input-set-key (kbd "s-5")
+                        (lambda () (interactive) (exwm-workspace-switch 4)))
+    (exwm-input-set-key (kbd "s-6")
+                        (lambda () (interactive) (exwm-workspace-switch 5)))
+    (exwm-input-set-key (kbd "s-7")
+                        (lambda () (interactive) (exwm-workspace-switch 6)))
+    (exwm-input-set-key (kbd "s-8")
+                        (lambda () (interactive) (exwm-workspace-switch 7)))
+    (exwm-input-set-key (kbd "s-9")
+                        (lambda () (interactive) (exwm-workspace-switch 8)))
+    (exwm-input-set-key (kbd "s-0")
+                        (lambda () (interactive) (exwm-workspace-switch 9)))
     ;; + Application launcher ('M-&' also works if the output buffer does not
     ;;   bother you). Note that there is no need for processes to be created by
     ;;   Emacs.
@@ -130,6 +153,10 @@
     ;; The example shorten 'C-c q' to 'C-q'.
     (push ?\C-q exwm-input-prefix-keys)
     (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
+
+
+    ;; Spacemacs Compatibility
+    (exwm-input-set-key (kbd "s-:") 'evil-ex)
 
     ;; The following example demonstrates how to use simulation keys to mimic the
     ;; behavior of Emacs. The argument to `exwm-input-set-simulation-keys' is a

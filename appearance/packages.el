@@ -12,15 +12,6 @@
 (defun appearance/pre-init-exwm ()
   (spacemacs|use-package-add-hook exwm
     :post-config
-    (defun exwm-bind-command (key command &rest bindings)
-      (while key
-        (exwm-input-set-key (kbd key)
-                            `(lambda ()
-                              (interactive)
-                              (start-process-shell-command ,command nil ,command)))
-        (setq key     (pop bindings)
-              command (pop bindings))))
-
     (exwm-input-set-key (kbd "s-p")
                         (lambda (command)
                           (interactive (list (read-shell-command " ")))
@@ -41,9 +32,9 @@
     (exwm-input-set-key (kbd "s-L") #'evil-window-move-far-right)
     (exwm-input-set-key (kbd "s-]") #'exwm-workspace-next)
     (exwm-input-set-key (kbd "s-[") #'exwm-workspace-prev)
-    (exwm-bind-command
-     "S-s-S"                     "setxkbmap -layout es"
-     "S-s-D"                     "setxkbmap -layout us"
+    (spacemacs/exwm-bind-command
+     "S-s-S"                   "setxkbmap -layout es"
+     "S-s-D"                   "setxkbmap -layout us"
      "<s-return>"              "termite"
      "<print>"                 "imgur-screenshot && mplayer /usr/share/sounds/freedesktop/stereo/screen-capture.oga"
      "<XF86MonBrightnessDown>" "xbacklight -dec 10"

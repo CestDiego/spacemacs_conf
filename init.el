@@ -24,7 +24,8 @@
      soundcloud
      twitter
      utils
-     exwm
+     (exwm :variables
+           exwm--terminal-command "termite")
      ;; nand2tetris
 
      ;; Spacemacs

@@ -33,7 +33,6 @@
     :config
     (when dotspacemacs-use-ido
       (exwm-enable-ido-workaround))
-
     ;; All buffers created in EXWM mode are named "*EXWM*". You may want to change
     ;; it in `exwm-update-class-hook' and `exwm-update-title-hook', which are run
     ;; when a new window class name or title is available. Here's some advice on
@@ -67,7 +66,6 @@
     ;; + Bind a key to switch workspace interactively
     (exwm-input-set-key (kbd "s-w") 'exwm-workspace-switch)
 
-
     (defvar exwm-workspace-switch-wrap t
       "Whether `exwm-workspace-next' and `exwm-workspace-prev' should wrap.")
 
@@ -97,7 +95,7 @@
          (t (exwm-workspace-switch  (1- exwm-workspace-current-index))))))
     ;; + Set shortcuts to switch to a certain workspace.
     (exwm-input-set-key (kbd "s-]") #'exwm-workspace-next)
-    (exwm-input-set-key (kbd "s-[") #'exwm-workspace-next)
+    (exwm-input-set-key (kbd "s-[") #'exwm-workspace-prev)
     (exwm-input-set-key (kbd "s-0")
                         (lambda () (interactive) (exwm-workspace-switch 0)))
     (exwm-input-set-key (kbd "s-1")
@@ -106,6 +104,7 @@
                         (lambda () (interactive) (exwm-workspace-switch 2)))
     (exwm-input-set-key (kbd "s-3")
                         (lambda () (interactive) (exwm-workspace-switch 3)))
+
     ;; + Application launcher ('M-&' also works if the output buffer does not
     ;;   bother you). Note that there is no need for processes to be created by
     ;;   Emacs.
@@ -113,10 +112,10 @@
                         (lambda (command)
                           (interactive (list (read-shell-command "$ ")))
                           (start-process-shell-command command nil command)))
-    ;; + 'slock' is a simple X display locker provided by suckless tools. 'i3lock'
+    ;; + 'slock' is a simple X display locker provided by suckless tools. 'i3lock'
     ;;   is a more feature-rich alternative.
     (exwm-input-set-key (kbd "s-<f2>")
-                        (lambda () (interactive) (start-process "" nil "slock")))
+                        (lambda () (interactive) (start-process "" nil "i3lock")))
 
     ;; The following example demonstrates how to set a key binding only available
     ;; in line mode. It's simply done by first push the prefix key to
@@ -135,10 +134,8 @@
        ([?\C-f] . right)
        ([?\C-p] . up)
        ([?\C-n] . down)
-       ([?\C-a] . home)
-       ([?\C-e] . end)
        ([?\M-v] . prior)
-       ([?\C-v] . next)))
+       ))
 
     ;; Do not forget to enable EXWM. It will start by itself when things are ready.
     (exwm-enable)

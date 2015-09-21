@@ -6,7 +6,63 @@
     (spacemacs-theme :location
                      (recipe :fetcher github
                              :repo "CestDiego/spacemacs-theme"))
+    exwm
     ))
+
+(defun appearance/pre-init-exwm ()
+  (spacemacs|use-package-add-hook exwm
+    :post-config
+    (defun exwm-bind-command (key command &rest bindings)
+      (while key
+        (exwm-input-set-key (kbd key)
+                            `(lambda ()
+                              (interactive)
+                              (start-process-shell-command ,command nil ,command)))
+        (setq key     (pop bindings)
+              command (pop bindings))))
+
+    (exwm-input-set-key (kbd "s-p")
+                        (lambda (command)
+                          (interactive (list (read-shell-command " ")))
+                          (start-process-shell-command command nil command)))
+    (exwm-input-set-key (kbd "s-q")
+                        (lambda ()
+                          (interactive)
+                          (exwm-manage--close-window exwm--id)))
+    (exwm-input-set-key (kbd "s-SPC") #'exwm-floating-toggle-floating)
+    (exwm-input-set-key (kbd "s-m")   #'exwm-floating-hide-mode-line)
+    (exwm-input-set-key (kbd "s-h") #'evil-window-left)
+    (exwm-input-set-key (kbd "s-j") #'evil-window-down)
+    (exwm-input-set-key (kbd "s-k") #'evil-window-up)
+    (exwm-input-set-key (kbd "s-l") #'evil-window-right)
+    (exwm-input-set-key (kbd "s-H") #'evil-window-move-far-left)
+    (exwm-input-set-key (kbd "s-J") #'evil-window-move-very-bottom)
+    (exwm-input-set-key (kbd "s-K") #'evil-window-move-very-top)
+    (exwm-input-set-key (kbd "s-L") #'evil-window-move-far-right)
+    (defun exwm-layout-toggle-fullscreen ()
+      "Hopefully Togggles full screen for X Apps"
+      (interactive)
+      (if exwm--fullscreen
+          (exwm-layout-unset-fullscreen)
+        (exwm-layout-set-fullscreen)))
+    (exwm-input-set-key (kbd "s-f") #'exwm-layout-toggle-fullscreen)
+    (exwm-bind-command
+     "s-S"                     "setxkbmap -layout es"
+     "s-D"                     "setxkbmap -layout us"
+     "<s-return>"              "termite"
+     "<print>"                 "imgur-screenshot && mplayer /usr/share/sounds/freedesktop/stereo/screen-capture.oga"
+     "<XF86MonBrightnessDown>" "xbacklight -dec 10"
+     "<XF86MonBrightnessUp>"   "xbacklight -inc 10"
+     "<XF86AudioMute>"         "amixer -q set Master 100%- unmute"
+     "<XF86AudioLowerVolume>"  "amixer -q set Master 10%- unmute"
+     "<XF86AudioRaiseVolume>"  "amixer -q set Master 10%+ unmute"
+     "<XF86AudioPlay>"         "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+     "<XF86AudioStop>"         "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop"
+     "<XF86AudioNext>"         "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+     "<XF86AudioPrev>"         "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+     )
+    ))
+
 
 (defun appearance/init-nerd-fonts ()
   (use-package nerd-fonts

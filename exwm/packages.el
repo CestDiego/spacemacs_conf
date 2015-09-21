@@ -66,7 +66,38 @@
     (exwm-input-set-key (kbd "s-r") 'exwm-reset)
     ;; + Bind a key to switch workspace interactively
     (exwm-input-set-key (kbd "s-w") 'exwm-workspace-switch)
+
+
+    (defvar exwm-workspace-switch-wrap t
+      "Whether `exwm-workspace-next' and `exwm-workspace-prev' should wrap.")
+
+    (defun exwm-workspace-next ()
+      "Switch to next exwm-workspaceective (to the right)."
+      (interactive)
+      (let* ((only-workspace? (equal exwm-workspace-number 1))
+             (overflow? (= exwm-workspace-current-index
+                           (1- exwm-workspace-number))))
+        (cond
+         (only-workspace? nil)
+         (overflow?
+          (when exwm-workspace-switch-wrap
+              (exwm-workspace-switch 0)))
+         (t (exwm-workspace-switch  (1+ exwm-workspace-current-index))))))
+
+    (defun exwm-workspace-prev ()
+      "Switch to next exwm-workspaceective (to the right)."
+      (interactive)
+      (let* ((only-workspace? (equal exwm-workspace-number 1))
+             (overflow? (= exwm-workspace-current-index 0)))
+        (cond
+         (only-workspace? nil)
+         (overflow?
+          (when exwm-workspace-switch-wrap
+            (exwm-workspace-switch (1- exwm-workspace-number))))
+         (t (exwm-workspace-switch  (1- exwm-workspace-current-index))))))
     ;; + Set shortcuts to switch to a certain workspace.
+    (exwm-input-set-key (kbd "s-]") #'exwm-workspace-next)
+    (exwm-input-set-key (kbd "s-[") #'exwm-workspace-next)
     (exwm-input-set-key (kbd "s-0")
                         (lambda () (interactive) (exwm-workspace-switch 0)))
     (exwm-input-set-key (kbd "s-1")

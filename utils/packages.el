@@ -23,7 +23,7 @@
     general-close
     fontawesome
     wakatime-mode
-    nameless
+    ;; nameless
     (nix-mode :location local)
     )
   "List of all packages to install and/or initialize. Built-in packages

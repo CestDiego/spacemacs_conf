@@ -24,9 +24,13 @@
     fontawesome
     wakatime-mode
     nameless
+    (nix-mode :location local)
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
+
+(defun utils/init-nix-mode ()
+  (use-package nix-mode))
 
 (defun utils/pre-init-wakatime-mode ()
   (spacemacs|use-package-add-hook wakatime-mode

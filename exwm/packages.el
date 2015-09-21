@@ -28,8 +28,11 @@
     :init
     ;; Disable dialog boxes since they are unusable in EXWM
     (setq use-dialog-box nil)
+    ;; 10 Worskpaces please
+    (setq exwm-workspace-number 10)
     ;; You may want Emacs to show you the time
     (display-time-mode t)
+    (push ?\M-m exwm-input-prefix-keys)
     :config
     (when dotspacemacs-use-ido
       (exwm-enable-ido-workaround))
@@ -81,7 +84,6 @@
           (when exwm-workspace-switch-wrap
               (exwm-workspace-switch 0)))
          (t (exwm-workspace-switch  (1+ exwm-workspace-current-index))))))
-
     (defun exwm-workspace-prev ()
       "Switch to next exwm-workspaceective (to the right)."
       (interactive)
@@ -93,9 +95,14 @@
           (when exwm-workspace-switch-wrap
             (exwm-workspace-switch (1- exwm-workspace-number))))
          (t (exwm-workspace-switch  (1- exwm-workspace-current-index))))))
+    (defun exwm-layout-toggle-fullscreen ()
+      "Hopefully Togggles full screen for X Apps"
+      (interactive)
+      (if exwm--fullscreen
+          (exwm-layout-unset-fullscreen)
+        (exwm-layout-set-fullscreen)))
+    (exwm-input-set-key (kbd "s-f") #'exwm-layout-toggle-fullscreen)
     ;; + Set shortcuts to switch to a certain workspace.
-    (exwm-input-set-key (kbd "s-]") #'exwm-workspace-next)
-    (exwm-input-set-key (kbd "s-[") #'exwm-workspace-prev)
     (exwm-input-set-key (kbd "s-0")
                         (lambda () (interactive) (exwm-workspace-switch 0)))
     (exwm-input-set-key (kbd "s-1")

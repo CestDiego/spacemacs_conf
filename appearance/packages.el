@@ -29,7 +29,7 @@
                         (lambda ()
                           (interactive)
                           (exwm-manage--close-window exwm--id)))
-    (exwm-input-set-key (kbd "s-SPC") #'exwm-floating-toggle-floating)
+    (exwm-input-set-key (kbd "S-s-SPC") #'exwm-floating-toggle-floating)
     (exwm-input-set-key (kbd "s-m")   #'exwm-floating-hide-mode-line)
     (exwm-input-set-key (kbd "s-h") #'evil-window-left)
     (exwm-input-set-key (kbd "s-j") #'evil-window-down)
@@ -39,16 +39,11 @@
     (exwm-input-set-key (kbd "s-J") #'evil-window-move-very-bottom)
     (exwm-input-set-key (kbd "s-K") #'evil-window-move-very-top)
     (exwm-input-set-key (kbd "s-L") #'evil-window-move-far-right)
-    (defun exwm-layout-toggle-fullscreen ()
-      "Hopefully Togggles full screen for X Apps"
-      (interactive)
-      (if exwm--fullscreen
-          (exwm-layout-unset-fullscreen)
-        (exwm-layout-set-fullscreen)))
-    (exwm-input-set-key (kbd "s-f") #'exwm-layout-toggle-fullscreen)
+    (exwm-input-set-key (kbd "s-]") #'exwm-workspace-next)
+    (exwm-input-set-key (kbd "s-[") #'exwm-workspace-prev)
     (exwm-bind-command
-     "s-S"                     "setxkbmap -layout es"
-     "s-D"                     "setxkbmap -layout us"
+     "S-s-S"                     "setxkbmap -layout es"
+     "S-s-D"                     "setxkbmap -layout us"
      "<s-return>"              "termite"
      "<print>"                 "imgur-screenshot && mplayer /usr/share/sounds/freedesktop/stereo/screen-capture.oga"
      "<XF86MonBrightnessDown>" "xbacklight -dec 10"

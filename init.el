@@ -41,8 +41,8 @@
              colors-enable-nyan-cat-progress-bar `,(display-graphic-p)
              colors-enable-rainbow-identifiers nil)
 
-     (perspectives :variables
-                   perspectives-display-help t)
+     ;; (perspectives :variables
+     ;;               perspectives-display-help t)
      ;; eyebrowse
      chrome
      (erc :variables

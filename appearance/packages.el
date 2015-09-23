@@ -23,6 +23,7 @@
                               (exwm-manage--close-window exwm--id))
                           (delete-window)))
 
+    (exwm-input-set-key (kbd "s-b") #'helm-mini)
     (exwm-input-set-key (kbd "S-s-SPC") #'exwm-floating-toggle-floating)
     (exwm-input-set-key (kbd "s-m")   #'exwm-floating-hide-mode-line)
     (exwm-input-set-key (kbd "s-h") #'evil-window-left)

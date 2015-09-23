@@ -19,7 +19,10 @@
     (exwm-input-set-key (kbd "s-q")
                         (lambda ()
                           (interactive)
-                          (exwm-manage--close-window exwm--id)))
+                          (when exwm--id
+                              (exwm-manage--close-window exwm--id))
+                          (delete-window)))
+
     (exwm-input-set-key (kbd "S-s-SPC") #'exwm-floating-toggle-floating)
     (exwm-input-set-key (kbd "s-m")   #'exwm-floating-hide-mode-line)
     (exwm-input-set-key (kbd "s-h") #'evil-window-left)

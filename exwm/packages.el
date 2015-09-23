@@ -32,7 +32,19 @@
     (setq exwm-workspace-number 10)
     ;; You may want Emacs to show you the time
     (display-time-mode t)
-    (push ?\M-m exwm-input-prefix-keys)
+    (when exwm-hide-tiling-modeline
+      (add-hook 'exwm-mode-hook #'hidden-mode-line-mode))
+    ;; (defun exwm-launch-term ()
+    ;;   (start-process-shell-command exwm--terminal-command
+    ;;                                nil exwm--terminal-command))
+    ;; (defun shell-pop-exwm-term (index)
+    ;;   (interactive "P")
+    ;;   (require 'shell-pop)
+    ;;   (shell-pop--set-shell-type
+    ;;    'shell-pop-shell-type
+    ;;    '("exwm-term"
+    ;;      "*EXWM Termite*" (lambda nil (funcall #'exwm-launch-term))))
+    ;;   (shell-pop index))
     :config
     (when dotspacemacs-use-ido
       (exwm-enable-ido-workaround))
@@ -154,7 +166,10 @@
     (push ?\C-q exwm-input-prefix-keys)
     (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
 
+
+
     ;; Spacemacs Compatibility
+    (push ?\M-m exwm-input-prefix-keys) ;; M-m leader
     (exwm-input-set-key (kbd "s-:") 'evil-ex)
 
     ;; The following example demonstrates how to use simulation keys to mimic the
@@ -162,16 +177,15 @@
     ;; list of cons cells (SRC . DEST), where SRC is the key sequence you press and
     ;; DEST is what EXWM actually sends to application. Note that SRC must be a key
     ;; sequence (of type vector or string), while DEST can also be a single key.
-    (exwm-input-set-simulation-keys
-     '(([?\C-b] . left)
-       ([?\C-f] . right)
-       ([?\C-p] . up)
-       ([?\C-n] . down)
-       ([?\M-v] . prior)
-       ))
+
+    ;; (exwm-input-set-simulation-keys
+    ;;  '(([?\C-b] . left)
+    ;;    ([?\C-f] . right)
+    ;;    ([?\C-p] . up)
+    ;;    ([?\C-n] . down)
+    ;;    ([?\M-v] . prior)
+    ;;    ))
 
     ;; Do not forget to enable EXWM. It will start by itself when things are ready.
-    (exwm-enable)
+    ;; (exwm-enable)
     ))
-
-

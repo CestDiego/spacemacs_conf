@@ -26,14 +26,22 @@
     (exwm-input-set-key (kbd "s-b") #'helm-mini)
     (exwm-input-set-key (kbd "S-s-SPC") #'exwm-floating-toggle-floating)
     (exwm-input-set-key (kbd "s-m")   #'exwm-floating-hide-mode-line)
+    ;; Focusing windows
     (exwm-input-set-key (kbd "s-h") #'evil-window-left)
     (exwm-input-set-key (kbd "s-j") #'evil-window-down)
     (exwm-input-set-key (kbd "s-k") #'evil-window-up)
     (exwm-input-set-key (kbd "s-l") #'evil-window-right)
+    ;; Moving Windows
     (exwm-input-set-key (kbd "s-H") #'evil-window-move-far-left)
     (exwm-input-set-key (kbd "s-J") #'evil-window-move-very-bottom)
     (exwm-input-set-key (kbd "s-K") #'evil-window-move-very-top)
     (exwm-input-set-key (kbd "s-L") #'evil-window-move-far-right)
+    ;; Resize
+    (exwm-input-set-key (kbd "M-s-h") #'spacemacs/shrink-window-horizontally)
+    (exwm-input-set-key (kbd "M-s-j") #'spacemacs/shrink-window)
+    (exwm-input-set-key (kbd "M-s-k") #'spacemacs/enlarge-window)
+    (exwm-input-set-key (kbd "M-s-l") #'spacemacs/enlarge-window-horizontally)
+    ;; Workspaces
     (exwm-input-set-key (kbd "s-]") #'exwm-workspace-next)
     (exwm-input-set-key (kbd "s-[") #'exwm-workspace-prev)
     (spacemacs/exwm-bind-command

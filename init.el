@@ -35,7 +35,7 @@
      ;;Version Control
      version-control
      (git :variables
-          git-magit-status-fullscreen nil)
+          git-magit-status-fullscreen t)
      github
      prodigy
      (colors :variables
@@ -110,7 +110,9 @@
    dotspacemacs-additional-packages '(visual-fill-column
                                       systemd)
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '(evil-org)
+   dotspacemacs-excluded-packages '(evil-org
+                                    erc-yank
+                                    erc-gitter)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of
    ;; the list `dotspacemacs-configuration-layers'

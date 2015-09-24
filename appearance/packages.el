@@ -29,9 +29,6 @@
                             (exwm-manage--close-window exwm--id))
                           (delete-window)))
 
-    ;; C-c is for copying and C-h for history in chrome and also to go back char
-    (delete ?\C-c exwm-input-prefix-keys)
-    (delete ?\C-h exwm-input-prefix-keys)
 
     ;; Shell (not a real one for the moment)
     (exwm-input-set-key (kbd "C-'") #'spacemacs/default-pop-shell)

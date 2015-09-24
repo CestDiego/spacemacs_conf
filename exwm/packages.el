@@ -166,10 +166,14 @@
     (push ?\C-q exwm-input-prefix-keys)
     (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
 
-
-
     ;; Spacemacs Compatibility
     (push ?\M-m exwm-input-prefix-keys) ;; M-m leader
+    ;; C-c, C-x are needed for copying and pasting
+    (delete ?\C-x exwm-input-prefix-keys)
+    (delete ?\C-c exwm-input-prefix-keys)
+    ;; We can use `M-m h' to access help
+    (delete ?\C-h exwm-input-prefix-keys)
+    (exwm-input-set-key (kbd "s-;") 'helm-M-x)
     (exwm-input-set-key (kbd "s-:") 'evil-ex)
 
     ;; The following example demonstrates how to use simulation keys to mimic the

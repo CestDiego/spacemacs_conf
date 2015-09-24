@@ -19,13 +19,33 @@
     (exwm-input-set-key (kbd "s-q")
                         (lambda ()
                           (interactive)
+                          (if exwm--id
+                              (exwm-manage--close-window exwm--id)
+                            (kill-this-buffer))))
+    (exwm-input-set-key (kbd "s-Q")
+                        (lambda ()
+                          (interactive)
                           (when exwm--id
-                              (exwm-manage--close-window exwm--id))
+                            (exwm-manage--close-window exwm--id))
                           (delete-window)))
 
+    ;; C-c is for copying and C-h for history in chrome and also to go back char
+    (delete ?\C-c exwm-input-prefix-keys)
+    (delete ?\C-h exwm-input-prefix-keys)
+
+    ;; Shell (not a real one for the moment)
+    (exwm-input-set-key (kbd "C-'") #'spacemacs/default-pop-shell)
+    ;; Recent buffers?
+    (exwm-input-set-key (kbd "<C-s-tab>") #'spacemacs/previous-useful-buffer)
+    (exwm-input-set-key (kbd "<M-s-tab>") #'spacemacs/next-useful-buffer)
+    ;; Change buffers
     (exwm-input-set-key (kbd "s-b") #'helm-mini)
+    ;; floating yo
     (exwm-input-set-key (kbd "S-s-SPC") #'exwm-floating-toggle-floating)
     (exwm-input-set-key (kbd "s-m")   #'exwm-floating-hide-mode-line)
+    ;; Undo window configurations
+    (exwm-input-set-key (kbd "s-u") #'winner-undo)
+    (exwm-input-set-key (kbd "s-U") #'winner-redo)
     ;; Focusing windows
     (exwm-input-set-key (kbd "s-h") #'evil-window-left)
     (exwm-input-set-key (kbd "s-j") #'evil-window-down)
@@ -36,6 +56,9 @@
     (exwm-input-set-key (kbd "s-J") #'evil-window-move-very-bottom)
     (exwm-input-set-key (kbd "s-K") #'evil-window-move-very-top)
     (exwm-input-set-key (kbd "s-L") #'evil-window-move-far-right)
+    ;; Split Windows
+    (exwm-input-set-key (kbd "C-s-j") #'split-window-below-and-focus)
+    (exwm-input-set-key (kbd "C-s-l") #'split-window-right-and-focus)
     ;; Resize
     (exwm-input-set-key (kbd "M-s-h") #'spacemacs/shrink-window-horizontally)
     (exwm-input-set-key (kbd "M-s-j") #'spacemacs/shrink-window)

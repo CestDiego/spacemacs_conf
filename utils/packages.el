@@ -24,6 +24,7 @@
     fontawesome
     wakatime-mode
     ;; nameless
+    keyfreq
     (nix-mode :location local)
     )
   "List of all packages to install and/or initialize. Built-in packages
@@ -180,3 +181,14 @@ which require an initialization must be listed explicitly in the list.")
     :init
     (firestarter-mode)
     ))
+
+(defun utils/init-keyfreq ()
+  (use-package keyfreq
+    :init
+    (setq keyfreq-file      (concat spacemacs-cache-directory "keyfreq")
+          keyfreq-file-lock (concat spacemacs-cache-directory "keyfreq.lock"))
+    :config
+    (evil-leader/set-key
+      "aK" 'keyfreq-show)
+    (keyfreq-mode 1)
+    (keyfreq-autosave-mode 1)))

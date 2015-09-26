@@ -108,6 +108,7 @@
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dostspacemacs/config'.
    dotspacemacs-additional-packages '(visual-fill-column
+                                      w3m
                                       systemd)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(evil-org

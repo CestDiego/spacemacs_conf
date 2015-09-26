@@ -131,6 +131,17 @@
           (exwm-layout-unset-fullscreen)
         (exwm-layout-set-fullscreen)))
     (exwm-input-set-key (kbd "s-f") #'exwm-layout-toggle-fullscreen)
+
+    ;; Quick swtiching between workspaces
+    (defvar exwm-toggle-workspace 0
+      "Previously selected workspace. Used with `exwm-jump-to-last-exwm'.")
+    (defun exwm-jump-to-last-exwm ()
+      (interactive)
+      (exwm-workspace-switch exwm-toggle-workspace))
+    (defadvice exwm-workspace-switch (before save-toggle-workspace activate)
+      (setq exwm-toggle-workspace exwm-workspace-current-index))
+    (exwm-input-set-key (kbd "<s-tab>") #'exwm-jump-to-last-exwm)
+
     ;; + Set shortcuts to switch to a certain workspace.
     (exwm-input-set-key (kbd "s-1")
                         (lambda () (interactive) (exwm-workspace-switch 0)))

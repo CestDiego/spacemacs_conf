@@ -561,6 +561,13 @@ layers configuration."
     (setq op/personal-disqus-shortname "cestdiego")
     (setq op/personal-google-analytics-id "UA-40864129-3"))
 
+  (when (configuration-layer/layer-usedp 'exwm)
+    ;; Helm should show only in its current window
+    (setq helm-display-function
+          (lambda (buf)
+            (pop-to-buffer buf
+                           '(display-buffer-below-selected . ((window-height . 0.4)
+                                                              (side . 'bottom)))))))
   ;; (when (configuration-layer/layer-usedp 'wakatime)
   ;;   (defun wakatime-client-command (savep)
   ;;     "Return client command executable and arguments.

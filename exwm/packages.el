@@ -124,13 +124,15 @@
           (when exwm-workspace-switch-wrap
             (exwm-workspace-switch (1- exwm-workspace-number))))
          (t (exwm-workspace-switch  (1- exwm-workspace-current-index))))))
-    (defun exwm-layout-toggle-fullscreen ()
-      "Hopefully Togggles full screen for X Apps"
+    (defun spacemacs/exwm-layout-toggle-fullscreen ()
+      "Togggles full screen for Emacs and X windows"
       (interactive)
-      (if exwm--fullscreen
-          (exwm-layout-unset-fullscreen)
-        (exwm-layout-set-fullscreen)))
-    (exwm-input-set-key (kbd "s-f") #'exwm-layout-toggle-fullscreen)
+      (if exwm--id
+          (if exwm--fullscreen
+              (exwm-reset)
+            (exwm-layout-set-fullscreen))
+        (spacemacs/toggle-maximize-buffer)))
+    (exwm-input-set-key (kbd "s-f") #'spacemacs/exwm-layout-toggle-fullscreen)
 
     ;; Quick swtiching between workspaces
     (defvar exwm-toggle-workspace 0

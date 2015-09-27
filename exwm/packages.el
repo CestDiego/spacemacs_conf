@@ -48,7 +48,7 @@
     ;;   (shell-pop--set-shell-type
     ;;    'shell-pop-shell-type
     ;;    '("exwm-term"
-    ;;      "*EXWM Termite*" (lambda nil (funcall #'exwm-launch-term))))
+    ;;      "Termite" #'exwm-launch-term))
     ;;   (shell-pop index))
     :config
     (when dotspacemacs-use-ido

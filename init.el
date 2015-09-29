@@ -96,6 +96,7 @@
      sql
      haskell
      javascript
+     react
      ruby
      extra-langs
      ranger
@@ -501,40 +502,66 @@ layers configuration."
   ;; (setq helm-ag-insert-at-point 'symbol)
   ;; (setq helm-ag-fuzzy-match t)
 
+  (when (configuration-layer/layer-usedp 'react)
+    (defun spacemacs/toggle-web-js2-mode ()
+      (interactive)
+      (if (eq major-mode 'js2-mode)
+          (progn
+            (web-mode)
+            (setq web-mode-content-type "html"))
+        (js2-mode)))
+    (evil-leader/set-key-for-mode 'web-mode
+      "m," 'spacemacs/toggle-web-js2-mode)
+    (evil-leader/set-key-for-mode 'js2-mode
+      "m," 'spacemacs/toggle-web-js2-mode))
+
   (when (configuration-layer/layer-usedp 'javascript)
     (setq js2-global-externs '("require" "module" "jest" "jasmine"
                                "it" "expect" "describe" "beforeEach"))
     ;; Fix Identation in JS
-    (setq js-indent-level                 2
-          js2-basic-offset                2
-          js-switch-indent-offset         2
-          js2-indent-switch-body          2
-          js2-strict-missing-semi-warning nil)
+    (setq-default
+     ;; js2-mode
+     js2-strict-missing-semi-warning nil
+     js2-basic-offset                2
+     js-indent-level                 2
+     js-switch-indent-offset         2
+     js2-indent-switch-body          2
+     ;; web-mode
+     css-indent-offset               2
+     web-mode-markup-indent-offset   2
+     web-mode-css-indent-offset      2
+     web-mode-code-indent-offset     2
+     web-mode-attr-indent-offset     2)
 
-    (eval-after-load 'flycheck-mode
-      '(flycheck-define-checker jsxhint-checker
-         "A JSX syntax and style checker based on JSXHint."
-         :command ("jsxhint" source)
-         :error-patterns
-         ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
-         :modes (web-mode)))
+    (with-eval-after-load 'web-mode
+      (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+      (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
+      (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
 
-    (add-hook 'web-mode-hook
-       (lambda ()
-         (when (equal web-mode-content-type "jsx")
-           ;; enable flycheck
-           (setq web-mode-indent-style 2
-                 web-mode-markup-indent-offset 2
-                 web-mode-css-indent-offset 2
-                 web-mode-code-indent-offset 2)
-           (flycheck-select-checker 'jsxhint-checker)
-           (flycheck-mode))))
+    ;; (eval-after-load 'flycheck-mode
+    ;;   '(flycheck-define-checker jsxhint-checker
+    ;;      "A JSX syntax and style checker based on JSXHint."
+    ;;      :command ("jsxhint" source)
+    ;;      :error-patterns
+    ;;      ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
+    ;;      :modes (web-mode)))
 
-    (defadvice web-mode-highlight-part (around tweak-jsx activate)
-      (if (equal web-mode-content-type "jsx")
-          (let ((web-mode-enable-part-face nil))
-            ad-do-it)
-        ad-do-it))
+    ;; (add-hook 'web-mode-hook
+    ;;    (lambda ()
+    ;;      (when (equal web-mode-content-type "jsx")
+    ;;        ;; enable flycheck
+    ;;        (setq web-mode-indent-style 2
+    ;;              web-mode-markup-indent-offset 2
+    ;;              web-mode-css-indent-offset 2
+    ;;              web-mode-code-indent-offset 2)
+    ;;        (flycheck-select-checker 'jsxhint-checker)
+    ;;        (flycheck-mode))))
+
+    ;; (defadvice web-mode-highlight-part (around tweak-jsx activate)
+    ;;   (if (equal web-mode-content-type "jsx")
+    ;;       (let ((web-mode-enable-part-face nil))
+    ;;         ad-do-it)
+    ;;     ad-do-it))
 
     (defun json-format ()
       (interactive)
@@ -599,6 +626,7 @@ layers configuration."
 
   ;;; BEGIN: Custom Hybrid Bindings
   (define-key evil-hybrid-state-map (kbd "S-<return>") 'evil-open-below)
+  (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
   ;;; END:   Custom Hybrid Bindings
 
   ;;; BEGIN: Multiple Cursors

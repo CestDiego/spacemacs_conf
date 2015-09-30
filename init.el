@@ -534,6 +534,7 @@ layers configuration."
      web-mode-attr-indent-offset     2)
 
     (with-eval-after-load 'web-mode
+      (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
       (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
       (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
       (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
@@ -626,7 +627,6 @@ layers configuration."
 
   ;;; BEGIN: Custom Hybrid Bindings
   (define-key evil-hybrid-state-map (kbd "S-<return>") 'evil-open-below)
-  (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
   ;;; END:   Custom Hybrid Bindings
 
   ;;; BEGIN: Multiple Cursors

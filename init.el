@@ -273,6 +273,8 @@ layers configuration."
   (setq spacemacs-mode-line-minor-modesp nil
         spacemacs/mode-line-battery-time 1)
 
+  (setq magit-push-always-verify nil)
+
   (add-hook 'emacs-lisp-mode-hook
      (lambda ()
        (push '("add-hook" . ?) prettify-symbols-alist)

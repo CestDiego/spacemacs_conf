@@ -598,18 +598,6 @@ layers configuration."
             (pop-to-buffer buf
                            '(display-buffer-below-selected . ((window-height . 0.4)
                                                               (side . 'bottom)))))))
-  ;; (when (configuration-layer/layer-usedp 'wakatime)
-  ;;   (defun wakatime-client-command (savep)
-  ;;     "Return client command executable and arguments.
-  ;;  Set SAVEP to non-nil for write action."
-  ;;     (format "%s --file \"%s\" %s --plugin %s/%s --key %s --time %.2f"
-  ;;             wakatime-cli-path
-  ;;             (buffer-file-name (current-buffer))
-  ;;             (if savep "--write" "")
-  ;;             wakatime-user-agent
-  ;;             wakatime-version
-  ;;             wakatime-api-key
-  ;;             (float-time))))
 
   ;;; BEGIN: Mouse Support
   (global-set-key (kbd "<C-s-mouse-4>") (lambda () (interactive)

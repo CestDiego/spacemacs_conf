@@ -368,7 +368,7 @@ layers configuration."
   ;; (setq python-shell-virtualenv-path "/usr/")
 
   (setq python-shell-interpreter "ipython")
-  (setq python-shell-interpreter-args "-i --gui=wx")
+  ;; (setq python-shell-interpreter-args "-i --gui=wx")
 
 
   (setq powerline-default-separator 'alternate)

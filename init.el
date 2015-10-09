@@ -389,7 +389,16 @@ layers configuration."
       :args '("dev" )
       :cwd "~/Projects/flat"
       :kill-signal 'sigkill
-      :kill-process-buffer-on-stop t))
+      :kill-process-buffer-on-stop t)
+
+    (prodigy-define-service
+      :name "Chulip Server"
+      :command "npm"
+      :args '("run" "dev" )
+      :cwd "~/Projects/chulip"
+      :kill-signal 'sigkill
+      :kill-process-buffer-on-stop t)
+    )
 
   (when (configuration-layer/layer-usedp 'syntax-checking)
     (setq flycheck-emacs-lisp-load-path 'inherit)

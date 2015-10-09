@@ -280,8 +280,6 @@ layers configuration."
        (push '("add-hook" . ?) prettify-symbols-alist)
        (push '("defun" . ?𝆑) prettify-symbols-alist)))
 
-  (global-prettify-symbols-mode)
-
   ;; (setq git-gutter-fr:side 'left-fringe)
   ;;; SANE DEFAULTS!!
   (add-hook 'visual-line-mode-hook 'visual-fill-column-mode)
@@ -520,22 +518,31 @@ layers configuration."
   (when (configuration-layer/layer-usedp 'javascript)
     (setq js2-global-externs '("require" "module" "jest" "jasmine"
                                "it" "expect" "describe" "beforeEach"))
+
+    (spacemacs/add-to-hooks
+     (lambda ()
+       (push '("function" . ?𝆑) prettify-symbols-alist)
+       (push '("React" . ?) prettify-symbols-alist)
+       (push '("() =>" . ?λ) prettify-symbols-alist))
+     '(js2-mode-hook web-mode-hook))
     ;; Fix Identation in JS
-    (setq-default
-     ;; js2-mode
-     js2-strict-missing-semi-warning nil
-     js2-basic-offset                2
-     js-indent-level                 2
-     js-switch-indent-offset         2
-     js2-indent-switch-body          2
-     ;; web-mode
-     css-indent-offset               2
-     web-mode-markup-indent-offset   2
-     web-mode-css-indent-offset      2
-     web-mode-code-indent-offset     2
-     web-mode-attr-indent-offset     2)
+    (setq-default javascript-indent-lever         2
+                  js-indent-level                 2
+                  js-switch-indent-offset         2
+                  js2-basic-offset                2
+                  js2-indent-switch-body          2
+                  js2-strict-missing-semi-warning nil
+                  ;; coffeescript
+                  coffee-tab-width                2
+                  ;; web-mode
+                  css-indent-offset               2
+                  web-mode-markup-indent-offset   2
+                  web-mode-css-indent-offset      2
+                  web-mode-code-indent-offset     2
+                  web-mode-attr-indent-offset     2)
 
     (with-eval-after-load 'web-mode
+      (setq emmet-expand-jsx-className? t)
       (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
       (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
       (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
@@ -680,6 +687,8 @@ layers configuration."
   ;;       (if file
   ;;           (find-file file)
   ;;         (revert-buffer bang (or bang (not (buffer-modified-p))) t))))
+
+  (global-prettify-symbols-mode)
   )
 
 (custom-set-variables

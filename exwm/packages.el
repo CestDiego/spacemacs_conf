@@ -37,8 +37,9 @@
     (setq exwm-workspace-number 10)
     ;; You may want Emacs to show you the time
     (display-time-mode t)
-    (when exwm-hide-tiling-modeline
+    (when exwm--hide-tiling-modeline
       (add-hook 'exwm-mode-hook #'hidden-mode-line-mode))
+    ;; Trying to make shell-pop with a real terminal :P
     ;; (defun exwm-launch-term ()
     ;;   (start-process-shell-command exwm--terminal-command
     ;;                                nil exwm--terminal-command))
@@ -91,13 +92,6 @@
                    (string= "gimp" exwm-instance-name))
            (exwm-workspace-rename-buffer exwm-title))))
 
-    ;; `exwm-input-set-key' allows you to set a global key binding (available in
-    ;; any case). Following are a few examples.
-    ;; + We always need a way to go back to line-mode from char-mode
-    (exwm-input-set-key (kbd "s-r") 'exwm-reset)
-    ;; + Bind a key to switch workspace interactively
-    (exwm-input-set-key (kbd "s-w") 'exwm-workspace-switch)
-
     (defvar exwm-workspace-switch-wrap t
       "Whether `spacemacs/exwm-workspace-next' and `spacemacs/exwm-workspace-prev' should wrap.")
 
@@ -132,7 +126,6 @@
               (exwm-reset)
             (exwm-layout-set-fullscreen))
         (spacemacs/toggle-maximize-buffer)))
-    (exwm-input-set-key (kbd "s-f") #'spacemacs/exwm-layout-toggle-fullscreen)
 
     ;; Quick swtiching between workspaces
     (defvar exwm-toggle-workspace 0
@@ -142,8 +135,16 @@
       (exwm-workspace-switch exwm-toggle-workspace))
     (defadvice exwm-workspace-switch (before save-toggle-workspace activate)
       (setq exwm-toggle-workspace exwm-workspace-current-index))
-    (exwm-input-set-key (kbd "<s-tab>") #'exwm-jump-to-last-exwm)
 
+    ;; `exwm-input-set-key' allows you to set a global key binding (available in
+    ;; any case). Following are a few examples.
+    ;; + We always need a way to go back to line-mode from char-mode
+    (exwm-input-set-key (kbd "s-r") 'exwm-reset)
+
+    (exwm-input-set-key (kbd "s-f") #'spacemacs/exwm-layout-toggle-fullscreen)
+    (exwm-input-set-key (kbd "<s-tab>") #'exwm-jump-to-last-exwm)
+    ;; + Bind a key to switch workspace interactively
+    (exwm-input-set-key (kbd "s-w") 'exwm-workspace-switch)
     ;; + Set shortcuts to switch to a certain workspace.
     (exwm-input-set-key (kbd "s-1")
                         (lambda () (interactive) (exwm-workspace-switch 0)))
@@ -168,14 +169,14 @@
     ;; + Application launcher ('M-&' also works if the output buffer does not
     ;;   bother you). Note that there is no need for processes to be created by
     ;;   Emacs.
-    (exwm-input-set-key (kbd "s-&")
+    (exwm-input-set-key (kbd "s-SPC")
                         (lambda (command)
                           (interactive (list (read-shell-command "$ ")))
                           (start-process-shell-command command nil command)))
     ;; + 'slock' is a simple X display locker provided by suckless tools. 'i3lock'
     ;;   is a more feature-rich alternative.
-    (exwm-input-set-key (kbd "s-<f2>")
-                        (lambda () (interactive) (start-process "" nil "i3lock")))
+    (exwm-input-set-key (kbd "<s-escape>")
+                        (lambda () (interactive) (start-process "" nil exwm--locking-command)))
 
     ;; The following example demonstrates how to set a key binding only available
     ;; in line mode. It's simply done by first push the prefix key to
@@ -184,7 +185,31 @@
     (push ?\C-q exwm-input-prefix-keys)
     (define-key exwm-mode-map [?\C-q] 'exwm-input-send-next-key)
 
-    ;; Spacemacs Compatibility
+    ;; M-m leader, sorry Space Folks
+    (push ?\M-m exwm-input-prefix-keys)
+    ;; Universal Get-me-outta-here
+    (push ?\C-g exwm-input-prefix-keys)
+    ;; Universal Arguments
+    (push ?\C-u exwm-input-prefix-keys)
+    (push ?\C-0 exwm-input-prefix-keys)
+    (push ?\C-1 exwm-input-prefix-keys)
+    (push ?\C-2 exwm-input-prefix-keys)
+    (push ?\C-3 exwm-input-prefix-keys)
+    (push ?\C-4 exwm-input-prefix-keys)
+    (push ?\C-5 exwm-input-prefix-keys)
+    (push ?\C-6 exwm-input-prefix-keys)
+    (push ?\C-7 exwm-input-prefix-keys)
+    (push ?\C-8 exwm-input-prefix-keys)
+    (push ?\C-9 exwm-input-prefix-keys)
+    ;; C-c, C-x are needed for copying and pasting
+    (delete ?\C-x exwm-input-prefix-keys)
+    (delete ?\C-c exwm-input-prefix-keys)
+    ;; We can use `M-m h' to access help
+    (delete ?\C-h exwm-input-prefix-keys)
+
+    ;; Preserve the habit
+    (exwm-input-set-key (kbd "s-:") 'helm-M-x)
+    (exwm-input-set-key (kbd "s-;") 'evil-ex)
     ;; Shell (not a real one for the moment)
     (exwm-input-set-key (kbd "C-'") #'spacemacs/default-pop-shell)
     ;; Undo window configurations
@@ -210,29 +235,6 @@
     ;; Workspaces
     (exwm-input-set-key (kbd "s-]") #'spacemacs/exwm-workspace-next)
     (exwm-input-set-key (kbd "s-[") #'spacemacs/exwm-workspace-prev)
-    ;; M-m leader sorry Space Folks
-    (push ?\M-m exwm-input-prefix-keys)
-    ;; Universal Get-me-outta-here
-    (push ?\C-g exwm-input-prefix-keys)
-    ;; Universal Arguments
-    (push ?\C-u exwm-input-prefix-keys)
-    (push ?\C-0 exwm-input-prefix-keys)
-    (push ?\C-1 exwm-input-prefix-keys)
-    (push ?\C-2 exwm-input-prefix-keys)
-    (push ?\C-3 exwm-input-prefix-keys)
-    (push ?\C-4 exwm-input-prefix-keys)
-    (push ?\C-5 exwm-input-prefix-keys)
-    (push ?\C-6 exwm-input-prefix-keys)
-    (push ?\C-7 exwm-input-prefix-keys)
-    (push ?\C-8 exwm-input-prefix-keys)
-    (push ?\C-9 exwm-input-prefix-keys)
-    ;; C-c, C-x are needed for copying and pasting
-    (delete ?\C-x exwm-input-prefix-keys)
-    (delete ?\C-c exwm-input-prefix-keys)
-    ;; We can use `M-m h' to access help
-    (delete ?\C-h exwm-input-prefix-keys)
-    (exwm-input-set-key (kbd "s-;") 'helm-M-x)
-    (exwm-input-set-key (kbd "s-:") 'evil-ex)
 
     (require 'exwm-randr)
     (setq exwm-randr-workspace-output-plist '(0 "VGA1"))

@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=EXWM
+Comment=Emacs Window Manager
+Exec=exec exwm-start
+Type=Application

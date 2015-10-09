@@ -12,7 +12,7 @@
 (defun appearance/pre-init-exwm ()
   (spacemacs|use-package-add-hook exwm
     :post-config
-    (exwm-input-set-key (kbd "s-p")
+    (exwm-input-set-key (kbd "s-SPC")
                         (lambda (command)
                           (interactive (list (read-shell-command " ")))
                           (start-process-shell-command command nil command)))

@@ -99,9 +99,9 @@
     (exwm-input-set-key (kbd "s-w") 'exwm-workspace-switch)
 
     (defvar exwm-workspace-switch-wrap t
-      "Whether `exwm-workspace-next' and `exwm-workspace-prev' should wrap.")
+      "Whether `spacemacs/exwm-workspace-next' and `spacemacs/exwm-workspace-prev' should wrap.")
 
-    (defun exwm-workspace-next ()
+    (defun spacemacs/exwm-workspace-next ()
       "Switch to next exwm-workspaceective (to the right)."
       (interactive)
       (let* ((only-workspace? (equal exwm-workspace-number 1))
@@ -113,7 +113,7 @@
           (when exwm-workspace-switch-wrap
               (exwm-workspace-switch 0)))
          (t (exwm-workspace-switch  (1+ exwm-workspace-current-index))))))
-    (defun exwm-workspace-prev ()
+    (defun spacemacs/exwm-workspace-prev ()
       "Switch to next exwm-workspaceective (to the right)."
       (interactive)
       (let* ((only-workspace? (equal exwm-workspace-number 1))
@@ -189,7 +189,7 @@
     (exwm-input-set-key (kbd "C-'") #'spacemacs/default-pop-shell)
     ;; Undo window configurations
     (exwm-input-set-key (kbd "s-u") #'winner-undo)
-    (exwm-input-set-key (kbd "s-U") #'winner-redo)
+    (exwm-input-set-key (kbd "S-s-U") #'winner-redo)
     ;; Change buffers
     (exwm-input-set-key (kbd "s-b") #'helm-mini)
     ;; Focusing windows
@@ -208,9 +208,24 @@
     (exwm-input-set-key (kbd "M-s-k") #'spacemacs/enlarge-window)
     (exwm-input-set-key (kbd "M-s-l") #'spacemacs/enlarge-window-horizontally)
     ;; Workspaces
-    (exwm-input-set-key (kbd "s-]") #'exwm-workspace-next)
-    (exwm-input-set-key (kbd "s-[") #'exwm-workspace-prev)
-    (push ?\M-m exwm-input-prefix-keys) ;; M-m leader
+    (exwm-input-set-key (kbd "s-]") #'spacemacs/exwm-workspace-next)
+    (exwm-input-set-key (kbd "s-[") #'spacemacs/exwm-workspace-prev)
+    ;; M-m leader sorry Space Folks
+    (push ?\M-m exwm-input-prefix-keys)
+    ;; Universal Get-me-outta-here
+    (push ?\C-g exwm-input-prefix-keys)
+    ;; Universal Arguments
+    (push ?\C-u exwm-input-prefix-keys)
+    (push ?\C-0 exwm-input-prefix-keys)
+    (push ?\C-1 exwm-input-prefix-keys)
+    (push ?\C-2 exwm-input-prefix-keys)
+    (push ?\C-3 exwm-input-prefix-keys)
+    (push ?\C-4 exwm-input-prefix-keys)
+    (push ?\C-5 exwm-input-prefix-keys)
+    (push ?\C-6 exwm-input-prefix-keys)
+    (push ?\C-7 exwm-input-prefix-keys)
+    (push ?\C-8 exwm-input-prefix-keys)
+    (push ?\C-9 exwm-input-prefix-keys)
     ;; C-c, C-x are needed for copying and pasting
     (delete ?\C-x exwm-input-prefix-keys)
     (delete ?\C-c exwm-input-prefix-keys)
@@ -219,6 +234,9 @@
     (exwm-input-set-key (kbd "s-;") 'helm-M-x)
     (exwm-input-set-key (kbd "s-:") 'evil-ex)
 
+    (require 'exwm-randr)
+    (setq exwm-randr-workspace-output-plist '(0 "VGA1"))
+    (exwm-randr-enable)
     ;; The following example demonstrates how to use simulation keys to mimic the
     ;; behavior of Emacs. The argument to `exwm-input-set-simulation-keys' is a
     ;; list of cons cells (SRC . DEST), where SRC is the key sequence you press and

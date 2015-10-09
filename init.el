@@ -270,8 +270,8 @@ user code."
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
   (global-vi-tilde-fringe-mode -1)
-  (setq spacemacs-mode-line-minor-modesp nil
-        spacemacs/mode-line-battery-time 1)
+  (spacemacs/toggle-mode-line-minor-modes-off)
+  (spacemacs/toggle-mode-line-battery-on)
 
   (setq magit-push-always-verify nil)
 

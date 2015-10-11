@@ -114,8 +114,7 @@
                                       w3m
                                       systemd)
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '(evil-org
-                                    erc-yank
+   dotspacemacs-excluded-packages '(erc-yank
                                     erc-gitter)
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
    ;; are declared in a layer which is not a member of

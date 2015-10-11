@@ -507,18 +507,18 @@ layers configuration."
            (goto-char (point-min))
            (when (re-search-forward "[[:digit:]]+$" (point-max) t)
              (replace-match (format "(#%s)" (match-string 0)))))))
-    (setq erc-nick "cestdiego"
-          erc-user-full-name "Diego Berrocal"
-          erc-fill-function 'erc-fill-static
-          erc-fill-static-center 19
-          erc-prompt-for-nickserv-password nil
-          erc-image-inline-rescale 300
-          erc-hide-list '("JOIN" "PART" "QUIT" "NICK")
-          erc-foolish-content '("\\[Github\\].* starred"
-                                "\\[Github\\].* forked"
-                                "\\[Github\\].* synchronize a Pull Request"
-                                "\\[Github\\].* labeled an issue in"
-                                "\\[Github\\].* unlabeled an issue in")))
+    (setq-default erc-nick "cestdiego"
+                  erc-user-full-name "Diego Berrocal"
+                  erc-fill-function 'erc-fill-static
+                  erc-fill-static-center 19
+                  erc-prompt-for-nickserv-password nil
+                  erc-image-inline-rescale 300
+                  erc-hide-list '("JOIN" "PART" "QUIT" "NICK")
+                  erc-foolish-content '("\\[Github\\].* starred"
+                                        "\\[Github\\].* forked"
+                                        "\\[Github\\].* synchronize a Pull Request"
+                                        "\\[Github\\].* labeled an issue in"
+                                        "\\[Github\\].* unlabeled an issue in")))
 
   ;; Insert thing at point for Helm-aG!!
   ;; (setq helm-ag-insert-at-point 'symbol)

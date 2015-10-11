@@ -25,6 +25,7 @@
      twitter
      utils
      (exwm :variables
+           exwm-app-launcher--prompt " "
            exwm--hide-tiling-modeline t
            exwm--terminal-command "termite")
      ;; nand2tetris

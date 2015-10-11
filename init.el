@@ -170,15 +170,18 @@ before layers configuration."
    ;; The leader key accessible in `emacs state' and `insert state'
    dotspacemacs-emacs-leader-key "M-m"
    ;; Major mode leader key is a shortcut key which is the equivalent of
-   ;; pressing `<leader> m`
+   ;; pressing `<leader> m`. Set it to `nil` to disable it. (default ",")
    dotspacemacs-major-mode-leader-key ","
-   ;; Major mode leader key accessible in `emacs state' and `insert state'
+   ;; Major mode leader key accessible in `emacs state' and `insert state'.
+   ;; (default "C-M-m)
    dotspacemacs-major-mode-emacs-leader-key "C-M-m"
    ;; The command key used for Evil commands (ex-commands) and
    ;; Emacs commands (M-x).
    ;; By default the command key is `:' so ex-commands are executed like in Vim
    ;; with `:' and Emacs commands are executed with `<leader> :'.
    dotspacemacs-command-key ":"
+   ;; If non nil `Y' is remapped to `y$'. (default t)
+   dotspacemacs-remap-Y-to-y$ t
    ;; Location where to auto-save files. Possible values are `original' to
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
@@ -202,47 +205,56 @@ before layers configuration."
    ;; Guide-key delay in seconds. The Guide-key is the popup buffer listing
    ;; the commands bound to the current keystrokes.
    dotspacemacs-which-key-delay 0.4
+   ;; Which-key frame position. Possible values are `right', `bottom' and
+   ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
+   ;; right; if there is insufficient space it displays it at the bottom.
+   ;; (default 'bottom)
+   dotspacemacs-which-key-position 'bottom
    ;; If non nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
-   ;; nil ;; to boost the loading time.
+   ;; nil to boost the loading time. (default t)
    dotspacemacs-loading-progress-bar t
-   ;; If non nil the frame is fullscreen when Emacs starts up.
+   ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
    dotspacemacs-fullscreen-at-startup t
    ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
-   ;; Use to disable fullscreen animations in OSX."
+   ;; Use to disable fullscreen animations in OSX. (default nil)
    dotspacemacs-fullscreen-use-non-native nil
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
-   ;; (Emacs 24.4+ only)
+   ;; (default nil) (Emacs 24.4+ only)
    dotspacemacs-maximized-at-startup nil
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
-   ;; Transparency can be toggled through `toggle-transparency'.
+   ;; Transparency can be toggled through `toggle-transparency'. (default 90)
    dotspacemacs-active-transparency 90
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's inactive or deselected.
-   ;; Transparency can be toggled through `toggle-transparency'.
+   ;; Transparency can be toggled through `toggle-transparency'. (default 90)
    dotspacemacs-inactive-transparency 90
-   ;; If non nil unicode symbols are displayed in the mode line.
+   ;; If non nil unicode symbols are displayed in the mode line. (default t)
    dotspacemacs-mode-line-unicode-symbols t
    ;; If non nil smooth scrolling (native-scrolling) is enabled. Smooth
    ;; scrolling overrides the default behavior of Emacs which recenters the
-   ;; point when it reaches the top or bottom of the screen.
+   ;; point when it reaches the top or bottom of the screen. (default t)
    dotspacemacs-smooth-scrolling t
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
+   ;; (default nil)
    dotspacemacs-smartparens-strict-mode t
-   ;; Select a scope to highlight delimiters. Possible value is `all',
-   ;; `current' or `nil'. Default is `all'
+   ;; Select a scope to highlight delimiters. Possible values are `any',
+   ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
+   ;; emphasis the current one). (default 'all)
    dotspacemacs-highlight-delimiters 'all
    ;; If non nil advises quit functions to keep server open when quitting.
+   ;; (default nil)
    dotspacemacs-persistent-server nil
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
+   ;; (default '("ag" "pt" "ack" "grep"))
    dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
    ;; The default package repository used if no explicit repository has been
    ;; specified with an installed package.
-   ;; Not used for now.
+   ;; Not used for now. (default nil)
    dotspacemacs-default-package-repository nil
    ))
 
@@ -250,7 +262,7 @@ before layers configuration."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
-  (setq-default evil-escape-key-sequence "nj")
+  (setq-default evil-escape-key-sequence "jk")
   (setq source-directory "~/Projects/emacs"
         dotspacemacs-verbose-loading t
         helm-ag-command-option " --search-zip "
@@ -460,7 +472,7 @@ layers configuration."
       (define-key custom-keys-mode-map (kbd "<C-s-tab>") 'eyebrowse-next-window-config)
       (define-key custom-keys-mode-map (kbd "<C-s-iso-lefttab>") 'eyebrowse-prev-window-config))
 
-    (when (configuration-layer/layer-usedp 'perspectives)
+    (when (configuration-layer/package-usedp 'persp-mode)
       (define-key custom-keys-mode-map (kbd "<C-tab>") 'spacemacs//perspectives-persp-next-n)
       (define-key custom-keys-mode-map (kbd "<C-iso-lefttab>") 'spacemacs//perspectives-persp-prev-p))
 
@@ -525,15 +537,23 @@ layers configuration."
     (evil-leader/set-key-for-mode 'js2-mode
       "m," 'spacemacs/toggle-web-js2-mode))
 
+  (defun cestiego/pretty-symbols (new-pretty-symbols)
+    (mapcar (lambda (item)
+              (push item prettify-symbols-alist))
+            new-pretty-symbols))
+
   (when (configuration-layer/layer-usedp 'javascript)
     (setq js2-global-externs '("require" "module" "jest" "jasmine"
                                "it" "expect" "describe" "beforeEach"))
 
     (spacemacs/add-to-hooks
      (lambda ()
-       (push '("function" . ?𝆑) prettify-symbols-alist)
-       (push '("React" . ?) prettify-symbols-alist)
-       (push '("() =>" . ?λ) prettify-symbols-alist))
+       (cestiego/pretty-symbols
+        '(("function" . ?𝆑)
+          ("React" . ?)
+          ("?" . ?)
+          ("=>" .  ?)
+          ("() =>" . ?λ))))
      '(js2-mode-hook web-mode-hook))
     ;; Fix Identation in JS
     (setq-default javascript-indent-lever         2
@@ -610,6 +630,7 @@ layers configuration."
 
   (when (configuration-layer/layer-usedp 'exwm)
     ;; Helm should show only in its current window
+    (exwm-input-set-key (kbd "s-p") #'spacemacs/exw-application-launcher)
     (setq helm-display-function
           (lambda (buf)
             (pop-to-buffer buf

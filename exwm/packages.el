@@ -172,11 +172,11 @@
     (defun spacemacs/exwm-application-launcher (command)
       "Launches an application in your PATH.
 Can show completions at point for COMMAND using helm or ido"
-        (interactive (list (read-shell-command exwm-app-launcher-prompt)))
+        (interactive (list (read-shell-command exwm-app-launcher--prompt)))
       (start-process-shell-command command nil command))
 
-    (exwm-input-set-key (kbd "s-SPC") #'spacemacs/exw-application-launcher)
-    (exwm-input-set-key (kbd "s-p") #'spacemacs/exw-application-launcher)
+    (exwm-input-set-key (kbd "s-SPC") #'spacemacs/exwm-application-launcher)
+    (exwm-input-set-key (kbd "s-p") #'spacemacs/exwm-application-launcher)
     ;; + 'slock' is a simple X display locker provided by suckless tools. 'i3lock'
     ;;   is a more feature-rich alternative.
     (exwm-input-set-key (kbd "<s-escape>")

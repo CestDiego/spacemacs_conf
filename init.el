@@ -632,7 +632,7 @@ layers configuration."
 
   (when (configuration-layer/layer-usedp 'exwm)
     ;; Helm should show only in its current window
-    (exwm-input-set-key (kbd "s-p") #'spacemacs/exw-application-launcher)
+    (exwm-input-set-key (kbd "s-p") #'spacemacs/exwm-application-launcher)
     (setq helm-display-function
           (lambda (buf)
             (pop-to-buffer buf

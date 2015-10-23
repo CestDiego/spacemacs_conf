@@ -290,6 +290,10 @@ user code."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+  ;; enable smartparens in hybrid insert state
+  (dolist (b sp-smartparens-bindings)
+    (evil-define-key 'hybrid emacs-lisp-mode-map (kbd (car b)) (cdr b)))
+
   (global-vi-tilde-fringe-mode -1)
   (spacemacs/toggle-mode-line-minor-modes-off)
   (spacemacs/toggle-mode-line-battery-on)

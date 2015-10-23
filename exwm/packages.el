@@ -34,7 +34,7 @@
     ;; Disable dialog boxes since they are unusable in EXWM
     (setq use-dialog-box nil)
     ;; 10 Worskpaces please
-    (setq exwm-workspace-number 10)
+    (setq exwm-workspace-number 1)
     ;; You may want Emacs to show you the time
     (display-time-mode t)
     (when exwm--hide-tiling-modeline
@@ -146,26 +146,15 @@
     ;; + Bind a key to switch workspace interactively
     (exwm-input-set-key (kbd "s-w") 'exwm-workspace-switch)
     ;; + Set shortcuts to switch to a certain workspace.
-    (exwm-input-set-key (kbd "s-1")
-                        (lambda () (interactive) (exwm-workspace-switch 0)))
-    (exwm-input-set-key (kbd "s-2")
-                        (lambda () (interactive) (exwm-workspace-switch 1)))
-    (exwm-input-set-key (kbd "s-3")
-                        (lambda () (interactive) (exwm-workspace-switch 2)))
-    (exwm-input-set-key (kbd "s-4")
-                        (lambda () (interactive) (exwm-workspace-switch 3)))
-    (exwm-input-set-key (kbd "s-5")
-                        (lambda () (interactive) (exwm-workspace-switch 4)))
-    (exwm-input-set-key (kbd "s-6")
-                        (lambda () (interactive) (exwm-workspace-switch 5)))
-    (exwm-input-set-key (kbd "s-7")
-                        (lambda () (interactive) (exwm-workspace-switch 6)))
-    (exwm-input-set-key (kbd "s-8")
-                        (lambda () (interactive) (exwm-workspace-switch 7)))
-    (exwm-input-set-key (kbd "s-9")
-                        (lambda () (interactive) (exwm-workspace-switch 8)))
-    (exwm-input-set-key (kbd "s-0")
-                        (lambda () (interactive) (exwm-workspace-switch 9)))
+    (exwm-input-set-key (kbd "s-1") 'spacemacs/persp-switch-to-1)
+    (exwm-input-set-key (kbd "s-2") 'spacemacs/persp-switch-to-2)
+    (exwm-input-set-key (kbd "s-3") 'spacemacs/persp-switch-to-3)
+    (exwm-input-set-key (kbd "s-4") 'spacemacs/persp-switch-to-4)
+    (exwm-input-set-key (kbd "s-5") 'spacemacs/persp-switch-to-5)
+    (exwm-input-set-key (kbd "s-6") 'spacemacs/persp-switch-to-6)
+    (exwm-input-set-key (kbd "s-7") 'spacemacs/persp-switch-to-7)
+    (exwm-input-set-key (kbd "s-8") 'spacemacs/persp-switch-to-8)
+    (exwm-input-set-key (kbd "s-9") 'spacemacs/persp-switch-to-9)
     ;; + Application launcher ('M-&' also works if the output buffer does not
     ;;   bother you). Note that there is no need for processes to be created by
     ;;   Emacs.
@@ -237,8 +226,8 @@ Can show completions at point for COMMAND using helm or ido"
     (exwm-input-set-key (kbd "M-s-k") #'spacemacs/enlarge-window)
     (exwm-input-set-key (kbd "M-s-l") #'spacemacs/enlarge-window-horizontally)
     ;; Workspaces
-    (exwm-input-set-key (kbd "s-]") #'spacemacs/exwm-workspace-next)
-    (exwm-input-set-key (kbd "s-[") #'spacemacs/exwm-workspace-prev)
+    (exwm-input-set-key (kbd "s-]") #'spacemacs//perspectives-persp-next-n)
+    (exwm-input-set-key (kbd "s-[") #'spacemacs//perspectives-persp-prev-p)
 
     (require 'exwm-randr)
     (setq exwm-randr-workspace-output-plist '(0 "VGA1"))

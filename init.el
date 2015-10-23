@@ -26,28 +26,29 @@ values."
      soundcloud
      twitter
      utils
-     (exwm :variables
-           exwm-app-launcher--prompt " "
-           exwm--hide-tiling-modeline t
-           exwm--terminal-command "termite")
+     ;; (exwm :variables
+     ;;       exwm-app-launcher--prompt " "
+     ;;       exwm--hide-tiling-modeline t
+     ;;       exwm--terminal-command "termite")
      ;; nand2tetris
 
      ;; Spacemacs
      nixos
      dash
-     ;; vim-powerline
-     ;;Version Control
+     ;; Version Control
      version-control
      (git :variables
           git-magit-status-fullscreen t)
      github
+     ;; Other stuff
      prodigy
      (colors :variables
              colors-enable-nyan-cat-progress-bar `,(display-graphic-p)
              colors-enable-rainbow-identifiers nil)
 
-     ;; (perspectives :variables
-     ;;               perspectives-display-help t)
+     (perspectives :variables
+                   spacemacs-persp-show-home-at-startup t
+                   perspectives-display-help t)
      ;; eyebrowse
      chrome
      (erc :variables

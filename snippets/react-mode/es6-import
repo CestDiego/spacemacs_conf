@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: es6-import
+# key: import/
+# binding: direct-keybinding
+# --
+import ${3:${1:$(s-upper-camel-case (file-name-nondirectory yas/text))}} from '${1:fs}'$2;$0

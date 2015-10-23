@@ -349,7 +349,7 @@ layers configuration."
 
   ;; (setq web-mode-enable-current-column-highlight t)
 
-  (when (configuration-layer/layer-usedp 'perspectives)
+  (when (configuration-layer/package-usedp 'persp-mode)
 
     (spacemacs|define-custom-persp "NixOS Configuration"
       :binding "N"

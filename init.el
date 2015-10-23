@@ -693,8 +693,8 @@ layers configuration."
   ;;; END:   Custom Hybrid Bindings
 
   ;;; BEGIN: Multiple Cursors
-  (global-set-key (kbd "C-;") 'mc/edit-lines)
-  (global-set-key (kbd "C-:") 'mc/mark-all-like-this)
+  (define-key evil-hybrid-state-map (kbd "C-;") 'mc/edit-lines)
+  (define-key evil-hybrid-state-map (kbd "C-:") 'mc/mark-all-like-this-dwim)
   ;;; END:   Multiple Cursors
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

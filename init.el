@@ -564,6 +564,22 @@ layers configuration."
   (when (configuration-layer/layer-usedp 'javascript)
     (setq js2-global-externs '("require" "module" "jest" "jasmine"
                                "it" "expect" "describe" "beforeEach"))
+    (defun js2-imenu-make-index ()
+      (save-excursion
+        ;; (setq imenu-generic-expression '((nil "describe\\(\"\\(.+\\)\"" 1)))
+        (imenu--generic-function '(("describe" "\\s-*describe\(\"\\(.+\\)\",.*" 1)
+                                   ("it" "\\s-*it\(\"\\(.+\\)\",.*" 1)
+                                   ("before" "\\s-*before\(\"\\(.+\\)\",.*" 1)
+                                   ("after" "\\s-*after\(\"\\(.+\\)\",.*" 1)
+                                   ;;add more keyword for mocha here
+                                   ("Function" "function[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*(" 1)
+                                   ("Function" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*=[ \t]*function[ \t]*(" 1)
+
+                                   ))))
+
+    (add-hook 'js2-mode-hook
+              (lambda ()
+                (setq imenu-create-index-function 'js2-imenu-make-index)))
 
     (spacemacs/add-to-hooks
      (lambda ()

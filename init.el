@@ -439,9 +439,16 @@ layers configuration."
       "p" 'term-paste) ;; why paste-microstate doesn't work?
 
     (evil-define-key 'hybrid term-raw-map
-      (kbd "C-k") 'term-send-up
-      (kbd "C-j") 'term-send-down
+      (kbd "C-S-k") 'term-send-up
+      (kbd "C-S-j") 'term-send-down
       (kbd "<C-backspace>") 'term-send-raw-meta)
+
+    (evil-define-key 'hybrid comint-mode-map
+      (kbd "C-S-k") 'comint-previous-matching-input-from-input
+      (kbd "C-S-j") 'comint-next-matching-input-from-input
+      (kbd "C-p") 'comint-previous-input
+      (kbd "C-n") 'comint-next-input
+      (kbd "<C-backspace>") 'backward-kill-word)
 
     (evil-define-key 'hybrid eshell-mode-map
       (kbd "C-k") 'eshell-previous-input

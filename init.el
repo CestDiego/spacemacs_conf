@@ -109,13 +109,13 @@ values."
      ;; Utils
      search-engine
      xkcd
+     games
      vagrant)
    ;; List of additional packages that will be installed wihout being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dostspacemacs/config'.
    dotspacemacs-additional-packages '(visual-fill-column
-                                      pacmacs
                                       w3m
                                       systemd)
    ;; A list of packages and/or extensions that will not be install and loaded.

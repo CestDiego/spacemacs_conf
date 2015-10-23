@@ -1,10 +1,11 @@
 #+TITLE: Twitter contribution layer for Spacemacs
+
 [[file:img/twitter.png]]
 * Table of Contents                                                     :TOC:
  - [[#description][Description]]
  - [[#features][Features]]
  - [[#install][Install]]
-     - [[#layer][Layer]]
+   - [[#layer][Layer]]
  - [[#key-bindings][Key Bindings]]
 
 * Description

@@ -46,9 +46,7 @@ which require an initialization must be listed explicitly in the list.")
               wakatime-user-agent
               wakatime-version
               wakatime-api-key
-              (float-time)))
-    )
-  )
+              (float-time)))))
 
 (defun utils/init-nameless ()
   (use-package nameless

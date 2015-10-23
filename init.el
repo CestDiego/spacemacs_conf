@@ -155,6 +155,7 @@ before layers configuration."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
                          tao-yin
+                         tao-yang
                          monokai
                          spacemacs-dark
                          aurora

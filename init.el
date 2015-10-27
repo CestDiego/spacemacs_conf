@@ -97,8 +97,9 @@ values."
      html
      latex
      c-c++
-     python
-     ;; ipython-notebook
+     (python :variables
+             python-test-runner 'pytest)
+     ipython-notebook
      sql
      haskell
      javascript

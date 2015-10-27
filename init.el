@@ -584,8 +584,8 @@ layers configuration."
                                    ))))
 
     (add-hook 'js2-mode-hook
-              (lambda ()
-                (setq imenu-create-index-function 'js2-imenu-make-index)))
+       (lambda ()
+         (setq imenu-create-index-function 'js2-imenu-make-index)))
 
     (spacemacs/add-to-hooks
      (lambda ()

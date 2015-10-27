@@ -297,8 +297,11 @@ layers configuration."
   (dolist (b sp-smartparens-bindings)
     (evil-define-key 'hybrid emacs-lisp-mode-map (kbd (car b)) (cdr b)))
 
+  (global-set-key (kbd "C-s") 'helm-swoop)
+
   (global-vi-tilde-fringe-mode -1)
   (spacemacs/toggle-mode-line-minor-modes-off)
+  (spacemacs/toggle-highlight-current-line-globally-off)
   (spacemacs/toggle-mode-line-battery-on)
 
   (setq magit-push-always-verify nil)

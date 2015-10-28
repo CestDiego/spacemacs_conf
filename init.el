@@ -170,7 +170,7 @@ before layers configuration."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Sauce Code Powerline PNFT Plus"
+   dotspacemacs-default-font '("Knack PNFT Plus Font Awesome Plu"
                                :size 19
                                :weight normal
                                :width normal

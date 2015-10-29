@@ -6,8 +6,18 @@
     (spacemacs-theme :location
                      (recipe :fetcher github
                              :repo "CestDiego/spacemacs-theme"))
+    (zone-nyan :location
+                     (recipe :fetcher github
+                             :repo "wasamasa/zone-nyan"))
     exwm
     ))
+
+(defun appearance/init-zone-nyan ()
+  (use-package zone-nyan
+    :config
+    (evil-leader/set-key
+      "an" 'zone-nyan-preview)))
+
 
 (defun appearance/pre-init-exwm ()
   (spacemacs|use-package-add-hook exwm

@@ -297,6 +297,18 @@ layers configuration."
   (dolist (b sp-smartparens-bindings)
     (evil-define-key 'hybrid emacs-lisp-mode-map (kbd (car b)) (cdr b)))
 
+  (defun maybe-you-mean-editor-finish? (orig-fun &rest args)
+    (let ((current-C-c-C-c (key-binding (kbd "C-c C-c") t))
+          )
+      (if (eq current-C-c-C-c 'with-editor-finish)
+          (with-editor-finish nil)
+        (apply orig-fun args))))
+
+  (advice-add 'evil-write :around #'maybe-you-mean-editor-finish?)
+  (add-hook 'with-editor-mode-hook 'evil-normalize-keymaps)
+  (evil-define-key 'normal with-editor-mode-map ",c" 'with-editor-finish)
+  (evil-define-key 'normal with-editor-mode-map ",a" 'with-editor-cancel)
+
   (global-set-key (kbd "C-s") 'helm-swoop)
 
   (global-vi-tilde-fringe-mode -1)

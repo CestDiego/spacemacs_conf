@@ -3,9 +3,6 @@
     auto-dim-other-buffers
     hexrgb
     (nerd-fonts :location local)
-    (spacemacs-theme :location
-                     (recipe :fetcher github
-                             :repo "CestDiego/spacemacs-theme"))
     (zone-nyan :location
                      (recipe :fetcher github
                              :repo "wasamasa/zone-nyan"))
@@ -72,14 +69,6 @@
     :init
     (evil-leader/set-key
       "hn" 'helm-nerd-fonts)))
-
-(defun appearance/init-spacemacs-theme ()
-  (use-package spacemacs-theme
-    :defer t
-    :init
-    (progn
-      (setq spacemacs-theme-comment-bg t)
-      (setq spacemacs-theme-org-height t))))
 
 (defun appearance/init-auto-dim-other-buffers ()
   (use-package auto-dim-other-buffers

@@ -316,9 +316,22 @@ user code."
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
   ;; enable smartparens in hybrid insert state
+  ;; (key-chord-define override-global-map (kbd "d;") 'evil-delete)
+
+  (defun cestiego/pretty-symbols (new-pretty-symbols)
+    (mapcar (lambda (item)
+              (push item prettify-symbols-alist))
+            new-pretty-symbols))
+
   (beacon-mode 1)
+
   (dolist (b sp-smartparens-bindings)
     (evil-define-key 'hybrid emacs-lisp-mode-map (kbd (car b)) (cdr b)))
+
+  (add-hook 'org-mode-hook (lambda ()
+                      (push
+                       '(?! . ( "#+begin_src" . "#+end_src"))
+                       evil-surround-pairs-alist)))
 
   (defun maybe-you-mean-editor-finish? (orig-fun &rest args)
     (let ((current-C-c-C-c (key-binding (kbd "C-c C-c") t))
@@ -328,6 +341,7 @@ layers configuration."
         (apply orig-fun args))))
 
   (advice-add 'evil-write :around #'maybe-you-mean-editor-finish?)
+
   (add-hook 'with-editor-mode-hook 'evil-normalize-keymaps)
   (evil-define-key 'normal with-editor-mode-map ",c" 'with-editor-finish)
   (evil-define-key 'normal with-editor-mode-map ",a" 'with-editor-cancel)
@@ -341,10 +355,16 @@ layers configuration."
 
   (setq magit-push-always-verify nil)
 
-  (add-hook 'emacs-lisp-mode-hook
-     (lambda ()
-       (push '("add-hook" . ?) prettify-symbols-alist)
-       (push '("defun" . ?𝆑) prettify-symbols-alist)))
+
+  (spacemacs/add-to-hooks
+   (lambda ()
+     (cestiego/pretty-symbols
+      '(("add-hook" . ?)
+        ("defun" . ?𝆑)
+        ("?" . ?)
+        ("=>" .  ?)
+        )))
+   '(emacs-lisp-mode-hook))
 
   ;; (setq git-gutter-fr:side 'left-fringe)
   ;;; SANE DEFAULTS!!
@@ -392,27 +412,27 @@ layers configuration."
 
   (when (configuration-layer/package-usedp 'persp-mode)
 
-    (spacemacs|define-custom-persp "NixOS Configuration"
-      :binding "N"
-      :body
-      (dired "~/Projects/nixpkgs/pkgs/")
-      (split-window-right)
-      (find-file "~/nixos-config/common/desktop.nix"))
+    ;; (spacemacs|define-custom-persp "NixOS Configuration"
+    ;;   :binding "N"
+    ;;   :body
+    ;;   (dired "~/Projects/nixpkgs/pkgs/")
+    ;;   (split-window-right)
+    ;;   (find-file "~/nixos-config/common/desktop.nix"))
 
-    (spacemacs|define-custom-persp "Blog"
-      :binding "b"
-      :body
-      (when (y-or-n-p "Hi, do you want to create a new post?")
-        (call-interactively 'op/new-post)))
+    ;; (spacemacs|define-custom-persp "Blog"
+    ;;   :binding "b"
+    ;;   :body
+    ;;   (when (y-or-n-p "Hi, do you want to create a new post?")
+    ;;     (call-interactively 'op/new-post)))
 
-    (spacemacs|define-custom-persp "@bspwm"
-      :binding "B"
-      :body
-      (find-file "~/dotbspwm/.config/sxhkd/sxhkdrc")
-      (split-window-right-and-focus)
-      (find-file "~/dotbspwm/.config/bspwm/bspwmrc")
-      (split-window-below-and-focus)
-      (find-file "~/dotbspwm/.config/bspwm/autostart"))
+    ;; (spacemacs|define-custom-persp "@bspwm"
+    ;;   :binding "B"
+    ;;   :body
+    ;;   (find-file "~/dotbspwm/.config/sxhkd/sxhkdrc")
+    ;;   (split-window-right-and-focus)
+    ;;   (find-file "~/dotbspwm/.config/bspwm/bspwmrc")
+    ;;   (split-window-below-and-focus)
+    ;;   (find-file "~/dotbspwm/.config/bspwm/autostart"))
     )
 
   (setq browse-url-browser-function 'browse-url-generic
@@ -596,11 +616,6 @@ layers configuration."
       "m," 'spacemacs/toggle-web-js2-mode)
     (evil-leader/set-key-for-mode 'js2-mode
       "m," 'spacemacs/toggle-web-js2-mode))
-
-  (defun cestiego/pretty-symbols (new-pretty-symbols)
-    (mapcar (lambda (item)
-              (push item prettify-symbols-alist))
-            new-pretty-symbols))
 
   (when (configuration-layer/layer-usedp 'javascript)
     (setq js2-global-externs '("require" "module" "jest" "jasmine"
@@ -853,8 +868,7 @@ layers configuration."
            (set
             (make-local-variable
              (quote package-build-recipes-dir))
-            default-directory)))))
- )
+            default-directory))))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

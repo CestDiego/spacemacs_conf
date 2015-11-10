@@ -669,31 +669,6 @@ layers configuration."
       (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
       (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
 
-    ;; (eval-after-load 'flycheck-mode
-    ;;   '(flycheck-define-checker jsxhint-checker
-    ;;      "A JSX syntax and style checker based on JSXHint."
-    ;;      :command ("jsxhint" source)
-    ;;      :error-patterns
-    ;;      ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
-    ;;      :modes (web-mode)))
-
-    ;; (add-hook 'web-mode-hook
-    ;;    (lambda ()
-    ;;      (when (equal web-mode-content-type "jsx")
-    ;;        ;; enable flycheck
-    ;;        (setq web-mode-indent-style 2
-    ;;              web-mode-markup-indent-offset 2
-    ;;              web-mode-css-indent-offset 2
-    ;;              web-mode-code-indent-offset 2)
-    ;;        (flycheck-select-checker 'jsxhint-checker)
-    ;;        (flycheck-mode))))
-
-    ;; (defadvice web-mode-highlight-part (around tweak-jsx activate)
-    ;;   (if (equal web-mode-content-type "jsx")
-    ;;       (let ((web-mode-enable-part-face nil))
-    ;;         ad-do-it)
-    ;;     ad-do-it))
-
     (defun json-format ()
       (interactive)
       (save-excursion

@@ -12,7 +12,6 @@
 
 (defvar utils-packages
   '(
-    define-word
     string-inflection
     ;; pdf-tools
     ;; aggressive-fill-paragraph
@@ -127,14 +126,6 @@ which require an initialization must be listed explicitly in the list.")
     :defer t
     :config
     (flycheck-package-setup)
-    ))
-
-(defun utils/init-define-word ()
-  (use-package define-word
-    :init
-    (evil-leader/set-key
-      "gd" 'define-word
-      "gD" 'define-word-at-point)
     ))
 
 (defun utils/init-string-inflection ()

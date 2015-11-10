@@ -93,16 +93,18 @@ values."
             shell-pop-autocd-to-working-dir nil
             shell-default-term-shell "zsh")
      ;; Lang
+     ;;; LIISSSSSPPPPPSSSS
+     clojure
+     emacs-lisp
+     scheme
+     ;;; Other
      ansible
      markdown
-     clojure
      cp2k
-     emacs-lisp
      html
      latex
      c-c++
-     (python :variables
-             python-test-runner 'pytest)
+     python
      ipython-notebook
      sql
      haskell

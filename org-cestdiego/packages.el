@@ -129,7 +129,8 @@ which require an initialization must be listed explicitly in the list.")
 
 (defun org-cestdiego/init-org-babel ()
   (use-package org-babel
-    :init
+    :config
+    (require 'ob-scheme)
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((R . t)
@@ -139,6 +140,7 @@ which require an initialization must be listed explicitly in the list.")
        (haskell . t)
        (js . t)
        (latex . t)
+       (scheme . t)
        (gnuplot . t)
        (C . t)
        (sql . t)

@@ -124,7 +124,9 @@ values."
    ;; configuration in `dostspacemacs/config'.
    dotspacemacs-additional-packages '(visual-fill-column
                                       babel-repl
+                                      key-chord
                                       w3m
+                                      sicp
                                       beacon
                                       systemd)
    ;; A list of packages and/or extensions that will not be install and loaded.

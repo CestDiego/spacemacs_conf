@@ -30,10 +30,10 @@ values."
      soundcloud
      twitter
      utils
-     (exwm :variables
-           exwm-app-launcher--prompt " "
-           exwm--hide-tiling-modeline t
-           exwm--terminal-command "termite")
+     ;; (exwm :variables
+     ;;       exwm-app-launcher--prompt " "
+     ;;       exwm--hide-tiling-modeline t
+     ;;       exwm--terminal-command "termite")
      ;; nand2tetris
 
      ;; Spacemacs
@@ -50,9 +50,9 @@ values."
              colors-enable-nyan-cat-progress-bar `,(display-graphic-p)
              colors-enable-rainbow-identifiers nil)
 
-     (perspectives :variables
-                   spacemacs-persp-show-home-at-startup t
-                   perspectives-display-help t)
+     ;; (perspectives :variables
+     ;;               spacemacs-persp-show-home-at-startup t
+     ;;               perspectives-display-help t)
      ;; eyebrowse
      chrome
      (erc :variables

@@ -332,6 +332,8 @@ layers configuration."
 
   (beacon-mode 1)
 
+  (setq helm-echo-input-in-header-line nil)
+
   (dolist (b sp-smartparens-bindings)
     (evil-define-key 'hybrid emacs-lisp-mode-map (kbd (car b)) (cdr b)))
 

@@ -502,6 +502,7 @@ layers configuration."
     (evil-define-key 'hybrid term-raw-map
       (kbd "C-S-k") 'term-send-up
       (kbd "C-S-j") 'term-send-down
+      (kbd "C-y")   'term-paste
       (kbd "<C-backspace>") 'term-send-raw-meta)
 
     (evil-define-key 'hybrid comint-mode-map
@@ -513,6 +514,7 @@ layers configuration."
 
     (evil-define-key 'hybrid eshell-mode-map
       (kbd "C-k") 'eshell-previous-input
+      (kbd "C-y") 'evil-paste-after
       (kbd "C-j") 'eshell-next-input)
 
     (evil-define-key 'hybrid cider-repl-mode-map
@@ -630,7 +632,6 @@ layers configuration."
                                    ;;add more keyword for mocha here
                                    ("Function" "function[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*(" 1)
                                    ("Function" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*=[ \t]*function[ \t]*(" 1)
-
                                    ))))
 
     (add-hook 'js2-mode-hook

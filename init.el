@@ -495,6 +495,13 @@ layers configuration."
       :cwd "~/Projects/chulip"
       :kill-signal 'sigkill
       :kill-process-buffer-on-stop t)
+
+    (prodigy-define-service
+      :name "Le Blog"
+      :command "takeapeek"
+      :cwd "~/Projects/le-blog-built"
+      :kill-signal 'sigkill
+      :kill-process-buffer-on-stop t)
     )
 
   (when (configuration-layer/layer-usedp 'syntax-checking)

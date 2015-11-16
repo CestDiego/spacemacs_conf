@@ -324,7 +324,7 @@ user code."
 layers configuration."
   ;; enable smartparens in hybrid insert state
   ;; (key-chord-define override-global-map (kbd "d;") 'evil-delete)
-
+  (global-evil-mc-mode)
   (defun cestiego/pretty-symbols (new-pretty-symbols)
     (mapcar (lambda (item)
               (push item prettify-symbols-alist))

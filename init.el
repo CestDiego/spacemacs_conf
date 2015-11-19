@@ -380,12 +380,6 @@ layers configuration."
   ;;; SANE DEFAULTS!!
   (add-hook 'visual-line-mode-hook 'visual-fill-column-mode)
 
-  ;; (defadvice helm-do-ag (around add-commands first (command-options) activate)
-  ;;   "Specify which command options you want ag to use"
-  ;;   (interactive "sSpecify ag-commands to use: ")
-  ;;   (let ((helm-ag-command-option command-options))
-  ;;     ad-do-it))
-
   ;; UTF-8 please
   (setq locale-coding-system    'utf-8) ; pretty
   (set-terminal-coding-system   'utf-8) ; pretty

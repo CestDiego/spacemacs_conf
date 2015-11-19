@@ -377,7 +377,6 @@ layers configuration."
         )))
    '(emacs-lisp-mode-hook))
 
-  ;; (setq git-gutter-fr:side 'left-fringe)
   ;;; SANE DEFAULTS!!
   (add-hook 'visual-line-mode-hook 'visual-fill-column-mode)
 

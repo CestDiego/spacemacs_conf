@@ -336,8 +336,6 @@ layers configuration."
 
   (setq helm-echo-input-in-header-line nil)
 
-  (setq org-ellipsis " ")
-
   (dolist (b sp-smartparens-bindings)
     (evil-define-key 'hybrid emacs-lisp-mode-map (kbd (car b)) (cdr b)))
 

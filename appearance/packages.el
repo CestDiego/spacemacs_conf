@@ -7,6 +7,7 @@
                      (recipe :fetcher github
                              :repo "wasamasa/zone-nyan"))
     exwm
+    smooth-scroll
     ))
 
 (defun appearance/init-zone-nyan ()
@@ -69,6 +70,15 @@
     :init
     (evil-leader/set-key
       "hn" 'helm-nerd-fonts)))
+
+(defun appearance/init-smooth-scroll ()
+  (use-package smooth-scroll
+    :defer
+    :init
+    (progn
+      (require 'smooth-scroll)
+      (smooth-scroll-mode 1)
+      (setq smooth-scroll/vscroll-step-size 5))))
 
 (defun appearance/init-auto-dim-other-buffers ()
   (use-package auto-dim-other-buffers

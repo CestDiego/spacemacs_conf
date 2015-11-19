@@ -18,6 +18,7 @@
     ob-mongo
     ob-browser
     org-gcal
+    org-readme
     ox-ioslide
     ox-cv
     mustache
@@ -225,6 +226,15 @@ which require an initialization must be listed explicitly in the list.")
       "ogp" 'org-gcal-post-at-point
       "ogr" 'org-gcal-refresh-token)
     ))
+
+(defun org-cestdiego/init-org-readme ()
+  (use-package org-readme
+    :defer t
+    :config
+    (evil-leader/set-key
+      "mr" 'org-readme-sync)
+    ))
+
 
 (defun org-cestdiego/init-ox-ioslide ()
   (use-package ox-ioslide

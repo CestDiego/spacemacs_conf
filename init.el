@@ -328,6 +328,7 @@ layers configuration."
   ;; (key-chord-define override-global-map (kbd "d;") 'evil-delete)
   (global-evil-mc-mode)
   (fset 'evil-visual-update-x-selection 'ignore)
+  (volatile-highlights-mode t)
   (defun cestiego/pretty-symbols (new-pretty-symbols)
     (mapcar (lambda (item)
               (push item prettify-symbols-alist))

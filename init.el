@@ -416,29 +416,29 @@ layers configuration."
 
   ;; (setq web-mode-enable-current-column-highlight t)
 
-  (when (configuration-layer/package-usedp 'persp-mode)
+  (when (configuration-layer/layer-usedp 'spacemacs-layouts)
 
-    ;; (spacemacs|define-custom-persp "NixOS Configuration"
-    ;;   :binding "N"
-    ;;   :body
-    ;;   (dired "~/Projects/nixpkgs/pkgs/")
-    ;;   (split-window-right)
-    ;;   (find-file "~/nixos-config/common/desktop.nix"))
+    (spacemacs|define-custom-layout "NixOS Configuration"
+      :binding "N"
+      :body
+      (dired "~/Projects/nixpkgs/pkgs/")
+      (split-window-right)
+      (find-file "~/nixos-config/common/desktop.nix"))
 
-    ;; (spacemacs|define-custom-persp "Blog"
-    ;;   :binding "b"
-    ;;   :body
-    ;;   (when (y-or-n-p "Hi, do you want to create a new post?")
-    ;;     (call-interactively 'op/new-post)))
+    (spacemacs|define-custom-layout "Blog"
+      :binding "b"
+      :body
+      (when (y-or-n-p "Hi, do you want to create a new post?")
+        (call-interactively 'op/new-post)))
 
-    ;; (spacemacs|define-custom-persp "@bspwm"
-    ;;   :binding "B"
-    ;;   :body
-    ;;   (find-file "~/dotbspwm/.config/sxhkd/sxhkdrc")
-    ;;   (split-window-right-and-focus)
-    ;;   (find-file "~/dotbspwm/.config/bspwm/bspwmrc")
-    ;;   (split-window-below-and-focus)
-    ;;   (find-file "~/dotbspwm/.config/bspwm/autostart"))
+    (spacemacs|define-custom-layout "@bspwm"
+      :binding "B"
+      :body
+      (find-file "~/dotbspwm/.config/sxhkd/sxhkdrc")
+      (split-window-right-and-focus)
+      (find-file "~/dotbspwm/.config/bspwm/bspwmrc")
+      (split-window-below-and-focus)
+      (find-file "~/dotbspwm/.config/bspwm/autostart"))
     )
 
   (setq browse-url-browser-function 'browse-url-generic
@@ -567,9 +567,9 @@ layers configuration."
       (define-key custom-keys-mode-map (kbd "<C-s-tab>") 'eyebrowse-next-window-config)
       (define-key custom-keys-mode-map (kbd "<C-s-iso-lefttab>") 'eyebrowse-prev-window-config))
 
-    (when (configuration-layer/package-usedp 'persp-mode)
-      (define-key custom-keys-mode-map (kbd "<C-tab>") 'spacemacs//perspectives-persp-next-n)
-      (define-key custom-keys-mode-map (kbd "<C-iso-lefttab>") 'spacemacs//perspectives-persp-prev-p))
+    (when (configuration-layer/layer-usedp 'spacemacs-layouts)
+      (define-key custom-keys-mode-map (kbd "<C-tab>") 'spacemacs//layouts-persp-next-n)
+      (define-key custom-keys-mode-map (kbd "<C-iso-lefttab>") 'spacemacs//layouts-persp-prev-p))
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;;;;;;; FINISH LE GLOBAL OVERRIDE ;;;;;;;;

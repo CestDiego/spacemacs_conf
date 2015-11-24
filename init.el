@@ -571,6 +571,7 @@ layers configuration."
       (define-key custom-keys-mode-map (kbd "<C-tab>") 'spacemacs//layouts-persp-next-n)
       (define-key custom-keys-mode-map (kbd "<C-iso-lefttab>") 'spacemacs//layouts-persp-prev-p))
 
+    ;; (define-key helm-map (kbd "C-w") '(lambda () (interactive) (symbol-at-point)))
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;;;;;;; FINISH LE GLOBAL OVERRIDE ;;;;;;;;
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

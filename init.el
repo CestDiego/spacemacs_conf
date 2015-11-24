@@ -628,9 +628,9 @@ layers configuration."
             (web-mode)
             (setq web-mode-content-type "html"))
         (js2-mode)))
-    (evil-leader/set-key-for-mode 'web-mode
+    (spacemacs/set-leader-keys-for-major-mode 'web-mode
       "m," 'spacemacs/toggle-web-js2-mode)
-    (evil-leader/set-key-for-mode 'js2-mode
+    (spacemacs/set-leader-keys-for-major-mode 'js2-mode
       "m," 'spacemacs/toggle-web-js2-mode))
 
   (when (configuration-layer/layer-usedp 'javascript)

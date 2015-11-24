@@ -23,10 +23,10 @@
     ox-cv
     mustache
     ht
-    (org-babel :location local)
-    (org-protocol :location local)
-    (org-capture :location local)
-    (org-agenda :location local)
+    (org-babel :location built-in)
+    (org-protocol :location built-in)
+    (org-capture :location built-in)
+    (org-agenda :location built-in)
     (ox-koma-letter :location local)
     (org-protocol-github-lines :location local)
     )

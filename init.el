@@ -37,6 +37,7 @@ values."
      ;; nand2tetris
 
      ;; Spacemacs
+     gnus
      nixos
      dash
      ;; Version Control

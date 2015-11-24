@@ -41,9 +41,10 @@
       '((t :strike-through t))
       "Basic strike-through face."
       :group 'basic-faces)
-    (push '("+" ,(if (featurep 'xemacs) 'org-table strike-through)) org-emphasis-alist)
     (unless (file-exists-p org-page-built-directory)
-      (make-directory org-page-built-directory))))
+      (make-directory org-page-built-directory))
+    :config
+    (push '("+" ,(if (featurep 'xemacs) 'org-table strike-through)) org-emphasis-alist)))
 
 (defun blog/init-mustache ()
   (use-package mustache))

@@ -518,13 +518,6 @@ layers configuration."
       (kbd "C-y")   'term-paste
       (kbd "<C-backspace>") 'term-send-raw-meta)
 
-    (evil-define-key 'hybrid comint-mode-map
-      (kbd "C-S-k") 'comint-previous-matching-input-from-input
-      (kbd "C-S-j") 'comint-next-matching-input-from-input
-      (kbd "C-p") 'comint-previous-input
-      (kbd "C-n") 'comint-next-input
-      (kbd "<C-backspace>") 'backward-kill-word)
-
     (evil-define-key 'hybrid eshell-mode-map
       (kbd "C-k") 'eshell-previous-input
       (kbd "C-y") 'evil-paste-after

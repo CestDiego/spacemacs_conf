@@ -128,6 +128,7 @@ values."
    dotspacemacs-additional-packages '(visual-fill-column
                                       encourage-mode
                                       key-chord
+                                      selectric-mode
                                       w3m
                                       sicp
                                       beacon

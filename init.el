@@ -126,6 +126,7 @@ values."
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dostspacemacs/config'.
    dotspacemacs-additional-packages '(visual-fill-column
+                                      encourage-mode
                                       key-chord
                                       w3m
                                       sicp

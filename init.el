@@ -38,6 +38,9 @@ values."
 
      ;; Spacemacs
      gnus
+     (elfeed :variables
+             elfeed-enable-web-interface t
+             rmh-elfeed-org-files (list "~/Dropbox/Org-Notes/elfeed.org"))
      nixos
      dash
      ;; Version Control

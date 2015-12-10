@@ -827,10 +827,6 @@ layers configuration."
  '(safe-local-variable-values
    (quote
     ((set-input-method "latin-1-prefix" t)
-     (firestarter let
-                  ((org-html-htmlize-output-type
-                    (quote css)))
-                  (op/do-publication t t org-page-built-directory))
      (firestarter op/do-publication t t "~/Projects/le_blog_built")
      (eval when
            (and

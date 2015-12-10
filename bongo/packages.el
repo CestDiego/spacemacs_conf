@@ -30,7 +30,7 @@ which require an initialization must be listed explicitly in the list.")
     (progn
       ;; (add-to-list 'evil-emacs-state-modes 'bongo-library-mode)
       ;; (add-to-list 'evil-emacs-state-modes 'bongo-playlist-mode)
-      (evil-leader/set-key
+      (spacemacs/set-leader-keys
         "aB" 'bongo)
       ))
   )

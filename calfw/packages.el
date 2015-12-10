@@ -15,7 +15,7 @@ which require an initialization must be listed explicitly in the list.")
       (interactive)
       (cfw:open-ical-calendar "https://www.google.com/calendar/ical/cestdiego%40gmail.com/private-6fc2c53f60c0053ad716dbaec2be1acf/basic.ics")
       )
-    (evil-leader/set-key
+    (spacemacs/set-leader-keys
       "aC" 'holi)
     )
   )

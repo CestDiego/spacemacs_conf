@@ -25,7 +25,7 @@
   (use-package org-page
     :commands (op/do-publication op/new-post op/new-repository)
     :init
-    (evil-leader/set-key
+    (spacemacs/set-leader-keys
       "opo" '(lambda () (interactive)
                (magit-status op/repository-directory))
       "opp" '(lambda() (interactive)

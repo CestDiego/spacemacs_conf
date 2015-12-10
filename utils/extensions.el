@@ -30,7 +30,7 @@
 (defun utils/init-mode-line-frame ()
   (use-package mode-line-frame
     :init
-    (evil-leader/set-key
+    (spacemacs/set-leader-keys
       "tmC" 'mode-line-frame-create)
     ))
 

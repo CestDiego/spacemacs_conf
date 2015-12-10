@@ -8,5 +8,5 @@
   (use-package webkit
     :init
     (require 'helm-webkit)
-    (evil-leader/set-key
+    (spacemacs/set-leader-keys
       "aw" 'webkit-open-url)))

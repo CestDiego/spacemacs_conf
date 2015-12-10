@@ -221,7 +221,7 @@ which require an initialization must be listed explicitly in the list.")
           org-gcal-client-secret "QmOmh-flucrRo1a_mtNQaQb-"
           org-gcal-file-alist '(("cestdiego@gmail.com" .  "~/Dropbox/Org-Notes/personal.org")
                                 ("ao267thudhi3o29famivcckt9c@group.calendar.google.com" .  "~/Dropbox/Org-Notes/ayers.org")))
-    (evil-leader/set-key
+    (spacemacs/set-leader-keys
       "ogf" 'org-gcal-fetch
       "ogp" 'org-gcal-post-at-point
       "ogr" 'org-gcal-refresh-token)
@@ -231,7 +231,7 @@ which require an initialization must be listed explicitly in the list.")
   (use-package org-readme
     :defer t
     :config
-    (evil-leader/set-key
+    (spacemacs/set-leader-keys
       "mr" 'org-readme-sync)
     ))
 

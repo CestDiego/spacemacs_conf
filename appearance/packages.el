@@ -13,7 +13,7 @@
 (defun appearance/init-zone-nyan ()
   (use-package zone-nyan
     :config
-    (evil-leader/set-key
+    (spacemacs/set-leader-keys
       "an" 'zone-nyan-preview)))
 
 
@@ -68,7 +68,7 @@
 (defun appearance/init-nerd-fonts ()
   (use-package nerd-fonts
     :init
-    (evil-leader/set-key
+    (spacemacs/set-leader-keys
       "hn" 'helm-nerd-fonts)))
 
 (defun appearance/init-smooth-scroll ()

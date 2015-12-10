@@ -18,7 +18,7 @@
     (progn
       (vagrant-tramp-enable)
       (eval-after-load "evil-leader"
-        (evil-leader/set-key
+        (spacemacs/set-leader-keys
           "avt" 'vagrant-tramp-term
           ))
       )))

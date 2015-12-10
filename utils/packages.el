@@ -102,14 +102,14 @@ which require an initialization must be listed explicitly in the list.")
   (defun helm-httpstatus ()
     (interactive)
     (helm-other-buffer '(helm-httpstatus-source) "*helm httpstatus*"))
-  (evil-leader/set-key
+  (spacemacs/set-leader-keys
     "hh" 'helm-httpstatus)
       )
 
 (defun utils/init-fontawesome ()
   (use-package fontawesome
     :init
-    (evil-leader/set-key
+    (spacemacs/set-leader-keys
       "fa" 'helm-fontawesome)
     ))
 
@@ -133,7 +133,7 @@ which require an initialization must be listed explicitly in the list.")
   (use-package string-inflection
     :init
     (progn
-      (evil-leader/set-key
+      (spacemacs/set-leader-keys
         "msi" 'string-inflection-cycle)
       ))
   )
@@ -144,7 +144,7 @@ which require an initialization must be listed explicitly in the list.")
 ;;    :init
 ;;    (progn
 ;;      (pdf-tools-install)
-;;      (evil-leader/set-key-for-mode 'pdf-view-mode
+;;      (spacemacs/set-leader-keys-for-major-mode 'pdf-view-mode
 ;;        "h" 'image-backward-hscroll
 ;;        "l" 'image-forward-hscroll
 ;;        ))))
@@ -177,7 +177,7 @@ which require an initialization must be listed explicitly in the list.")
     (setq keyfreq-file      (concat spacemacs-cache-directory "keyfreq")
           keyfreq-file-lock (concat spacemacs-cache-directory "keyfreq.lock"))
     :config
-    (evil-leader/set-key
+    (spacemacs/set-leader-keys
       "aK" 'keyfreq-show)
     (keyfreq-mode 1)
     (keyfreq-autosave-mode 1)))

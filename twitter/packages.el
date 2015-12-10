@@ -19,7 +19,7 @@
   (use-package twittering-mode
     :commands twit
     :init
-    (evil-leader/set-key
+    (spacemacs/set-leader-keys
       "at" 'twit)
     (when (configuration-layer/package-usedp 'flyspell)
       (add-hook 'twittering-edit-mode-hook (lambda () (flyspell-mode 1))))

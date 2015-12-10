@@ -806,6 +806,7 @@ layers configuration."
   ;;         (revert-buffer bang (or bang (not (buffer-modified-p))) t))))
 
   (global-prettify-symbols-mode)
+  ;; https://github.com/ocodo/.emacs.d/blob/master/custom/handy-functions.el
   )
 
 (custom-set-variables

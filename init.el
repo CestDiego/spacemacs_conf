@@ -500,7 +500,7 @@ layers configuration."
     (prodigy-define-service
       :name "Le Blog"
       :command "takeapeek"
-      :cwd "~/Projects/le-blog-built"
+      :cwd "~/Projects/le_blog_built"
       :kill-signal 'sigkill
       :kill-process-buffer-on-stop t)
     )

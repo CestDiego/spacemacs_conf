@@ -182,7 +182,7 @@ values."
                          tao-yang
                          aurora
                          zenburn ;; This works without erc
-                         ;; spacemacs-light
+                         spacemacs-light
                          ;; leuven  ;; This works without erc
                          )
    ;; If non nil the cursor color matches the state color.

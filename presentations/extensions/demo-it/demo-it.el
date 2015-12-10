@@ -441,7 +441,7 @@ STEPS is a list of functions to execute."
     :global t
     :keymap '(
               ;; (" ". demo-it-step)
-              ((kbd "RET") . demo-it-step)
+              ((kbd "<return>") . demo-it-step)
               ((kbd "<down>") . demo-it-step)
               ((kbd "<mouse-1>") . demo-it-set-mouse-or-advance)
               ([nil mouse-1] . demo-it-step)

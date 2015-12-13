@@ -119,6 +119,7 @@ values."
      extra-langs
      ranger
      ;; Utils
+     selectric
      search-engine
      xkcd
      games

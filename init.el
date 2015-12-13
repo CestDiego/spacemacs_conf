@@ -333,6 +333,7 @@ user code."
 layers configuration."
   ;; enable smartparens in hybrid insert state
   ;; (key-chord-define override-global-map (kbd "d;") 'evil-delete)
+  (encourage-mode)
   (global-evil-mc-mode)
   (fset 'evil-visual-update-x-selection 'ignore)
   (volatile-highlights-mode t)

@@ -133,6 +133,7 @@ values."
    dotspacemacs-additional-packages '(visual-fill-column
                                       encourage-mode
                                       key-chord
+                                      lice
                                       w3m
                                       sicp
                                       beacon

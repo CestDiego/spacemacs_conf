@@ -134,6 +134,7 @@ values."
                                       encourage-mode
                                       key-chord
                                       lice
+                                      focus
                                       w3m
                                       sicp
                                       beacon

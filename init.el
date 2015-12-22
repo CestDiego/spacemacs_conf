@@ -58,7 +58,6 @@ values."
      ;; (perspectives :variables
      ;;               spacemacs-persp-show-home-at-startup t
      ;;               perspectives-display-help t)
-     ;; eyebrowse
      chrome
      (erc :variables
           erc-enable-sasl-auth t)
@@ -97,6 +96,8 @@ values."
             shell-default-shell 'ansi-term
             shell-pop-autocd-to-working-dir nil
             shell-default-term-shell "zsh")
+     ;; Layouts
+     eyebrowse
      ;; Lang
      ;;; LIISSSSSPPPPPSSSS
      clojure
@@ -564,10 +565,6 @@ layers configuration."
 
     (define-key custom-keys-mode-map (kbd "C-\"") 'org-cycle-agenda-files)
     (define-key custom-keys-mode-map (kbd "C-'") 'spacemacs/default-pop-shell)
-
-    (when (configuration-layer/package-usedp 'eyebrowse)
-      (define-key custom-keys-mode-map (kbd "<C-s-tab>") 'eyebrowse-next-window-config)
-      (define-key custom-keys-mode-map (kbd "<C-s-iso-lefttab>") 'eyebrowse-prev-window-config))
 
     (when (configuration-layer/layer-usedp 'spacemacs-layouts)
       (define-key custom-keys-mode-map (kbd "<C-tab>") 'spacemacs//layouts-persp-next-n)

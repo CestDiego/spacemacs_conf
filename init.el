@@ -363,7 +363,7 @@ layers configuration."
           (with-editor-finish nil)
         (apply orig-fun args))))
 
-  (advice-add 'evil-write :around #'maybe-you-mean-editor-finish?)
+  ;; (advice-add 'evil-write :around #'maybe-you-mean-editor-finish?)
 
   (add-hook 'with-editor-mode-hook 'evil-normalize-keymaps)
   (evil-define-key 'normal with-editor-mode-map ",c" 'with-editor-finish)

@@ -134,6 +134,7 @@ values."
                                       encourage-mode
                                       key-chord
                                       lice
+                                      eshell-z
                                       focus
                                       w3m
                                       sicp
@@ -335,6 +336,7 @@ layers configuration."
   ;; enable smartparens in hybrid insert state
   ;; (key-chord-define override-global-map (kbd "d;") 'evil-delete)
   (encourage-mode)
+  (require 'eshell-z)
   (global-evil-mc-mode)
   (fset 'evil-visual-update-x-selection 'ignore)
   (volatile-highlights-mode t)

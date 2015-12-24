@@ -25,7 +25,6 @@ values."
      (blog :variables
            org-page-use-melpa-version nil
            org-page-built-directory "~/Projects/le_blog_built/")
-     eshell
      org-cestdiego
      presentations
      soundcloud

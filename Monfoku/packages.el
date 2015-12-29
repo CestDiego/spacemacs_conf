@@ -69,13 +69,6 @@
         (babel-repl-send-buffer)))
     ))
 
-(defun Monfoku/init-comint ()
-  (use-package comint
-    :config
-    (add-to-list 'comint-preoutput-filter-functions
-                 (lambda (output)
-                   (replace-regexp-in-string "\033\\[[0-9]+[A-Z]" "" output)))))
-
 
 (defun Monfoku/init-skewer-mode ()
   (use-package skewer-mode

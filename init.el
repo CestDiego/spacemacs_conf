@@ -65,7 +65,6 @@ values."
             rcirc-default-user-name "cestdiego"
             rcirc-default-full-name "Diego Berrocal"
             rcirc-enable-znc-support t)
-     html
      restclient
      ;; Org
      (org :variables

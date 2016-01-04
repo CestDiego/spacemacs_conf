@@ -124,6 +124,7 @@ which require an initialization must be listed explicitly in the list.")
 
 (defun org-cestdiego/init-ob ()
   (use-package ob
+    :defer t
     :config
     (org-babel-do-load-languages
      'org-babel-load-languages

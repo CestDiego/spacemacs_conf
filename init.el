@@ -345,6 +345,8 @@ layers configuration."
               (push item prettify-symbols-alist))
             new-pretty-symbols))
 
+  (setq ispell-extra-args '("--sug-mode=ultra" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
+
   (beacon-mode 1)
 
   (setq helm-echo-input-in-header-line nil)

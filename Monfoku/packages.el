@@ -14,29 +14,34 @@
 ;; which require an initialization must be listed explicitly in the list.
 (setq Monfoku-packages
     '(
+      nodejs-repl
       babel-repl
-      ;; (comint :location built-in)
       skewer-mode
       livid-mode
       ))
 
-;; List of packages to exclude.
-(setq Monfoku-excluded-packages '())
+(defun Monfoku/init-nodejs-repl ()
+  (use-package nodejs-repl
+    :init
+    (spacemacs/declare-prefix-for-mode 'js2-mode "msn" "nodejs-repl")
+    (spacemacs/set-leader-keys-for-major-mode 'js2-mode
+      "sni" 'nodejs-repl
+      "snb" 'nodejs-repl-send-buffer
+      "snr" 'nodejs-repl-send-region
+      "nee" 'nodejs-repl-send-last-sexp)
+    ))
 
-;; For each package, define a function Monfoku/init-<package-name>
-;;
+
 (defun Monfoku/init-babel-repl ()
   (use-package babel-repl
     :defer t
     :init
     (setq babel-repl-cli-arguments '())
-
-    (spacemacs/declare-prefix-for-mode 'js2-mode "ms" "repl")
+    (spacemacs/declare-prefix-for-mode 'js2-mode "msB" "babel-repl")
     (spacemacs/set-leader-keys-for-major-mode 'js2-mode
-
-      "sr" 'spacemacs/babel-repl-send-dwi
-      "sb" 'spacemacs/babel-repl-send-buffer
-      "sB" 'spacemacs/babel-repl-send-buffer-and-switch)
+      "sBr" 'spacemacs/babel-repl-send-dwi
+      "sBb" 'spacemacs/babel-repl-send-buffer
+      "sBB" 'spacemacs/babel-repl-send-buffer-and-switch)
 
     (defun spacemacs/babel-repl-send-dwim ()
       (interactive)
@@ -77,10 +82,13 @@
     (add-hook 'js2-mode-hook 'skewer-mode)
     ;; This starts the server process
     ;; Otherwise we need to call httpd-start or run-skewer manually
-    (httpd-start)
+    (defun spacemacs/run-skewer ()
+      (interactive)
+      (let ((httpd-port 1337))
+        (run-skewer)))
     :config
     (spacemacs/set-leader-keys-for-major-mode 'js2-mode
-      "ss" 'run-skewer
+      "ss" 'spacemacs/run-skewer
       "si" 'skewer-repl
       "sb" 'skewer-load-buffer
       "ee" 'skewer-eval-last-expression

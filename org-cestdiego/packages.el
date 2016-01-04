@@ -23,11 +23,11 @@
     ox-cv
     mustache
     ht
-    (org-babel :location built-in)
-    (org-protocol :location built-in)
-    (org-capture :location built-in)
-    (org-agenda :location built-in)
-    (ox-koma-letter :location local)
+    (ob                        :location built-in)
+    (org-protocol              :location built-in)
+    (org-capture               :location built-in)
+    (org-agenda                :location built-in)
+    (ox-koma-letter            :location local)
     (org-protocol-github-lines :location local)
     )
   "List of all packages to install and/or initialize. Built-in packages
@@ -95,43 +95,36 @@ which require an initialization must be listed explicitly in the list.")
              "* TO-READ %c %^g\n Entered on: %U\n %?\n%i\n"
              :empy-lines 1)
             ("w" "Weight Log" table-line (file+headline "weight.org" "Diario de Peso") " | %? | %t |")
-            ("c" "Clock In" table-line (file+headline "clokin.org" "Bitácora de Asistencia") " | %T |")
-            )
-          )
-    ))
+            ("c" "Clock In" table-line (file+headline "clokin.org" "Bitácora de Asistencia") " | %T |")))))
 
-(defun org-cestdiego/init-org-agenda ()
-  (use-package org-agenda
-    :commands org-agenda
-    :defer t
+(defun org-cestdiego/pre-init-org-agenda ()
+  (spacemacs|use-package-add-hook org-agenda
+    :post-config
+    (progn
+
+      (defadvice org-switch-to-buffer-other-window (after make-full-agenda-window-frame activate)
+        "Advice this function inside the agenda to be the sole window when in a popup frame"
+        (when (equal "emacs-agenda" (frame-parameter nil 'name))
+          (delete-other-windows)
+          (hidden-mode-line-mode)))
+
+      (defadvice org-agenda-quit (after make-full-window-frame activate)
+        "Advise org-agenda to be the sole window when in a popup frame"
+        (if (equal "emacs-agenda" (frame-parameter nil 'name))
+            (delete-frame)))
+
+      (setq org-agenda-custom-commands
+            (append '(("v" tags "Movies")
+                      ("l" tags "Links"
+                       ((org-agenda-overriding-header "Links that I have to Read: ")
+                        (org-agenda-skip-function
+                         '(org-agenda-skip-entry-if 'todo '("READING" "READ")))))
+                      ("e" tags-todo "Events"))
+                    org-agenda-custom-commands)))))
+
+(defun org-cestdiego/init-ob ()
+  (use-package ob
     :config
-    (defadvice org-switch-to-buffer-other-window (after make-full-agenda-window-frame activate)
-      "Advice this function inside the agenda to be the sole window when in a popup frame"
-      (when (equal "emacs-agenda" (frame-parameter nil 'name))
-        (delete-other-windows)
-        (hidden-mode-line-mode)))
-
-    (defadvice org-agenda-quit (after make-full-window-frame activate)
-      "Advise org-agenda to be the sole window when in a popup frame"
-      (if (equal "emacs-agenda" (frame-parameter nil 'name))
-          (delete-frame)))
-    ;; (org-agenda)
-
-    (setq org-agenda-custom-commands
-          (append '(("v" tags "Movies")
-                    ("l" tags "links"
-                     ((org-agenda-overriding-header "Links that I have to Read: ")
-                      (org-agenda-skip-function
-                       '(org-agenda-skip-entry-if 'todo '("READING" "READ")))))
-                    ("e" tags-todo "Eventos"))
-                  org-agenda-custom-commands))
-    ))
-
-
-(defun org-cestdiego/init-org-babel ()
-  (use-package org-babel
-    :config
-    (require 'ob-scheme)
     (org-babel-do-load-languages
      'org-babel-load-languages
      '((R . t)
@@ -146,8 +139,7 @@ which require an initialization must be listed explicitly in the list.")
        (C . t)
        (sql . t)
        (ditaa . t)
-       ))
-    ))
+       ))))
 
 (defun org-cestdiego/post-init-org()
   "Initialize my package"

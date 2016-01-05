@@ -18,7 +18,14 @@
       babel-repl
       skewer-mode
       livid-mode
+      (mocha-snippets :location (recipe :fetcher github
+                                        :repo "cestdiego/mocha-snippets.el"))
       ))
+
+
+(defun Monfoku/init-mocha-snippets ()
+  (use-package mocha-snippets))
+
 
 (defun Monfoku/init-nodejs-repl ()
   (use-package nodejs-repl

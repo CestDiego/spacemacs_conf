@@ -51,7 +51,7 @@ values."
      ;; Other stuff
      prodigy
      (colors :variables
-             colors-enable-nyan-cat-progress-bar `,(display-graphic-p)
+             colors-enable-nyan-cat-progress-bar t
              colors-enable-rainbow-identifiers nil)
 
      ;; (perspectives :variables

@@ -91,7 +91,7 @@ values."
      ;; Shells
      (shell :variables
             shell-protect-eshell-prompt t
-            shell-default-shell 'ansi-term
+            shell-default-shell 'eshell
             shell-pop-autocd-to-working-dir nil
             shell-default-term-shell "zsh")
      ;; Layouts

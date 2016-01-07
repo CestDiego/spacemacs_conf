@@ -332,6 +332,23 @@ user code."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+  (setq user-full-name    "Diego Berrocal"
+        user-mail-address "cestdiego@gmail.com")
+
+  (defun spacemacs/user-full-name ()
+    "Guess the user's full name. Returns nil if no likely name could be found."
+    (or (replace-regexp-in-string
+         "\n$" "" (shell-command-to-string "git config --get user.name"))
+        (user-full-name)
+        (getenv "USER")))
+
+  (defun spacemacs/user-email ()
+    "Guess the user's email address. Returns nil if none could be found."
+    (or (replace-regexp-in-string
+         "\n$" "" (shell-command-to-string "git config --get user.email"))
+        user-mail-address
+        (getenv "EMAIL")))
+
   (encourage-mode)
   ;; (with-eval-after-load 'eshell
   ;;   (require 'eshell-z))

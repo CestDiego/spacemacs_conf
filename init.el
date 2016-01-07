@@ -332,8 +332,6 @@ user code."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
-  ;; enable smartparens in hybrid insert state
-  ;; (key-chord-define override-global-map (kbd "d;") 'evil-delete)
   (encourage-mode)
   ;; (with-eval-after-load 'eshell
   ;;   (require 'eshell-z))

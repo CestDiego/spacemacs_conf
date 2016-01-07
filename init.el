@@ -506,6 +506,9 @@ layers configuration."
   (setq zone-programs [zone-pgm-rotate-LR-lockstep])
 
   (when (configuration-layer/package-usedp 'nyan-mode)
+    (spacemacs|do-after-display-system-init
+     (nyan-mode -1)
+     (nyan-mode))
     (nyan-mode -1))
 
   (setq tab-width 2)

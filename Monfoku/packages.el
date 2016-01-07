@@ -18,8 +18,7 @@
       babel-repl
       skewer-mode
       livid-mode
-      (mocha-snippets :location (recipe :fetcher github
-                                        :repo "cestdiego/mocha-snippets.el"))
+      mocha-snippets
       ))
 
 

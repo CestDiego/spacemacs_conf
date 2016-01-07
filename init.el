@@ -858,6 +858,11 @@ layers configuration."
     ((firestarter async-shell-command
                   (concat "PORT=1337 mocha "
                           (expand-file-name "test"
+                                            (projectile-project-root)))
+                  "* Mocha Test Output *" "* Mocha Test Error Output *")
+     (firestarter async-shell-command
+                  (concat "PORT=1337 mocha "
+                          (expand-file-name "test"
                                             (projectile-project-root))))
      (set-input-method "latin-1-prefix" t)
      (firestarter op/do-publication t t "~/Projects/le_blog_built")

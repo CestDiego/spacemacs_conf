@@ -352,8 +352,6 @@ layers configuration."
   (key-chord-mode 1)
   (key-chord-define-global "qq" 'spacemacs/frame-killer)
   (encourage-mode)
-  ;; (with-eval-after-load 'eshell
-  ;;   (require 'eshell-z))
   (global-evil-mc-mode)
   (fset 'evil-visual-update-x-selection 'ignore)
   (volatile-highlights-mode t)

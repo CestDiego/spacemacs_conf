@@ -360,6 +360,14 @@ layers configuration."
               (push item prettify-symbols-alist))
             new-pretty-symbols))
 
+  (push '("* Mocha Test Output *"
+          :dedicated t
+          :position bottom
+          :stick tc-state
+          :noselect nil
+          :height 0.4)
+        popwin:special-display-config)
+
   (setq ispell-extra-args '("--sug-mode=ultra" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
 
   (beacon-mode 1)

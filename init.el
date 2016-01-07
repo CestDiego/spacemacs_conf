@@ -349,6 +349,8 @@ layers configuration."
         user-mail-address
         (getenv "EMAIL")))
 
+  (key-chord-mode 1)
+  (key-chord-define-global "qq" 'spacemacs/frame-killer)
   (encourage-mode)
   ;; (with-eval-after-load 'eshell
   ;;   (require 'eshell-z))

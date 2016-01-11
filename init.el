@@ -354,6 +354,11 @@ user code."
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
 layers configuration."
+
+  ;; (spacemacs/set-leader-keys "sm" 'evil-mc-state/evil-mc-mode)
+  ;; (define-key evil-mc-state-map
+  ;;   (kbd dotspacemacs-leader-key) spacemacs-default-map)
+
   (setq user-full-name    "Diego Berrocal"
         user-mail-address "cestdiego@gmail.com")
 

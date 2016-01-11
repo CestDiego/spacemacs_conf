@@ -824,12 +824,6 @@ layers configuration."
       (set-window-dedicated-p
        (get-buffer-window (current-buffer) t) t)))
 
-  (set-face-attribute 'helm-selection nil
-                      :inherit t)
-
-  (set-face-attribute 'helm-selection-line nil
-                      :inherit t)
-
   ;; (set-face-attribute 'mode-line-inactive nil
   ;;                     :underline "#202020"
   ;;                     :box nil

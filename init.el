@@ -376,12 +376,27 @@ layers configuration."
         user-mail-address
         (getenv "EMAIL")))
 
+  (defun cestdiego/frame-finish ()
+    (interactive)
+    (let ((C-c-C-c-key (kbd "C-c C-c")))
+      (if (key-binding C-c-C-c-key)
+          (setq unread-command-events (listify-key-sequence C-c-C-c-key))
+        (message "Nothing is bound to `C-c C-c'"))))
+
+  (defun cestdiego/setup-frame-finish ()
+    (interactive)
+    (key-chord-define-global "xx" 'cestdiego/frame-finish))
+
+  (add-hook 'prog-mode-hook 'cestdiego/setup-frame-finish)
+
   (key-chord-mode 1)
   (key-chord-define-global "qq" 'spacemacs/frame-killer)
+
   (encourage-mode)
   (global-evil-mc-mode)
   (fset 'evil-visual-update-x-selection 'ignore)
   (volatile-highlights-mode t)
+
   (defun cestiego/pretty-symbols (new-pretty-symbols)
     (mapcar (lambda (item)
               (push item prettify-symbols-alist))

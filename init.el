@@ -595,8 +595,6 @@ layers configuration."
       (kbd "C-r") 'cider-repl-previous-matching-input
       (kbd "C-s") 'cider-repl-next-matching-input)
 
-    (add-to-list 'helm-completing-read-handlers-alist '(pony-manage . ido))
-
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;;;;;;; OVERRIDING GLOBALLY STUFF ;;;;;;;;
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -670,10 +668,6 @@ layers configuration."
                                         "\\[Github\\].* synchronize a Pull Request"
                                         "\\[Github\\].* labeled an issue in"
                                         "\\[Github\\].* unlabeled an issue in")))
-
-  ;; Insert thing at point for Helm-aG!!
-  ;; (setq helm-ag-insert-at-point 'symbol)
-  ;; (setq helm-ag-fuzzy-match t)
 
   (when (configuration-layer/layer-usedp 'react)
     (defun spacemacs/toggle-web-js2-mode ()

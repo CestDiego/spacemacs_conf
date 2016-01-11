@@ -521,7 +521,7 @@ layers configuration."
 
   (setq browse-url-browser-function 'browse-url-generic
         engine/browser-function 'browse-url-generic
-        browse-url-generic-program "chromium")
+        browse-url-generic-program "google-chrome-stable")
 
   (defadvice evil-inner-word (around underscore-as-word activate)
     (let ((table (copy-syntax-table (syntax-table))))

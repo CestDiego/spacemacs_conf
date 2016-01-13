@@ -69,7 +69,7 @@
   (use-package nerd-fonts
     :init
     (spacemacs/set-leader-keys
-      "hn" 'helm-nerd-fonts)))
+      "hN" 'helm-nerd-fonts)))
 
 (defun appearance/init-smooth-scroll ()
   (use-package smooth-scroll

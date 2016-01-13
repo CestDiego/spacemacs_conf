@@ -19,7 +19,7 @@ values."
    dotspacemacs-configuration-layers
    '(
      ;; MY Own layers
-     no-dots
+     ;; no-dots
      appearance
      (blog :variables
            org-page-use-melpa-version nil

@@ -23,7 +23,7 @@
     ox-cv
     mustache
     ht
-    (ob                        :location built-in)
+    ;; (ob                        :location built-in)
     (org-protocol              :location built-in)
     (org-capture               :location built-in)
     (org-agenda                :location built-in)

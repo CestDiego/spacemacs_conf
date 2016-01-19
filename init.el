@@ -390,8 +390,9 @@ layers configuration."
   (add-hook 'prog-mode-hook 'cestdiego/setup-frame-finish)
 
   (key-chord-mode 1)
-  (key-chord-define-global "qq" 'spacemacs/frame-killer)
+  (setq key-chord-one-key-delay 0.15)
 
+  (key-chord-define-global "qq" 'spacemacs/frame-killer)
   (encourage-mode)
   (global-evil-mc-mode)
   (fset 'evil-visual-update-x-selection 'ignore)

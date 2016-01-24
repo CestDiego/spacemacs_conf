@@ -637,9 +637,10 @@ layers configuration."
     (define-key custom-keys-mode-map (kbd "C-\"") 'org-cycle-agenda-files)
     (define-key custom-keys-mode-map (kbd "C-'") 'spacemacs/default-pop-shell)
 
-    (when (configuration-layer/layer-usedp 'spacemacs-layouts)
-      (define-key custom-keys-mode-map (kbd "<C-tab>") 'spacemacs//layouts-persp-next-n)
-      (define-key custom-keys-mode-map (kbd "<C-iso-lefttab>") 'spacemacs//layouts-persp-prev-p))
+    ;; (when (configuration-layer/layer-usedp 'spacemacs-layouts)
+    ;;   (define-key custom-keys-mode-map (kbd "<C-tab>") 'spacemacs//layouts-persp-next-n)
+    ;;   (define-key custom-keys-mode-map (kbd "<C-backtab>") 'spacemacs//layouts-persp-prev-p))
+
 
     ;; (define-key helm-map (kbd "C-w") '(lambda () (interactive) (symbol-at-point)))
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

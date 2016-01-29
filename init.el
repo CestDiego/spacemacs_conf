@@ -392,7 +392,36 @@ layers configuration."
   (setq key-chord-one-key-delay 0.15)
 
   (key-chord-define-global "qq" 'spacemacs/frame-killer)
-  (setq org-todo-keywords '((sequence " TODO" "DONE")))
+  (setq org-todo-keywords '((sequence " TODO" "DONE"))
+        org-ellipsis " ↴"
+        ;; don't let me accidentally delete text without realizing it in org.  ie: point is buried in a subtree, but you only
+        ;; see the heading and you accidentally kill a line without knowing it.
+        ;; this might not be supported for evil-mode
+        org-catch-invisible-edits 'show-and-error
+        ;; whenever I change state from TODO to DONE org will log that timestamp. Let's put that in a drawer
+        org-log-into-drawer t
+        ;; make org-mode record the date when you finish a task
+        org-log-done 'time
+        ;; when you press S-down, org changes the timestamp under point
+        org-edit-timestamp-down-means-later t
+        ;; make the agenda start on today not wednesday
+        org-agenda-start-on-weekday nil
+        ;; don't make the agenda only show saturday and Sunday if today is saturday. Make it show 7 days
+        org-agenda-span 7
+        ;; using the diary slows down the agenda view
+        ;; but it also shows you upcoming calendar events
+        org-agenda-include-diary t
+        ;; this tells the agenda to take up the whole window and hide all other buffers
+        org-agenda-window-setup 'current-window
+        ;; this tells org-mode to only quit selecting tags for things when you tell it that you are done with it
+        org-fast-tag-selection-single-key nil
+        org-html-validation-link nil
+        org-export-kill-product-buffer-when-displayed t
+        ;; are there more backends that I can use?
+        org-export-backends '(ascii beamer html texinfo latex)
+        ;;most of these modules let you store links to various stuff in org
+        org-bullets-bullet-list '("◉" "◎" "♠" "○" "►" "◇"))
+
   (encourage-mode)
   (global-evil-mc-mode)
   (fset 'evil-visual-update-x-selection 'ignore)

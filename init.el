@@ -422,6 +422,26 @@ layers configuration."
         ;;most of these modules let you store links to various stuff in org
         org-bullets-bullet-list '("◉" "◎" "♠" "○" "►" "◇"))
 
+  (defun cestdiego/inbox-email-draft-configuration ()
+    ;; When editing mail, set the goal-column to 72.
+    (auto-fill-mode 1)
+    (set-fill-column 72)
+    (save-excursion
+      ;; Don't know if this is necessary, but it seems to help.
+      (set-buffer (buffer-name))
+      (goto-char (point-min))
+      ;; Replace non-breaking strange space characters
+      (while (search-forward (char-to-string 160) nil t)
+        (replace-match " "))))
+
+  (defun cestdiego/configure-edit-server ()
+    (cond ((string-match "github.com" (buffer-name))
+           (markdown-mode))
+          ((string-match "inbox.google.com" (buffer-name))
+           (cestdiego/inbox-email-draft-configuration))))
+
+  (add-hook 'edit-server-start-hook 'cestdiego/configure-edit-server)
+
   (encourage-mode)
   (global-evil-mc-mode)
   (fset 'evil-visual-update-x-selection 'ignore)

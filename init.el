@@ -103,7 +103,6 @@ values."
      ;;; Other
      ansible
      markdown
-     cp2k
      html
      latex
      c-c++

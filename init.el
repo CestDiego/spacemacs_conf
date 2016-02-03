@@ -467,7 +467,7 @@ layers configuration."
   (setq helm-echo-input-in-header-line nil)
 
   (dolist (b sp-smartparens-bindings)
-    (evil-define-key 'hybrid emacs-lisp-mode-map (kbd (car b)) (cdr b)))
+    (define-key emacs-lisp-mode-map (kbd (car b)) (cdr b)))
 
 
   (defun cestdiego/org-setup-pretty-symbols ()
@@ -685,22 +685,20 @@ layers configuration."
     (evil-define-key 'normal term-raw-map
       "p" 'term-paste) ;; why paste-microstate doesn't work?
 
-    (evil-define-key 'hybrid term-raw-map
-      (kbd "C-S-k") 'term-send-up
-      (kbd "C-S-j") 'term-send-down
-      (kbd "C-y")   'term-paste
-      (kbd "<C-backspace>") 'term-send-raw-meta)
+    (define-key term-raw-map (kbd "C-S-k") 'term-send-up)
+    (define-key term-raw-map (kbd "C-S-j") 'term-send-down)
+    (define-key term-raw-map (kbd "C-y")   'term-paste)
+    (define-key term-raw-map (kbd "<C-backspace>") 'term-send-raw-meta)
 
-    (evil-define-key 'hybrid eshell-mode-map
-      (kbd "C-k") 'eshell-previous-input
-      (kbd "C-y") 'evil-paste-after
-      (kbd "C-j") 'eshell-next-input)
 
-    (evil-define-key 'hybrid cider-repl-mode-map
-      (kbd "C-k") 'cider-repl-backward-input
-      (kbd "C-j") 'cider-repl-forward-input
-      (kbd "C-r") 'cider-repl-previous-matching-input
-      (kbd "C-s") 'cider-repl-next-matching-input)
+    ;; (define-key eshell-mode-map (kbd "C-k") 'eshell-previous-input)
+    ;; (define-key eshell-mode-map (kbd "C-y") 'evil-paste-after)
+    ;; (define-key eshell-mode-map (kbd "C-j") 'eshell-next-input)
+
+    ;; (define-key cider-repl-mode-map (kbd "C-k") 'cider-repl-backward-input)
+    ;; (define-key cider-repl-mode-map (kbd "C-j") 'cider-repl-forward-input)
+    ;; (define-key cider-repl-mode-map (kbd "C-r") 'cider-repl-previous-matching-input)
+    ;; (define-key cider-repl-mode-map (kbd "C-s") 'cider-repl-next-matching-input)
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;;;;;;; OVERRIDING GLOBALLY STUFF ;;;;;;;;

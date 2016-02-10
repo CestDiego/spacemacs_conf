@@ -407,7 +407,7 @@ layers configuration."
   (setq key-chord-one-key-delay 0.15)
 
   (key-chord-define-global "qq" 'spacemacs/frame-killer)
-  (setq org-todo-keywords '((sequence " TODO" "DONE"))
+  (setq org-todo-keywords '((sequence "TODO" "DONE"))
         org-ellipsis " ↴"
         ;; don't let me accidentally delete text without realizing it in org.  ie: point is buried in a subtree, but you only
         ;; see the heading and you accidentally kill a line without knowing it.

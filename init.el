@@ -183,12 +183,14 @@ values."
    ;; If the value is nil then no banner is displayed. (default 'official)
    dotspacemacs-startup-banner 'official
    ;; List of items to show in the startup buffer. If nil it is disabled.
-   ;; Possible values are: `recents' `bookmarks' `projects'.
+   ;; Possible values are: `recents' `bookmarks' `projects' `agenda' `todos'.
    ;; (default '(recents projects))
    dotspacemacs-startup-lists '(recents projects)
    ;; Number of recent files to show in the startup buffer. Ignored if
    ;; `dotspacemacs-startup-lists' doesn't include `recents'. (default 5)
    dotspacemacs-startup-recent-list-size 5
+   ;; Default major mode of the scratch buffer (default `text-mode')
+   dotspacemacs-scratch-mode 'text-mode
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
@@ -232,9 +234,11 @@ values."
    ;; In the terminal, these pairs are generally indistinguishable, so this only
    ;; works in the GUI. (default nil)
    dotspacemacs-distinguish-gui-tab nil
-   ;; (Not implemented) dotspacemacs-distinguish-gui-ret nil
-   ;; If non nil `Y' is remapped to `y$'. (default t)
+   ;; If non nil `Y' is remapped to `y$' in Evil states. (default nil)
    dotspacemacs-remap-Y-to-y$ t
+   ;; If non nil, inverse the meaning of `g' in `:substitute' Evil ex-command.
+   ;; (default nil)
+   dotspacemacs-ex-substitute-global nil
    ;; Name of the default layout (default "Default")
    dotspacemacs-default-layout-name "Default"
    ;; If non nil the default layout name is displayed in the mode-line.
@@ -264,7 +268,7 @@ values."
    dotspacemacs-helm-position 'bottom
    ;; If non nil the paste micro-state is enabled. When enabled pressing `p`
    ;; several times cycle between the kill ring content. (default nil)
-   dotspacemacs-enable-paste-micro-state t
+   dotspacemacs-enable-paste-transient-state t
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
    dotspacemacs-which-key-delay 0.4
@@ -295,11 +299,15 @@ values."
    ;; the transparency level of a frame when it's inactive or deselected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
    dotspacemacs-inactive-transparency 90
+   ;; If non nil show the titles of transient states. (default t)
+   dotspacemacs-show-transient-state-title t
+   ;; If non nil show the color guide hint for transient state keys. (default t)
+   dotspacemacs-show-transient-state-color-guide t
    ;; If non nil unicode symbols are displayed in the mode line. (default t)
    dotspacemacs-mode-line-unicode-symbols t
    ;; If non nil smooth scrolling (native-scrolling) is enabled. Smooth
-   ;; scrolling overrides the default behavior of Emacs which recenters the
-   ;; point when it reaches the top or bottom of the screen. (default t)
+   ;; scrolling overrides the default behavior of Emacs which recenters point
+   ;; when it reaches the top or bottom of the screen. (default t)
    dotspacemacs-smooth-scrolling t
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.

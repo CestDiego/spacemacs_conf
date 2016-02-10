@@ -132,7 +132,6 @@ values."
                                       encourage-mode
                                       key-chord
                                       lice
-                                      eshell-z
                                       editorconfig
                                       nvm
                                       focus

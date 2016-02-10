@@ -40,7 +40,7 @@ values."
      (elfeed :variables
              elfeed-enable-web-interface t
              rmh-elfeed-org-files (list "~/Dropbox/Org-Notes/elfeed.org"))
-     nixos
+     ,(unless (eq system-type 'darwin) nixos)
      dash
      ;; Version Control
      version-control

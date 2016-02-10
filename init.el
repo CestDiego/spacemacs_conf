@@ -17,7 +17,7 @@ values."
    ;; List of configuration layers to load. If it is the symbol `all' instead
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
-   '(
+   `(
      ;; MY Own layers
      ;; no-dots
      appearance
@@ -74,6 +74,7 @@ values."
                wakatime-api-key    "813b0d78-1f17-43eb-bede-a5c008651d4a"
                wakatime-cli-path   "/run/current-system/sw/bin/wakatime"
                wakatime-python-bin "/run/current-system/sw/bin/python")
+     ,(when (eq system-type 'darwin) 'osx)
      ;; Completings Stuff
      (auto-completion :variables
                       auto-completion-enable-help-tooltip t

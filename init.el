@@ -558,7 +558,7 @@ layers configuration."
    (lambda ()
      (cestiego/pretty-symbols
       '(("add-hook" . ?)
-        ("defun" . ?𝆑)
+        ("defun" . ?ƒ)
         ("?" . ?)
         ("=>" .  ?)
         )))
@@ -825,7 +825,7 @@ layers configuration."
     (spacemacs/add-to-hooks
      (lambda ()
        (cestiego/pretty-symbols
-        '(("function" . ?𝆑)
+        '(("function" . ?ƒ)
           ("React" . ?)
           ("?" . ?)
           ("=>" .  ?)

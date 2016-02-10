@@ -132,6 +132,8 @@ values."
                                       key-chord
                                       lice
                                       eshell-z
+                                      editorconfig
+                                      nvm
                                       focus
                                       w3m
                                       sicp
@@ -360,6 +362,11 @@ layers configuration."
 
   (setq user-full-name    "Diego Berrocal"
         user-mail-address "cestdiego@gmail.com")
+
+  (require 'editorconfig)
+  (editorconfig-mode 1)
+  (require 'nvm)
+  (nvm-use "0.10.40")
 
   (defun spacemacs/user-full-name ()
     "Guess the user's full name. Returns nil if no likely name could be found."

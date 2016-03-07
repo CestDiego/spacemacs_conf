@@ -13,7 +13,6 @@ which require an initialization must be listed explicitly in the list.")
     (require 'calfw-ical)
     (defun holi ()
       (interactive)
-      (cfw:open-ical-calendar "https://www.google.com/calendar/ical/cestdiego%40gmail.com/private-6fc2c53f60c0053ad716dbaec2be1acf/basic.ics")
       )
     (spacemacs/set-leader-keys
       "aC" 'holi)

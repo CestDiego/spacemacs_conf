@@ -32,6 +32,7 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    `(
+     nginx
      ;; MY Own layers
      ;; no-dots
      appearance
@@ -50,11 +51,12 @@ values."
      ;; nand2tetris
 
      ;; Spacemacs
+     pdf-tools
      gnus
      (elfeed :variables
              elfeed-enable-web-interface t
              rmh-elfeed-org-files (list "~/Dropbox/Org-Notes/elfeed.org"))
-     ,(unless (eq system-type 'darwin) nixos)
+     ;; ,(unless (eq system-type 'darwin) nixos)
      dash
      ;; Version Control
      version-control
@@ -84,15 +86,14 @@ values."
           org-mapping-style 'worf)
      ;; Miscellaneous
      emoji
-     (wakatime :variables
-               wakatime-api-key    "813b0d78-1f17-43eb-bede-a5c008651d4a"
-               wakatime-cli-path   "/run/current-system/sw/bin/wakatime"
-               wakatime-python-bin "/run/current-system/sw/bin/python")
+     ;; (wakatime :variables
+     ;;           wakatime-api-key    "813b0d78-1f17-43eb-bede-a5c008651d4a"
+     ;;           wakatime-cli-path   "/run/current-system/sw/bin/wakatime"
+     ;;           wakatime-python-bin "/run/current-system/sw/bin/python")
      ,(when (eq system-type 'darwin) 'osx)
      ;; Completings Stuff
      (auto-completion :variables
                       auto-completion-enable-help-tooltip t
-                      auto-completion-private-snippets-directory "~/.spacemacs.d/snippets"
                       auto-completion-return-key-behavior 'complete
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-sort-by-usage t
@@ -108,29 +109,28 @@ values."
             shell-default-shell 'ansi-term
             shell-pop-autocd-to-working-dir nil
             shell-default-term-shell "zsh")
-     ;; Layouts
-     eyebrowse
      ;; Lang
      ;;; LIISSSSSPPPPPSSSS
-     clojure
+     ;; clojure
      emacs-lisp
      scheme
-     ;;; Other
      ansible
      markdown
      html
      latex
+     lua
      c-c++
      python
      ipython-notebook
      sql
-     haskell
+     ;; haskell
+     java
      javascript
      react
      ruby
      extra-langs
-     ranger
      ;; Utils
+     ranger
      selectric
      search-engine
      xkcd

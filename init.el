@@ -369,6 +369,7 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
   (setq-default evil-escape-key-sequence "jk")
+  (setq httpd-port 1337)
   (setq source-directory "~/Documents/Projects/emacs-24.5"
         dotspacemacs-verbose-loading t
         helm-ag-command-option " --search-zip "

@@ -36,7 +36,7 @@
   (assoc-default font-name nerd-fonts-alist))
 
 (defun nerd-fonts--propertize (glyph)
-  (propertize glyph 'face '(:family "Knack PNFT Plus Font Awesome Plu" :height 2.0)))
+  (propertize glyph 'face '(:family "Meslo LG M DZ for Powerline" :height 2.0)))
 
 (defun nerd-fonts-get-candidates-from-alists (le-font)
   (mapcar (lambda (font)

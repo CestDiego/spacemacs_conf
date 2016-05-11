@@ -16,6 +16,7 @@
     org
     ob-http
     ob-mongo
+    ob-coffee
     ob-browser
     org-gcal
     org-readme
@@ -33,8 +34,11 @@
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
 
-(defun org-cestdiego/init-ob-http()
-  (use-package ob-http))
+(defun org-cestdiego/init-ob-coffee()
+  (use-package ob-coffee
+    :defer t
+    :init
+    (add-to-list 'org-babel-load-languages '(coffee . t))))
 
 (defun org-cestdiego/init-ob-mongo()
   (use-package ob-mongo))

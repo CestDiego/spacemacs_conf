@@ -554,9 +554,8 @@ _k_: Import Proj            _e_: Start Emulator
 
   (setq helm-echo-input-in-header-line nil)
 
-  (dolist (b sp-smartparens-bindings)
-    (define-key emacs-lisp-mode-map (kbd (car b)) (cdr b)))
-
+  ;; (dolist (b sp-smartparens-bindings)
+  ;;   (define-key emacs-lisp-mode-map (kbd (car b)) (cdr b)))
 
   (defun cestdiego/org-setup-pretty-symbols ()
     (cestiego/pretty-symbols

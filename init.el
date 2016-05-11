@@ -975,12 +975,12 @@ _k_: Import Proj            _e_: Start Emulator
   ;;; END:   Extra Hybrid Modes
 
   ;;; BEGIN: Custom Hybrid Bindings
-  (define-key evil-hybrid-state-map (kbd "S-<return>") 'evil-open-below)
+  (define-key evil-insert-state-map (kbd "S-<return>") 'evil-open-below)
   ;;; END:   Custom Hybrid Bindings
 
   ;;; BEGIN: Multiple Cursors
-  (define-key evil-hybrid-state-map (kbd "C-;") 'mc/edit-lines)
-  (define-key evil-hybrid-state-map (kbd "C-:") 'mc/mark-all-like-this-dwim)
+  (define-key evil-insert-state-map (kbd "C-;") 'mc/edit-lines)
+  (define-key evil-insert-state-map (kbd "C-:") 'mc/mark-all-like-this-dwim)
   ;;; END:   Multiple Cursors
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

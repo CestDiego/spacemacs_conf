@@ -395,6 +395,51 @@ layers configuration."
   (setq user-full-name    "Diego Berrocal"
         user-mail-address "cestdiego@gmail.com")
 
+  (setq eclim-eclipse-dirs '("/Users/dberrocal/Downloads/sts-bundle/STS.app/Contents/Eclipse/")
+        eclim-executable "/Users/dberrocal/Downloads/sts-bundle/STS.app/Contents/Eclipse/eclim"
+        eclimd-default-workspace "/Users/dberrocal/Documents/.workspace/")
+  (defhydra hydra-eclim (:color teal
+                                :hint nil)
+    "
+Eclim:
+ ╭─────────────────────────────────────────────────────┐
+ │ Java                                                │       Problems
+╭┴─────────────────────────────────────────────────────┴────────────────────────────────────╯
+  _d_: Show Doc             _i_: Implement (Override)          _p_: Show Problems
+  _g_: Make getter/setter  _fd_: Find Declarations             _c_: Show Corrections
+  _o_: Organize Imports    _fr_: Find References               _r_: Buffer Refresh
+  _h_: Hierarchy            _R_: Refactor
+
+Project                            Android
+─────────────────────────────────────────────────────────
+_j_: Jump to proj           _a_: Start Activity
+_b_: Create                 _m_: Clear/Build/Install
+_k_: Import Proj            _e_: Start Emulator
+                          ^_l_: Logcat
+"
+    ("d"   eclim-java-show-documentation-for-current-element)
+    ("g"   eclim-java-generate-getter-and-setter)
+    ("o"   eclim-java-import-organize)
+    ("h"   eclim-java-call-hierarchy)
+    ("i"   eclim-java-implement)
+    ("fd"  eclim-java-find-declaration)
+    ("fr"  eclim-java-find-references)
+    ("R"   eclim-java-refactor-rename-symbol-at-point)
+    ("p"   eclim-problems)
+    ("c"   eclim-problems-correct)
+    ("r"   eclim-problems-buffer-refresh)
+    ("j"   eclim-project-goto)
+    ("b"   eclim-project-create)
+    ("k"   eclim-project-import)
+    ("a"   android-start-app)
+    ("m"   my-clean-debug-install)
+    ("e"   android-start-emulator)
+    ("l"   android-logcat)
+    ("q"   nil "cancel" :color blue))
+
+  (define-key eclim-mode-map (kbd "C-c e") 'hydra-eclim/body)
+  (require 'eclimd)
+
   (require 'editorconfig)
   (editorconfig-mode 1)
   (require 'nvm)

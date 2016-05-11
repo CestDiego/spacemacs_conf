@@ -143,6 +143,7 @@ values."
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dostspacemacs/config'.
    dotspacemacs-additional-packages '(visual-fill-column
+                                      company-flx
                                       encourage-mode
                                       key-chord
                                       lice
@@ -391,6 +392,9 @@ layers configuration."
   ;; (spacemacs/set-leader-keys "sm" 'evil-mc-state/evil-mc-mode)
   ;; (define-key evil-mc-state-map
   ;;   (kbd dotspacemacs-leader-key) spacemacs-default-map)
+
+  (with-eval-after-load 'company
+    (company-flx-mode +1))
 
   (setq user-full-name    "Diego Berrocal"
         user-mail-address "cestdiego@gmail.com")

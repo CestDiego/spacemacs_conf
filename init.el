@@ -1060,30 +1060,12 @@ _k_: Import Proj            _e_: Start Emulator
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ahs-case-fold-search nil)
- '(ahs-default-range (quote ahs-range-whole-buffer))
- '(ahs-idle-interval 0.25)
- '(ahs-idle-timer 0 t)
- '(ahs-inhibit-face-list nil)
- '(compilation-message-face (quote default))
  '(org-agenda-files
    (quote
-    ("~/Dropbox/Org-Notes/main.org" "~/Dropbox/Org-Notes/links.org")))
- '(ring-bell-function (quote ignore) t)
+    ("~/Documents/work.org" "~/Documents/todo.org" "~/Documents/ebay.org")))
  '(safe-local-variable-values
    (quote
-    ((firestarter async-shell-command
-                  (concat "PORT=1337 mocha "
-                          (expand-file-name "test"
-                                            (projectile-project-root)))
-                  "* Mocha Test Output *" "* Mocha Test Error Output *")
-     (firestarter async-shell-command
-                  (concat "PORT=1337 mocha "
-                          (expand-file-name "test"
-                                            (projectile-project-root))))
-     (set-input-method "latin-1-prefix" t)
-     (firestarter op/do-publication t t "~/Projects/le_blog_built")
-     (eval when
+    ((eval when
            (and
             (buffer-file-name)
             (file-regular-p

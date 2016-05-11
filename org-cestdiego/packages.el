@@ -14,7 +14,6 @@
   '(
     ;; package org-babels go here
     org
-    ob-http
     ob-mongo
     ob-coffee
     ob-browser
@@ -68,6 +67,16 @@ which require an initialization must be listed explicitly in the list.")
       (when (equal "emacs-capture" (frame-parameter nil 'name))
         (delete-other-windows)))
 
+    ;; alfred-org-capture
+    (defun make-orgcapture-frame ()
+      "Create a new frame and run org-capture."
+      (interactive)
+      (make-frame '((name . "emacs-capture") (width . 80) (height . 16)
+                    (top . 400) (left . 300)
+                    ))
+      (select-frame-by-name "emacs-capture")
+      (org-capture))
+
     (defadvice org-capture-finalize
         (after delete-capture-frame activate)
       "Advise capture-finalize to close the frame"
@@ -78,7 +87,7 @@ which require an initialization must be listed explicitly in the list.")
     ;;;; Add idea, mind-onanism, contacts, movies to download das
     (setq org-capture-templates
           '(("t" "Todo" entry
-             (file+headline "~/Dropbox/Org-Notes/main.org" "Tasks")
+             (file+headline "main.org" "Tasks")
              "* TODO %? %^g \n %i\n")
             ("i" "For jotting quick ideas" entry
              (file+headline "gtd.org" "Ideas")
@@ -95,11 +104,11 @@ which require an initialization must be listed explicitly in the list.")
              (file "movies.org")
              "* ToDownload %? \n  :PROPERTIES:\n  :DATE: %t\n  :URL: %c\n  :END:")
             ("l" "Temp Links from the interwebs" entry
-             (file+headline "~/Dropbox/Org-Notes/links.org" "Links")
+             (file+headline "links.org" "Links")
              "* TO-READ %c %^g\n Entered on: %U\n %?\n%i\n"
              :empy-lines 1)
             ("w" "Weight Log" table-line (file+headline "weight.org" "Diario de Peso") " | %? | %t |")
-            ("c" "Clock In" table-line (file+headline "clokin.org" "Bitácora de Asistencia") " | %T |")))))
+            ("c" "Clock In" table-line (file+headline "clokin.org" "Bitácora de Asistencia") " | %? | %T |")))))
 
 (defun org-cestdiego/pre-init-org-agenda ()
   (spacemacs|use-package-add-hook org-agenda

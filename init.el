@@ -393,6 +393,11 @@ layers configuration."
   ;; (spacemacs/set-leader-keys "sm" 'evil-mc-state/evil-mc-mode)
   ;; (define-key evil-mc-state-map
   ;;   (kbd dotspacemacs-leader-key) spacemacs-default-map)
+  (with-eval-after-load 'git-link
+    (add-to-list 'git-link-remote-alist
+                 '("github.corp.ebay.com"  git-link-github))
+    (add-to-list 'git-link-commit-remote-alist
+                 '("github.corp.ebay.com"  git-link-commit-github)))
 
   (with-eval-after-load 'company
     (company-flx-mode +1))

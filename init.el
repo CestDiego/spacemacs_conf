@@ -456,6 +456,8 @@ _k_: Import Proj            _e_: Start Emulator
   (require 'nvm)
   (nvm-use "0.10.40")
 
+  (setq ispell-program-name "/usr/local/bin/aspell")
+
   (defun spacemacs/user-full-name ()
     "Guess the user's full name. Returns nil if no likely name could be found."
     (or (replace-regexp-in-string

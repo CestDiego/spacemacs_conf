@@ -126,25 +126,6 @@ which require an initialization must be listed explicitly in the list.")
                       ("e" tags-todo "Events"))
                     org-agenda-custom-commands)))))
 
-(defun org-cestdiego/init-ob ()
-  (use-package ob
-    :defer t
-    :config
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((R . t)
-       (emacs-lisp . t)
-       (python . t)
-       (sh . t)
-       (haskell . t)
-       (js . t)
-       (latex . t)
-       (scheme . t)
-       (gnuplot . t)
-       (C . t)
-       (sql . t)
-       (ditaa . t)
-       ))))
 
 (defun org-cestdiego/post-init-org()
   "Initialize my package"
@@ -166,6 +147,22 @@ which require an initialization must be listed explicitly in the list.")
         '((python "pythoncode")))
 
   (setq org-ditaa-jar-path "/usr/bin/ditaa")
+
+  ;; Org-babel
+  (setq org-babel-load-languages
+        (append org-babel-load-languages
+                '((R . t)
+                  (emacs-lisp . t)
+                  (python . t)
+                  (sh . t)
+                  (haskell . t)
+                  (js . t)
+                  (latex . t)
+                  (scheme . t)
+                  (gnuplot . t)
+                  (C . t)
+                  (sql . t)
+                  (ditaa . t))))
 
   (defun org-check-misformatted-subtree ()
     "Check misformatted entries in the current buffer."

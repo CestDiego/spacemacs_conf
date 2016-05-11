@@ -886,15 +886,20 @@ _k_: Import Proj            _e_: Start Emulator
        (lambda ()
          (setq imenu-create-index-function 'js2-imenu-make-index)))
 
+    (defun cestdiego/js-setup-pretty-symbols ()
+      (cestiego/pretty-symbols
+       '(("function" . ?ƒ)
+         ("React"    . ?)
+         ("?"        . ?)
+         ("=>"       . ?)
+         ("->"       . ?)
+         ("@"        . ?)
+         ("() =>"    . ?λ)
+         ("() ->"    . ?ƒ))))
     (spacemacs/add-to-hooks
-     (lambda ()
-       (cestiego/pretty-symbols
-        '(("function" . ?ƒ)
-          ("React" . ?)
-          ("?" . ?)
-          ("=>" .  ?)
-          ("() =>" . ?λ))))
-     '(js2-mode-hook web-mode-hook))
+     #'cestdiego/js-setup-pretty-symbols
+     '(js2-mode-hook react-mode coffee-mode-hook web-mode-hook))
+
     ;; Fix Identation in JS
     (setq-default javascript-indent-lever         2
                   js-indent-level                 2

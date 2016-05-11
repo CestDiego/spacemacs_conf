@@ -144,6 +144,7 @@ values."
    ;; configuration in `dostspacemacs/config'.
    dotspacemacs-additional-packages '(visual-fill-column
                                       company-flx
+                                      kite-mini
                                       encourage-mode
                                       key-chord
                                       lice

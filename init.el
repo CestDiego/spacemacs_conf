@@ -638,6 +638,9 @@ _k_: Import Proj            _e_: Start Emulator
 
   ;;; SANE DEFAULTS!!
   (add-hook 'visual-line-mode-hook 'visual-fill-column-mode)
+  (evil-define-key 'normal markdown-mode-map
+    "j" 'evil-next-visual-line
+    "k" 'evil-previous-visual-line)
 
   ;; UTF-8 please
   (setq locale-coding-system    'utf-8) ; pretty

@@ -929,6 +929,7 @@ _k_: Import Proj            _e_: Start Emulator
         (shell-command-on-region (mark) (point)
                                  "python -m json.tool" (buffer-name) t)))
     (add-to-list 'auto-mode-alist '("\\.tern-config\\'" . json-mode))
+    (add-to-list 'auto-mode-alist '("\\.marko\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.tern-project\\'" . json-mode))
     (add-to-list 'auto-mode-alist '("dmenuExtended_preferences.txt\\'" . json-mode)))
 

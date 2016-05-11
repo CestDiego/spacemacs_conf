@@ -767,6 +767,7 @@ _k_: Import Proj            _e_: Start Emulator
     (define-key term-raw-map (kbd "C-S-j") 'term-send-down)
     (define-key term-raw-map (kbd "C-y")   'term-paste)
     (define-key term-raw-map (kbd "<C-backspace>") 'term-send-raw-meta)
+    (define-key term-raw-map (kbd "<M-backspace>") 'term-send-raw-meta)
 
 
     ;; (define-key eshell-mode-map (kbd "C-k") 'eshell-previous-input)

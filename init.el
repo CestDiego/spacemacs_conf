@@ -452,6 +452,7 @@ _k_: Import Proj            _e_: Start Emulator
 
   (require 'editorconfig)
   (editorconfig-mode 1)
+  (add-hook 'text-mode-hook 'auto-fill-mode)
   (require 'nvm)
   (nvm-use "0.10.40")
 

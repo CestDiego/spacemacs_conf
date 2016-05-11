@@ -630,7 +630,6 @@ _k_: Import Proj            _e_: Start Emulator
   (global-vi-tilde-fringe-mode -1)
   (spacemacs/toggle-mode-line-minor-modes-off)
   (spacemacs/toggle-highlight-current-line-globally-off)
-  (spacemacs/toggle-mode-line-battery-on)
 
   (setq magit-push-always-verify nil)
 

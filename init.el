@@ -650,6 +650,8 @@ layers configuration."
 
 
   (setq powerline-default-separator 'alternate)
+  (spaceline-compile)
+
   (setq vc-follow-symlinks t)
 
   (setq zone-timer (run-with-idle-timer 6000 t 'zone))

@@ -18,11 +18,11 @@
   (setenv "DARK_CYAN"      (cdr (aref ansi-color-map 46)))
   (setenv "DARK_GREY"      (cdr (aref ansi-color-map 47))))
 
-(defadvice spacemacs/post-theme-init (after set-colors-as-env-variables activate)
-  "Change Window Manager Theme as well! :O"
-  (spacemacs/set-color-env-vars)
-  (when (not (string= (getenv "BACKGROUND") "black"))
-    (message (shell-command-to-string "change-theme"))))
+;; (defadvice spacemacs/post-theme-init (after set-colors-as-env-variables activate)
+;;   "Change Window Manager Theme as well! :O"
+;;   (spacemacs/set-color-env-vars)
+;;   (when (not (string= (getenv "BACKGROUND") "black"))
+;;     (message (shell-command-to-string "change-theme"))))
 
 ;; Responsive Modeline
 (defun spacemacs//responsive-modeline ()

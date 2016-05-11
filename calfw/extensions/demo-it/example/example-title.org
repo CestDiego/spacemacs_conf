@@ -1,6 +1,0 @@
-
-
-* Demo-It
-
-A simple demonstration of making demonstrations
-...within Emacs

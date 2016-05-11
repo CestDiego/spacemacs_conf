@@ -21,9 +21,9 @@ values."
      ;; MY Own layers
      ;; no-dots
      appearance
-     (blog :variables
-           org-page-use-melpa-version nil
-           org-page-built-directory "~/Projects/le_blog_built/")
+     ;; (blog :variables
+     ;;       org-page-use-melpa-version nil
+     ;;       org-page-built-directory "~/Projects/le_blog_built/")
      org-cestdiego
      presentations
      soundcloud

@@ -742,25 +742,10 @@ _k_: Import Proj            _e_: Start Emulator
 
   (when (configuration-layer/layer-usedp 'prodigy)
     (prodigy-define-service
-      :name "HackSpace"
-      :command "nodemon"
-      :args '("dev" )
-      :cwd "~/Projects/flat"
-      :kill-signal 'sigkill
-      :kill-process-buffer-on-stop t)
-
-    (prodigy-define-service
-      :name "Chulip Server"
-      :command "npm"
-      :args '("run" "dev" )
-      :cwd "~/Projects/chulip"
-      :kill-signal 'sigkill
-      :kill-process-buffer-on-stop t)
-
-    (prodigy-define-service
-      :name "Le Blog"
-      :command "takeapeek"
-      :cwd "~/Projects/le_blog_built"
+      :name "StartFE"
+      :command "browser-refresh"
+      :args '("index.js")
+      :cwd "~/Documents/ebay/StartFE/"
       :kill-signal 'sigkill
       :kill-process-buffer-on-stop t)
     )

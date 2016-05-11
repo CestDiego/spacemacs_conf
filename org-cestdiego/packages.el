@@ -119,6 +119,7 @@ which require an initialization must be listed explicitly in the list.")
 
       (setq org-agenda-custom-commands
             (append '(("v" tags "Movies")
+                      ("s" tags "spacemacs")
                       ("l" tags "Links"
                        ((org-agenda-overriding-header "Links that I have to Read: ")
                         (org-agenda-skip-function

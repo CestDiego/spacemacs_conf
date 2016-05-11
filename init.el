@@ -213,11 +213,11 @@ values."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
                          monokai
+                         zenburn ;; This works without erc
                          spacemacs-dark
                          tao-yin
                          tao-yang
                          aurora
-                         zenburn ;; This works without erc
                          spacemacs-light
                          ;; leuven  ;; This works without erc
                          )

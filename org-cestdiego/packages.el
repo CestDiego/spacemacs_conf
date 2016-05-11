@@ -214,8 +214,8 @@ which require an initialization must be listed explicitly in the list.")
     :init
     (setq org-gcal-client-id "245586477436-efhjaq0vfr8i07t4inqkmi417hvd3gak.apps.googleusercontent.com"
           org-gcal-client-secret "QmOmh-flucrRo1a_mtNQaQb-"
-          org-gcal-file-alist '(("cestdiego@gmail.com" .  "~/Dropbox/Org-Notes/personal.org")
-                                ("ao267thudhi3o29famivcckt9c@group.calendar.google.com" .  "~/Dropbox/Org-Notes/ayers.org")))
+          org-gcal-file-alist '(("cestdiego@gmail.com" .  "personal.org")
+                                ("ao267thudhi3o29famivcckt9c@group.calendar.google.com" .  "ayers.org")))
     (spacemacs/set-leader-keys
       "ogf" 'org-gcal-fetch
       "ogp" 'org-gcal-post-at-point

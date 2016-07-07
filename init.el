@@ -1065,7 +1065,7 @@ _k_: Import Proj            _e_: Start Emulator
  ;; If there is more than one, they won't work right.
  '(org-agenda-files
    (quote
-    ("~/Documents/work.org" "~/Documents/todo.org" "~/Documents/ebay.org")))
+    ("~/Documents/Org-Notes/work/" "~/Documents/Org-Notes")))
  '(safe-local-variable-values
    (quote
     ((eval when

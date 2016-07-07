@@ -56,7 +56,7 @@ values."
      gnus
      (elfeed :variables
              elfeed-enable-web-interface t
-             rmh-elfeed-org-files (list "~/Dropbox/Org-Notes/elfeed.org"))
+             rmh-elfeed-org-files (list "~/Google Drive/Org-Notes/elfeed.org"))
      ;; ,(unless (eq system-type 'darwin) nixos)
      dash
      ;; Version Control

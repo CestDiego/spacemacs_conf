@@ -85,6 +85,7 @@ values."
      ;; Org
      (org :variables
           org-mapping-style 'worf)
+     pandoc
      ;; Miscellaneous
      emoji
      ;; (wakatime :variables

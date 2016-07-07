@@ -1019,7 +1019,6 @@ _k_: Import Proj            _e_: Start Emulator
   ;;                     :height 1
   ;;                     :background (face-background 'default))
   (setq projectile-enable-caching t)
-  (set-face-attribute 'fringe nil :background (face-background 'default))
 
   ;; (add-to-list 'default-frame-alist '(minibuffer))
   ;; ;; (add-to-list 'default-frame-alist '(unsplittable . t))

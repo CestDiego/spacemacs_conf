@@ -930,7 +930,7 @@ _k_: Import Proj            _e_: Start Emulator
                   web-mode-attr-indent-offset     2)
 
     (with-eval-after-load 'web-mode
-      (setq emmet-expand-jsx-className? t)
+      (add-hook 'react-mode-hook (lambda () (setq emmet-expand-jsx-className? t))
       (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
       (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
       (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))

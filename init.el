@@ -396,6 +396,8 @@ layers configuration."
   ;; (spacemacs/set-leader-keys "sm" 'evil-mc-state/evil-mc-mode)
   ;; (define-key evil-mc-state-map
   ;;   (kbd dotspacemacs-leader-key) spacemacs-default-map)
+  (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
+
   (with-eval-after-load 'git-link
     (add-to-list 'git-link-remote-alist
                  '("github.corp.ebay.com"  git-link-github))

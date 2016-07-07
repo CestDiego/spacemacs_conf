@@ -32,13 +32,14 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    `(
+     vimscript
      nginx
      ;; MY Own layers
      ;; no-dots
      appearance
-     ;; (blog :variables
-     ;;       org-page-use-melpa-version nil
-     ;;       org-page-built-directory "~/Projects/le_blog_built/")
+     ;;(blog :variables
+     ;;     org-page-use-melpa-version nil
+     ;;     org-page-built-directory "~/Documents/Projects/le_blog_built/")
      org-cestdiego
      presentations
      soundcloud

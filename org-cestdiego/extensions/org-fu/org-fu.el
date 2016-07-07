@@ -9,7 +9,7 @@
 
 ;;* base directory
 (defun orfu-expand (name)
-  (expand-file-name name "~/Dropbox/org"))
+  (expand-file-name name "~/Google Drive/org"))
 
 (defcustom orfu-github-project-name
   "https://github\\.com/abo-abo/\\([^/]+\\)"

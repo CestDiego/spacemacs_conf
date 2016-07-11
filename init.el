@@ -983,6 +983,9 @@ _k_: Import Proj            _e_: Start Emulator
   (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
   ;;; END: Mouse Support
 
+  ;; osx sets this by itself
+  (global-set-key (kbd "s-t") nil)
+
   ;;; BEGIN: Extra Hybrid Modes
   (push 'git-commit-major-mode evil-insert-state-modes)
   (push 'image-mode evil-insert-state-modes)

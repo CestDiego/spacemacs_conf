@@ -930,7 +930,7 @@ _k_: Import Proj            _e_: Start Emulator
                   web-mode-attr-indent-offset     2)
 
     (with-eval-after-load 'web-mode
-      (add-hook 'react-mode-hook (lambda () (setq emmet-expand-jsx-className? t))
+      (add-hook 'react-mode-hook (lambda () (setq-local emmet-expand-jsx-className? t)))
       (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
       (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
       (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
@@ -947,6 +947,7 @@ _k_: Import Proj            _e_: Start Emulator
     (add-to-list 'auto-mode-alist '("dmenuExtended_preferences.txt\\'" . json-mode)))
 
   (when (configuration-layer/layer-usedp 'html)
+    (add-hook 'html-mode-hook 'web-mode)
     (add-to-list 'auto-mode-alist '("\\.touchegg.conf\\'" . web-mode)))
 
   (when (configuration-layer/layer-usedp 'blog)

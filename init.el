@@ -459,7 +459,7 @@ _k_: Import Proj            _e_: Start Emulator
   (editorconfig-mode 1)
   (add-hook 'text-mode-hook 'auto-fill-mode)
   (require 'nvm)
-  (nvm-use "0.10.40")
+  (nvm-use "4.2.3")
 
   (setq ispell-program-name "/usr/local/bin/aspell")
 

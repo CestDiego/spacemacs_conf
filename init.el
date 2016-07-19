@@ -985,6 +985,7 @@ _k_: Import Proj            _e_: Start Emulator
 
   ;; osx sets this by itself
   (global-set-key (kbd "s-t") nil)
+  (global-set-key (kbd "s-C") nil)
 
   ;;; BEGIN: Extra Hybrid Modes
   (push 'git-commit-major-mode evil-insert-state-modes)

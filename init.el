@@ -28,8 +28,7 @@ values."
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
    dotspacemacs-configuration-layer-path '()
-   ;; List of configuration layers to load. If it is the symbol `all' instead
-   ;; of a list then all discovered layers will be installed.
+   ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    `(
      vimscript
@@ -142,9 +141,11 @@ values."
      vagrant)
    ;; List of additional packages that will be installed wihout being
    ;; wrapped in a layer. If you need some configuration for these
-   ;; packages then consider to create a layer, you can also put the
-   ;; configuration in `dostspacemacs/config'.
-   dotspacemacs-additional-packages '(visual-fill-column
+   ;; packages, then consider creating a layer. You can also put the
+   ;; configuration in `dotspacemacs/user-config'.
+   dotspacemacs-additional-packages '(
+                                      visual-fill-column
+                                      helm-hunks
                                       company-flx
                                       kite-mini
                                       encourage-mode
@@ -156,14 +157,20 @@ values."
                                       w3m
                                       sicp
                                       beacon
-                                      systemd)
-   ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '(erc-yank
-                                    erc-gitter)
-   ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
-   ;; are declared in a layer which is not a member of
-   ;; the list `dotspacemacs-configuration-layers'. (default t)
-   dotspacemacs-delete-orphan-packages t))
+                                      systemd
+                                      )
+   ;; A list of packages that cannot be updated.
+   dotspacemacs-frozen-packages '()
+   ;; A list of packages that will not be install and loaded.
+   dotspacemacs-excluded-packages '()
+   ;; Defines the behaviour of Spacemacs when downloading packages.
+   ;; Possible values are `used', `used-but-keep-unused' and `all'. `used' will
+   ;; download only explicitly used packages and remove any unused packages as
+   ;; well as their dependencies. `used-but-keep-unused' will download only the
+   ;; used packages but won't delete them if they become unused. `all' will
+   ;; download all the packages regardless if they are used or not and packages
+   ;; won't be deleted by Spacemacs. (default is `used')
+   dotspacemacs-download-packages 'used))
 
 (defun dotspacemacs/init ()
   "Initialization function.
@@ -202,13 +209,12 @@ values."
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
    dotspacemacs-startup-banner 'official
-   ;; List of items to show in the startup buffer. If nil it is disabled.
-   ;; Possible values are: `recents' `bookmarks' `projects' `agenda' `todos'.
-   ;; (default '(recents projects))
-   dotspacemacs-startup-lists '(recents projects)
-   ;; Number of recent files to show in the startup buffer. Ignored if
-   ;; `dotspacemacs-startup-lists' doesn't include `recents'. (default 5)
-   dotspacemacs-startup-recent-list-size 5
+   ;; List of items to show in startup buffer or an association list of of
+   ;; the form `(list-type . list-size)`. If nil it is disabled.
+   ;; Possible values for list-type are:
+   ;; `recents' `bookmarks' `projects' `agenda' `todos'."
+   dotspacemacs-startup-lists '((recents . 5)
+                                (projects . 7))
    ;; Default major mode of the scratch buffer (default `text-mode')
    dotspacemacs-scratch-mode 'text-mode
    ;; List of themes, the first of the list is loaded when spacemacs starts.
@@ -216,23 +222,19 @@ values."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
                          monokai
-                         zenburn ;; This works without erc
+                         zenburn
                          spacemacs-dark
-                         tao-yin
-                         tao-yang
-                         aurora
                          spacemacs-light
-                         ;; leuven  ;; This works without erc
                          )
-   ;; If non nil the cursor color matches the state color.
+   ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
-   ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
-   ;; size to make separators look not too crappy.
+   ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
+   ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Meslo LG M DZ for Powerline"
-                               :size 19
+                               :size 15
                                :weight normal
                                :width normal
-                               :powerline-scale 1)
+                               :powerline-scale 1.1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -256,6 +258,12 @@ values."
    dotspacemacs-distinguish-gui-tab t
    ;; If non nil `Y' is remapped to `y$' in Evil states. (default nil)
    dotspacemacs-remap-Y-to-y$ t
+   ;; If non-nil, the shift mappings `<' and `>' retain visual state if used
+   ;; there. (default t)
+   dotspacemacs-retain-visual-state-on-shift t
+   ;; If non-nil, J and K move lines up and down when in visual mode.
+   ;; (default nil)
+   dotspacemacs-visual-line-move-text t
    ;; If non nil, inverse the meaning of `g' in `:substitute' Evil ex-command.
    ;; (default nil)
    dotspacemacs-ex-substitute-global nil
@@ -278,10 +286,6 @@ values."
    dotspacemacs-auto-save-file-location 'cache
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
    dotspacemacs-max-rollback-slots 5
-   ;; If non nil then `ido' replaces `helm' for some commands. For now only
-   ;; `find-files' (SPC f f), `find-spacemacs-file' (SPC f e s), and
-   ;; `find-contrib-file' (SPC f e c) are replaced. (default nil)
-   dotspacemacs-use-ido nil
    ;; If non nil, `helm' will try to minimize the space it uses. (default nil)
    dotspacemacs-helm-resize nil
    ;; if non nil, the helm header is hidden when there is only one source.
@@ -337,6 +341,9 @@ values."
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
    dotspacemacs-line-numbers nil
+   ;; Code folding method. Possible values are `evil' and `origami'.
+   ;; (default 'evil)
+   dotspacemacs-folding-method 'evil
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
@@ -369,8 +376,12 @@ values."
 
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
-It is called immediately after `dotspacemacs/init'.  You are free to put any
-user code."
+It is called immediately after `dotspacemacs/init', before layer configuration
+executes.
+ This function is mostly useful for variables that need to be set
+before packages are loaded. If you are unsure, you should try in setting them in
+`dotspacemacs/user-config' first."
+
   (setq-default evil-escape-key-sequence "jk")
   (setq httpd-port 1337)
   (setq source-directory "~/Documents/Projects/emacs-24.5"
@@ -389,9 +400,20 @@ user code."
   )
 
 (defun dotspacemacs/user-config ()
-  "Configuration function.
- This function is called at the very end of Spacemacs initialization after
-layers configuration."
+  "Configuration function for user code.
+This function is called at the very end of Spacemacs initialization after
+layers configuration.
+This is the place where most of your configurations should be done. Unless it is
+explicitly specified that a variable should be set before a package is loaded,
+you should place your code here."
+
+  (require 'editorconfig)
+
+  (require 'nvm)
+  (nvm-use "4.2.3")
+
+  (use-package helm-hunks
+    :commands helm-hunks)
 
   ;; (spacemacs/set-leader-keys "sm" 'evil-mc-state/evil-mc-mode)
   ;; (define-key evil-mc-state-map
@@ -410,12 +432,15 @@ layers configuration."
   (setq user-full-name    "Diego Berrocal"
         user-mail-address "cestdiego@gmail.com")
 
-  (setq eclim-eclipse-dirs '("/Users/dberrocal/Downloads/sts-bundle/STS.app/Contents/Eclipse/")
-        eclim-executable "/Users/dberrocal/Downloads/sts-bundle/STS.app/Contents/Eclipse/eclim"
-        eclimd-default-workspace "/Users/dberrocal/Documents/.workspace/")
-  (defhydra hydra-eclim (:color teal
-                                :hint nil)
-    "
+  (require 'eclimd)
+  (eval-after-load 'eclim-mode
+    (progn
+      (setq eclim-eclipse-dirs '("/Users/dberrocal/Downloads/sts-bundle/STS.app/Contents/Eclipse/")
+            eclim-executable "/Users/dberrocal/Downloads/sts-bundle/STS.app/Contents/Eclipse/eclim"
+            eclimd-default-workspace "/Users/dberrocal/Documents/.workspace/")
+      (defhydra hydra-eclim (:color teal
+                                    :hint nil)
+        "
 Eclim:
  ╭─────────────────────────────────────────────────────┐
  │ Java                                                │       Problems
@@ -432,34 +457,30 @@ _b_: Create                 _m_: Clear/Build/Install
 _k_: Import Proj            _e_: Start Emulator
                           ^_l_: Logcat
 "
-    ("d"   eclim-java-show-documentation-for-current-element)
-    ("g"   eclim-java-generate-getter-and-setter)
-    ("o"   eclim-java-import-organize)
-    ("h"   eclim-java-call-hierarchy)
-    ("i"   eclim-java-implement)
-    ("fd"  eclim-java-find-declaration)
-    ("fr"  eclim-java-find-references)
-    ("R"   eclim-java-refactor-rename-symbol-at-point)
-    ("p"   eclim-problems)
-    ("c"   eclim-problems-correct)
-    ("r"   eclim-problems-buffer-refresh)
-    ("j"   eclim-project-goto)
-    ("b"   eclim-project-create)
-    ("k"   eclim-project-import)
-    ("a"   android-start-app)
-    ("m"   my-clean-debug-install)
-    ("e"   android-start-emulator)
-    ("l"   android-logcat)
-    ("q"   nil "cancel" :color blue))
+        ("d"   eclim-java-show-documentation-for-current-element)
+        ("g"   eclim-java-generate-getter-and-setter)
+        ("o"   eclim-java-import-organize)
+        ("h"   eclim-java-call-hierarchy)
+        ("i"   eclim-java-implement)
+        ("fd"  eclim-java-find-declaration)
+        ("fr"  eclim-java-find-references)
+        ("R"   eclim-java-refactor-rename-symbol-at-point)
+        ("p"   eclim-problems)
+        ("c"   eclim-problems-correct)
+        ("r"   eclim-problems-buffer-refresh)
+        ("j"   eclim-project-goto)
+        ("b"   eclim-project-create)
+        ("k"   eclim-project-import)
+        ("a"   android-start-app)
+        ("m"   my-clean-debug-install)
+        ("e"   android-start-emulator)
+        ("l"   android-logcat)
+        ("q"   nil "cancel" :color blue))
 
-  (define-key eclim-mode-map (kbd "C-c e") 'hydra-eclim/body)
-  (require 'eclimd)
+      (define-key eclim-mode-map (kbd "C-c e") 'hydra-eclim/body)))
 
-  (require 'editorconfig)
   (editorconfig-mode 1)
   (add-hook 'text-mode-hook 'auto-fill-mode)
-  (require 'nvm)
-  (nvm-use "4.2.3")
 
   (setq ispell-program-name "/usr/local/bin/aspell")
 
@@ -566,10 +587,7 @@ _k_: Import Proj            _e_: Start Emulator
 
   (beacon-mode 1)
 
-  (setq helm-echo-input-in-header-line nil)
-
-  ;; (dolist (b sp-smartparens-bindings)
-  ;;   (define-key emacs-lisp-mode-map (kbd (car b)) (cdr b)))
+  (setq helm-echo-input-in-header-line t)
 
   (defun cestdiego/org-setup-pretty-symbols ()
     (cestiego/pretty-symbols
@@ -1031,17 +1049,7 @@ _k_: Import Proj            _e_: Start Emulator
   ;; (add-to-list 'minibuffer-frame-alist '(left . 525))
   ;; (add-to-list 'minibuffer-frame-alist '(top . -1))
   ;; (add-to-list 'minibuffer-frame-alist '(width . 100))
-  ;; (add-to-list 'minibuffer-frame-alist '(name . "Minibuf"))
-
-  ;; (setq magit-repository-directories "~")
-
-  (defun my-expand-lines ()
-    (interactive)
-    (let ((hippie-expand-try-functions-list
-           '(try-expand-line)))
-      (call-interactively 'hippie-expand)))
-
-  (define-key evil-insert-state-map (kbd "C-x C-l") 'my-expand-lines)
+  ;; (add-to-list 'minibuffer-frame-alist '(name . "minibuf"))
 
   ;; (defadvice he-substitute-string (after he-paredit-fix)
   ;;   "remove extra paren when expanding line in paredit"
@@ -1073,7 +1081,10 @@ _k_: Import Proj            _e_: Start Emulator
     ("~/Documents/Org-Notes/work/" "~/Documents/Org-Notes")))
  '(safe-local-variable-values
    (quote
-    ((eval when
+    ((eval progn
+           (react-mode)
+           (message "heeelooo"))
+     (eval when
            (and
             (buffer-file-name)
             (file-regular-p

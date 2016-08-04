@@ -515,7 +515,8 @@ _k_: Import Proj            _e_: Start Emulator
   (setq key-chord-one-key-delay 0.15)
 
   (key-chord-define-global "qq" 'spacemacs/frame-killer)
-  (setq org-todo-keywords '((sequence "TODO" "DONE"))
+  (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")
+                            (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)"))
         org-ellipsis " ↴"
         ;; don't let me accidentally delete text without realizing it in org.  ie: point is buried in a subtree, but you only
         ;; see the heading and you accidentally kill a line without knowing it.

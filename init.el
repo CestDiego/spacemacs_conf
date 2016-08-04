@@ -674,6 +674,11 @@ _k_: Import Proj            _e_: Start Emulator
     "j" 'evil-next-visual-line
     "k" 'evil-previous-visual-line)
 
+  ;; Are these better ways to jump between windows?
+  (spacemacs/set-leader-keys
+    "w <tab>" 'other-window
+    "ww" 'ace-window)
+
   ;; UTF-8 please
   (setq locale-coding-system    'utf-8) ; pretty
   (set-terminal-coding-system   'utf-8) ; pretty

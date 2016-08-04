@@ -841,6 +841,11 @@ _k_: Import Proj            _e_: Start Emulator
     (define-key custom-keys-mode-map (kbd "C-\"") 'org-cycle-agenda-files)
     (define-key custom-keys-mode-map (kbd "C-'") 'spacemacs/default-pop-shell)
 
+    (with-eval-after-load 'org-mode
+      (define-key org-mode-map (kbd "<C-M-return>") 'org-insert-subheading)
+      (define-key org-mode-map (kbd "<C-M-S-return>") 'org-insert-todo-subheading)
+      )
+
     ;; (when (configuration-layer/layer-usedp 'spacemacs-layouts)
     ;;   (define-key custom-keys-mode-map (kbd "<C-tab>") 'spacemacs//layouts-persp-next-n)
     ;;   (define-key custom-keys-mode-map (kbd "<C-backtab>") 'spacemacs//layouts-persp-prev-p))

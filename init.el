@@ -409,7 +409,9 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
   (require 'editorconfig)
+  (editorconfig-mode 1)
 
+  ;; TODO there is lots to do for recognizing each file with it's proper nvm version
   (require 'nvm)
   (nvm-use "4.2.3")
 
@@ -483,7 +485,6 @@ _k_: Import Proj            _e_: Start Emulator
 
       (define-key eclim-mode-map (kbd "C-c e") 'hydra-eclim/body)))
 
-  (editorconfig-mode 1)
   (add-hook 'text-mode-hook 'auto-fill-mode)
 
   (setq ispell-program-name "/usr/local/bin/aspell")

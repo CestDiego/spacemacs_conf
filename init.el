@@ -144,6 +144,7 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
+                                      suggest
                                       visual-fill-column
                                       helm-hunks
                                       company-flx
@@ -414,6 +415,9 @@ you should place your code here."
 
   (use-package helm-hunks
     :commands helm-hunks)
+
+  (require 'suggest)
+  (spacemacs/set-leader-keys "aa" 'suggest)
 
   ;; (spacemacs/set-leader-keys "sm" 'evil-mc-state/evil-mc-mode)
   ;; (define-key evil-mc-state-map

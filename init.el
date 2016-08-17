@@ -72,6 +72,7 @@ values."
      ;; (perspectives :variables
      ;;               spacemacs-persp-show-home-at-startup t
      ;;               perspectives-display-help t)
+     finance
      chrome
      (erc :variables
           erc-enable-sasl-auth t)
@@ -420,6 +421,13 @@ you should place your code here."
 
   (require 'suggest)
   (spacemacs/set-leader-keys "aa" 'suggest)
+
+  (add-to-list 'search-engine-alist
+               '(ebay-github
+                 :name "Ebay Github"
+                 :url "https://github.corp.ebay.com/search?type=Code&ref=searchresults&utf8=✓&q=%s"))
+
+  (define-key evil-normal-state-map "gs" 'engine/search-ebay-github)
 
   ;; (spacemacs/set-leader-keys "sm" 'evil-mc-state/evil-mc-mode)
   ;; (define-key evil-mc-state-map

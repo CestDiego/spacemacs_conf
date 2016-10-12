@@ -409,6 +409,24 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  ;; (defun diego/transpile (ast)
+  ;;   (cond ((numberp ast) ast)
+  ;;         ((equal ast nil) nil)
+  ;;         ((stringp ast) ast)
+  ;;         ((symbolp ast)  ast)
+  ;;         ((listp ast)  (let ((traspiled-cdr (-map 'diego/transpile (cdr ast))))
+  ;;                         (if (not (symbolp (car ast))) (error "nope need first item in list to be symbol"))
+  ;;                         (if (equal (symbol-name (car ast)) "ñ")
+  ;;                             (cons 'lambda traspiled-cdr)
+  ;;                           (cons (car ast) traspiled-cdr))
+  ;;                         )))
+  ;;   )
+
+  ;; (defun diego/run (ast)
+  ;;   (eval (car (read-from-string (concat "(" (pp (diego/transpile ast)) ")"  ) )  )   )
+  ;;   )
+
+  ;; (diego/run '(ñ () (interactive) (message "lolz")))
   (require 'editorconfig)
   (editorconfig-mode 1)
 

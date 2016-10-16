@@ -412,6 +412,7 @@ you should place your code here."
 
   (keyboard-translate ?\C-h ?\C-?)
 
+  (setq tab-always-indent t)
   ;; (defun diego/transpile (ast)
   ;;   (cond ((numberp ast) ast)
   ;;         ((equal ast nil) nil)

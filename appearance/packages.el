@@ -7,7 +7,6 @@
                      (recipe :fetcher github
                              :repo "wasamasa/zone-nyan"))
     exwm
-    ;; smooth-scroll
     ))
 
 (defun appearance/init-zone-nyan ()

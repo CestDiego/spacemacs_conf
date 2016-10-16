@@ -159,6 +159,7 @@ values."
                                       focus
                                       w3m
                                       sicp
+                                      mocha-snippets
                                       beacon
                                       systemd
                                       )
@@ -409,6 +410,9 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+
+  (require 'mocha-snippets)
+  (setq mocha-snippets-use-fat-arrows t)
 
   (keyboard-translate ?\C-h ?\C-?)
 
@@ -809,7 +813,6 @@ _k_: Import Proj            _e_: Start Emulator
 
   (setq tab-width 2)
 
-  (setq tags-revert-without-query 1)
 
   (when (configuration-layer/layer-usedp 'syntax-checking)
     (setq flycheck-emacs-lisp-load-path 'inherit)

@@ -18,12 +18,7 @@
       babel-repl
       skewer-mode
       livid-mode
-      mocha-snippets
       ))
-
-
-(defun Monfoku/init-mocha-snippets ()
-  (use-package mocha-snippets))
 
 
 (defun Monfoku/init-nodejs-repl ()

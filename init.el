@@ -809,6 +809,7 @@ _k_: Import Proj            _e_: Start Emulator
 
   (setq tab-width 2)
 
+  (setq tags-revert-without-query 1)
 
   (when (configuration-layer/layer-usedp 'syntax-checking)
     (setq flycheck-emacs-lisp-load-path 'inherit)

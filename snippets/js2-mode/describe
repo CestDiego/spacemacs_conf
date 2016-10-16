@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: describe
+# key: desc/
+# --
+describe('$1', ($2) => {
+  $3
+  it('$4', ($5) => {
+    $0
+  });
+});

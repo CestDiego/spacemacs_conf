@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: stub
+# key: stub
+# --
+${1:const }$2 = sinon.stub(${3:widget}, '$2');

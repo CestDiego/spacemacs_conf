@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: spy
+# key: spy
+# --
+${1:const }$2 = sinon.spy(${3:widget}, '$2');

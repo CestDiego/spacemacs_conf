@@ -116,7 +116,7 @@ values."
      ;;; LIISSSSSPPPPPSSSS
      ;; clojure
      emacs-lisp
-     scheme
+     ;; scheme
      ansible
      markdown
      html

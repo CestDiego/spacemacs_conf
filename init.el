@@ -1042,6 +1042,13 @@ _k_: Import Proj            _e_: Start Emulator
   (global-set-key (kbd "s-t") nil)
   (global-set-key (kbd "s-C") nil)
 
+  ;; Make Mouse Wheeel not go too damn fast
+  (setq mouse-wheel-progressive-speed nil)
+  (setq mouse-wheel-scroll-amount
+        '(             2
+          ((shift)   . 1)
+          ((control) . 7)))
+
   ;;; BEGIN: Extra Hybrid Modes
   (push 'git-commit-major-mode evil-insert-state-modes)
   (push 'image-mode evil-insert-state-modes)

@@ -448,6 +448,24 @@ you should place your code here."
   (use-package helm-hunks
     :commands helm-hunks)
 
+  ;; Taken from http://endlessparentheses.com/create-github-prs-from-emacs-with-magit.html
+  (defun cestdiego/visit-pull-request-url ()
+    "Visit the current branch's PR on Github."
+    (interactive)
+    (browse-url
+     (format "https://github.com/%s/pull/new/%s"
+             (replace-regexp-in-string
+              "\\`.+github\\.com:\\(.+\\)\\.git\\'" "\\1"
+              (magit-get "remote"
+                         (magit-get-remote)
+                         "url"))
+             ;; TODO Implement a helm backend to list agains which branch to make the PR
+             (cdr (or (magit-remote-branch-at-point)
+                      (user-error "No remote branch"))))))
+  (eval-after-load 'magit
+    '(define-key magit-mode-map "."
+       #'cestdiego/visit-pull-request-url))
+
   (require 'suggest)
   (spacemacs/set-leader-keys "aa" 'suggest)
 

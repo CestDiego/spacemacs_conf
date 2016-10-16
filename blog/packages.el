@@ -12,14 +12,18 @@
 
 ;; List of all packages to install and/or initialize. Built-in packages
 ;; which require an initialization must be listed explicitly in the list.
-(setq blog-packages '())
+(setq blog-packages '(
+                      (org-page :location local)
+                      ht
+                      mustache
+                      ))
 
-(if org-page-use-melpa-version
-      (push 'org-page blog-packages)
-  ;; If we are using the extension, install dependencies
-  (push '(org-page :location local) blog-packages)
-  (push 'mustache blog-packages)
-  (push 'ht blog-packages))
+;; (if org-page-use-melpa-version
+;;       (push 'org-page blog-packages)
+;;   ;; If we are using the extension, install dependencies
+;;   (push '(org-page :location local) blog-packages)
+;;   (push 'mustache blog-packages)
+;;   (push 'ht blog-packages))
 
 (defun blog/init-org-page ()
   (use-package org-page

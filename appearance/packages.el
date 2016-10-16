@@ -7,7 +7,11 @@
                      (recipe :fetcher github
                              :repo "wasamasa/zone-nyan"))
     exwm
+    all-the-icons
     ))
+
+(defun appearance/init-all-the-icons ()
+  (use-package all-the-icons))
 
 (defun appearance/init-zone-nyan ()
   (use-package zone-nyan

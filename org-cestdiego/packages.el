@@ -23,6 +23,7 @@
     ox-cv
     mustache
     ht
+    org-mac-link
     ;; (ob                        :location built-in)
     (org-protocol              :location built-in)
     (org-capture               :location built-in)
@@ -38,6 +39,15 @@ which require an initialization must be listed explicitly in the list.")
     :defer t
     :init
     (add-to-list 'org-babel-load-languages '(coffee . t))))
+
+(defun org-cestdiego/init-org-mac-link ()
+  (use-package org-mac-link
+    :commands 'org-mac-grab-link
+    :defer t
+    :config
+    (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)
+    ))
+
 
 (defun org-cestdiego/init-ob-mongo()
   (use-package ob-mongo))

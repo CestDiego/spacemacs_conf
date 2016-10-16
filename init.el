@@ -447,12 +447,6 @@ you should place your code here."
   (require 'suggest)
   (spacemacs/set-leader-keys "aa" 'suggest)
 
-  (add-to-list 'search-engine-alist
-               '(ebay-github
-                 :name "Ebay Github"
-                 :url "https://github.corp.ebay.com/search?type=Code&ref=searchresults&utf8=✓&q=%s"))
-
-  (define-key evil-normal-state-map "gs" 'engine/search-ebay-github)
 
   ;; (spacemacs/set-leader-keys "sm" 'evil-mc-state/evil-mc-mode)
   ;; (define-key evil-mc-state-map
@@ -815,15 +809,6 @@ _k_: Import Proj            _e_: Start Emulator
 
   (setq tab-width 2)
 
-  (when (configuration-layer/layer-usedp 'prodigy)
-    (prodigy-define-service
-      :name "StartFE"
-      :command "browser-refresh"
-      :args '("index.js")
-      :cwd "~/Documents/ebay/StartFE/"
-      :kill-signal 'sigkill
-      :kill-process-buffer-on-stop t)
-    )
 
   (when (configuration-layer/layer-usedp 'syntax-checking)
     (setq flycheck-emacs-lisp-load-path 'inherit)

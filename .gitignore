@@ -3,3 +3,4 @@ npm-debug.log
 .tern-port
 flycheck_init.el
 *.elc
+.DS_Store

@@ -982,6 +982,9 @@ _k_: Import Proj            _e_: Start Emulator
                   web-mode-attr-indent-offset     2)
 
     (with-eval-after-load 'web-mode
+      ;; Font in gdrive
+      (set-face-attribute 'web-mode-html-attr-name-face nil :family "Operator SSm" :slant 'italic)
+
       (add-hook 'react-mode-hook (lambda () (setq-local emmet-expand-jsx-className? t)))
       (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
       (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))

@@ -103,6 +103,7 @@ values."
      ;; (ycmd :variables
      ;;       ycmd-server-command "~/build/ycmd/")
      ;; Syntax Checking Stuff
+     gtags
      spell-checking
      syntax-checking
      ;; Shells

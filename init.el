@@ -413,6 +413,9 @@ you should place your code here."
   (keyboard-translate ?\C-h ?\C-?)
 
   (setq tab-always-indent t)
+  ;; TODO: Remember to use the macro so that this only works in graphical UIs
+  (setq neo-theme (if window-system 'icons 'arrow))
+
   ;; (defun diego/transpile (ast)
   ;;   (cond ((numberp ast) ast)
   ;;         ((equal ast nil) nil)

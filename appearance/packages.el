@@ -7,7 +7,7 @@
                      (recipe :fetcher github
                              :repo "wasamasa/zone-nyan"))
     exwm
-    smooth-scroll
+    ;; smooth-scroll
     ))
 
 (defun appearance/init-zone-nyan ()
@@ -15,7 +15,6 @@
     :config
     (spacemacs/set-leader-keys
       "an" 'zone-nyan-preview)))
-
 
 (defun appearance/pre-init-exwm ()
   (spacemacs|use-package-add-hook exwm
@@ -70,15 +69,6 @@
     :init
     (spacemacs/set-leader-keys
       "hN" 'helm-nerd-fonts)))
-
-(defun appearance/init-smooth-scroll ()
-  (use-package smooth-scroll
-    :defer
-    :init
-    (progn
-      (require 'smooth-scroll)
-      (smooth-scroll-mode 1)
-      (setq smooth-scroll/vscroll-step-size 5))))
 
 (defun appearance/init-auto-dim-other-buffers ()
   (use-package auto-dim-other-buffers

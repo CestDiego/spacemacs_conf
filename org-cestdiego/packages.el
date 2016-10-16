@@ -129,6 +129,10 @@ which require an initialization must be listed explicitly in the list.")
       (setq org-agenda-custom-commands
             (append '(("v" tags "Movies")
                       ("s" tags "spacemacs")
+                      ("c" todo "IN_CODE_REVIEW"
+                       ((org-agenda-overriding-header "Items that are in Code Review")))
+                      ("Q" tags "questions")
+                      ("S" tags "sprint10")
                       ("l" tags "Links"
                        ((org-agenda-overriding-header "Links that I have to Read: ")
                         (org-agenda-skip-function

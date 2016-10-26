@@ -415,6 +415,24 @@ you should place your code here."
   (require 'mocha-snippets)
   (setq mocha-snippets-use-fat-arrows t)
 
+  ;; org-pomodoro mode hooks
+  (add-hook 'org-pomodoro-finished-hook
+            (lambda ()
+              (notify-osx "Pomodoro completed!" "Time for a break.")))
+
+  (add-hook 'org-pomodoro-break-finished-hook
+            (lambda ()
+              (notify-osx "Pomodoro Short Break Finished" "Ready for Another?")))
+
+  (add-hook 'org-pomodoro-long-break-finished-hook
+            (lambda ()
+              (notify-osx "Pomodoro Long Break Finished" "Ready for Another?")))
+
+  (add-hook 'org-pomodoro-killed-hook
+            (lambda ()
+              (notify-osx "Pomodoro Killed" "One does not simply kill a pomodoro!")))
+
+  (remove-hook 'emacs-lisp-mode-local-vars-hook #'spacemacs/ggtags-mode-enable)
   (handoff-global-mode 1)
   (keyboard-translate ?\C-h ?\C-?)
 

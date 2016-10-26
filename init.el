@@ -489,9 +489,6 @@ you should place your code here."
   (require 'suggest)
   (spacemacs/set-leader-keys "aa" 'suggest)
 
-  ;; (spacemacs/set-leader-keys "sm" 'evil-mc-state/evil-mc-mode)
-  ;; (define-key evil-mc-state-map
-  ;;   (kbd dotspacemacs-leader-key) spacemacs-default-map)
   (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
 
   (with-eval-after-load 'company
@@ -634,7 +631,6 @@ _k_: Import Proj            _e_: Start Emulator
   (add-hook 'edit-server-start-hook 'cestdiego/configure-edit-server)
 
   (encourage-mode)
-  (global-evil-mc-mode)
   (fset 'evil-visual-update-x-selection 'ignore)
   (volatile-highlights-mode t)
 

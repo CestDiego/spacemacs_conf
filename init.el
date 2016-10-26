@@ -476,12 +476,6 @@ you should place your code here."
   ;;   (kbd dotspacemacs-leader-key) spacemacs-default-map)
   (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
 
-  (with-eval-after-load 'git-link
-    (add-to-list 'git-link-remote-alist
-                 '("github.corp.ebay.com"  git-link-github))
-    (add-to-list 'git-link-commit-remote-alist
-                 '("github.corp.ebay.com"  git-link-commit-github)))
-
   (with-eval-after-load 'company
     (company-flx-mode +1))
 

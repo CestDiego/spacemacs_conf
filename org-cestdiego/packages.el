@@ -18,12 +18,14 @@
     ob-coffee
     ob-browser
     org-gcal
+    org-jira
     org-readme
     ox-ioslide
     ox-cv
     mustache
     ht
     org-mac-link
+    org-alert
     ;; (ob                        :location built-in)
     (org-protocol              :location built-in)
     (org-capture               :location built-in)
@@ -33,6 +35,35 @@
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
+
+
+(defun org-cestdiego/init-org-jira ()
+  (use-package org-jira
+    :config
+    (spacemacs/declare-prefix-for-mode 'org-mode "mj" "jira")
+    (spacemacs/declare-prefix-for-mode 'org-mode "mjp" "projects")
+    (spacemacs/declare-prefix-for-mode 'org-mode "mji" "issues")
+    (spacemacs/declare-prefix-for-mode 'org-mode "mjs" "subtasks")
+    (spacemacs/declare-prefix-for-mode 'org-mode "mjc" "comments")
+    (spacemacs/declare-prefix-for-mode 'org-mode "mjt" "todos")
+    (spacemacs/set-leader-keys-for-major-mode 'org-mode
+      "jpg" 'org-jira-get-projects
+      "jib" 'org-jira-browse-issue
+      "jig" 'org-jira-get-issues
+      "jih" 'org-jira-get-issues-headonly
+      "jif" 'org-jira-get-issues-from-filter-headonly
+      "jiF" 'org-jira-get-issues-from-filter
+      "jiu" 'org-jira-update-issue
+      "jiw" 'org-jira-progress-issue
+      "jir" 'org-jira-refresh-issue
+      "jic" 'org-jira-create-issue
+      "jik" 'org-jira-copy-current-issue-key
+      "jsc" 'org-jira-create-subtask
+      "jsg" 'org-jira-get-subtasks
+      "jcu" 'org-jira-update-comment
+      "jtj" 'org-jira-todo-to-jira)
+    ))
+
 
 (defun org-cestdiego/init-ob-coffee()
   (use-package ob-coffee
@@ -48,6 +79,20 @@ which require an initialization must be listed explicitly in the list.")
     (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)
     ))
 
+(defun org-cestdiego/init-org-alert ()
+  (use-package org-alert
+    :init
+    (setq alert-default-style 'osx-notifier)
+    :config
+    (defun org-alert-check ()
+      "Check for active, due deadlines and initiate notifications."
+      (interactive)
+      (org-alert--preserve-agenda-buffer)
+      (let ((active (org-alert--filter-active (org-alert--get-headlines))))
+        (dolist (dl (org-alert--strip-states active))
+          (notify-osx dl org-alert-notification-title)))
+      (org-alert--restore-agenda-buffer))
+    ))
 
 (defun org-cestdiego/init-ob-mongo()
   (use-package ob-mongo))
@@ -142,7 +187,7 @@ which require an initialization must be listed explicitly in the list.")
                       ("c" todo "IN_CODE_REVIEW"
                        ((org-agenda-overriding-header "Items that are in Code Review")))
                       ("Q" tags "questions")
-                      ("S" tags "sprint10")
+                      ("S" tags "sprint13")
                       ("l" tags "Links"
                        ((org-agenda-overriding-header "Links that I have to Read: ")
                         (org-agenda-skip-function
@@ -171,6 +216,19 @@ which require an initialization must be listed explicitly in the list.")
         '((python "pythoncode")))
 
   (setq org-ditaa-jar-path "/usr/bin/ditaa")
+
+  (set-face-attribute 'org-block-begin-line nil :family "Operator SSm" :slant 'normal)
+  (set-face-attribute 'org-block-end-line nil :family "Operator SSm" :slant 'normal)
+
+  (defun org-generate-link-description (url description)
+    (cond
+     ((string-match "jirap" url)
+      (replace-regexp-in-string "https://jira.+/browse/" "" url))
+     ((string-match "github" url)
+      (replace-regexp-in-string "https://github.+\com/" "" url))
+     (t description)
+     ))
+  (setq org-make-link-description-function 'org-generate-link-description)
 
   ;; Org-babel
   (setq org-babel-load-languages

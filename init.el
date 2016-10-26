@@ -35,6 +35,7 @@ values."
      nginx
      ;; MY Own layers
      ;; no-dots
+     misc
      appearance
      ;;(blog :variables
      ;;     org-page-use-melpa-version nil
@@ -414,6 +415,7 @@ you should place your code here."
   (require 'mocha-snippets)
   (setq mocha-snippets-use-fat-arrows t)
 
+  (handoff-global-mode 1)
   (keyboard-translate ?\C-h ?\C-?)
 
   (setq tab-always-indent t)

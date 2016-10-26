@@ -27,6 +27,7 @@
     org-mac-link
     org-alert
     ;; (ob                        :location built-in)
+    (org-notify                :location built-in)
     (org-protocol              :location built-in)
     (org-capture               :location built-in)
     (org-agenda                :location built-in)
@@ -36,6 +37,17 @@
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
 
+(defun org-cestdiego/init-org-notify()
+  (use-package org-notify
+    :config
+    (org-notify-start)
+    (org-notify-add 'appt
+                    '(:time "-1s" :period "20s" :duration 10
+                            :actions (-message -ding))
+                    '(:time "15m" :period "2m" :duration 100
+                            :actions -notify)
+                    '(:time "2h" :period "5m" :actions -message)
+                    '(:time "3d" :actions -email))))
 
 (defun org-cestdiego/init-org-jira ()
   (use-package org-jira

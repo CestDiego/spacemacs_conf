@@ -1151,15 +1151,38 @@ _k_: Import Proj            _e_: Start Emulator
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#272822" "#F92672" "#A6E22E" "#E6DB74" "#66D9EF" "#FD5FF0" "#A1EFE4" "#F8F8F2"])
+ '(compilation-message-face (quote default))
+ '(fci-rule-color "#20240E")
+ '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
+ '(highlight-tail-colors
+   (quote
+    (("#20240E" . 0)
+     ("#679A01" . 20)
+     ("#4BBEAE" . 30)
+     ("#1DB4D0" . 50)
+     ("#9A8F21" . 60)
+     ("#A75B00" . 70)
+     ("#F309DF" . 85)
+     ("#20240E" . 100))))
+ '(magit-diff-use-overlays nil)
  '(org-agenda-files
    (quote
-    ("/Users/dberrocal/Documents/Org-Notes/work/work.org" "/Users/dberrocal/Documents/Org-Notes/elfeed.org" "/Users/dberrocal/Documents/Org-Notes/journal.org" "/Users/dberrocal/Documents/Org-Notes/links.org" "/Users/dberrocal/Documents/Org-Notes/main.org")))
+    ("/Users/dberrocal/Documents/Org-Notes/work/work.org" "/Users/dberrocal/Documents/Org-Notes/links.org" "/Users/dberrocal/Documents/Org-Notes/main.org")))
  '(package-selected-packages
    (quote
-    (mocha-snippets helm-gtags ggtags minitest font-lock+ pug-mode smooth-scrolling company-nand2tetris nand2tetris sweetgreen grunt all-the-icons company-emacs-eclim osx-dictionary py-isort dumb-jump hideshowvis eclim zone-nyan esxml yapfify yaml-mode xterm-color xkcd ws-butler wolfram-mode window-numbering which-key web-mode web-beautify w3m volatile-highlights visual-fill-column vimrc-mode vi-tilde-fringe vagrant-tramp vagrant uuidgen use-package typit mmt twittering-mode toc-org thrift tagedit systemd suggest loop string-inflection stan-mode sql-indent spotify spacemacs-theme spaceline soundcloud string-utils list-utils smooth-scroll smeargle slim-mode sicp shell-pop selectric-mode scss-mode scad-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restclient restart-emacs rcirc-notify rcirc-color rbenv ranger rake rainbow-mode rainbow-identifiers rainbow-delimiters qml-mode pyvenv python-environment pytest pyenv-mode prodigy pip-requirements persp-mode pdf-tools tablist pcre2el pbcopy paradox spinner pandoc-mode pacmacs ox-pandoc ox-ioslide makey osx-trash orgit org-tree-slide org-readme lib-requires header2 yaoddmuse http-post-simple org-projectile org-present org-pomodoro org-plus-contrib org-mac-link org-gcal alert request-deferred deferred log4e gntp org-download org-bullets open-junk-file ob-mongo ob-http ob-coffee ob-browser nvm nginx-mode neotree multi-term move-text mmm-mode matlab-mode markdown-toc magit-gitflow magit-gh-pulls macrostep lua-mode lorem-ipsum livid-mode skewer-mode live-py-mode linum-relative link-hint lice less-css-mode ledger-mode launchctl kite-mini keyfreq key-chord julia-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc jinja2-mode jade-mode info+ indent-guide ido-vertical-mode hydra hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hexrgb help-fns+ helm-themes helm-swoop helm-spotify multi helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-hunks helm-gitignore helm-flx helm-descbinds helm-dash helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gmail-message-mode ham-mode markdown-mode html-to-markdown gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gist gh marshal logito pcache ht gh-md general-close fontawesome focus flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck-package flycheck-ledger flycheck pkg-info epl flx-ido firestarter fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help erc-yt erc-view-log erc-terminal-notifier erc-social-graph erc-image erc-hl-nicks engine-mode encourage-mode emoji-cheat-sheet-plus emms emmet-mode elisp-slime-nav elfeed-web simple-httpd elfeed-org org elfeed-goodies ace-jump-mode noflet powerline popwin elfeed ein request websocket editorconfig edit-server disaster diminish diff-hl define-word dash-at-point dactyl-mode cython-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-quickhelp pos-tip company-flx flx company-emoji company-c-headers company-auctex company-anaconda company column-enforce-mode color-identifiers-mode coffee-mode cmake-mode clean-aindent-mode clang-format chruby bundler inf-ruby bind-map bind-key beacon seq auto-yasnippet yasnippet auto-highlight-symbol auto-dim-other-buffers auto-dictionary auto-compile packed auctex arduino-mode ansible-doc ansible anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup 2048-game quelpa package-build monokai-theme)))
+    (org-jira zenburn-theme org-alert demo-it handoff mocha-snippets helm-gtags ggtags minitest font-lock+ pug-mode smooth-scrolling company-nand2tetris nand2tetris sweetgreen grunt all-the-icons company-emacs-eclim osx-dictionary py-isort dumb-jump hideshowvis eclim zone-nyan esxml yapfify yaml-mode xterm-color xkcd ws-butler wolfram-mode window-numbering which-key web-mode web-beautify w3m volatile-highlights visual-fill-column vimrc-mode vi-tilde-fringe vagrant-tramp vagrant uuidgen use-package typit mmt twittering-mode toc-org thrift tagedit systemd suggest loop string-inflection stan-mode sql-indent spotify spacemacs-theme spaceline soundcloud string-utils list-utils smooth-scroll smeargle slim-mode sicp shell-pop selectric-mode scss-mode scad-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restclient restart-emacs rcirc-notify rcirc-color rbenv ranger rake rainbow-mode rainbow-identifiers rainbow-delimiters qml-mode pyvenv python-environment pytest pyenv-mode prodigy pip-requirements persp-mode pdf-tools tablist pcre2el pbcopy paradox spinner pandoc-mode pacmacs ox-pandoc ox-ioslide makey osx-trash orgit org-tree-slide org-readme lib-requires header2 yaoddmuse http-post-simple org-projectile org-present org-pomodoro org-plus-contrib org-mac-link org-gcal alert request-deferred deferred log4e gntp org-download org-bullets open-junk-file ob-mongo ob-http ob-coffee ob-browser nvm nginx-mode neotree multi-term move-text mmm-mode matlab-mode markdown-toc magit-gitflow magit-gh-pulls macrostep lua-mode lorem-ipsum livid-mode skewer-mode live-py-mode linum-relative link-hint lice less-css-mode ledger-mode launchctl kite-mini keyfreq key-chord julia-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc jinja2-mode jade-mode info+ indent-guide ido-vertical-mode hydra hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hexrgb help-fns+ helm-themes helm-swoop helm-spotify multi helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-hunks helm-gitignore helm-flx helm-descbinds helm-dash helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gmail-message-mode ham-mode markdown-mode html-to-markdown gitignore-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gist gh marshal logito pcache ht gh-md general-close fontawesome focus flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck-package flycheck-ledger flycheck pkg-info epl flx-ido firestarter fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help erc-yt erc-view-log erc-terminal-notifier erc-social-graph erc-image erc-hl-nicks engine-mode encourage-mode emoji-cheat-sheet-plus emms emmet-mode elisp-slime-nav elfeed-web simple-httpd elfeed-org org elfeed-goodies ace-jump-mode noflet powerline popwin elfeed ein request websocket editorconfig edit-server disaster diminish diff-hl define-word dash-at-point dactyl-mode cython-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-quickhelp pos-tip company-flx flx company-emoji company-c-headers company-auctex company-anaconda company column-enforce-mode color-identifiers-mode coffee-mode cmake-mode clean-aindent-mode clang-format chruby bundler inf-ruby bind-map bind-key beacon seq auto-yasnippet yasnippet auto-highlight-symbol auto-dim-other-buffers auto-dictionary auto-compile packed auctex arduino-mode ansible-doc ansible anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup 2048-game quelpa package-build monokai-theme)))
+ '(pos-tip-background-color "#A6E22E")
+ '(pos-tip-foreground-color "#272822")
  '(safe-local-variable-values
    (quote
-    ((eval when
+    ((firestarter let
+                  ((org-html-htmlize-output-type
+                    (quote css)))
+                  (op/do-publication t t org-page-built-directory))
+     (set-input-method "latin-1-prefix" t)
+     (eval when
            (and
             (buffer-file-name)
             (file-regular-p
@@ -1222,11 +1245,37 @@ _k_: Import Proj            _e_: Start Emulator
            (set
             (make-local-variable
              (quote package-build-recipes-dir))
-            default-directory))))))
+            default-directory)))))
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#F92672")
+     (40 . "#CF4F1F")
+     (60 . "#C26C0F")
+     (80 . "#E6DB74")
+     (100 . "#AB8C00")
+     (120 . "#A18F00")
+     (140 . "#989200")
+     (160 . "#8E9500")
+     (180 . "#A6E22E")
+     (200 . "#729A1E")
+     (220 . "#609C3C")
+     (240 . "#4E9D5B")
+     (260 . "#3C9F79")
+     (280 . "#A1EFE4")
+     (300 . "#299BA6")
+     (320 . "#2896B5")
+     (340 . "#2790C3")
+     (360 . "#66D9EF"))))
+ '(vc-annotate-very-old-color nil)
+ '(weechat-color-list
+   (unspecified "#272822" "#20240E" "#F70057" "#F92672" "#86C30D" "#A6E22E" "#BEB244" "#E6DB74" "#40CAE4" "#66D9EF" "#FB35EA" "#FD5FF0" "#74DBCD" "#A1EFE4" "#F8F8F2" "#F8F8F0")))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
+ '(org-level-2 ((t (:inherit org-tree-slide-heading-level-2))))
+ '(org-level-3 ((t (:inherit org-tree-slide-heading-level-3)))))

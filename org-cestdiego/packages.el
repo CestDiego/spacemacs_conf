@@ -209,91 +209,95 @@ which require an initialization must be listed explicitly in the list.")
                     org-agenda-custom-commands)))))
 
 
-(defun org-cestdiego/post-init-org()
+(defun org-cestdiego/pre-init-org()
   "Initialize my package"
-  (setq org-startup-folded nil)
-  (setq org-src-fontify-natively t)
-  (setq org-src-tab-acts-natively t)
-  (setq org-confirm-babel-evaluate nil)
+  (spacemacs|use-package-add-hook org
+    :post-config
+    (setq org-startup-folded nil)
+    (setq org-src-fontify-natively t)
+    (setq org-src-tab-acts-natively t)
+    (setq org-confirm-babel-evaluate nil)
 
-  (setq org-latex-packages-alist '(("" "color" t)
-                                   ("" "minted" t)
-                                   ("" "parskip" t))
-        org-latex-pdf-process
-        '("pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"
-          "bibtex $(basename %b)"
-          "pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"
-          "pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"))
+    (setq org-latex-packages-alist '(("" "color" t)
+                                     ("" "minted" t)
+                                     ("" "parskip" t))
+          org-latex-pdf-process
+          '("pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"
+            "bibtex $(basename %b)"
+            "pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"
+            "pdflatex -interaction nonstopmode -shell-escape -output-directory %o %f"))
 
-  (setq org-latex-custom-lang-environments
-        '((python "pythoncode")))
+    (setq org-latex-custom-lang-environments
+          '((python "pythoncode")))
 
-  (setq org-ditaa-jar-path "/usr/bin/ditaa")
+    (setq org-ditaa-jar-path "/usr/bin/ditaa")
 
-  (set-face-attribute 'org-block-begin-line nil :family "Operator SSm" :slant 'normal)
-  (set-face-attribute 'org-block-end-line nil :family "Operator SSm" :slant 'normal)
+    (set-face-attribute 'org-block-begin-line nil :family "Operator SSm" :slant 'normal)
+    (set-face-attribute 'org-block-end-line nil :family "Operator SSm" :slant 'normal)
 
-  (defun org-generate-link-description (url description)
-    (cond
-     ((string-match "jirap" url)
-      (replace-regexp-in-string "https://jira.+/browse/" "" url))
-     ((string-match "github" url)
-      (replace-regexp-in-string "https://github.+\com/" "" url))
-     (t description)
-     ))
-  (setq org-make-link-description-function 'org-generate-link-description)
+    (defun org-generate-link-description (url description)
+      (cond
+       ((string-match "jirap" url)
+        (replace-regexp-in-string "https://jira.+/browse/" "" url))
+       ((string-match "github" url)
+        (replace-regexp-in-string "https://github.+\com/" "" url))
+       (t description)
+       ))
 
-  ;; Org-babel
-  (setq org-babel-load-languages
-        (append org-babel-load-languages
-                '((R . t)
-                  (emacs-lisp . t)
-                  (python . t)
-                  (sh . t)
-                  (haskell . t)
-                  (js . t)
-                  (latex . t)
-                  (scheme . t)
-                  (gnuplot . t)
-                  (C . t)
-                  (sql . t)
-                  (ditaa . t))))
+    (setq org-make-link-description-function 'org-generate-link-description)
 
-  (defun org-check-misformatted-subtree ()
-    "Check misformatted entries in the current buffer."
-    (interactive)
-    (show-all)
-    (org-map-entries
-     (lambda ()
-       (when (and (move-beginning-of-line 2)
-                  (not (looking-at org-heading-regexp)))
-         (if (or (and (org-get-scheduled-time (point))
-                      (not (looking-at (concat "^.*" org-scheduled-regexp))))
-                 (and (org-get-deadline-time (point))
-                      (not (looking-at (concat "^.*" org-deadline-regexp)))))
-             (when (y-or-n-p "Fix this subtree? ")
-               (message "Call the function again when you're done fixing this subtree.")
-               (recursive-edit))
-           (message "All subtrees checked."))))))
+    ;; Org-babel
+    (setq org-babel-load-languages
+          (append org-babel-load-languages
+                  '((R . t)
+                    (emacs-lisp . t)
+                    (python . t)
+                    (sh . t)
+                    (haskell . t)
+                    (js . t)
+                    (latex . t)
+                    (scheme . t)
+                    (gnuplot . t)
+                    (C . t)
+                    (sql . t)
+                    (ditaa . t))))
 
-  (defun org-mode/prettify-symbols ()
-    (push '("href-link" . ?) prettify-symbols-alist)
-    (prettify-symbols-mode))
+    (defun org-check-misformatted-subtree ()
+      "Check misformatted entries in the current buffer."
+      (interactive)
+      (show-all)
+      (org-map-entries
+       (lambda ()
+         (when (and (move-beginning-of-line 2)
+                    (not (looking-at org-heading-regexp)))
+           (if (or (and (org-get-scheduled-time (point))
+                        (not (looking-at (concat "^.*" org-scheduled-regexp))))
+                   (and (org-get-deadline-time (point))
+                        (not (looking-at (concat "^.*" org-deadline-regexp)))))
+               (when (y-or-n-p "Fix this subtree? ")
+                 (message "Call the function again when you're done fixing this subtree.")
+                 (recursive-edit))
+             (message "All subtrees checked."))))))
 
-  (add-hook 'org-mode-hook 'org-mode/prettify-symbols)
+    (defun org-mode/prettify-symbols ()
+      (push '("href-link" . ?) prettify-symbols-alist)
+      (prettify-symbols-mode))
 
-  ;; (setq org-hide-emphasis-markers t)
-  ;; (regexp-opt (list " @@html:</kbd>@@[a-zA-Z0-9k ]"))
-  ;; Got the org-link from
-  ;; http://emacs.stackexchange.com/questions/7323/how-to-add-new-markup-to-org-mode-html-export
-  ;; (org-add-link-type "kbd" #'ignore #'spacemacs/export-kbd-tag)
-  ;; (defun spacemacs/export-kbd-tag (path desc format)
-  ;;   "Export org audio links to hmtl."
-  ;;   (cl-case format
-  ;;     (html (format "<kbd>%s</kbd>" (or desc "")))
-  ;;     (latex (format "(HOW DO I EXPORT AUDIO TO LATEX? \"%s\")" path))))
-  ;; check out https://github.com/capitaomorte/yasnippet/issues/349
+    (add-hook 'org-mode-hook 'org-mode/prettify-symbols)
 
+    ;; (setq org-hide-emphasis-markers t)
+    ;; (regexp-opt (list " @@html:</kbd>@@[a-zA-Z0-9k ]"))
+    ;; Got the org-link from
+    ;; http://emacs.stackexchange.com/questions/7323/how-to-add-new-markup-to-org-mode-html-export
+    ;; (org-add-link-type "kbd" #'ignore #'spacemacs/export-kbd-tag)
+    ;; (defun spacemacs/export-kbd-tag (path desc format)
+    ;;   "Export org audio links to hmtl."
+    ;;   (cl-case format
+    ;;     (html (format "<kbd>%s</kbd>" (or desc "")))
+    ;;     (latex (format "(HOW DO I EXPORT AUDIO TO LATEX? \"%s\")" path))))
+    ;; check out https://github.com/capitaomorte/yasnippet/issues/349
+
+    )
   )
 
 (defun org-cestdiego/init-ob-browser()

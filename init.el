@@ -433,7 +433,7 @@ you should place your code here."
               (notify-osx "Pomodoro Killed" "One does not simply kill a pomodoro!")))
 
   (remove-hook 'emacs-lisp-mode-local-vars-hook #'spacemacs/ggtags-mode-enable)
-  (handoff-global-mode 1)
+  (handoff-global-mode nil)
   (keyboard-translate ?\C-h ?\C-?)
 
   (setq tab-always-indent t)

@@ -432,6 +432,28 @@ you should place your code here."
             (lambda ()
               (notify-osx "Pomodoro Killed" "One does not simply kill a pomodoro!")))
 
+  ;; Source
+  ;; https://www.reddit.com/r/emacs/comments/5a4n39/ligatures_question_i_cant_find_more_informative/d9dx2oi/
+  (defun cestdiego/prettify-list (l &optional merge)
+    "Takes two lists and interleaves the (optional) second between each element of the first.  Used to
+create multi-character sequences for use with prettify-symbols mode.  If not supplied, MERGE defaults
+to '(Br . Bl)"
+    (let ((merge (or merge '(Br . Bl)))
+          (head (car l))
+          (tail (cdr l)))
+      (cond
+       ((not (consp l))    '())
+       ((not (consp tail))  (list head))
+       (t (cons head
+                (cons merge
+                      (prettify-list tail merge)))))))
+
+  (defun cestdiego/prettify-string (s &optional merge)
+    "Takes a string and an optional list, and returns a list of the string's characters with MERGE
+interleaved between each character, for use with prettify-symbols mode.  If no MERGE is supplied,
+uses the prettify-list default."
+    (prettify-list (append s nil) merge))
+
   (remove-hook 'emacs-lisp-mode-local-vars-hook #'spacemacs/ggtags-mode-enable)
   (handoff-global-mode nil)
   (keyboard-translate ?\C-h ?\C-?)

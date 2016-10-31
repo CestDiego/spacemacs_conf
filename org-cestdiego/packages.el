@@ -24,7 +24,7 @@
     ox-cv
     mustache
     ht
-    org-mac-link
+    ;; org-mac-link
     org-alert
     ;; (ob                        :location built-in)
     (org-notify                :location built-in)
@@ -83,13 +83,14 @@ which require an initialization must be listed explicitly in the list.")
     :init
     (add-to-list 'org-babel-load-languages '(coffee . t))))
 
-(defun org-cestdiego/init-org-mac-link ()
-  (use-package org-mac-link
-    :commands 'org-mac-grab-link
-    :defer t
-    :config
-    (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)
-    ))
+;; Apparently this fails with current version of org-mode. Double check later
+;; (defun org-cestdiego/init-org-mac-link ()
+;;   (use-package org-mac-link
+;;     :commands 'org-mac-grab-link
+;;     :defer t
+;;     :config
+;;     (define-key org-mode-map (kbd "C-c g") 'org-mac-grab-link)
+;;     ))
 
 (defun org-cestdiego/init-org-alert ()
   (use-package org-alert

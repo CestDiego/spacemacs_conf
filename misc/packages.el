@@ -40,7 +40,7 @@
     :defer t
     :init
     (spacemacs|add-toggle handoff
-      :mode 'handoff-mode
+      :mode handoff-mode
       :documentation "Get your hands off the mouse!"
       :evil-leader "t!")
     ))

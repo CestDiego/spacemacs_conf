@@ -830,7 +830,18 @@ _k_: Import Proj            _e_: Start Emulator
   (setq vc-follow-symlinks t)
 
   (setq zone-timer (run-with-idle-timer 6000 t 'zone))
-  (setq zone-programs [zone-pgm-rotate-LR-lockstep])
+  (setq zone-programs [zone-pgm-jitter
+                        zone-pgm-putz-with-case
+                        zone-pgm-dissolve
+                        zone-pgm-whack-chars
+                        zone-pgm-rotate
+                        zone-pgm-rotate-LR-lockstep
+                        zone-pgm-rotate-RL-lockstep
+                        zone-pgm-rotate-LR-variable
+                        zone-pgm-rotate-RL-variable
+                        zone-pgm-rat-race
+                        zone-pgm-paragraph-spaz
+                        zone-pgm-random-life])
 
   (when (configuration-layer/package-usedp 'nyan-mode)
     (spacemacs|do-after-display-system-init

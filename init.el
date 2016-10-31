@@ -1088,8 +1088,7 @@ _k_: Import Proj            _e_: Start Emulator
   (setq mouse-wheel-progressive-speed nil)
   (setq mouse-wheel-scroll-amount
         '(             2
-          ((shift)   . 1)
-          ((control) . 7)))
+          ((shift)   . 1)))
 
   ;;; BEGIN: Extra Hybrid Modes
   (push 'git-commit-major-mode evil-insert-state-modes)

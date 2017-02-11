@@ -7,3 +7,6 @@
 [submodule "utils/extensions/i3-emacs"]
 	path = utils/extensions/i3-emacs
 	url = git@github.com:vava/i3-emacs.git
+[submodule "layers/blog/themes/just_right"]
+	path = layers/blog/themes/just_right
+	url = https://github.com/cestdiego/just_right

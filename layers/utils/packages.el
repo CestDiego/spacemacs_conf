@@ -19,7 +19,7 @@
     python-environment
     firestarter
     flycheck-package
-    general-close
+    syntactic-close
     fontawesome
     wakatime-mode
     ;; nameless
@@ -153,10 +153,10 @@ which require an initialization must be listed explicitly in the list.")
     ))
 
 
-(defun utils/init-general-close ()
-  (use-package general-close
+(defun utils/init-syntactic-close ()
+  (use-package syntactic-close
     :config
-    (global-set-key (kbd "M-`") 'general-close)
+    (global-set-key (kbd "M-`") 'syntactic-close)
     ))
 
 

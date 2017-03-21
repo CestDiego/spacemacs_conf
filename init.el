@@ -44,8 +44,6 @@ values."
      ebay
      org-cestdiego
      presentations
-     soundcloud
-     twitter
      utils
      ;; (exwm :variables
      ;;       exwm-app-launcher--prompt " "
@@ -106,7 +104,6 @@ values."
      ;; (ycmd :variables
      ;;       ycmd-server-command "~/build/ycmd/")
      ;; Syntax Checking Stuff
-     gtags
      spell-checking
      syntax-checking
      ;; Shells
@@ -120,7 +117,6 @@ values."
      ;; clojure
      emacs-lisp
      ;; scheme
-     ansible
      markdown
      html
      latex
@@ -135,14 +131,10 @@ values."
      ruby
      extra-langs
      ;; Utils
-     ranger
      selectric
      search-engine
      xkcd
-     games
-     spotify
-     ;; Monfoku
-     vagrant)
+     )
    ;; List of additional packages that will be installed wihout being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the

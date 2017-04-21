@@ -31,9 +31,6 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    `(
-     typescript
-     vimscript
-     nginx
      ;; MY Own layers
      ;; no-dots
      misc
@@ -41,8 +38,7 @@ values."
      ;;(blog :variables
      ;;     org-page-use-melpa-version nil
      ;;     org-page-built-directory "~/Documents/Projects/le_blog_built/")
-     ebay
-     org-cestdiego
+     ;; org-cestdiego
      presentations
      utils
      ;; (exwm :variables
@@ -53,10 +49,9 @@ values."
 
      ;; Spacemacs
      pdf-tools
-     gnus
-     (elfeed :variables
-             elfeed-enable-web-interface t
-             rmh-elfeed-org-files (list "~/Google Drive/Org-Notes/elfeed.org"))
+     ;; (elfeed :variables
+     ;;         elfeed-enable-web-interface t
+     ;;         rmh-elfeed-org-files (list "~/Google Drive/Org-Notes/elfeed.org"))
      ;; ,(unless (eq system-type 'darwin) nixos)
      dash
      ;; Version Control
@@ -69,20 +64,12 @@ values."
      (colors :variables
              colors-enable-nyan-cat-progress-bar t
              colors-enable-rainbow-identifiers nil)
-
      ;; (perspectives :variables
      ;;               spacemacs-persp-show-home-at-startup t
      ;;               perspectives-display-help t)
-     finance
      chrome
      (erc :variables
           erc-enable-sasl-auth t)
-     (rcirc :variables
-            rcirc-default-nick "cestdiego"
-            rcirc-default-user-name "cestdiego"
-            rcirc-default-full-name "Diego Berrocal"
-            rcirc-enable-znc-support t)
-     restclient
      ;; Org
      (org :variables
           org-mapping-style 'worf)
@@ -124,18 +111,13 @@ values."
      c-c++
      python
      ipython-notebook
-     sql
-     ;; haskell
      javascript
      react
      ruby
-     extra-langs
      ;; Utils
-     selectric
      search-engine
-     xkcd
      )
-   ;; List of additional packages that will be installed wihout being
+   ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.

@@ -836,7 +836,10 @@ uses the prettify-list default."
       (find-file "~/dotbspwm/.config/bspwm/autostart"))
     )
 
-  (unless (eq system-type 'darwin)
+  (if (eq system-type 'darwin)
+      ;; Taken from https://www.emacswiki.org/emacs/BrowseUrl#toc26
+      (setq browse-url-browser-function (quote browse-url-generic)
+            browse-url-generic-program "open")
     (setq browse-url-browser-function 'browse-url-generic
           engine/browser-function 'browse-url-generic
           browse-url-generic-program "google-chrome-stable"))

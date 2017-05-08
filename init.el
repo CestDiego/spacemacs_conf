@@ -104,7 +104,7 @@ values."
      ;; clojure
      emacs-lisp
      ;; scheme
-     markdown
+     (markdown :variables markdown-live-preview-engine 'vmd))
      html
      latex
      lua

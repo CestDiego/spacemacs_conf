@@ -1231,6 +1231,9 @@ uses the prettify-list default."
 
   (global-prettify-symbols-mode)
   ;; https://github.com/ocodo/.emacs.d/blob/master/custom/handy-functions.el
+
+  ;; Figure out how to set the pyenv environment depending on the project one is at
+  (pyenv-mode-set "2.7.8")
   )
 
 (custom-set-variables

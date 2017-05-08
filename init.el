@@ -122,6 +122,7 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
+                                      spaceline-all-the-icons
                                       atomic-chrome
                                       suggest
                                       visual-fill-column
@@ -435,6 +436,9 @@ you should place your code here."
     (setq org-html-htmlize-font-prefix "org-")
     (setq org-html-doctype "html5")
     (setq org-html-html5-fancy t))
+
+  (require 'spaceline-all-the-icons)
+  (spaceline-all-the-icons-theme)
 
   (require 'atomic-chrome)
   (atomic-chrome-start-server)

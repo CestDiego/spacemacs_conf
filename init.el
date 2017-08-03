@@ -30,7 +30,7 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   `(
+   `(ruby
      ;; MY Own layers
      ;; no-dots
      misc
@@ -48,7 +48,6 @@ values."
      ;; nand2tetris
 
      ;; Spacemacs
-     pdf-tools
      ;; (elfeed :variables
      ;;         elfeed-enable-web-interface t
      ;;         rmh-elfeed-org-files (list "~/Google Drive/Org-Notes/elfeed.org"))
@@ -104,18 +103,14 @@ values."
      ;; clojure
      emacs-lisp
      ;; scheme
-     (markdown :variables markdown-live-preview-engine 'vmd))
+     (markdown :variables markdown-live-preview-engine 'vmd)
      html
      latex
      lua
      c-c++
      python
-     ipython-notebook
      javascript
      react
-     ruby
-     ;; Utils
-     search-engine
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -545,7 +540,7 @@ uses the prettify-list default."
 
   ;; TODO there is lots to do for recognizing each file with it's proper nvm version
   (require 'nvm)
-  (nvm-use "6.9.5")
+  (nvm-use "6.11.1")
 
   (use-package helm-hunks
     :commands helm-hunks)

@@ -1040,6 +1040,9 @@ uses the prettify-list default."
                                         "\\[Github\\].* labeled an issue in"
                                         "\\[Github\\].* unlabeled an issue in")))
 
+  ;; This will allow the shebang #!/bin/node :)
+  (setq js2-skip-preprocessor-directives t)
+
   (when (configuration-layer/layer-usedp 'react)
     (defun spacemacs/toggle-web-js2-mode ()
       (interactive)

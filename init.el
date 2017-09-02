@@ -544,7 +544,7 @@ uses the prettify-list default."
 
   ;; TODO there is lots to do for recognizing each file with it's proper nvm version
   (require 'nvm)
-  (nvm-use "6.11.1")
+  (nvm-use "8.1.2")
 
   (use-package helm-hunks
     :commands helm-hunks)

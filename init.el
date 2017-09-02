@@ -428,6 +428,9 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
 
+  ;; Set the Emacs customization file path. Must be done here in user-init.
+  (setq custom-file "~/.spacemacs.d/custom.el")
+
   (setq-default evil-escape-key-sequence "jk")
   (setq httpd-port 1337)
   (setq source-directory "~/Documents/Projects/emacs-24.5"

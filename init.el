@@ -118,6 +118,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
                                       spaceline-all-the-icons
+                                      yarn-mode
                                       atomic-chrome
                                       suggest
                                       visual-fill-column

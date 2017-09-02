@@ -1239,4 +1239,8 @@ uses the prettify-list default."
 
   ;; Figure out how to set the pyenv environment depending on the project one is at
   (pyenv-mode-set "2.7.8")
+  ;; Lastly, load custom-file (but only if the file exists).
+  (when (file-exists-p custom-file)
+    (load-file custom-file)
+    )
   )

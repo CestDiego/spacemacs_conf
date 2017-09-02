@@ -58,7 +58,6 @@ values."
      version-control
      (git :variables
           git-magit-status-fullscreen t)
-     github
      ;; Other stuff
      prodigy
      (colors :variables

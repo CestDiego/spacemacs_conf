@@ -300,7 +300,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil, the paste transient-state is enabled. While enabled, pressing
    ;; `p' several times cycles through the elements in the `kill-ring'.
    ;; (default nil)
-   dotspacemacs-enable-paste-transient-state nil
+   dotspacemacs-enable-paste-transient-state t
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
    dotspacemacs-which-key-delay 0.4
@@ -412,7 +412,7 @@ It should only modify the values of Spacemacs settings."
    ;; `trailing' to delete only the whitespace at end of lines, `changed' to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup nil
+   dotspacemacs-whitespace-cleanup 'changed
    ;; Either nil or a number of seconds. If non-nil zone out after the specified
    ;; number of seconds. (default nil)
    dotspacemacs-zone-out-when-idle nil
@@ -432,14 +432,22 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   ;; Set the Emacs customization file path. Must be done here in user-init.
   (setq custom-file "~/.spacemacs.d/custom.el")
+  ;; From: https://github.com/krismolendyke/.emacs.d/blob/0765f0029be19cb33b50b518e46e004777fe248c/init.el#L49-L52
+
+  (defvar cestdiego/brew-cache-directory
+    (string-trim (shell-command-to-string
+                  (string-join `(,(executable-find "brew") "--cache") " ")))
+    "Homebrew cache.")
 
   (setq-default evil-escape-key-sequence "jk")
   (setq httpd-port 1337)
-  (setq source-directory "~/Documents/Projects/emacs-24.5"
+  (setq source-directory (if (eq system-type 'darwin)
+                             (string-join `(,cestdiego/brew-cache-directory "emacs-plus--git") "/")
+                           "~/Documents/Projects/emacs-24.5")
         dotspacemacs-verbose-loading t
         helm-ag-command-option " --search-zip "
         delete-by-moving-to-trash t
-        ;; Only Useful with `SPC t ~'
+        ;; Only Useful with `SPC T ~'
         vi-tilde-fringe-bitmap-array [#b00000000
                                       #b00000000
                                       #b00010000

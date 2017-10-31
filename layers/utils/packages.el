@@ -12,7 +12,6 @@
 
 (defvar utils-packages
   '(
-    string-inflection
     ;; pdf-tools
     ;; aggressive-fill-paragraph
     helm
@@ -166,16 +165,6 @@ which require an initialization must be listed explicitly in the list.")
     :config
     (flycheck-package-setup)
     ))
-
-(defun utils/init-string-inflection ()
-  "Initialize my package"
-  (use-package string-inflection
-    :init
-    (progn
-      (spacemacs/set-leader-keys
-        "msi" 'string-inflection-cycle)
-      ))
-  )
 
 ;;(defun utils/init-pdf-tools ()
 ;;  "Initialize my package"

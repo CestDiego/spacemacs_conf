@@ -3,9 +3,7 @@
     auto-dim-other-buffers
     hexrgb
     (nerd-fonts :location local)
-    (zone-nyan :location
-                     (recipe :fetcher github
-                             :repo "wasamasa/zone-nyan"))
+    zone-nyan
     exwm
     all-the-icons
     ))

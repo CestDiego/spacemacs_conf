@@ -552,6 +552,11 @@ uses the prettify-list default."
   (require 'editorconfig)
   (editorconfig-mode 1)
 
+
+  (defun cestdiego/brew-get-prefix-dir-for-program (program)
+    (string-trim (shell-command-to-string
+                  (string-join `(,(executable-find "brew") "--prefix" ,program) " "))))
+
   ;; TODO there is lots to do for recognizing each file with it's proper nvm version
   (require 'nvm)
   (nvm-use "8.1.2")

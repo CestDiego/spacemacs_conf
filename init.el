@@ -430,6 +430,16 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
 
+  ;; Undecorated frame in OSX (doesn't work https://github.com/koekeishiya/chunkwm/issues/265)
+  (add-to-list 'default-frame-alist '(undecorated . nil))
+  ;; This makes the titlebar bearable by making it transparent
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . 'nil))
+
+  ;; IMPORTANT: This makes the emacs window not take unnecessary space because of chunkwm
+  ;; https://github.com/d12frosted/homebrew-emacs-plus/issues/13#issuecomment-299072152
+  (setq frame-resize-pixelwise t)
+
   ;; Set the Emacs customization file path. Must be done here in user-init.
   (setq custom-file "~/.spacemacs.d/custom.el")
   ;; From: https://github.com/krismolendyke/.emacs.d/blob/0765f0029be19cb33b50b518e46e004777fe248c/init.el#L49-L52

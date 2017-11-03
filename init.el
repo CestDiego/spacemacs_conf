@@ -75,7 +75,6 @@ values."
      pandoc
      ;; Miscellaneous
      emoji
-     (unicode-fonts :variables unicode-fonts-force-multi-color-on-mac t)
      ;; (wakatime :variables
      ;;           wakatime-api-key    "813b0d78-1f17-43eb-bede-a5c008651d4a"
      ;;           wakatime-cli-path   "/run/current-system/sw/bin/wakatime"

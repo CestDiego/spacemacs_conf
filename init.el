@@ -133,7 +133,6 @@ values."
                                       focus
                                       w3m
                                       mocha-snippets
-                                      beacon
                                       systemd
                                       )
    ;; A list of packages that cannot be updated.
@@ -708,8 +707,6 @@ uses the prettify-list default."
         popwin:special-display-config)
 
   (setq ispell-extra-args '("--sug-mode=ultra" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
-
-  (beacon-mode 1)
 
   (setq helm-echo-input-in-header-line t)
 

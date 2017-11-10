@@ -429,6 +429,41 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
 
+  ;; https://emacs-doctor.com/emacs-hide-mode-line.html
+
+  (defvar-local hidden-mode-line-mode nil)
+  (define-minor-mode hidden-mode-line-mode
+    "Minor mode to hide the mode-line in the current buffer."
+    :init-value nil
+    :global t
+    :variable hidden-mode-line-mode
+    :group 'editing-basics
+    (if hidden-mode-line-mode
+        (setq hide-mode-line mode-line-format
+              mode-line-format nil)
+      (setq mode-line-format hide-mode-line
+            hide-mode-line nil))
+    (force-mode-line-update)
+    ;; Apparently force-mode-line-update is not always enough to
+    ;; redisplay the mode-line
+    (redraw-display)
+    (when (and (called-interactively-p 'interactive)
+               hidden-mode-line-mode)
+      (run-with-idle-timer
+       0 nil 'message
+       (concat "Hidden Mode Line Mode enabled.  "
+               "Use M-x hidden-mode-line-mode to make the mode-line appear."))))
+
+  ;; If you want to hide the mode-line in every buffer by default
+  (add-hook 'after-change-major-mode-hook 'hidden-mode-line-mode)
+
+  (defun message-buffer-file-name-or-nothing ()
+    (if buffer-file-name
+        (message buffer-file-name))
+    )
+
+  (add-hook 'focus-in-hook 'message-buffer-file-name-or-nothing)
+
   ;; Undecorated frame in OSX (doesn't work https://github.com/koekeishiya/chunkwm/issues/265)
   (add-to-list 'default-frame-alist '(undecorated . nil))
   ;; This makes the titlebar bearable by making it transparent

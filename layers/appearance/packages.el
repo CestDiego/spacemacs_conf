@@ -82,8 +82,8 @@
     :if nil
     :ensure hexrgb
     :init
-    (defadvice load-theme (after activate)
-      (set-auto-dim-other-face-to-dimmed-default))
+    (require ' hexrgb)
+    (advice-add #'load-theme :after #'set-auto-dim-other-face-to-dimmed-default)
     :config
     (add-hook 'after-init-hook (lambda ()
                           (when (fboundp 'auto-dim-other-buffers-mode)
@@ -91,6 +91,5 @@
 
 (defun appearance/init-hexrgb ()
   (use-package hexrgb
-    :if nil
     :config
     (set-auto-dim-other-face-to-dimmed-default)))

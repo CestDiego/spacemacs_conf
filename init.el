@@ -807,6 +807,7 @@ uses the prettify-list default."
   (spacemacs/toggle-highlight-current-line-globally-off)
   (spacemacs/toggle-transparency)
 
+  (auto-dim-other-buffers-mode)
   (setq magit-push-always-verify nil)
 
 

@@ -805,6 +805,7 @@ uses the prettify-list default."
   (global-vi-tilde-fringe-mode -1)
   (spacemacs/toggle-mode-line-minor-modes-off)
   (spacemacs/toggle-highlight-current-line-globally-off)
+  (spacemacs/toggle-transparency)
 
   (setq magit-push-always-verify nil)
 

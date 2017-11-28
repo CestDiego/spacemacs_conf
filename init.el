@@ -1248,9 +1248,13 @@ uses the prettify-list default."
   (define-key evil-insert-state-map (kbd "S-<return>") 'evil-open-below)
   ;;; END:   Custom Hybrid Bindings
 
-  ;;; BEGIN: Multiple Cursors
-  (define-key evil-insert-state-map (kbd "C-;") 'mc/edit-lines)
-  (define-key evil-insert-state-map (kbd "C-:") 'mc/mark-all-like-this-dwim)
+  ;;; BEGIN: EVIL Multiple Cursors
+  (global-evil-mc-mode 1)
+  ;; Fix for bug: https://github.com/gabesoft/evil-mc/issues/70
+  ;; https://github.com/emacs-evil/evil/issues/864
+  (add-hook 'evil-mc-after-cursors-deleted
+            (lambda ()
+              (setq evil-was-yanked-without-register t)))
   ;;; END:   Multiple Cursors
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

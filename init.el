@@ -456,13 +456,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; If you want to hide the mode-line in every buffer by default
   (add-hook 'after-change-major-mode-hook 'hidden-mode-line-mode)
 
-  (defun message-buffer-file-name-or-nothing ()
-    (if buffer-file-name
-        (message buffer-file-name))
-    )
-
-  (add-hook 'focus-in-hook 'message-buffer-file-name-or-nothing)
-
   ;; Undecorated frame in OSX (doesn't work https://github.com/koekeishiya/chunkwm/issues/265)
   (add-to-list 'default-frame-alist '(undecorated . nil))
   ;; This makes the titlebar bearable by making it transparent
@@ -800,6 +793,24 @@ uses the prettify-list default."
   (evil-define-key 'normal with-editor-mode-map ",c" 'with-editor-finish)
   (evil-define-key 'normal with-editor-mode-map ",a" 'with-editor-cancel)
 
+  (defun cestdiego/cursor-pos ()
+    (interactive)
+    (let ((line (cadr (s-split " " (what-line))))
+          (file-or-buffer-name (if buffer-file-name
+                                   buffer-file-name
+                                 (buffer-name)
+                                 ))
+          (column (car (last (s-split "=" (what-cursor-position))))))
+      (message
+       (s-join " "
+               `("Current Buffer:" ,file-or-buffer-name
+                 "Line:" ,line
+                 "Column:" ,column)))
+      )
+    )
+
+  (add-hook 'focus-in-hook 'cestdiego/cursor-pos)
+  (global-set-key (kbd "H-?") 'cestdiego/cursor-pos)
   (global-set-key (kbd "C-s") 'helm-swoop)
 
   (global-vi-tilde-fringe-mode -1)

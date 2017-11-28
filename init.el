@@ -34,6 +34,7 @@ values."
      ;; MY Own layers
      ;; no-dots
      misc
+     mc-columns
      appearance
      my-javascript
      ;;(blog :variables

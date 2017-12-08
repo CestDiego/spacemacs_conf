@@ -30,11 +30,12 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   `(ruby
+   `(typescript
+     ruby
      ;; MY Own layers
      ;; no-dots
      misc
-     mc-columns
+     mc-column
      appearance
      my-javascript
      ;;(blog :variables
@@ -118,6 +119,7 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
+                                      darkroom
                                       yarn-mode
                                       atomic-chrome
                                       suggest

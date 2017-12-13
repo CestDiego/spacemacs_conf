@@ -51,6 +51,9 @@ values."
      ;; nand2tetris
 
      ;;;;;;;;;;;;; Spacemacs ;;;;;;;;;;;;;
+     ;; Not ready yet because doesn't support multiple arguments
+     ;; (ivy :variables
+     ;;      ivy-extra-directories nil)
      ;; (elfeed :variables
      ;;         elfeed-enable-web-interface t
      ;;         rmh-elfeed-org-files (list "~/Google Drive/Org-Notes/elfeed.org"))

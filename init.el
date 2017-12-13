@@ -800,12 +800,10 @@ uses the prettify-list default."
                                  ))
           (column (car (last (s-split "=" (what-cursor-position))))))
       (message
-       (s-join " "
+       (s-join "  "
                `("Current Buffer:" ,file-or-buffer-name
                  "Line:" ,line
-                 "Column:" ,column)))
-      )
-    )
+                 "Column:" ,column)))))
 
   (add-hook 'focus-in-hook 'cestdiego/cursor-pos)
   (global-set-key (kbd "H-?") 'cestdiego/cursor-pos)

@@ -130,7 +130,6 @@ values."
                                       encourage-mode
                                       key-chord
                                       lice
-                                      editorconfig
                                       nvm
                                       focus
                                       w3m
@@ -584,10 +583,6 @@ uses the prettify-list default."
   ;;   )
 
   ;; (cestdiego/run '(:hurtrealbad: () (interactive) (message "lolz")))
-
-  (require 'editorconfig)
-  (editorconfig-mode 1)
-
 
   (defun cestdiego/brew-get-prefix-dir-for-program (program)
     (string-trim (shell-command-to-string

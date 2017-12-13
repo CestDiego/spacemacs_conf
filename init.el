@@ -32,7 +32,7 @@ values."
    dotspacemacs-configuration-layers
    `(typescript
      ruby
-     ;; MY Own layers
+     ;;;;;;;;;;;;;;; MY Own layers ;;;;;;;;;;;;;;;
      ;; no-dots
      misc
      mc-column
@@ -50,7 +50,7 @@ values."
      ;;       exwm--terminal-command "termite")
      ;; nand2tetris
 
-     ;; Spacemacs
+     ;;;;;;;;;;;;; Spacemacs ;;;;;;;;;;;;;
      ;; (elfeed :variables
      ;;         elfeed-enable-web-interface t
      ;;         rmh-elfeed-org-files (list "~/Google Drive/Org-Notes/elfeed.org"))

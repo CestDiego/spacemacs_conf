@@ -123,7 +123,6 @@ values."
                                       yarn-mode
                                       atomic-chrome
                                       suggest
-                                      visual-fill-column
                                       helm-hunks
                                       company-flx
                                       kite-mini
@@ -829,7 +828,6 @@ uses the prettify-list default."
    '(emacs-lisp-mode-hook))
 
   ;;; SANE DEFAULTS!!
-  (add-hook 'visual-line-mode-hook 'visual-fill-column-mode)
   (evil-define-key 'normal markdown-mode-map
     "j" 'evil-next-visual-line
     "k" 'evil-previous-visual-line)

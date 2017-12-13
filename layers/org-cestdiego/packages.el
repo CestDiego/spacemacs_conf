@@ -174,16 +174,19 @@ which require an initialization must be listed explicitly in the list.")
 
       (setq org-agenda-custom-commands
             (append '(("v" tags "Movies")
-                      ("s" tags "spacemacs")
                       ("c" todo "IN_CODE_REVIEW"
                        ((org-agenda-overriding-header "Items that are in Code Review")))
                       ("Q" tags "questions")
-                      ("S" tags "sprint13")
                       ("l" tags "Links"
                        ((org-agenda-overriding-header "Links that I have to Read: ")
                         (org-agenda-skip-function
                          '(org-agenda-skip-entry-if 'todo '("READING" "READ")))))
-                      ("e" tags-todo "Events"))
+                      ("e" tags-todo "Events")
+
+                      ;; Sprint stuff
+                      ("S" . "Current Sprint Agenda")
+                      ("Ss" tags "+current+sprint")
+                      ("St" tags-todo "+current+sprint"))
                     org-agenda-custom-commands)))))
 
 

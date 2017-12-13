@@ -806,8 +806,7 @@ uses the prettify-list default."
                  "Column:" ,column)))))
 
   (add-hook 'focus-in-hook 'cestdiego/cursor-pos)
-  (global-set-key (kbd "H-?") 'cestdiego/cursor-pos)
-  (global-set-key (kbd "C-s") 'helm-swoop)
+  (global-set-key (kbd "H-?") 'hidden-mode-line-mode)
 
   (global-vi-tilde-fringe-mode -1)
   (spacemacs/toggle-mode-line-minor-modes-off)

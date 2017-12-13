@@ -491,7 +491,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
                              (string-join `(,cestdiego/brew-cache-directory "emacs-plus--git") "/")
                            "~/Documents/Projects/emacs-24.5")
         dotspacemacs-verbose-loading t
-        helm-ag-command-option " --search-zip "
+        helm-ag-base-command "rg --vimgrep --no-heading"
+        helm-ag-always-set-extra-option nil
         delete-by-moving-to-trash t
         ;; Only Useful with `SPC T ~'
         vi-tilde-fringe-bitmap-array [#b00000000

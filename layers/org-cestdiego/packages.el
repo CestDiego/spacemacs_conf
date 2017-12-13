@@ -89,78 +89,78 @@ which require an initialization must be listed explicitly in the list.")
     ))
 
 (defun org-cestdiego/init-org-protocol ()
-  (use-package org-protocol))
+  (use-package org-protocol :defer t))
 
 (defun org-cestdiego/init-org-capture ()
   (use-package org-capture
-    :commands org-capture
     :defer t
     :init
-    (add-hook 'org-capture-mode-hook 'evil-insert-state)
-    :config
-    (defadvice org-switch-to-buffer-other-window
-        (after make-full-capture-window-frame activate)
-      "Agenda to be the sole window when it is in a popup frame"
-      (when (equal "emacs-capture" (frame-parameter nil 'name))
-        (delete-other-windows)
-        (hidden-mode-line-mode)))
+    (with-eval-after-load 'org
+      (progn
+        (add-hook 'org-capture-mode-hook 'evil-insert-state)
+        (defadvice org-switch-to-buffer-other-window
+            (after make-full-capture-window-frame activate)
+          "Agenda to be the sole window when it is in a popup frame"
+          (when (equal "emacs-capture" (frame-parameter nil 'name))
+            (delete-other-windows)
+            (hidden-mode-line-mode)))
 
-    ;;;; Thank you random guy from StackOverflow
-    ;;;; http://goo.gl/OOWIVp
-    (defadvice org-capture
-        (after make-full-window-frame activate)
-      "Advise capture to be the sole window when in a popup frame"
-      (when (equal "emacs-capture" (frame-parameter nil 'name))
-        (delete-other-windows)))
+        ;; Thank you random guy from StackOverflow
+        ;; http://goo.gl/OOWIVp
+        (defadvice org-capture
+            (after make-full-window-frame activate)
+          "Advise capture to be the sole window when in a popup frame"
+          (when (equal "emacs-capture" (frame-parameter nil 'name))
+            (delete-other-windows)))
 
-    ;; alfred-org-capture
-    (defun make-orgcapture-frame ()
-      "Create a new frame and run org-capture."
-      (interactive)
-      (make-frame '((name . "emacs-capture") (width . 80) (height . 16)
-                    (top . 400) (left . 300)
-                    ))
-      (select-frame-by-name "emacs-capture")
-      (org-capture))
+        ;; alfred-org-capture
+        (defun make-orgcapture-frame ()
+          "Create a new frame and run org-capture."
+          (interactive)
+          (make-frame '((name . "emacs-capture") (width . 80) (height . 16)
+                        (top . 400) (left . 300)
+                        ))
+          (select-frame-by-name "emacs-capture")
+          (org-capture))
 
-    (defadvice org-capture-finalize
-        (after delete-capture-frame activate)
-      "Advise capture-finalize to close the frame"
-      (if (equal "emacs-capture" (frame-parameter nil 'name))
-          (delete-frame)))
+        (defadvice org-capture-finalize
+            (after delete-capture-frame activate)
+          "Advise capture-finalize to close the frame"
+          (if (equal "emacs-capture" (frame-parameter nil 'name))
+              (delete-frame)))
 
-    ;;; Capture Templates
-    ;;;; Add idea, mind-onanism, contacts, movies to download das
-    (setq org-capture-templates
-          '(("t" "Todo" entry
-             (file+headline "main.org" "Tasks")
-             "* TODO %? %^g \n %i\n")
-            ("i" "For jotting quick ideas" entry
-             (file+headline "gtd.org" "Ideas")
-             "* %?\n %i\n%t\n%A")
-            ;; ("c" "Contacts" entry (file "contacts.org")
-            ;;  "* %(org-contacts-template-name)\n
-            ;;  :PROPERTIES:\n
-            ;;  :EMAIL:
-            ;;  %(org-contacts-template-email)\n  :END:")
-            ("b" "Bookmark links" entry
-             (file+headline "links.org" "Bookmarks")
-             "* %?%^g")
-            ("m" "Movies to see" entry
-             (file "movies.org")
-             "* ToDownload %? \n  :PROPERTIES:\n  :DATE: %t\n  :URL: %c\n  :END:")
-            ("l" "Temp Links from the interwebs" entry
-             (file+headline "links.org" "Links")
-             "* TO-READ %c %^g\n Entered on: %U\n %?\n%i\n"
-             :empy-lines 1)
-            ("w" "Weight Log" table-line (file+headline "weight.org" "Diario de Peso") " | %? | %t |")
-            ("c" "Clock In" table-line (file+headline "clokin.org" "Bitácora de Asistencia") " | %? | %T |")))))
+        ;;; Capture Templates
+        ;;;; Add idea, mind-onanism, contacts, movies to download das
+        (setq org-capture-templates
+              '(("t" "Todo" entry
+                 (file+headline "main.org" "Tasks")
+                 "* TODO %? %^g \n %i\n")
+                ("i" "For jotting quick ideas" entry
+                 (file+headline "gtd.org" "Ideas")
+                 "* %?\n %i\n%t\n%A")
+                ;; ("c" "Contacts" entry (file "contacts.org")
+                ;;  "* %(org-contacts-template-name)\n
+                ;;  :PROPERTIES:\n
+                ;;  :EMAIL:
+                ;;  %(org-contacts-template-email)\n  :END:")
+                ("b" "Bookmark links" entry
+                 (file+headline "links.org" "Bookmarks")
+                 "* %?%^g")
+                ("m" "Movies to see" entry
+                 (file "movies.org")
+                 "* ToDownload %? \n  :PROPERTIES:\n  :DATE: %t\n  :URL: %c\n  :END:")
+                ("l" "Temp Links from the interwebs" entry
+                 (file+headline "links.org" "Links")
+                 "* TO-READ %c %^g\n Entered on: %U\n %?\n%i\n"
+                 :empy-lines 1)
+                ("w" "Weight Log" table-line (file+headline "weight.org" "Diario de Peso") " | %? | %t |")
+                ("c" "Clock In" table-line (file+headline "clokin.org" "Bitácora de Asistencia") " | %? | %T |")))))))
+
 
 (defun org-cestdiego/pre-init-org-agenda ()
   (spacemacs|use-package-add-hook org-agenda
     :post-config
     (progn
-
       (defadvice org-switch-to-buffer-other-window (after make-full-agenda-window-frame activate)
         "Advice this function inside the agenda to be the sole window when in a popup frame"
         (when (equal "emacs-agenda" (frame-parameter nil 'name))

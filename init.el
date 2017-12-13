@@ -41,7 +41,7 @@ values."
      ;;(blog :variables
      ;;     org-page-use-melpa-version nil
      ;;     org-page-built-directory "~/Documents/Projects/le_blog_built/")
-     ;; org-cestdiego
+     org-cestdiego
      presentations
      utils
      ;; (exwm :variables

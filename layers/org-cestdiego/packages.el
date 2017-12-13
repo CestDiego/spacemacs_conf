@@ -12,26 +12,13 @@
 
 (defvar org-cestdiego-packages
   '(
-    ;; package org-babels go here
-    org
-    ob-mongo
-    ob-coffee
-    ob-browser
-    org-gcal
-    org-jira
-    org-readme
-    ox-ioslide
-    ox-cv
-    mustache
-    ht
     ;; org-mac-link
     org-alert
     ;; (ob                        :location built-in)
     ;; (org-notify                :location built-in)
-    (org-protocol              :location built-in)
-    (org-capture               :location built-in)
-    (org-agenda                :location built-in)
-    (ox-koma-letter            :location local)
+    org-protocol
+    org-capture
+    org-agenda
     (org-protocol-github-lines :location local)
     )
   "List of all packages to install and/or initialize. Built-in packages
@@ -77,12 +64,6 @@ which require an initialization must be listed explicitly in the list.")
     ))
 
 
-(defun org-cestdiego/init-ob-coffee()
-  (use-package ob-coffee
-    :defer t
-    :init
-    (add-to-list 'org-babel-load-languages '(coffee . t))))
-
 ;; Apparently this fails with current version of org-mode. Double check later
 ;; (defun org-cestdiego/init-org-mac-link ()
 ;;   (use-package org-mac-link
@@ -106,9 +87,6 @@ which require an initialization must be listed explicitly in the list.")
           (notify-osx dl org-alert-notification-title)))
       (org-alert--restore-agenda-buffer))
     ))
-
-(defun org-cestdiego/init-ob-mongo()
-  (use-package ob-mongo))
 
 (defun org-cestdiego/init-org-protocol ()
   (use-package org-protocol))
@@ -299,40 +277,6 @@ which require an initialization must be listed explicitly in the list.")
 
     )
   )
-
-(defun org-cestdiego/init-ob-browser()
-  (use-package ob-browser
-    :init
-    (progn
-      ;; (add-to-list 'exec-path "/home/io/.installed/phantomjs/bin")
-      (setenv "PATH" (mapconcat 'identity exec-path ":")))))
-
-(defun org-cestdiego/init-org-gcal ()
-  (use-package org-gcal
-    :init
-    (setq org-gcal-client-id "245586477436-efhjaq0vfr8i07t4inqkmi417hvd3gak.apps.googleusercontent.com"
-          org-gcal-client-secret "QmOmh-flucrRo1a_mtNQaQb-"
-          org-gcal-file-alist '(("cestdiego@gmail.com" .  "personal.org")
-                                ("ao267thudhi3o29famivcckt9c@group.calendar.google.com" .  "ayers.org")))
-    (spacemacs/set-leader-keys
-      "ogf" 'org-gcal-fetch
-      "ogp" 'org-gcal-post-at-point
-      "ogr" 'org-gcal-refresh-token)
-    ))
-
-(defun org-cestdiego/init-org-readme ()
-  (use-package org-readme
-    :defer t
-    :config
-    (spacemacs/set-leader-keys
-      "mr" 'org-readme-sync)
-    ))
-
-
-(defun org-cestdiego/init-ox-ioslide ()
-  (use-package ox-ioslide
-    :config
-    (require 'ox-ioslide-helper)))
 
 (defun org-cestdiego/init-org-protocol-github-lines ()
   (use-package org-protocol-github-lines

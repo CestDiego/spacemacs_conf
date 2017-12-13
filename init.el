@@ -808,10 +808,13 @@ uses the prettify-list default."
   (add-hook 'focus-in-hook 'cestdiego/cursor-pos)
   (global-set-key (kbd "H-?") 'hidden-mode-line-mode)
 
+  ;; Appearance
+  (spacemacs/enable-transparency)
+
   (global-vi-tilde-fringe-mode -1)
+
   (spacemacs/toggle-mode-line-minor-modes-off)
   (spacemacs/toggle-highlight-current-line-globally-off)
-  (spacemacs/toggle-transparency)
 
   (auto-dim-other-buffers-mode)
   (setq magit-push-always-verify nil)

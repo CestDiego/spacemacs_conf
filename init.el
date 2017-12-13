@@ -123,7 +123,6 @@ values."
                                       yarn-mode
                                       atomic-chrome
                                       suggest
-                                      helm-hunks
                                       company-flx
                                       kite-mini
                                       encourage-mode
@@ -592,8 +591,6 @@ uses the prettify-list default."
   (setq nvm-dir "/usr/local/opt/nvm")
   (nvm-use "8.9.1")
 
-  (use-package helm-hunks
-    :commands helm-hunks)
 
   ;; Taken from http://endlessparentheses.com/create-github-prs-from-emacs-with-magit.html
   (defun cestdiego/visit-pull-request-url ()

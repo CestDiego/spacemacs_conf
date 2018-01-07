@@ -12,6 +12,7 @@
 
 (defvar org-cestdiego-packages
   '(
+    org
     ;; org-mac-link
     org-alert
     ;; (ob                        :location built-in)
@@ -21,10 +22,13 @@
     (org-agenda :location built-in)
     (org-protocol-github-lines :location local)
     org-projectile
-    (org-git-link :location built-in)
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
+
+(defun org-cestdiego/post-init-org ()
+  ;; We assume the org installation includes `org-plus-contrib`
+  (require 'org-git-link))
 
 (defun org-cestdiego/init-org-notify()
   (use-package org-notify
@@ -292,13 +296,5 @@ which require an initialization must be listed explicitly in the list.")
           '(("syl20bnr/spacemacs" . "~/.emacs.d")))
     ))
 
-(defun org-cestdiego/init-org-projectile ()
-  (spacemacs|use-package-add-hook org-projectile
-    :post-config
-    (setq org-projectile-capture-template "* TODO %?\n  %i\n  %a")
-    ))
-
-(defun org-cestdiego/init-org-git-link ()
-  (spacemacs|use-package-add-hook org
-    :post-config
-    (use-package org-git-link)))
+(defun org-cestdiego/post-init-org-projectile ()
+  (setq org-projectile-capture-template "* TODO %?\n  %i\n  %a"))

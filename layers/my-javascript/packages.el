@@ -31,7 +31,6 @@
 
 (defconst my-javascript-packages
   '(
-    ;; indium
     nodejs-repl
     )
   "The list of Lisp packages required by the my-javascript layer.
@@ -67,21 +66,6 @@ Each entry is either:
   (interactive)
   (split-window-below)
   (indium-run-node "node"))
-
-(defun my-javascript/init-indium ()
-  (use-package indium
-    :defer t
-    :init
-    indium
-    (progn
-      (spacemacs/register-repl 'indium-repl-mode
-                               'spacemacs/indium-repl-start "Indium NODE REPL")
-      (add-hook 'js2-mode-hook 'indium-interaction-mode)
-      )
-    :config
-    (progn
-
-      ;; Funcs
 
 (defun spacemacs/indium-repl-eval-buffer-and-focus ()
   "Execute whole buffer in browser and switch to REPL in insert state."

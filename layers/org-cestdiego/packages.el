@@ -16,10 +16,12 @@
     org-alert
     ;; (ob                        :location built-in)
     ;; (org-notify                :location built-in)
-    org-protocol
-    org-capture
-    org-agenda
+    (org-protocol :location built-in)
+    (org-capture :location built-in)
+    (org-agenda :location built-in)
     (org-protocol-github-lines :location local)
+    org-projectile
+    (org-git-link :location built-in)
     )
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
@@ -290,25 +292,13 @@ which require an initialization must be listed explicitly in the list.")
           '(("syl20bnr/spacemacs" . "~/.emacs.d")))
     ))
 
-(defun org-cestdiego/init-ox-koma-letter ()
-  "Initialize ox-koma-letter"
-  (use-package ox-koma-letter
-    :init
-    (add-to-list 'org-latex-classes
-                 '("my-letter"
-                   "\\documentclass\[%
-      DIV=14,
-      fontsize=12pt,
-      parskip=half,
-      subject=titled,
-      backaddress=false,
-      fromalign=left,
-      fromemail=true,
-      fromphone=true\]\{scrlttr2\}
-      \[DEFAULT-PACKAGES]
-      \[PACKAGES]
-      \[EXTRA]"))
-    (setq org-koma-letter-default-class "my-letter")
-    (add-to-list 'org-latex-packages-alist '("AUTO" "babel" t) t)
-    )
-  )
+(defun org-cestdiego/init-org-projectile ()
+  (spacemacs|use-package-add-hook org-projectile
+    :post-config
+    (setq org-projectile-capture-template "* TODO %?\n  %i\n  %a")
+    ))
+
+(defun org-cestdiego/init-org-git-link ()
+  (spacemacs|use-package-add-hook org
+    :post-config
+    (use-package org-git-link)))

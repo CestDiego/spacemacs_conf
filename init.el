@@ -63,6 +63,7 @@ values."
      version-control
      (git :variables
           git-magit-status-fullscreen t)
+     github
      ;; Other stuff
      prodigy
      (colors :variables
@@ -76,6 +77,7 @@ values."
           erc-enable-sasl-auth t)
      ;; Org
      (org :variables
+          org-enable-reveal-js-support t
           org-mapping-style 'worf)
      pandoc
      ;; Miscellaneous

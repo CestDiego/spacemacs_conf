@@ -125,6 +125,7 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
+                                      visual-fill-column
                                       darkroom
                                       yarn-mode
                                       atomic-chrome
@@ -836,6 +837,7 @@ uses the prettify-list default."
    '(emacs-lisp-mode-hook))
 
   ;;; SANE DEFAULTS!!
+  (add-hook 'visual-line-mode-hook 'visual-fill-column-mode)
   (evil-define-key 'normal markdown-mode-map
     "j" 'evil-next-visual-line
     "k" 'evil-previous-visual-line)

@@ -635,8 +635,6 @@ uses the prettify-list default."
   (setq user-full-name    "Diego Berrocal"
         user-mail-address "cestdiego@gmail.com")
 
-  (add-hook 'text-mode-hook 'auto-fill-mode)
-
   (setq ispell-program-name "/usr/local/bin/aspell")
 
   (defun spacemacs/user-full-name ()

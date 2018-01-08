@@ -829,10 +829,9 @@ uses the prettify-list default."
   (spacemacs/add-to-hooks
    (lambda ()
      (cestiego/pretty-symbols
-      '(("add-hook" . ?)
+      '(("add-hook" . ?⚓)
         ("defun" . ?ƒ)
-        ("?" . ?)
-        ("=>" .  ?)
+        ("=>" .  ?⤇)
         )))
    '(emacs-lisp-mode-hook))
 

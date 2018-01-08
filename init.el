@@ -30,7 +30,8 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   `(typescript
+   `(yaml
+     typescript
      ruby
      ;;;;;;;;;;;;;;; MY Own layers ;;;;;;;;;;;;;;;
      ;; no-dots
@@ -601,8 +602,8 @@ uses the prettify-list default."
 
   ;; TODO there is lots to do for recognizing each file with it's proper nvm version
   (require 'nvm)
-  (setq nvm-dir "/usr/local/opt/nvm")
-  (nvm-use "8.9.1")
+  (setq nvm-dir "~/.nvm")
+  (nvm-use "8.9.4")
 
 
   ;; Taken from http://endlessparentheses.com/create-github-prs-from-emacs-with-magit.html

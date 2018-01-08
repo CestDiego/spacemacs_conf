@@ -838,6 +838,7 @@ uses the prettify-list default."
 
   ;;; SANE DEFAULTS!!
   (add-hook 'visual-line-mode-hook 'visual-fill-column-mode)
+  (add-hook 'text-mode #'spacemacs/toggle-visual-line-navigation-on)
   (evil-define-key 'normal markdown-mode-map
     "j" 'evil-next-visual-line
     "k" 'evil-previous-visual-line)

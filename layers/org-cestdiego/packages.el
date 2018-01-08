@@ -28,12 +28,7 @@ which require an initialization must be listed explicitly in the list.")
 
 ;; We use org-plus-contrib instead of org D:
 (defun org-cestdiego/post-init-org-plus-contrib ()
-  (require 'org-git-link)
-  (evil-define-key 'normal org-mode-map (kbd "j") 'evil-next-visual-line)
-  (evil-define-key 'normal org-mode-map (kbd "k") 'evil-previous-visual-line)
-  (evil-define-key 'visual org-mode-map (kbd "j") 'evil-next-visual-line)
-  (evil-define-key 'visual org-mode-map (kbd "k") 'evil-previous-visual-line)
-  )
+  (require 'org-git-link))
 
 (defun org-cestdiego/init-org-notify()
   (use-package org-notify

@@ -632,7 +632,7 @@ uses the prettify-list default."
             ("L<U"      3 magit-repolist-column-unpulled-from-upstream ((:right-align t)))
             ("L>U"      3 magit-repolist-column-unpushed-to-upstream   ((:right-align t)))
             ("Path"    99 magit-repolist-column-path                   ())))
-    (setq magit-repository-directories '("~/Documents/Projects" "~/Documents/eBay" ("~/dotfiles" . 0) ("~/.spacemacs.d" . 0)))
+    (setq magit-repository-directories '(("~/Documents" . 2) ("~/dotfiles" . 0) ("~/.spacemacs.d" . 0)))
     )
 
   (require 'suggest)

@@ -621,9 +621,19 @@ uses the prettify-list default."
              ;; TODO Implement a helm backend to list agains which branch to make the PR
              (cdr (or (magit-remote-branch-at-point)
                       (user-error "No remote branch"))))))
-  (eval-after-load 'magit
-    '(define-key magit-mode-map "."
-       #'cestdiego/visit-pull-request-url))
+
+  (with-eval-after-load 'magit
+    (define-key magit-mode-map "."
+      #'cestdiego/visit-pull-request-url)
+    (setq magit-repolist-columns
+          '(("Name"    25 magit-repolist-column-ident                  ())
+            ("Version" 25 magit-repolist-column-version                ())
+            ("D"        1 magit-repolist-column-dirty                  ())
+            ("L<U"      3 magit-repolist-column-unpulled-from-upstream ((:right-align t)))
+            ("L>U"      3 magit-repolist-column-unpushed-to-upstream   ((:right-align t)))
+            ("Path"    99 magit-repolist-column-path                   ())))
+    (setq magit-repository-directories '("~/Documents/Projects" "~/Documents/eBay" ("~/dotfiles" . 0) ("~/.spacemacs.d" . 0)))
+    )
 
   (require 'suggest)
   (spacemacs/set-leader-keys "aa" 'suggest)

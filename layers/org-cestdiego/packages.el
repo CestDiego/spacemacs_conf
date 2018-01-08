@@ -12,7 +12,7 @@
 
 (defvar org-cestdiego-packages
   '(
-    org
+    org-plus-contrib
     ;; org-mac-link
     org-alert
     ;; (ob                        :location built-in)
@@ -26,8 +26,8 @@
   "List of all packages to install and/or initialize. Built-in packages
 which require an initialization must be listed explicitly in the list.")
 
-(defun org-cestdiego/post-init-org ()
-  ;; We assume the org installation includes `org-plus-contrib`
+;; We use org-plus-contrib instead of org D:
+(defun org-cestdiego/post-init-org-plus-contrib ()
   (require 'org-git-link))
 
 (defun org-cestdiego/init-org-notify()

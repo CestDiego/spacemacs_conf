@@ -1174,6 +1174,16 @@ uses the prettify-list default."
                   web-mode-code-indent-offset     2
                   web-mode-attr-indent-offset     2)
 
+    (with-eval-after-load 'nameless
+      (progn
+        (set-face-attribute 'nameless-face nil :family "Operator SSm" :box nil :height 1.2)
+        (setq nameless-prefix "⧽")
+        (setq nameless-global-aliases '(("SB" . "spacemacs-buffer")
+                                        ("🅢"  . "spacemacs")
+                                        ("⨀"  . "dotspacemacs")
+                                        ("🛠" . "configuration-layer")))
+        ))
+
     (with-eval-after-load 'web-mode
       ;; Font in gdrive
       (set-face-attribute 'web-mode-html-attr-name-face nil :family "Operator SSm" :slant 'italic)

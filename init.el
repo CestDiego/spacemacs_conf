@@ -140,6 +140,7 @@ values."
                                       w3m
                                       mocha-snippets
                                       systemd
+                                      lsp-mode
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -1197,6 +1198,18 @@ uses the prettify-list default."
                                         ("🛠" . "configuration-layer")))
         ))
 
+
+    (define-derived-mode marko-mode web-mode "marko")
+    (add-to-list 'auto-mode-alist '("\\.marko\\'" . marko-mode))
+
+    (require 'lsp-mode)
+    (defconst lsp-marko--get-root (lsp-make-traverser #'(lambda (dir)
+                                                        (directory-files dir nil "package.json"))))
+
+    (lsp-define-stdio-client lsp-marko "marko"
+                             lsp-marko--get-root '("marko-language-server"))
+    (add-hook 'marko-mode #'lsp-marko-enable)
+
     (with-eval-after-load 'web-mode
       ;; Font in gdrive
       (set-face-attribute 'web-mode-html-attr-name-face nil :family "Operator SSm" :slant 'italic)
@@ -1213,7 +1226,6 @@ uses the prettify-list default."
         (shell-command-on-region (mark) (point)
                                  "python -m json.tool" (buffer-name) t)))
     (add-to-list 'auto-mode-alist '("\\.tern-config\\'" . json-mode))
-    (add-to-list 'auto-mode-alist '("\\.marko\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.tern-project\\'" . json-mode))
     (add-to-list 'auto-mode-alist '("dmenuExtended_preferences.txt\\'" . json-mode)))
 

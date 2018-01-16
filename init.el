@@ -1182,8 +1182,7 @@ uses the prettify-list default."
       (cestiego/pretty-symbols
        '(("function" . ?ƒ)
          ("React"    . ?)
-         ("?"        . ?)
-         ("=>"       . ?)
+         ("=>"       . ?⤇)
          ("->"       . ?)
          ("@"        . ?)
          ("() =>"    . ?λ)

@@ -1,7 +1,6 @@
 (defvar appearance-packages
   '(
     auto-dim-other-buffers
-    hexrgb
     (nerd-fonts :location local)
     zone-nyan
     exwm
@@ -71,25 +70,26 @@
     (spacemacs/set-leader-keys
       "hN" 'helm-nerd-fonts)))
 
-(defun set-auto-dim-other-face-to-dimmed-default ()
-  (setq dim-other-buffers-face-color (hexrgb-increment-value
-                                      (face-background 'default) -0.03))
-  (custom-set-faces
-   `(auto-dim-other-buffers-face ((t :background ,dim-other-buffers-face-color)))))
-
 (defun appearance/init-auto-dim-other-buffers ()
   (use-package auto-dim-other-buffers
-    :if nil
-    :ensure hexrgb
     :init
-    (require ' hexrgb)
-    (advice-add #'load-theme :after #'set-auto-dim-other-face-to-dimmed-default)
-    :config
+    ;; Getting config from: https://github.com/mina86/auto-dim-other-buffers.el/issues/9#issuecomment-241503056
+    (defun cestdiego/reset-auto-dim-face (&rest args)
+      "Adjust `auto-dim-other-buffers-face' to the current background color.
+ARGs is unused and are only for when this function is used as advice."
+      (interactive)
+      (let* ((percent-to-darken 3.5)
+             (current-background-color (face-background 'default))
+             (new-auto-dim-background-color
+              (color-darken-name current-background-color percent-to-darken)))
+        (set-face-background 'auto-dim-other-buffers-face
+                             new-auto-dim-background-color)))
     (add-hook 'after-init-hook (lambda ()
-                          (when (fboundp 'auto-dim-other-buffers-mode)
-                            (auto-dim-other-buffers-mode t))))))
-
-(defun appearance/init-hexrgb ()
-  (use-package hexrgb
-    :config
-    (set-auto-dim-other-face-to-dimmed-default)))
+                           (when (fboundp 'auto-dim-other-buffers-mode)
+                             (auto-dim-other-buffers-mode t)
+                             (cestdiego/reset-auto-dim-face)
+                             )))
+    (add-hook 'spacemacs-post-theme-change-hook #'cestdiego/reset-auto-dim-face)
+    (advice-add 'load-theme :after 'cestdiego/reset-auto-dim-face)
+    )
+  )

@@ -487,6 +487,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   (add-hook 'focus-in-hook 'cestdiego/cursor-pos)
 
+  (setq window-divider-default-bottom-width 1
+        window-divider-default-places t)
+
+  (set-face-attribute 'window-divider nil :foreground "white")
+  (window-divider-mode 1)
   (global-set-key (kbd "H-?") 'hidden-mode-line-mode)
 
   ;; Undecorated frame in OSX (doesn't work https://github.com/koekeishiya/chunkwm/issues/265)

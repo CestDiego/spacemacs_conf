@@ -848,8 +848,28 @@ uses the prettify-list default."
    '(emacs-lisp-mode-hook))
 
   ;;; SANE DEFAULTS!!
-  (add-hook 'visual-line-mode-hook 'visual-fill-column-mode)
+  (spacemacs|add-toggle visual-line-navigation
+    :status visual-line-mode
+    :on
+    (progn
+      (visual-line-mode)
+      (visual-fill-column-mode)
+      (evil-define-minor-mode-key 'motion 'visual-line-mode "j" 'evil-next-visual-line)
+      (evil-define-minor-mode-key 'motion 'visual-line-mode "k" 'evil-previous-visual-line)
+      (when (bound-and-true-p evil-escape-mode)
+        (evil-escape-mode -1)
+        (setq evil-escape-motion-state-shadowed-func nil)
+        (evil-define-minor-mode-key 'motion 'visual-line-mode "j" 'evil-next-visual-line)
+        (evil-define-minor-mode-key 'motion 'visual-line-mode "k" 'evil-previous-visual-line)
+        (evil-escape-mode))
+      (evil-normalize-keymaps))
+    :off
+    (progn
+      (visual-line-mode -1)
+      (visual-fill-column-mode -1)
+      (evil-normalize-keymaps)))
   (add-hook 'text-mode #'spacemacs/toggle-visual-line-navigation-on)
+
   (evil-define-key 'normal markdown-mode-map
     "j" 'evil-next-visual-line
     "k" 'evil-previous-visual-line)

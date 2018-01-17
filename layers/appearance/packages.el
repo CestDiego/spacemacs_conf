@@ -74,7 +74,7 @@
   "Adjust `auto-dim-other-buffers-face' to the current background color.
 ARGs is unused and are only for when this function is used as advice."
   (interactive)
-  (let* ((percent-to-darken 4)
+  (let* ((percent-to-darken 6)
          (current-background-color (face-background 'default))
          (new-vertical-border-color
           (color-darken-name current-background-color percent-to-darken)))

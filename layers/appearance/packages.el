@@ -70,26 +70,51 @@
     (spacemacs/set-leader-keys
       "hN" 'helm-nerd-fonts)))
 
+(defun cestdiego/reset-vertical-border-face (&rest args)
+  "Adjust `auto-dim-other-buffers-face' to the current background color.
+ARGs is unused and are only for when this function is used as advice."
+  (interactive)
+  (let* ((percent-to-darken 4)
+         (current-background-color (face-background 'default))
+         (new-vertical-border-color
+          (color-darken-name current-background-color percent-to-darken)))
+    (set-face-attribute 'vertical-border nil
+                        :foreground new-vertical-border-color
+                        :background new-vertical-border-color)))
+
+(defun cestdiego/reset-auto-dim-face (&rest args)
+  "Adjust `auto-dim-other-buffers-face' to the current background color.
+ARGs is unused and are only for when this function is used as advice."
+  (interactive)
+  (let* ((percent-to-darken 3.5)
+         (current-background-color (face-background 'default))
+         (new-auto-dim-background-color
+          (color-darken-name current-background-color percent-to-darken)))
+    (set-face-background 'auto-dim-other-buffers-face
+                         new-auto-dim-background-color)
+    (set-face-background 'fringe
+                         new-auto-dim-background-color)
+    (set-face-background 'minibuffer-prompt
+                         (face-background 'default))
+    ;; the leading space character is correct
+    (with-current-buffer (get-buffer " *Echo Area 0*")
+      (make-local-variable 'face-remapping-alist)
+      (add-to-list 'face-remapping-alist `(default (:background ,new-auto-dim-background-color))))
+    ))
+
 (defun appearance/init-auto-dim-other-buffers ()
   (use-package auto-dim-other-buffers
     :init
+    ;; Better setting to know what window is currently selected
+    (setq-default cursor-in-non-selected-windows nil)
     ;; Getting config from: https://github.com/mina86/auto-dim-other-buffers.el/issues/9#issuecomment-241503056
-    (defun cestdiego/reset-auto-dim-face (&rest args)
-      "Adjust `auto-dim-other-buffers-face' to the current background color.
-ARGs is unused and are only for when this function is used as advice."
-      (interactive)
-      (let* ((percent-to-darken 3.5)
-             (current-background-color (face-background 'default))
-             (new-auto-dim-background-color
-              (color-darken-name current-background-color percent-to-darken)))
-        (set-face-background 'auto-dim-other-buffers-face
-                             new-auto-dim-background-color)))
     (add-hook 'after-init-hook (lambda ()
                            (when (fboundp 'auto-dim-other-buffers-mode)
                              (auto-dim-other-buffers-mode t)
                              (cestdiego/reset-auto-dim-face)
+                             (cestdiego/reset-vertical-border-face)
                              )))
     (add-hook 'spacemacs-post-theme-change-hook #'cestdiego/reset-auto-dim-face)
-    (advice-add 'load-theme :after 'cestdiego/reset-auto-dim-face)
+    (add-hook 'spacemacs-post-theme-change-hook #'cestdiego/reset-vertical-border-face)
     )
   )

@@ -135,12 +135,15 @@ which require an initialization must be listed explicitly in the list.")
           (if (equal "emacs-capture" (frame-parameter nil 'name))
               (delete-frame)))
 
+        (setq org-directory "~/Google Drive/Org-Notes")
+        (setq work-org-dir (expand-file-name "work/work.org" org-directory))
+        (setq work-current-sprint "44")
         ;;; Capture Templates
         ;;;; Add idea, mind-onanism, contacts, movies to download das
         (setq org-capture-templates
-              '(("t" "Todo" entry
-                 (file+headline "main.org" "Tasks")
-                 "* TODO %? %^g \n %i\n")
+              `(("t" "Todo" entry
+                 (file+olp ,work-org-dir ,(concat "Sprint " work-current-sprint) "Tasks")
+                 "* TODO %? %^g \n %i\n %a\n")
                 ("i" "For jotting quick ideas" entry
                  (file+headline "gtd.org" "Ideas")
                  "* %?\n %i\n%t\n%A")
@@ -159,8 +162,12 @@ which require an initialization must be listed explicitly in the list.")
                  (file+headline "links.org" "Links")
                  "* TO-READ %c %^g\n Entered on: %U\n %?\n%i\n"
                  :empy-lines 1)
-                ("w" "Weight Log" table-line (file+headline "weight.org" "Diario de Peso") " | %? | %t |")
-                ("c" "Clock In" table-line (file+headline "clokin.org" "Bitácora de Asistencia") " | %? | %T |")))))))
+                ("c" "Clock In" table-line (file+headline "clokin.org" "Bitácora de Asistencia") " | %? | %T |"))
+          )
+        )
+      )
+    )
+  )
 
 
 (defun org-cestdiego/pre-init-org-agenda ()
@@ -191,9 +198,10 @@ which require an initialization must be listed explicitly in the list.")
 
                       ;; Sprint stuff
                       ("S" . "Current Sprint Agenda")
-                      ("Ss" tags "+current+sprint")
-                      ("St" tags-todo "+current+sprint"))
-                    org-agenda-custom-commands)))))
+                      ("Ss" tags "+current+sprint+notes")
+                      ("St" tags-todo "+current+sprint+tasks"))
+                    org-agenda-custom-commands))
+      )))
 
 
 (defun org-cestdiego/pre-init-org()

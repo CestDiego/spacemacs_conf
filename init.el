@@ -774,6 +774,10 @@ uses the prettify-list default."
   (setq ispell-extra-args '("--sug-mode=ultra" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
 
   (setq helm-echo-input-in-header-line t)
+  ;; ;; Unfortunately this doesn't work well with chunkwm
+  ;; (setq helm-display-function 'helm-display-buffer-in-own-frame
+  ;;       helm-display-buffer-reuse-frame t
+  ;;       helm-use-undecorated-frame-option t)
 
   (defun cestdiego/org-setup-pretty-symbols ()
     (cestiego/pretty-symbols

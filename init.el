@@ -133,7 +133,6 @@ values."
    dotspacemacs-additional-packages '(
                                       visual-fill-column
                                       darkroom
-                                      yarn-mode
                                       atomic-chrome
                                       suggest
                                       company-flx

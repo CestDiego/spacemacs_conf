@@ -540,7 +540,35 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
 
   ;; https://emacs-doctor.com/emacs-hide-mode-line.html
-  (require 'hidden-mode-line-mode)
+
+  (defvar-local hidden-mode-line-mode nil)
+
+  (define-minor-mode hidden-mode-line-mode
+    "Minor mode to hide the mode-line in the current buffer."
+    :init-value nil
+    :global t
+    :variable hidden-mode-line-mode
+    :group 'editing-basics
+    (if hidden-mode-line-mode
+        (setq hide-mode-line mode-line-format
+              mode-line-format nil)
+      (setq mode-line-format hide-mode-line
+            hide-mode-line nil))
+    (force-mode-line-update)
+    ;; Apparently force-mode-line-update is not always enough to
+    ;; redisplay the mode-line
+    (redraw-display)
+    (when (and (called-interactively-p 'interactive)
+               hidden-mode-line-mode)
+      (run-with-idle-timer
+       0 nil 'message
+       (concat "Hidden Mode Line Mode enabled.  "
+               "Use M-x hidden-mode-line-mode to make the mode-line appear."))))
+
+  ;; If you want to hide the mode-line in every buffer by default
+  (add-hook 'after-change-major-mode-hook 'hidden-mode-line-mode)
+
+  (global-set-key (kbd "H-?") 'hidden-mode-line-mode)
 
   (setq window-divider-default-bottom-width 10
         window-divider-default-right-width 10
@@ -662,7 +690,11 @@ uses the prettify-list default."
 
   ;; Archive
   ;; (handoff-global-mode nil)
-  ;; (keyboard-translate ?\C-h ?\C-?)
+
+  (global-set-key (kbd "C-?") 'help-command)
+  (global-set-key (kbd "M-?") 'mark-paragraph)
+  (global-set-key (kbd "C-h") 'delete-backward-char)
+  (global-set-key (kbd "M-h") 'backward-kill-word)
 
   (setq tab-always-indent t)
 
@@ -1269,7 +1301,6 @@ uses the prettify-list default."
   ;; Figure out how to set the pyenv environment depending on the project one is at
   (pyenv-mode-set "2.7.8")
 
-
   (setq ns-auto-hide-menu-bar t)
   )
 
@@ -1285,7 +1316,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (lsp-javascript-typescript zone-nyan zenburn-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum which-key web-mode web-beautify w3m volatile-highlights vmd-mode visual-fill-column vi-tilde-fringe uuidgen use-package toc-org tide tagedit systemd syntactic-close symon string-inflection spaceline-all-the-icons smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocop rspec-mode robe rjsx-mode reveal-in-osx-finder restart-emacs rbenv rake rainbow-mode rainbow-identifiers rainbow-delimiters pyvenv python-environment pytest pyenv-mode py-isort pug-mode prodigy popwin pippel pipenv pip-requirements persp-mode pbcopy password-generator paradox pandoc-mode ox-reveal ox-pandoc overseer osx-trash osx-dictionary orgit org-tree-slide org-projectile org-present org-pomodoro org-mime org-download org-bullets org-brain org-alert open-junk-file nvm neotree nameless multi-term move-text monokai-theme mocha-snippets mmm-mode minitest material-theme markdown-toc magithub magit-svn magit-gitflow magit-gh-pulls macrostep lsp-ui lsp-python lorem-ipsum livid-mode live-py-mode linum-relative link-hint lice less-css-mode launchctl kite-mini keyfreq key-chord json-navigator json-mode js2-refactor js-doc indent-guide importmagic impatient-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-dash helm-css-scss helm-company helm-c-yasnippet helm-ag handoff grunt google-translate google-c-style golden-ratio gnuplot gmail-message-mode github-search github-clone gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gist gh-md fuzzy fontawesome font-lock+ focus flyspell-correct-helm flymd flycheck-rtags flycheck-pos-tip flycheck-package flx-ido firestarter fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help erc-yt erc-view-log erc-terminal-notifier erc-social-graph erc-image erc-hl-nicks encourage-mode emojify emoji-cheat-sheet-plus emmet-mode elisp-slime-nav editorconfig edit-server dumb-jump disaster diminish diff-hl dash-at-point darkroom cython-mode counsel-projectile company-web company-tern company-statistics company-rtags company-quickhelp company-lua company-lsp company-flx company-emoji company-c-headers company-auctex company-anaconda column-enforce-mode color-identifiers-mode clean-aindent-mode clang-format chruby centered-cursor-mode bundler browse-at-remote auto-yasnippet auto-highlight-symbol auto-dim-other-buffers auto-dictionary auto-compile aggressive-indent ace-window ace-link ace-jump-helm-line ac-ispell))))
+    (zone-nyan esxml zenburn-theme yasnippet-snippets yapfify yaml-mode xterm-color web-mode web-beautify w3m vmd-mode visual-fill-column tide tagedit systemd syntactic-close smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocop rspec-mode robe rjsx-mode reveal-in-osx-finder rbenv rake rainbow-mode rainbow-identifiers pyvenv python-environment pytest pyenv-mode py-isort pug-mode prodigy pippel pipenv pip-requirements pbcopy pandoc-mode ox-reveal ox-pandoc osx-trash osx-dictionary orgit org-tree-slide org-projectile org-category-capture org-present org-pomodoro org-mime org-download org-brain org-alert alert log4e gntp nvm multi-term monokai-theme mocha-snippets mmm-mode minitest material-theme markdown-toc magithub ghub+ apiwrap magit-svn magit-gitflow magit-gh-pulls lsp-ui lsp-python lsp-javascript-typescript typescript-mode livid-mode skewer-mode live-py-mode lice less-css-mode launchctl kite-mini websocket keyfreq key-chord json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc importmagic epc ctable concurrent deferred impatient-mode simple-httpd htmlize helm-rtags helm-pydoc helm-gitignore helm-dash helm-css-scss helm-company helm-c-yasnippet handoff haml-mode grunt google-c-style gnuplot gmail-message-mode ham-mode markdown-mode html-to-markdown gitignore-mode github-search github-clone gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gist gh marshal logito pcache gh-md fuzzy fontawesome focus flyspell-correct-helm flyspell-correct flymd flycheck-rtags flycheck-pos-tip flycheck-package package-lint flycheck firestarter evil-org evil-magit magit magit-popup git-commit ghub with-editor eshell-z eshell-prompt-extras esh-help erc-yt erc-view-log erc-terminal-notifier erc-social-graph erc-image erc-hl-nicks encourage-mode emojify ht emoji-cheat-sheet-plus emmet-mode edit-server disaster diff-hl dash-at-point darkroom cython-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-rtags rtags company-quickhelp pos-tip company-lua lua-mode company-lsp lsp-mode company-flx company-emoji company-c-headers company-auctex company-anaconda company color-identifiers-mode clang-format chruby bundler inf-ruby browse-at-remote auto-yasnippet yasnippet auto-dim-other-buffers auto-dictionary auctex anaconda-mode pythonic ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org symon string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin persp-mode pcre2el password-generator paradox overseer org-plus-contrib org-bullets open-junk-file neotree nameless move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump diminish define-word counsel-projectile column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-window ace-link ace-jump-helm-line))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

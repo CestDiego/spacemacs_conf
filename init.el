@@ -1264,67 +1264,54 @@ uses the prettify-list default."
     (spacemacs/add-to-hooks
      #'cestdiego/js-setup-pretty-symbols
      '(js2-mode-hook react-mode coffee-mode-hook web-mode-hook))
-
-    ;; Fix Identation in JS
-    (setq-default javascript-indent-lever         2
-                  js-indent-level                 2
-                  js-switch-indent-offset         2
-                  js2-basic-offset                2
-                  js2-indent-switch-body          2
-                  js2-strict-missing-semi-warning nil
-                  ;; coffeescript
-                  coffee-tab-width                2
-                  ;; web-mode
-                  css-indent-offset               2
-                  web-mode-markup-indent-offset   2
-                  web-mode-css-indent-offset      2
-                  web-mode-code-indent-offset     2
-                  web-mode-attr-indent-offset     2)
-
-    (with-eval-after-load 'nameless
-      (progn
-        (set-face-attribute 'nameless-face nil :family "Operator SSm" :box nil :height 1.2)
-        (setq nameless-prefix "⧽")
-        (setq nameless-global-aliases '(("SB" . "spacemacs-buffer")
-                                        ("🅢"  . "spacemacs")
-                                        ("⨀"  . "dotspacemacs")
-                                        ("🛠" . "configuration-layer")))
-        ))
-
-
-    (define-derived-mode marko-mode web-mode "marko")
-    (add-to-list 'auto-mode-alist '("\\.marko\\'" . marko-mode))
-
-    (require 'lsp-mode)
-    (defconst lsp-marko--get-root (lsp-make-traverser #'(lambda (dir)
-                                                        (directory-files dir nil "package.json"))))
-
-    (lsp-define-stdio-client lsp-marko "marko"
-                             lsp-marko--get-root '("marko-language-server"))
-    (add-hook 'marko-mode #'lsp-marko-enable)
-
-    (with-eval-after-load 'web-mode
-      ;; Font in gdrive
-      (set-face-attribute 'web-mode-html-attr-name-face nil :family "Operator SSm" :slant 'italic)
-
-      (add-hook 'react-mode-hook (lambda () (setq-local emmet-expand-jsx-className? t)))
-      (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
-      (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
-      (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
-      (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
-
-    (defun json-format ()
-      (interactive)
-      (save-excursion
-        (shell-command-on-region (mark) (point)
-                                 "python -m json.tool" (buffer-name) t)))
-    (add-to-list 'auto-mode-alist '("\\.tern-config\\'" . json-mode))
-    (add-to-list 'auto-mode-alist '("\\.tern-project\\'" . json-mode))
-    (add-to-list 'auto-mode-alist '("dmenuExtended_preferences.txt\\'" . json-mode)))
+    )
 
   (when (configuration-layer/layer-usedp 'html)
+    (require 'web-mode)
+    ;; Font in gdrive
+    (set-face-attribute 'web-mode-html-attr-name-face nil :family "Operator SSm" :slant 'italic)
+
+    (add-hook 'react-mode-hook (lambda () (setq-local emmet-expand-jsx-className? t)))
+    (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)
+    (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
+
     (add-hook 'html-mode-hook 'web-mode)
-    (add-to-list 'auto-mode-alist '("\\.touchegg.conf\\'" . web-mode)))
+    (add-to-list 'auto-mode-alist '("\\.touchegg.conf\\'" . web-mode))
+
+
+    (when (configuration-layer/layer-usedp 'lsp)
+      (setq lsp-ui-sideline-delay 1)
+      (require 'lsp-mode)
+      (define-derived-mode marko-mode web-mode "marko")
+
+      (add-to-list 'auto-mode-alist '("\\.marko\\'" . marko-mode))
+
+      (defun spacemacs//set-lsp-key-bindings (mode)
+        "Set the key bindings for lsp in the given MODE."
+        (add-to-list (intern (format "spacemacs-jump-handlers-%S" mode))
+                     '(lsp-ui-peek-find-definitions)))
+
+      (defconst lsp-marko--root-dir
+        (lsp-make-traverser #'(lambda (dir)
+                                (directory-files
+                                 dir
+                                 nil
+                                 "package.json"))))
+
+      (lsp-define-stdio-client lsp-marko "marko"
+                               lsp-marko--root-dir '("marko-language-server"))
+
+      (spacemacs|define-jump-handlers marko-mode)
+      ;; (spacemacs//set-lsp-key-bindings 'marko-mode)
+      (spacemacs/lsp-bind-keys-for-mode 'marko-mode)
+
+      (add-hook 'marko-mode-hook '(lambda () (interactive)
+                                    (setq-local spacemacs-jump-handlers '((lsp-ui-peek-find-definitions)))
+                                    (lsp-marko-enable)))
+      )
+    )
 
   (when (configuration-layer/layer-usedp 'blog)
     (setq op/personal-github-link "https://github.com/CestDiego/")

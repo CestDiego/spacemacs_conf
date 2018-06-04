@@ -1236,9 +1236,6 @@ uses the prettify-list default."
                                         "\\[Github\\].* labeled an issue in"
                                         "\\[Github\\].* unlabeled an issue in")))
 
-  ;; This will allow the shebang #!/bin/node :)
-  (setq js2-skip-preprocessor-directives t)
-
   (when (configuration-layer/layer-usedp 'react)
     (defun spacemacs/toggle-web-js2-mode ()
       (interactive)
@@ -1253,24 +1250,8 @@ uses the prettify-list default."
       "m," 'spacemacs/toggle-web-js2-mode))
 
   (when (configuration-layer/layer-usedp 'javascript)
-    (setq js2-global-externs '("require" "module" "jest" "jasmine"
-                               "it" "expect" "describe" "beforeEach"))
-    (defun js2-imenu-make-index ()
-      (save-excursion
-        ;; (setq imenu-generic-expression '((nil "describe\\(\"\\(.+\\)\"" 1)))
-        (imenu--generic-function '(("describe" "\\s-*describe\(\"\\(.+\\)\",.*" 1)
-                                   ("it" "\\s-*it\(\"\\(.+\\)\",.*" 1)
-                                   ("before" "\\s-*before\(\"\\(.+\\)\",.*" 1)
-                                   ("after" "\\s-*after\(\"\\(.+\\)\",.*" 1)
-                                   ;;add more keyword for mocha here
-                                   ("Function" "function[ \t]+\\([a-zA-Z0-9_$.]+\\)[ \t]*(" 1)
-                                   ("Function" "^[ \t]*\\([a-zA-Z0-9_$.]+\\)[ \t]*=[ \t]*function[ \t]*(" 1)
-                                   ))))
-
-    (add-hook 'js2-mode-hook
-       (lambda ()
-         (setq imenu-create-index-function 'js2-imenu-make-index)))
-
+    ;; This will allow the shebang #!/bin/node :)
+    (setq js2-skip-preprocessor-directives t)
     (defun cestdiego/js-setup-pretty-symbols ()
       (cestiego/pretty-symbols
        '(("function" . ?ƒ)

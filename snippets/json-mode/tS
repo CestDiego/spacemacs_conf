@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: tS
+# key: tS
+# --
+"$1": {
+    "textSpans": [{
+       "text": "$2"
+    }]
+}$0

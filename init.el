@@ -1133,6 +1133,44 @@ uses the prettify-list default."
     (define-key inferior-python-mode-map (kbd "C-S-j") 'comint-next-prompt)
   )
 
+  (with-eval-after-load 'org-mode
+    (define-key org-mode-map (kbd "<C-M-return>") 'org-insert-subheading)
+    (define-key org-mode-map (kbd "<C-M-S-return>") 'org-insert-todo-subheading)
+  )
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;;;;;; OVERRIDING GLOBALLY STUFF ;;;;;;;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (defvar custom-keys-mode-map (make-keymap) "custom-keys-mode keymap.")
+  (define-minor-mode custom-keys-mode
+    "A minor mode so that my key settings override annoying major modes."
+    t " my-keys" 'custom-keys-mode-map)
+  (custom-keys-mode 1)
+
+  (defun my-minibuffer-setup-hook ()
+    (custom-keys-mode 0))
+  (add-hook 'minibuffer-setup-hook 'my-minibuffer-setup-hook)
+
+  (defadvice load (after give-my-keybindings-priority)
+    "Try to ensure that my keybindings always have priority."
+    (if (not (eq (car (car minor-mode-map-alist)) 'custom-keys-mode))
+        (let ((mykeys (assq 'custom-keys-mode minor-mode-map-alist)))
+          (assq-delete-all 'custom-keys-mode minor-mode-map-alist)
+          (add-to-list 'minor-mode-map-alist mykeys))))
+
+  (ad-activate 'load)
+
+  (define-key custom-keys-mode-map (kbd "C-\"") 'org-cycle-agenda-files)
+  (define-key custom-keys-mode-map (kbd "C-'") 'spacemacs/default-pop-shell)
+
+  ;; (when (configuration-layer/layer-usedp 'spacemacs-layouts)
+  ;;   (define-key custom-keys-mode-map (kbd "<C-tab>") 'spacemacs//layouts-persp-next-n)
+  ;;   (define-key custom-keys-mode-map (kbd "<C-backtab>") 'spacemacs//layouts-persp-prev-p))
+
+  ;; (define-key helm-map (kbd "C-w") '(lambda () (interactive) (symbol-at-point)))
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;;;;;; FINISH LE GLOBAL OVERRIDE ;;;;;;;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
   (when (configuration-layer/layer-usedp 'shell)
     (setq eshell-rc-script (expand-file-name
                             ".eshellrc"
@@ -1157,46 +1195,6 @@ uses the prettify-list default."
     ;; (define-key cider-repl-mode-map (kbd "C-j") 'cider-repl-forward-input)
     ;; (define-key cider-repl-mode-map (kbd "C-r") 'cider-repl-previous-matching-input)
     ;; (define-key cider-repl-mode-map (kbd "C-s") 'cider-repl-next-matching-input)
-
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;;;;;;; OVERRIDING GLOBALLY STUFF ;;;;;;;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    (defvar custom-keys-mode-map (make-keymap) "custom-keys-mode keymap.")
-    (define-minor-mode custom-keys-mode
-      "A minor mode so that my key settings override annoying major modes."
-      t " my-keys" 'custom-keys-mode-map)
-    (custom-keys-mode 1)
-
-    (defun my-minibuffer-setup-hook ()
-      (custom-keys-mode 0))
-    (add-hook 'minibuffer-setup-hook 'my-minibuffer-setup-hook)
-
-    (defadvice load (after give-my-keybindings-priority)
-      "Try to ensure that my keybindings always have priority."
-      (if (not (eq (car (car minor-mode-map-alist)) 'custom-keys-mode))
-          (let ((mykeys (assq 'custom-keys-mode minor-mode-map-alist)))
-            (assq-delete-all 'custom-keys-mode minor-mode-map-alist)
-            (add-to-list 'minor-mode-map-alist mykeys))))
-
-    (ad-activate 'load)
-
-    (define-key custom-keys-mode-map (kbd "C-\"") 'org-cycle-agenda-files)
-    (define-key custom-keys-mode-map (kbd "C-'") 'spacemacs/default-pop-shell)
-
-    (with-eval-after-load 'org-mode
-      (define-key org-mode-map (kbd "<C-M-return>") 'org-insert-subheading)
-      (define-key org-mode-map (kbd "<C-M-S-return>") 'org-insert-todo-subheading)
-      )
-
-    ;; (when (configuration-layer/layer-usedp 'spacemacs-layouts)
-    ;;   (define-key custom-keys-mode-map (kbd "<C-tab>") 'spacemacs//layouts-persp-next-n)
-    ;;   (define-key custom-keys-mode-map (kbd "<C-backtab>") 'spacemacs//layouts-persp-prev-p))
-
-
-    ;; (define-key helm-map (kbd "C-w") '(lambda () (interactive) (symbol-at-point)))
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;;;;;;; FINISH LE GLOBAL OVERRIDE ;;;;;;;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     )
 
   (when (configuration-layer/layer-usedp 'erc)

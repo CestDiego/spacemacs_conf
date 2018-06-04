@@ -1124,20 +1124,6 @@ uses the prettify-list default."
 
   (cestdiego/sort-sexps test-stringy)
 
-  (defun cestdiego/space-no-entropy ()
-    "Sorts packages in your layer"
-    (interactive)
-    (let ((layer-name (spacemacs/get-parent-dir)))
-      ;; TODO: Make sure one can access this layer
-      ()
-      ;; Get the contents of the buffer
-      ;; Get the start and the end lines of the packages
-      ;; Get the s-exps
-      ;; call space-no-entropy and then return a map of line numbers and sexps
-      ;; Replace the packagelist with the new ordered s-exps
-      )
-    )
-
   (when (configuration-layer/layer-usedp 'syntax-checking)
     (setq flycheck-emacs-lisp-load-path 'inherit)
     )

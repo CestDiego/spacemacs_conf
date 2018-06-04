@@ -652,6 +652,7 @@ you should place your code here."
 
   (require 'mocha-snippets)
   (setq mocha-snippets-use-fat-arrows t)
+  (setq mocha-snippets-add-space-after-function-keyword t)
 
   ;; org-pomodoro mode hooks
   (add-hook 'org-pomodoro-finished-hook

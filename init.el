@@ -120,7 +120,7 @@ values."
      lua
      c-c++
      python
-     javascript
+     (javascript :variables javascript-backend 'lsp)
      react
      lsp
      )

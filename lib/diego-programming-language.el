@@ -1,0 +1,18 @@
+;; (defun cestdiego/transpile (ast)
+;;   (cond ((numberp ast) ast)
+;;         ((equal ast nil) nil)
+;;         ((stringp ast) ast)
+;;         ((symbolp ast)  ast)
+;;         ((listp ast)  (let ((traspiled-cdr (-map 'cestdiego/transpile (cdr ast))))
+;;                         (if (not (symbolp (car ast))) (error "nope need first item in list to be symbol"))
+;;                         (if (equal (symbol-name (car ast)) ":hurtrealbad:")
+;;                             (cons 'lambda traspiled-cdr)
+;;                           (cons (car ast) traspiled-cdr))
+;;                         )))
+;;   )
+
+;; (defun cestdiego/run (ast)
+;;   (eval (car (read-from-string (concat "(" (pp (cestdiego/transpile ast)) ")"  ) )  )   )
+;;   )
+
+;; (cestdiego/run '(:hurtrealbad: () (interactive) (message "lolz")))

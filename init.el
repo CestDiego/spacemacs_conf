@@ -134,8 +134,6 @@ values."
    dotspacemacs-additional-packages '(
                                       visual-fill-column
                                       darkroom
-                                      atomic-chrome
-                                      suggest
                                       company-flx
                                       kite-mini
                                       encourage-mode
@@ -542,32 +540,13 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
 
   ;; https://emacs-doctor.com/emacs-hide-mode-line.html
+  (require 'hidden-mode-line-mode)
 
-  (defvar-local hidden-mode-line-mode nil)
-  (define-minor-mode hidden-mode-line-mode
-    "Minor mode to hide the mode-line in the current buffer."
-    :init-value nil
-    :global t
-    :variable hidden-mode-line-mode
-    :group 'editing-basics
-    (if hidden-mode-line-mode
-        (setq hide-mode-line mode-line-format
-              mode-line-format nil)
-      (setq mode-line-format hide-mode-line
-            hide-mode-line nil))
-    (force-mode-line-update)
-    ;; Apparently force-mode-line-update is not always enough to
-    ;; redisplay the mode-line
-    (redraw-display)
-    (when (and (called-interactively-p 'interactive)
-               hidden-mode-line-mode)
-      (run-with-idle-timer
-       0 nil 'message
-       (concat "Hidden Mode Line Mode enabled.  "
-               "Use M-x hidden-mode-line-mode to make the mode-line appear."))))
-
-  ;; If you want to hide the mode-line in every buffer by default
-  (add-hook 'after-change-major-mode-hook 'hidden-mode-line-mode)
+  (setq window-divider-default-bottom-width 10
+        window-divider-default-right-width 10
+        window-divider-default-places t)
+  (window-divider-mode 1)
+  (set-face-attribute 'window-divider nil :foreground "white")
 
   (defun cestdiego/cursor-pos ()
     (interactive)
@@ -582,16 +561,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                `("Current Buffer:" ,file-or-buffer-name
                  "Line:" ,line
                  "Column:" ,column)))))
-
   (add-hook 'focus-in-hook 'cestdiego/cursor-pos)
-
-  (setq window-divider-default-bottom-width 1
-        window-divider-default-places t)
-
-  (set-face-attribute 'window-divider nil :foreground "white")
-  (window-divider-mode 1)
-  (global-set-key (kbd "H-?") 'hidden-mode-line-mode)
-
   ;; Undecorated frame in OSX (doesn't work https://github.com/koekeishiya/chunkwm/issues/265)
   (add-to-list 'default-frame-alist '(undecorated . nil))
   ;; This makes the titlebar bearable by making it transparent
@@ -603,32 +573,27 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq frame-resize-pixelwise t)
 
   ;; Set the Emacs customization file path. Must be done here in user-init.
-  (setq custom-file "~/.spacemacs.d/custom.el")
   ;; From: https://github.com/krismolendyke/.emacs.d/blob/0765f0029be19cb33b50b518e46e004777fe248c/init.el#L49-L52
-
   (defvar cestdiego/brew-cache-directory
     (string-trim (shell-command-to-string
                   (string-join `(,(executable-find "brew") "--cache") " ")))
     "Homebrew cache.")
 
+  (defun cestdiego/brew-get-prefix-dir-for-program (program)
+    (string-trim (shell-command-to-string
+                  (string-join `(,(executable-find "brew") "--prefix" ,program) " "))))
+
+
   (setq-default evil-escape-key-sequence "jk")
-  (setq httpd-port 1337)
-  (setq source-directory (if (eq system-type 'darwin)
+
+  (setq httpd-port 1337
+        source-directory (if (eq system-type 'darwin)
                              (string-join `(,cestdiego/brew-cache-directory "emacs-plus--git") "/")
                            "~/Documents/Projects/emacs-24.5")
         dotspacemacs-verbose-loading t
         helm-ag-base-command "rg --vimgrep --no-heading"
         helm-ag-always-set-extra-option nil
-        delete-by-moving-to-trash t
-        ;; Only Useful with `SPC T ~'
-        vi-tilde-fringe-bitmap-array [#b00000000
-                                      #b00000000
-                                      #b00010000
-                                      #b00111000
-                                      #b01111100
-                                      #b00111000
-                                      #b00010000
-                                      #b00000000])
+        delete-by-moving-to-trash t)
   )
 
 (defun dotspacemacs/user-config ()
@@ -639,6 +604,26 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  (defun spacemacs/user-full-name ()
+    "Guess the user's full name. Returns nil if no likely name could be found."
+    (or (replace-regexp-in-string
+         "\n$" "" (shell-command-to-string "git config --get user.name"))
+        (user-full-name)
+        (getenv "USER")))
+
+  (defun spacemacs/user-email ()
+    "Guess the user's email address. Returns nil if none could be found."
+    (or (replace-regexp-in-string
+         "\n$" "" (shell-command-to-string "git config --get user.email"))
+        user-mail-address
+        (getenv "EMAIL")))
+
+  (setq user-full-name    (spacemacs/user-full-name)
+        user-mail-address (spacemacs/user-email))
+
+  (setq ispell-program-name "/usr/local/bin/aspell")
+
+
   ;; org things
   (with-eval-after-load 'org
     (require 'htmlize)
@@ -647,29 +632,9 @@ you should place your code here."
     (setq org-html-doctype "html5")
     (setq org-html-html5-fancy t))
 
-  (require 'atomic-chrome)
-  (atomic-chrome-start-server)
-
   (require 'mocha-snippets)
   (setq mocha-snippets-use-fat-arrows t)
   (setq mocha-snippets-add-space-after-function-keyword t)
-
-  ;; org-pomodoro mode hooks
-  (add-hook 'org-pomodoro-finished-hook
-            (lambda ()
-              (notify-osx "Pomodoro completed!" "Time for a break.")))
-
-  (add-hook 'org-pomodoro-break-finished-hook
-            (lambda ()
-              (notify-osx "Pomodoro Short Break Finished" "Ready for Another?")))
-
-  (add-hook 'org-pomodoro-long-break-finished-hook
-            (lambda ()
-              (notify-osx "Pomodoro Long Break Finished" "Ready for Another?")))
-
-  (add-hook 'org-pomodoro-killed-hook
-            (lambda ()
-              (notify-osx "Pomodoro Killed" "One does not simply kill a pomodoro!")))
 
   ;; Source
   ;; https://www.reddit.com/r/emacs/comments/5a4n39/ligatures_question_i_cant_find_more_informative/d9dx2oi/
@@ -694,101 +659,26 @@ uses the prettify-list default."
     (prettify-list (append s nil) merge))
 
   (remove-hook 'emacs-lisp-mode-local-vars-hook #'spacemacs/ggtags-mode-enable)
+
+  ;; Archive
   ;; (handoff-global-mode nil)
-  (keyboard-translate ?\C-h ?\C-?)
+  ;; (keyboard-translate ?\C-h ?\C-?)
 
   (setq tab-always-indent t)
-  (spacemacs|do-after-display-system-init
-   (setq neo-theme (if window-system 'icons 'arrow)))
-
-  ;; (defun cestdiego/transpile (ast)
-  ;;   (cond ((numberp ast) ast)
-  ;;         ((equal ast nil) nil)
-  ;;         ((stringp ast) ast)
-  ;;         ((symbolp ast)  ast)
-  ;;         ((listp ast)  (let ((traspiled-cdr (-map 'cestdiego/transpile (cdr ast))))
-  ;;                         (if (not (symbolp (car ast))) (error "nope need first item in list to be symbol"))
-  ;;                         (if (equal (symbol-name (car ast)) ":hurtrealbad:")
-  ;;                             (cons 'lambda traspiled-cdr)
-  ;;                           (cons (car ast) traspiled-cdr))
-  ;;                         )))
-  ;;   )
-
-  ;; (defun cestdiego/run (ast)
-  ;;   (eval (car (read-from-string (concat "(" (pp (cestdiego/transpile ast)) ")"  ) )  )   )
-  ;;   )
-
-  ;; (cestdiego/run '(:hurtrealbad: () (interactive) (message "lolz")))
-
-  (defun cestdiego/brew-get-prefix-dir-for-program (program)
-    (string-trim (shell-command-to-string
-                  (string-join `(,(executable-find "brew") "--prefix" ,program) " "))))
 
   ;; TODO there is lots to do for recognizing each file with it's proper nvm version
   (require 'nvm)
   (setq nvm-dir "~/.nvm")
   (nvm-use "8.9.4")
 
-
-  ;; Taken from http://endlessparentheses.com/create-github-prs-from-emacs-with-magit.html
-  (defun cestdiego/visit-pull-request-url ()
-    "Visit the current branch's PR on Github."
-    (interactive)
-    (browse-url
-     (format "https://github.com/%s/pull/new/%s"
-             (replace-regexp-in-string
-              "\\`.+github\\.com:\\(.+\\)\\.git\\'" "\\1"
-              (magit-get "remote"
-                         (magit-get-remote)
-                         "url"))
-             ;; TODO Implement a helm backend to list agains which branch to make the PR
-             (cdr (or (magit-remote-branch-at-point)
-                      (user-error "No remote branch"))))))
-
-  (with-eval-after-load 'magit
-    (define-key magit-mode-map "."
-      #'cestdiego/visit-pull-request-url)
-    (setq magit-repolist-columns
-          '(("Name"    25 magit-repolist-column-ident                  ())
-            ("Version" 25 magit-repolist-column-version                ())
-            ("D"        1 magit-repolist-column-dirty                  ())
-            ("L<U"      3 magit-repolist-column-unpulled-from-upstream ((:right-align t)))
-            ("L>U"      3 magit-repolist-column-unpushed-to-upstream   ((:right-align t)))
-            ("Path"    99 magit-repolist-column-path                   ())))
-    (setq magit-repository-directories '(("~/Documents" . 2) ("~/dotfiles" . 0) ("~/.spacemacs.d" . 0)))
-    )
-
-  (require 'suggest)
-  (spacemacs/set-leader-keys "aa" 'suggest)
-
+  ;; Hide ugly dired details
   (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
-
-  (with-eval-after-load 'company
-    (company-flx-mode +1))
-
-  (setq user-full-name    "Diego Berrocal"
-        user-mail-address "cestdiego@gmail.com")
-
-  (setq ispell-program-name "/usr/local/bin/aspell")
-
-  (defun spacemacs/user-full-name ()
-    "Guess the user's full name. Returns nil if no likely name could be found."
-    (or (replace-regexp-in-string
-         "\n$" "" (shell-command-to-string "git config --get user.name"))
-        (user-full-name)
-        (getenv "USER")))
-
-  (defun spacemacs/user-email ()
-    "Guess the user's email address. Returns nil if none could be found."
-    (or (replace-regexp-in-string
-         "\n$" "" (shell-command-to-string "git config --get user.email"))
-        user-mail-address
-        (getenv "EMAIL")))
 
   (defun cestdiego/frame-finish ()
     (interactive)
     (let ((C-c-C-c-key (kbd "C-c C-c")))
       (if (key-binding C-c-C-c-key)
+          ;; We add the C-c C-c sequence to the unread events so that the frame can defer to whatever function is bound to C-c C-c
           (setq unread-command-events (listify-key-sequence C-c-C-c-key))
         (message "Nothing is bound to `C-c C-c'"))))
 
@@ -797,11 +687,13 @@ uses the prettify-list default."
     (key-chord-define-global "xx" 'cestdiego/frame-finish))
 
   (add-hook 'prog-mode-hook 'cestdiego/setup-frame-finish)
+  (key-chord-define-global "qq" 'spacemacs/frame-killer)
 
-  (key-chord-mode 1)
   (setq key-chord-one-key-delay 0.15)
 
-  (key-chord-define-global "qq" 'spacemacs/frame-killer)
+  (key-chord-mode 1)
+
+
   (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)")
                             (sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)"))
         org-ellipsis " ↴"
@@ -828,39 +720,32 @@ uses the prettify-list default."
         org-fast-tag-selection-single-key nil
         org-html-validation-link nil
         org-export-kill-product-buffer-when-displayed t
-        ;; are there more backends that I can use?
-        org-export-backends '(ascii beamer html texinfo latex)
-        ;;most of these modules let you store links to various stuff in org
-        org-bullets-bullet-list '("◉" "◎" "♠" "○" "►" "◇"))
-
-  (defun cestdiego/inbox-email-draft-configuration ()
-    ;; When editing mail, set the goal-column to 72.
-    (auto-fill-mode 1)
-    (set-fill-column 72)
-    (save-excursion
-      ;; Don't know if this is necessary, but it seems to help.
-      (set-buffer (buffer-name))
-      (goto-char (point-min))
-      ;; Replace non-breaking strange space characters
-      (while (search-forward (char-to-string 160) nil t)
-        (replace-match " "))))
-
-  (defun cestdiego/configure-edit-server ()
-    (cond ((string-match "github.com" (buffer-name))
-           (markdown-mode))
-          ((string-match "inbox.google.com" (buffer-name))
-           (cestdiego/inbox-email-draft-configuration))))
-
-  (add-hook 'edit-server-start-hook 'cestdiego/configure-edit-server)
+      )
 
   (encourage-mode)
-  (fset 'evil-visual-update-x-selection 'ignore)
-  (volatile-highlights-mode t)
 
-  (defun cestiego/pretty-symbols (new-pretty-symbols)
-    (mapcar (lambda (item)
-              (push item prettify-symbols-alist))
-            new-pretty-symbols))
+  ;; Imagine the following scenario.  One wants to paste some previously copied
+  ;; (from application other than Emacs) text to the system's clipboard in place
+  ;; of some contiguous block of text in a buffer.  Hence, one switches to
+  ;; `evil-visual-state' and selects the corresponding block of text to be
+  ;; replaced.  However, one either pastes some (previously killed) text from
+  ;; `kill-ring' or (if `kill-ring' is empty) receives the error: "Kill ring is
+  ;; empty"; see `evil-visual-paste' and `current-kill' respectively.  The
+  ;; reason why `current-kill' does not return the desired text from the
+  ;; system's clipboard is because `evil-visual-update-x-selection' is being run
+  ;; by `evil-visual-pre-command' before `evil-visual-paste'.  That is
+  ;; `x-select-text' is being run (by `evil-visual-update-x-selection') before
+  ;; `evil-visual-paste'.  As a result, `x-select-text' copies the selected
+  ;; block of text to the system's clipboard as long as
+  ;; `x-select-enable-clipboard' is non-nil (and in this scenario we assume that
+  ;; it is).  According to the documentation of `interprogram-paste-function',
+  ;; it should not return the text from the system's clipboard if it was last
+  ;; provided by Emacs (e.g. with `x-select-text').  Thus, one ends up with the
+  ;; problem described above.  To solve it, simply make
+  ;; `evil-visual-update-x-selection' do nothing:
+  (fset 'evil-visual-update-x-selection 'ignore)
+
+  (volatile-highlights-mode t)
 
   (push '("* Mocha Test Output *"
           :dedicated t
@@ -872,57 +757,16 @@ uses the prettify-list default."
 
   (setq ispell-extra-args '("--sug-mode=ultra" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
 
-  (setq helm-echo-input-in-header-line t)
-  ;; ;; Unfortunately this doesn't work well with chunkwm
+  ;; Having Helm in a floating window :)
+  ;; (setq helm-echo-input-in-header-line t)
   ;; (setq helm-display-function 'helm-display-buffer-in-own-frame
   ;;       helm-display-buffer-reuse-frame t
   ;;       helm-use-undecorated-frame-option t)
 
-  (defun cestdiego/org-setup-pretty-symbols ()
-    (cestiego/pretty-symbols
-     '((">=" . ?≥)
-       ("<=" . ?≤)
-       ("\\geq" . ?≥)
-       ("\\leq" . ?≤)
-       ("\\neg" . ?¬)
-       ("\\rightarrow" . ?→)
-       ("\\leftarrow" . ?←)
-       ("\\infty" . ?∞)
-       ("-->" . ?→)
-       ("<--" . ?←)
-       ("\\exists" . ?∃)
-       ("\\nexists" . ?∄)
-       ("\\forall" . ?∀)
-       ("\\or" . ?∨)
-       ("\\and" . ?∧)
-       (":)" . ?☺)
-       ("):" . ?☹)
-       (":D" . ?☺)
-       ("\\checkmark" . ?✓)
-       ("\\check" . ?✓)
-       ("1/4" . ?¼)
-       ("1/2" . ?½)
-       ("3/4" . ?¾)
-       ("1/7" . ?⅐)
-       ("1/5" . ?⅕)
-       ("2/5" . ?⅖)
-       ("3/5" . ?⅗)
-       ("4/5" . ?⅘)
-       ("1/6" . ?⅙)
-       ("1/6" . ?⅚)
-       ("1/6" . ?⅛)
-       ("1/6" . ?⅜)
-       ("1/6" . ?⅝)
-       ("1/6" . ?⅞)
-       ("ae" . ?æ)
-       ("^_^" . ?☻))))
-
-  (add-hook 'org-mode-hook (lambda ()
-                      (push
-                       '(?! . ( "#+begin_src" . "#+end_src"))
-                       evil-surround-pairs-alist)))
-
-  (add-hook 'org-mode-hook 'cestdiego/org-setup-pretty-symbols)
+  (defun cestiego/pretty-symbols (new-pretty-symbols)
+    (mapcar (lambda (item)
+              (push item prettify-symbols-alist))
+            new-pretty-symbols))
 
   (defun maybe-you-mean-editor-finish? (orig-fun &rest args)
     (let ((current-C-c-C-c (key-binding (kbd "C-c C-c") t))
@@ -1336,22 +1180,18 @@ uses the prettify-list default."
                                                               (side . 'bottom)))))))
 
   ;;; BEGIN: Mouse Support
-  (global-set-key (kbd "<C-s-mouse-4>") (lambda () (interactive)
-                                          (spacemacs/zoom-frm-in)
-                                          (spacemacs//zoom-frm-powerline-reset)))
-  (global-set-key (kbd "<C-s-mouse-5>") (lambda () (interactive)
-                                          (spacemacs/zoom-frm-out)
-                                          (spacemacs//zoom-frm-powerline-reset)))
-  (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
-  (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
+  ;; (global-set-key (kbd "<C-s-mouse-4>") (lambda () (interactive)
+  ;;                                         (spacemacs/zoom-frm-in)
+  ;;                                         (spacemacs//zoom-frm-powerline-reset)))
+  ;; (global-set-key (kbd "<C-s-mouse-5>") (lambda () (interactive)
+  ;;                                         (spacemacs/zoom-frm-out)
+  ;;                                         (spacemacs//zoom-frm-powerline-reset)))
+  ;; (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
+  ;; (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
   ;;; END: Mouse Support
 
-  ;; osx sets this by itself
-  (global-set-key (kbd "s-t") nil)
-  (global-set-key (kbd "s-C") nil)
-
   ;; Make Mouse Wheeel not go too damn fast
-  (setq mouse-wheel-progressive-speed nil)
+  (setq mouse-wheel-progressive-speed nilj)
   (setq mouse-wheel-scroll-amount
         '(             2
           ((shift)   . 1)))
@@ -1367,6 +1207,7 @@ uses the prettify-list default."
 
   ;;; BEGIN: EVIL Multiple Cursors
   (global-evil-mc-mode 1)
+
   ;; Fix for bug: https://github.com/gabesoft/evil-mc/issues/70
   ;; https://github.com/emacs-evil/evil/issues/864
   (add-hook 'evil-mc-after-cursors-deleted
@@ -1430,8 +1271,18 @@ uses the prettify-list default."
 
 
   (setq ns-auto-hide-menu-bar t)
-  ;; Lastly, load custom-file (but only if the file exists).
-  (when (file-exists-p custom-file)
-    (load-file custom-file)
-    )
   )
+
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (zenburn-theme web-mode visual-fill-column tide typescript-mode string-inflection restart-emacs rainbow-mode pyvenv pug-mode prodigy pip-requirements persp-mode pandoc-mode ox-pandoc org-projectile org-category-capture org-brain org-alert magithub ghub+ apiwrap lsp-ui link-hint importmagic impatient-mode hl-todo helm-xref helm-projectile helm-make helm-descbinds git-link eyebrowse evil-mc evil-matchit evil-magit eval-sexp-fu erc-image editorconfig dumb-jump counsel-projectile projectile counsel ivy company-quickhelp company-lsp company-anaconda anaconda-mode avy smartparens flycheck window-purpose imenu-list rtags helm helm-core skewer-mode simple-httpd lsp-mode markdown-mode magit git-commit pythonic js2-mode inf-ruby spaceline yasnippet which-key evil async org-plus-contrib hydra bind-key zone-nyan yasnippet-snippets yapfify yaml-mode xterm-color ws-butler with-editor winum web-beautify w3m volatile-highlights vmd-mode vi-tilde-fringe uuidgen use-package undo-tree toc-org tagedit systemd syntactic-close symon swiper spaceline-all-the-icons smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocop rspec-mode robe rjsx-mode reveal-in-osx-finder rbenv rake rainbow-identifiers rainbow-delimiters python-environment pytest pyenv-mode py-isort powerline popwin pippel pipenv pbcopy password-generator paradox ox-reveal overseer osx-trash osx-dictionary orgit org-tree-slide org-present org-pomodoro org-mime org-download org-bullets open-junk-file nvm neotree nameless multi-term move-text monokai-theme mocha-snippets mmm-mode minitest material-theme markdown-toc magit-svn magit-gitflow magit-gh-pulls macrostep lsp-python lorem-ipsum livid-mode live-py-mode linum-relative lice less-css-mode launchctl kite-mini keyfreq key-chord json-navigator json-mode js2-refactor js-doc indent-guide hungry-delete htmlize highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-rtags helm-pydoc helm-purpose helm-mode-manager helm-gitignore helm-flx helm-dash helm-css-scss helm-company helm-c-yasnippet helm-ag handoff grunt goto-chg google-translate google-c-style golden-ratio gnuplot gmail-message-mode github-search github-clone gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gist ghub gh-md fuzzy fontawesome font-lock+ focus flyspell-correct-helm flymd flycheck-rtags flycheck-pos-tip flycheck-package flx-ido firestarter fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eshell-z eshell-prompt-extras esh-help erc-yt erc-view-log erc-terminal-notifier erc-social-graph erc-hl-nicks epc encourage-mode emojify emoji-cheat-sheet-plus emmet-mode elisp-slime-nav edit-server disaster diminish diff-hl dash-at-point darkroom cython-mode company-web company-tern company-statistics company-rtags company-lua company-flx company-emoji company-c-headers company-auctex column-enforce-mode color-identifiers-mode clean-aindent-mode clang-format chruby centered-cursor-mode bundler browse-at-remote auto-yasnippet auto-highlight-symbol auto-dim-other-buffers auto-dictionary auto-compile aggressive-indent ace-window ace-link ace-jump-helm-line ac-ispell)))))

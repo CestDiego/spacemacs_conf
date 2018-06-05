@@ -1223,7 +1223,7 @@ uses the prettify-list default."
   ;;; END: Mouse Support
 
   ;; Make Mouse Wheeel not go too damn fast
-  (setq mouse-wheel-progressive-speed nilj)
+  (setq mouse-wheel-progressive-speed nil)
   (setq mouse-wheel-scroll-amount
         '(             2
           ((shift)   . 1)))

@@ -591,10 +591,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
                  "Column:" ,column)))))
   (add-hook 'focus-in-hook 'cestdiego/cursor-pos)
   ;; Undecorated frame in OSX (doesn't work https://github.com/koekeishiya/chunkwm/issues/265)
-  (add-to-list 'default-frame-alist '(undecorated . nil))
+  ;; (add-to-list 'default-frame-alist '(undecorated . t))
   ;; This makes the titlebar bearable by making it transparent
+
+  (add-to-list 'default-frame-alist '(ns-appearance . 'dark))
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist '(ns-appearance . 'nil))
 
   ;; IMPORTANT: This makes the emacs window not take unnecessary space because of chunkwm
   ;; https://github.com/d12frosted/homebrew-emacs-plus/issues/13#issuecomment-299072152
@@ -701,7 +702,7 @@ uses the prettify-list default."
   ;; TODO there is lots to do for recognizing each file with it's proper nvm version
   (require 'nvm)
   (setq nvm-dir "~/.nvm")
-  (nvm-use "8.9.4")
+  (nvm-use "8.11.2")
 
   ;; Hide ugly dired details
   (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))

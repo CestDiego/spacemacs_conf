@@ -589,13 +589,15 @@ before packages are loaded. If you are unsure, you should try in setting them in
                `("Current Buffer:" ,file-or-buffer-name
                  "Line:" ,line
                  "Column:" ,column)))))
+
   (add-hook 'focus-in-hook 'cestdiego/cursor-pos)
+
   ;; Undecorated frame in OSX (doesn't work https://github.com/koekeishiya/chunkwm/issues/265)
   ;; (add-to-list 'default-frame-alist '(undecorated . t))
-  ;; This makes the titlebar bearable by making it transparent
 
-  (add-to-list 'default-frame-alist '(ns-appearance . 'dark))
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  ;; This makes the titlebar bearable by making it transparent
+  ;; (add-to-list 'default-frame-alist '(ns-appearance . 'dark))
+  ;; (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 
   ;; IMPORTANT: This makes the emacs window not take unnecessary space because of chunkwm
   ;; https://github.com/d12frosted/homebrew-emacs-plus/issues/13#issuecomment-299072152

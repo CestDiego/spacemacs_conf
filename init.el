@@ -70,9 +70,7 @@ values."
      github
      ;; Other stuff
      prodigy
-     (colors :variables
-             colors-enable-nyan-cat-progress-bar t
-             colors-enable-rainbow-identifiers nil)
+     colors
      ;; (perspectives :variables
      ;;               spacemacs-persp-show-home-at-startup t
      ;;               perspectives-display-help t)

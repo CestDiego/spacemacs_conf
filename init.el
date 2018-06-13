@@ -952,8 +952,6 @@ uses the prettify-list default."
   ;; (setq python-shell-interpreter-args "-i --gui=wx")
 
 
-  (spaceline-compile)
-
   (setq vc-follow-symlinks t)
 
   (setq zone-timer (run-with-idle-timer 6000 t 'zone))

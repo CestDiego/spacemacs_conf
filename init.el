@@ -539,8 +539,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   ;; https://emacs-doctor.com/emacs-hide-mode-line.html
 
-  (defvar-local hidden-mode-line-mode nil)
+  (setq custom-file "~/.spacemacs.d/custom.el")
 
+  (defvar-local hidden-mode-line-mode nil)
   (define-minor-mode hidden-mode-line-mode
     "Minor mode to hide the mode-line in the current buffer."
     :init-value nil
@@ -1300,25 +1301,7 @@ uses the prettify-list default."
   ;; Appearance
   (spacemacs/enable-transparency)
   (global-vi-tilde-fringe-mode -1)
+  ;; Lastly, load custom-file (but only if the file exists).
+  (when (file-exists-p custom-file)
+    (load-file custom-file))
   )
-
-(defun dotspacemacs/emacs-custom-settings ()
-  "Emacs custom settings.
-This is an auto-generated function, do not modify its content directly, use
-Emacs customize menu instead.
-This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (zone-nyan esxml zenburn-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum web-mode web-beautify w3m volatile-highlights vmd-mode visual-fill-column vi-tilde-fringe uuidgen toc-org tide typescript-mode tagedit systemd syntactic-close symon string-inflection spaceline-all-the-icons spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocop rspec-mode robe rjsx-mode reveal-in-osx-finder restart-emacs rbenv rake rainbow-mode rainbow-identifiers rainbow-delimiters pyvenv python-environment pytest pyenv-mode py-isort pug-mode prodigy popwin pippel pipenv pip-requirements persp-mode password-generator paradox spinner pandoc-mode ox-reveal ox-pandoc overseer osx-trash osx-dictionary orgit org-tree-slide org-projectile org-category-capture org-present org-pomodoro org-mime org-download org-bullets org-brain org-alert alert log4e gntp open-junk-file nvm neotree nameless multi-term move-text monokai-theme mocha-snippets mmm-mode minitest material-theme markdown-toc magithub ghub+ apiwrap magit-svn magit-gitflow magit-gh-pulls macrostep lsp-ui lsp-python lorem-ipsum livid-mode skewer-mode live-py-mode link-hint lice launchctl kite-mini websocket keyfreq key-chord json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc indent-guide importmagic epc ctable concurrent deferred impatient-mode simple-httpd hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-purpose window-purpose imenu-list helm-projectile helm-mode-manager helm-make helm-gitignore request helm-flx helm-descbinds helm-dash helm-css-scss helm-company helm-c-yasnippet helm-ag handoff haml-mode grunt google-translate google-c-style golden-ratio gnuplot gmail-message-mode ham-mode markdown-mode html-to-markdown gitignore-mode github-search github-clone gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gist gh marshal logito pcache gh-md fuzzy fontawesome focus flyspell-correct-helm flyspell-correct flymd flycheck-rtags flycheck-pos-tip flycheck-package package-lint flycheck flx-ido firestarter fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit ghub with-editor evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help erc-yt erc-view-log erc-terminal-notifier erc-social-graph erc-image erc-hl-nicks encourage-mode emojify ht emoji-cheat-sheet-plus emmet-mode elisp-slime-nav editorconfig edit-server dumb-jump disaster diff-hl dash-at-point darkroom cython-mode counsel-projectile projectile counsel swiper ivy pkg-info epl company-web web-completion-data company-tern dash-functional tern company-statistics company-rtags rtags company-quickhelp pos-tip company-lua lua-mode company-lsp lsp-mode company-flx flx company-emoji company-c-headers company-auctex company-anaconda company column-enforce-mode color-identifiers-mode clean-aindent-mode clang-format chruby centered-cursor-mode bundler inf-ruby browse-at-remote auto-yasnippet yasnippet auto-highlight-symbol auto-dim-other-buffers auto-dictionary auto-compile packed auctex anaconda-mode pythonic f dash s all-the-icons memoize aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core ac-ispell auto-complete popup which-key use-package pcre2el org-plus-contrib hydra font-lock+ exec-path-from-shell evil goto-chg undo-tree diminish bind-map bind-key async))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-)

@@ -812,6 +812,15 @@ uses the prettify-list default."
           (with-editor-finish nil)
         (apply orig-fun args))))
 
+  (defun CestDiego/confirm-before-closing-frame-wq (&rest r)
+    (if (and (display-graphic-p)
+             (not (daemonp))
+             (eq (count-windows) 1))
+        (y-or-n-p "You are about to close Emacs")
+      ;; Always return true otherwise
+      t)
+    )
+  (advice-add 'evil-save-and-close :before-while #'CestDiego/confirm-before-closing-frame-wq)
   ;; (advice-add 'evil-write :around #'maybe-you-mean-editor-finish?)
 
   (add-hook 'with-editor-mode-hook 'evil-normalize-keymaps)

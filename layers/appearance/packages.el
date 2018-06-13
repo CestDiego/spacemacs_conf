@@ -105,8 +105,7 @@ ARGs is unused and are only for when this function is used as advice."
                          new-auto-dim-background-color)
     (set-face-background 'fringe
                          new-auto-dim-background-color)
-    (set-face-background 'minibuffer-prompt
-                         (face-background 'default))
+
     ;; the leading space character is correct
     (with-current-buffer (get-buffer " *Echo Area 0*")
       (make-local-variable 'face-remapping-alist)

@@ -568,11 +568,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   (global-set-key (kbd "H-?") 'hidden-mode-line-mode)
 
-  (setq window-divider-default-bottom-width 10
-        window-divider-default-right-width 10
-        window-divider-default-places t)
-  (window-divider-mode 1)
-  (set-face-attribute 'window-divider nil :foreground "white")
 
   (defun cestdiego/cursor-pos ()
     (interactive)
@@ -826,16 +821,6 @@ uses the prettify-list default."
   (add-hook 'with-editor-mode-hook 'evil-normalize-keymaps)
   (evil-define-key 'normal with-editor-mode-map ",c" 'with-editor-finish)
   (evil-define-key 'normal with-editor-mode-map ",a" 'with-editor-cancel)
-
-  ;; Appearance
-  (spacemacs/enable-transparency)
-
-  (global-vi-tilde-fringe-mode -1)
-
-  (spacemacs/toggle-mode-line-minor-modes-off)
-  (spacemacs/toggle-highlight-current-line-globally-off)
-
-  (auto-dim-other-buffers-mode)
 
   (spacemacs/add-to-hooks
    (lambda ()
@@ -1311,7 +1296,12 @@ uses the prettify-list default."
 
   ;; Figure out how to set the pyenv environment depending on the project one is at
   (pyenv-mode-set "2.7.8")
+
+  ;; Appearance
+  (spacemacs/enable-transparency)
+  (global-vi-tilde-fringe-mode -1)
   )
+
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use

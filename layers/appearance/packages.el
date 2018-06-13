@@ -74,13 +74,24 @@
   "Adjust `auto-dim-other-buffers-face' to the current background color.
 ARGs is unused and are only for when this function is used as advice."
   (interactive)
-  (let* ((percent-to-darken 6)
+  (let* ((percent-to-darken 8)
          (current-background-color (face-background 'default))
          (new-vertical-border-color
           (color-darken-name current-background-color percent-to-darken)))
+
     (set-face-attribute 'vertical-border nil
                         :foreground new-vertical-border-color
-                        :background new-vertical-border-color)))
+                        :background new-vertical-border-color)
+
+    (setq window-divider-default-bottom-width 5
+          window-divider-default-right-width 4 ; The vertical-border above has 1 px width already
+          window-divider-default-places t)
+
+    (set-face-attribute 'window-divider nil :foreground new-vertical-border-color)
+    (set-face-attribute 'window-divider-first-pixel nil :foreground new-vertical-border-color)
+    (set-face-attribute 'window-divider-last-pixel nil :foreground new-vertical-border-color)
+    (window-divider-mode 1)
+    ))
 
 (defun cestdiego/reset-auto-dim-face (&rest args)
   "Adjust `auto-dim-other-buffers-face' to the current background color.
@@ -108,13 +119,16 @@ ARGs is unused and are only for when this function is used as advice."
     ;; Better setting to know what window is currently selected
     (setq-default cursor-in-non-selected-windows nil)
     ;; Getting config from: https://github.com/mina86/auto-dim-other-buffers.el/issues/9#issuecomment-241503056
-    (add-hook 'after-init-hook (lambda ()
-                           (when (fboundp 'auto-dim-other-buffers-mode)
-                             (auto-dim-other-buffers-mode t)
-                             (cestdiego/reset-auto-dim-face)
-                             (cestdiego/reset-vertical-border-face)
-                             )))
+    (add-hook 'spacemacs-post-user-config-hook (lambda ()
+                                           (when (fboundp 'auto-dim-other-buffers-mode)
+                                             (auto-dim-other-buffers-mode t)
+                                             (cestdiego/reset-auto-dim-face)
+                                             (cestdiego/reset-vertical-border-face)
+                                             )))
     (add-hook 'spacemacs-post-theme-change-hook #'cestdiego/reset-auto-dim-face)
     (add-hook 'spacemacs-post-theme-change-hook #'cestdiego/reset-vertical-border-face)
+
+    (fringe-mode 0)
+    (auto-dim-other-buffers-mode)
     )
   )

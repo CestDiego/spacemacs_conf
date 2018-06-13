@@ -968,11 +968,12 @@ uses the prettify-list default."
                         zone-pgm-paragraph-spaz
                         zone-pgm-random-life])
 
-  (when (configuration-layer/package-usedp 'nyan-mode)
-    (spacemacs|do-after-display-system-init
-     (nyan-mode -1)
-     (nyan-mode))
-    (nyan-mode -1))
+  ;; No need to have the Nyan cat anymore :(
+  ;; (when (configuration-layer/package-usedp 'nyan-mode)
+  ;;   (spacemacs|do-after-display-system-init
+  ;;    (nyan-mode -1)
+  ;;    (nyan-mode))
+  ;;   (nyan-mode -1))
 
   (setq tab-width 2)
 

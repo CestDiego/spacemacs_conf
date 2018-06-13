@@ -952,7 +952,6 @@ uses the prettify-list default."
   ;; (setq python-shell-interpreter-args "-i --gui=wx")
 
 
-  (setq powerline-default-separator 'alternate)
   (spaceline-compile)
 
   (setq vc-follow-symlinks t)

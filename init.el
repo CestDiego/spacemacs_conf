@@ -1301,10 +1301,7 @@ uses the prettify-list default."
 
   ;; Figure out how to set the pyenv environment depending on the project one is at
   (pyenv-mode-set "2.7.8")
-
-  (setq ns-auto-hide-menu-bar t)
   )
-
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use

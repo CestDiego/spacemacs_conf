@@ -83,10 +83,17 @@ ARGs is unused and are only for when this function is used as advice."
                         :foreground new-vertical-border-color
                         :background new-vertical-border-color)
 
+    ;; Minibuffer stuff
+    (set-face-attribute 'minibuffer-prompt nil :background new-vertical-border-color)
+    ;; Define a closure for each time the hook gets set
+    (defun set-le-color (color) `(lambda () (set-background-color ,color)))
+    ;; Optimize for the hook
+    (add-hook 'minibuffer-setup-hook (set-le-color new-vertical-border-color))
+
+    ;; Window Divider stuff
     (setq window-divider-default-bottom-width 5
           window-divider-default-right-width 4 ; The vertical-border above has 1 px width already
           window-divider-default-places t)
-
     (set-face-attribute 'window-divider nil :foreground new-vertical-border-color)
     (set-face-attribute 'window-divider-first-pixel nil :foreground new-vertical-border-color)
     (set-face-attribute 'window-divider-last-pixel nil :foreground new-vertical-border-color)

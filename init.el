@@ -694,7 +694,8 @@ uses the prettify-list default."
 
   (global-set-key (kbd "C-?") 'help-command)
   (global-set-key (kbd "M-?") 'mark-paragraph)
-  (global-set-key (kbd "C-h") 'delete-backward-char)
+  ;; (global-set-key (kbd "C-h") 'delete-backward-char)
+  (keyboard-translate ?\C-h ?\C-?)
   (global-set-key (kbd "M-h") 'backward-kill-word)
 
   (setq tab-always-indent t)

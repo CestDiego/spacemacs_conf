@@ -74,29 +74,34 @@
   "Adjust `auto-dim-other-buffers-face' to the current background color.
 ARGs is unused and are only for when this function is used as advice."
   (interactive)
-  (let* ((percent-to-darken 8)
+  (let* ((percent-to-darken 6)
          (current-background-color (face-background 'default))
          (new-vertical-border-color
-          (color-darken-name current-background-color percent-to-darken)))
+          (color-darken-name current-background-color percent-to-darken))
+         (new-window-border-color
+          (color-darken-name current-background-color (+ 2 percent-to-darken)))
+         )
+
+    (set-face-background 'fringe new-vertical-border-color)
 
     (set-face-attribute 'vertical-border nil
                         :foreground new-vertical-border-color
                         :background new-vertical-border-color)
 
     ;; Minibuffer stuff
-    (set-face-attribute 'minibuffer-prompt nil :background new-vertical-border-color)
+    (set-face-background 'minibuffer-prompt new-window-border-color)
     ;; Define a closure for each time the hook gets set
     (defun set-le-color (color) `(lambda () (set-background-color ,color)))
     ;; Optimize for the hook
-    (add-hook 'minibuffer-setup-hook (set-le-color new-vertical-border-color))
+    (add-hook 'minibuffer-setup-hook (set-le-color new-window-border-color))
 
     ;; Window Divider stuff
     (setq window-divider-default-bottom-width 5
           window-divider-default-right-width 4 ; The vertical-border above has 1 px width already
           window-divider-default-places t)
-    (set-face-attribute 'window-divider nil :foreground new-vertical-border-color)
-    (set-face-attribute 'window-divider-first-pixel nil :foreground new-vertical-border-color)
-    (set-face-attribute 'window-divider-last-pixel nil :foreground new-vertical-border-color)
+    (set-face-foreground 'window-divider new-window-border-color)
+    (set-face-foreground 'window-divider-first-pixel new-window-border-color)
+    (set-face-foreground 'window-divider-last-pixel new-window-border-color)
     (window-divider-mode 1)
     ))
 
@@ -108,10 +113,8 @@ ARGs is unused and are only for when this function is used as advice."
          (current-background-color (face-background 'default))
          (new-auto-dim-background-color
           (color-darken-name current-background-color percent-to-darken)))
-    (set-face-background 'auto-dim-other-buffers-face
-                         new-auto-dim-background-color)
-    (set-face-background 'fringe
-                         new-auto-dim-background-color)
+
+    (set-face-background 'auto-dim-other-buffers-face new-auto-dim-background-color)
 
     ;; the leading space character is correct
     (with-current-buffer (get-buffer " *Echo Area 0*")

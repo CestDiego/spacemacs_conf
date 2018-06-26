@@ -3,9 +3,8 @@
 ;; It must be stored in your home directory.
 
 (defun dotspacemacs/layers ()
-  "Configuration Layers declaration.
-You should not put any user code in this function besides modifying the variable
-values."
+  "Layer configuration:
+This function should only modify configuration layer settings."
   (setq-default
    ;; Base distribution to use. This is a layer contained in the directory
    ;; `+distribution'. For now available distributions are `spacemacs-base'
@@ -122,6 +121,7 @@ values."
      react
      lsp
      )
+
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
@@ -174,8 +174,8 @@ It should only modify the values of Spacemacs settings."
 
    ;; File path pointing to emacs 27.1 executable compiled with support
    ;; for the portable dumper (this is currently the branch pdumper).
-   ;; (default "emacs")
-   dotspacemacs-emacs-pdumper-executable-file "emacs"
+   ;; (default "emacs-27.0.50")
+   dotspacemacs-emacs-pdumper-executable-file "emacs-27.0.50"
 
    ;; Name of the Spacemacs dump file. This is the file will be created by the
    ;; portable dumper in the cache directory under dumps sub-directory.
@@ -236,6 +236,23 @@ It should only modify the values of Spacemacs settings."
                                        hybrid-mode-default-state 'normal)
    ;; If non-nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
+
+   ;; If non-nil then Spacemacs will import your PATH and environment variables
+   ;; from your default shell on startup. This is enabled by default for macOS
+   ;; users and X11 users.
+   dotspacemacs-import-env-vars-from-shell (and (display-graphic-p)
+                                                (or (eq system-type 'darwin)
+                                                    (eq system-type 'gnu/linux)
+                                                    (eq window-system 'x)))
+
+   ;; If nil then use the default shell is used to fetch the environment
+   ;; variables. Set this variable to a different shell executable path to
+   ;; import the environment variables from this shell. Note that
+   ;; `file-shell-name' is preserved and always points to the default shell. For
+   ;; instance to use your fish shell environment variables set this variable to
+   ;; `/usr/local/bin/fish'.
+   ;; (default nil)
+   dotspacemacs-import-env-vars-shell-file-name "/bin/zsh"
 
    ;; Specify the startup banner. Default value is `official', it displays
    ;; the official spacemacs logo. An integer value is the index of text
@@ -367,23 +384,6 @@ It should only modify the values of Spacemacs settings."
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
    dotspacemacs-max-rollback-slots 5
 
-   ;; If non-nil, `helm' will try to minimize the space it uses. (default nil)
-   dotspacemacs-helm-resize nil
-
-   ;; if non-nil, the helm header is hidden when there is only one source.
-   ;; (default nil)
-   dotspacemacs-helm-no-header nil
-
-   ;; define the position to display `helm', options are `bottom', `top',
-   ;; `left', or `right'. (default 'bottom)
-   dotspacemacs-helm-position 'bottom
-
-   ;; Controls fuzzy matching in helm. If set to `always', force fuzzy matching
-   ;; in all non-asynchronous sources. If set to `source', preserve individual
-   ;; source settings. Else, disable fuzzy matching in all sources.
-   ;; (default 'always)
-   dotspacemacs-helm-use-fuzzy 'always
-
    ;; If non-nil, the paste transient-state is enabled. While enabled, pressing
    ;; `p' several times cycles through the elements in the `kill-ring'.
    ;; (default nil)
@@ -439,7 +439,9 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil show the color guide hint for transient state keys. (default t)
    dotspacemacs-show-transient-state-color-guide t
 
-   ;; If non-nil unicode symbols are displayed in the mode line. (default t)
+   ;; If non-nil unicode symbols are displayed in the mode line.
+   ;; If you use Emacs as a daemon and wants unicode characters only in GUI set
+   ;; the value to quoted `display-graphic-p'. (default t)
    dotspacemacs-mode-line-unicode-symbols t
 
    ;; If non-nil smooth scrolling (native-scrolling) is enabled. Smooth
@@ -480,7 +482,15 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-highlight-delimiters 'all
 
    ;; If non-nil, start an Emacs server if one is not already running.
-   dotspacemacs-enable-server t
+   ;; (default nil)
+   dotspacemacs-enable-server nil
+
+   ;; Set the emacs server socket location.
+   ;; If nil, uses whatever the Emacs default is, otherwise a directory path
+   ;; like \"~/.emacs.d/server\". It has no effect if
+   ;; `dotspacemacs-enable-server' is nil.
+   ;; (default nil)
+   dotspacemacs-server-socket-dir nil
 
    ;; If non-nil, advise quit functions to keep server open when quitting.
    ;; (default nil)
@@ -538,6 +548,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
 
   ;; https://emacs-doctor.com/emacs-hide-mode-line.html
+
+  ;; TODO: Figure out how to make childrames float in Emacs with chunkwm
+  (setq lsp-ui-doc-use-childframe nil)
+  (setq lsp-highlight-symbol-at-point nil)
+  (setq lsp-ui-sideline-enable nil)
 
   (setq custom-file "~/.spacemacs.d/custom.el")
 

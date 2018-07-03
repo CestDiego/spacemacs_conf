@@ -237,23 +237,6 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
 
-   ;; If non-nil then Spacemacs will import your PATH and environment variables
-   ;; from your default shell on startup. This is enabled by default for macOS
-   ;; users and X11 users.
-   dotspacemacs-import-env-vars-from-shell (and (display-graphic-p)
-                                                (or (eq system-type 'darwin)
-                                                    (eq system-type 'gnu/linux)
-                                                    (eq window-system 'x)))
-
-   ;; If nil then use the default shell is used to fetch the environment
-   ;; variables. Set this variable to a different shell executable path to
-   ;; import the environment variables from this shell. Note that
-   ;; `file-shell-name' is preserved and always points to the default shell. For
-   ;; instance to use your fish shell environment variables set this variable to
-   ;; `/usr/local/bin/fish'.
-   ;; (default nil)
-   dotspacemacs-import-env-vars-shell-file-name "/bin/zsh"
-
    ;; Specify the startup banner. Default value is `official', it displays
    ;; the official spacemacs logo. An integer value is the index of text
    ;; banner, `random' chooses a random text banner in `core/banners'
@@ -341,19 +324,6 @@ It should only modify the values of Spacemacs settings."
    ;; In the terminal, these pairs are generally indistinguishable, so this only
    ;; works in the GUI. (default nil)
    dotspacemacs-distinguish-gui-tab nil
-
-   ;; If non-nil `Y' is remapped to `y$' in Evil states. (default nil)
-   dotspacemacs-remap-Y-to-y$ t
-   ;; If non-nil, the shift mappings `<' and `>' retain visual state if used
-   ;; there. (default t)
-   dotspacemacs-retain-visual-state-on-shift t
-
-   ;; If non-nil, `J' and `K' move lines up and down when in visual mode.
-   ;; (default nil)
-   dotspacemacs-visual-line-move-text t
-   ;; If non-nil, inverse the meaning of `g' in `:substitute' Evil ex-command.
-   ;; (default nil)
-   dotspacemacs-ex-substitute-global nil
 
    ;; Name of the default layout (default "Default")
    dotspacemacs-default-layout-name "Default"
@@ -539,6 +509,15 @@ It should only modify the values of Spacemacs settings."
    ;; (default nil)
    dotspacemacs-pretty-docs nil))
 
+(defun dotspacemacs/user-env ()
+  "Environment variables setup.
+This function defines the environment variables for your Emacs session. By
+default it calls `spacemacs/load-spacemacs-env' which loads the environment
+variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
+See the header of this file for more information."
+  (spacemacs/force-init-spacemacs-env)
+  (spacemacs/load-spacemacs-env))
+
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init', before layer configuration
@@ -634,6 +613,13 @@ before packages are loaded. If you are unsure, you should try in setting them in
         helm-ag-base-command "rg --vimgrep --no-heading"
         helm-ag-always-set-extra-option nil
         delete-by-moving-to-trash t)
+  )
+
+(defun dotspacemacs/user-load ()
+  "Library to load while dumping.
+This function is called only while dumping Spacemacs configuration. You can
+`require' or `load' the libraries of your choice that will be included in the
+dump."
   )
 
 (defun dotspacemacs/user-config ()

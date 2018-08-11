@@ -532,6 +532,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq lsp-ui-doc-use-childframe nil)
   (setq lsp-highlight-symbol-at-point nil)
   (setq lsp-ui-sideline-enable nil)
+  (setq lsp-ui-doc-enable nil)
 
   (setq custom-file "~/.spacemacs.d/custom.el")
 
@@ -704,7 +705,7 @@ uses the prettify-list default."
   ;; TODO there is lots to do for recognizing each file with it's proper nvm version
   (require 'nvm)
   (setq nvm-dir "~/.nvm")
-  (nvm-use "8.11.2")
+  (nvm-use "8.11.3")
 
   ;; Hide ugly dired details
   (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))

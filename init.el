@@ -117,9 +117,8 @@ This function should only modify configuration layer settings."
      lua
      c-c++
      python
-     (javascript :variables javascript-backend 'lsp)
+     javascript
      react
-     lsp
      )
 
    ;; List of additional packages that will be installed without being
@@ -529,10 +528,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; https://emacs-doctor.com/emacs-hide-mode-line.html
 
   ;; TODO: Figure out how to make childrames float in Emacs with chunkwm
-  (setq lsp-ui-doc-use-childframe nil)
-  (setq lsp-highlight-symbol-at-point nil)
-  (setq lsp-ui-sideline-enable nil)
-  (setq lsp-ui-doc-enable nil)
+  ;; (setq lsp-ui-doc-use-childframe nil)
+  ;; (setq lsp-highlight-symbol-at-point nil)
+  ;; (setq lsp-ui-sideline-enable nil)
+  ;; (setq lsp-ui-doc-enable nil)
 
   (setq custom-file "~/.spacemacs.d/custom.el")
 

@@ -1155,13 +1155,12 @@ uses the prettify-list default."
     (add-hook 'html-mode-hook 'web-mode)
     (add-to-list 'auto-mode-alist '("\\.touchegg.conf\\'" . web-mode))
 
+    (define-derived-mode marko-mode web-mode "marko")
+    (add-to-list 'auto-mode-alist '("\\.marko\\'" . marko-mode))
 
     (when (configuration-layer/layer-usedp 'lsp)
       (setq lsp-ui-sideline-delay 1)
       (require 'lsp-mode)
-      (define-derived-mode marko-mode web-mode "marko")
-
-      (add-to-list 'auto-mode-alist '("\\.marko\\'" . marko-mode))
 
       (defun spacemacs//set-lsp-key-bindings (mode)
         "Set the key bindings for lsp in the given MODE."

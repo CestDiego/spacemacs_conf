@@ -102,8 +102,9 @@ This function should only modify configuration layer settings."
      syntax-checking
      ;; Shells
      (shell :variables
+            shell-default-shell 'eshell
             shell-protect-eshell-prompt t
-            shell-default-shell 'ansi-term
+            shell-enable-smart-eshell t
             shell-pop-autocd-to-working-dir nil
             shell-default-term-shell "zsh")
      ;; Lang

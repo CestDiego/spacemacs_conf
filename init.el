@@ -875,6 +875,13 @@ uses the prettify-list default."
   (prefer-coding-system         'utf-8) ; please
   (set-language-environment     'utf-8) ; with sugar on top
 
+  (when (configuration-layer/layer-usedp 'c-c++)
+    (with-eval-after-load 'disaster
+      (if (eq system-type 'darwin)
+          (setq disaster-objdump (replace-regexp-in-string "objdump" "gobjdump" disaster-objdump)))
+      )
+    )
+
   (when (configuration-layer/layer-usedp 'rcirc)
     (setq rcirc-server-alist
           '(("freenode"

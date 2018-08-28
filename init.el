@@ -702,7 +702,10 @@ uses the prettify-list default."
   ;; TODO there is lots to do for recognizing each file with it's proper nvm version
   (require 'nvm)
   (setq nvm-dir "~/.nvm")
-  (nvm-use "8.11.3")
+
+  (nvm-use (getenv "MY_NODE_VERSION"))
+  ;; Figure out how to set the pyenv environment depending on the project one is at
+  (pyenv-mode-set (getenv "MY_PYTHON_VERSION"))
 
   ;; Hide ugly dired details
   (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
@@ -1294,8 +1297,6 @@ uses the prettify-list default."
   (global-prettify-symbols-mode)
   ;; https://github.com/ocodo/.emacs.d/blob/master/custom/handy-functions.el
 
-  ;; Figure out how to set the pyenv environment depending on the project one is at
-  (pyenv-mode-set "2.7.8")
 
   ;; Appearance
   (spacemacs/enable-transparency)

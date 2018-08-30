@@ -116,7 +116,9 @@ This function should only modify configuration layer settings."
      html
      latex
      lua
-     c-c++
+     (c-c++ :variables
+            c-c++-default-mode-for-headers 'c++-mode
+            c-c++-enable-clang-support t)
      python
      javascript
      react

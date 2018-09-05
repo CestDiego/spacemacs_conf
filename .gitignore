@@ -6,4 +6,5 @@ flycheck_init.el
 .DS_Store
 *TAGS
 GPATH
-/custom.el
+custom.el
+.spacemacs.env

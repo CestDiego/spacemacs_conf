@@ -78,15 +78,16 @@ This function should only modify configuration layer settings."
           erc-enable-sasl-auth t)
      ;; Org
      (org :variables
+          org-enable-trello-support t
           org-enable-reveal-js-support t
           org-mapping-style 'worf)
      pandoc
      ;; Miscellaneous
      emoji
-     ;; (wakatime :variables
-     ;;           wakatime-api-key    "813b0d78-1f17-43eb-bede-a5c008651d4a"
-     ;;           wakatime-cli-path   "/run/current-system/sw/bin/wakatime"
-     ;;           wakatime-python-bin "/run/current-system/sw/bin/python")
+     (wakatime :variables
+               wakatime-api-key    "813b0d78-1f17-43eb-bede-a5c008651d4a"
+               wakatime-cli-path   (executable-find "wakatime")
+               wakatime-python-bin (executable-find "python"))
      ,(when (eq system-type 'darwin) 'osx)
      ;; Completings Stuff
      (auto-completion :variables
@@ -325,7 +326,7 @@ It should only modify the values of Spacemacs settings."
    ;; and TAB or `C-m' and `RET'.
    ;; In the terminal, these pairs are generally indistinguishable, so this only
    ;; works in the GUI. (default nil)
-   dotspacemacs-distinguish-gui-tab nil
+   dotspacemacs-distinguish-gui-tab t
 
    ;; Name of the default layout (default "Default")
    dotspacemacs-default-layout-name "Default"
@@ -708,7 +709,7 @@ uses the prettify-list default."
 
   (nvm-use (getenv "MY_NODE_VERSION"))
   ;; Figure out how to set the pyenv environment depending on the project one is at
-  (pyenv-mode-set (getenv "MY_PYTHON_VERSION"))
+  ;; (pyenv-mode-set (getenv "MY_PYTHON_VERSION"))
 
   ;; Hide ugly dired details
   (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
@@ -1156,6 +1157,8 @@ uses the prettify-list default."
     (require 'web-mode)
     ;; Font in gdrive
     (set-face-attribute 'web-mode-html-attr-name-face nil :family "Operator SSm" :slant 'italic)
+
+    (setq web-mode-enable-engine-detection t)
 
     (add-hook 'react-mode-hook (lambda () (setq-local emmet-expand-jsx-className? t)))
     (define-key web-mode-map (kbd "C-j") 'emmet-expand-line)

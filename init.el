@@ -294,7 +294,7 @@ It should only modify the values of Spacemacs settings."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Meslo LG L DZ for Powerline"
-                               :size 16
+                               :size 14
                                :weight normal
                                :width normal)
 
@@ -708,8 +708,6 @@ uses the prettify-list default."
   (setq nvm-dir "~/.nvm")
 
   (nvm-use (getenv "MY_NODE_VERSION"))
-  ;; Figure out how to set the pyenv environment depending on the project one is at
-  ;; (pyenv-mode-set (getenv "MY_PYTHON_VERSION"))
 
   ;; Hide ugly dired details
   (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode 1)))
